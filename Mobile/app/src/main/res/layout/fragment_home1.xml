@@ -183,6 +183,7 @@
             android:backgroundTint="#FCF3EE"
             app:layout_constraintTop_toBottomOf="@id/fotobunga"
             app:layout_constraintRight_toRightOf="parent"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginHorizontal="13dp"
             android:layout_marginTop="7dp"/>
         <TextView
@@ -271,7 +272,8 @@
                         app:layout_constraintTop_toBottomOf="@id/fotonextar"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginHorizontal="13dp"
-                        android:layout_marginTop="7dp"/>
+                        android:layout_marginTop="7dp"
+                        android:foreground="?android:attr/selectableItemBackground"/>
                     <TextView
                         android:id="@+id/deskripsi1"
                         android:layout_width="wrap_content"
@@ -358,7 +360,8 @@
                         app:layout_constraintTop_toBottomOf="@id/fotoduit"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginTop="7dp"
-                        android:layout_marginHorizontal="13dp"/>
+                        android:layout_marginHorizontal="13dp"
+                        android:foreground="?android:attr/selectableItemBackground"/>
                     <TextView
                         android:id="@+id/deskripsi2"
                         android:layout_width="wrap_content"
@@ -387,7 +390,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="64 terjual"
+                        android:text="48 terjual"
                         android:textSize="8dp"
                         android:textStyle="normal"
                         app:layout_constraintRight_toRightOf="parent"
@@ -445,7 +448,8 @@
                         app:layout_constraintTop_toBottomOf="@id/fototopi"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginTop="7dp"
-                        android:layout_marginHorizontal="13dp"/>
+                        android:layout_marginHorizontal="13dp"
+                        android:foreground="?android:attr/selectableItemBackground"/>
                     <TextView
                         android:id="@+id/deskripsi3"
                         android:layout_width="wrap_content"
@@ -474,7 +478,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="64 terjual"
+                        android:text="25 terjual"
                         android:textSize="8dp"
                         android:textStyle="normal"
                         app:layout_constraintRight_toRightOf="parent"
