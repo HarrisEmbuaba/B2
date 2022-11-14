@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TableLayout;
 
+import com.example.po3.R;
+import com.example.po3.adapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class home extends AppCompatActivity {

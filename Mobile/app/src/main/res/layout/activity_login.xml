@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="60dp"
     android:background="@color/white"
-    tools:context=".login">
+    tools:context=".Activity.login">
 
     <ImageView
         android:id="@+id/icon_park_s"
