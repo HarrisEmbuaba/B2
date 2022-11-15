@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.po3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,22 +9,22 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
-public class register extends AppCompatActivity {
-    Button Daftar;
-    TextView tologin;
+import com.example.po3.R;
+
+public class MainActivity extends AppCompatActivity {
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        notif(register.this);
-        signIn();
+        setContentView(R.layout.activity_main);
+        Masuk();
+        notif(MainActivity.this);
     }
-    public void signIn(){
-        tologin = (TextView) findViewById(R.id.masuk);
-        tologin.setOnClickListener(new View.OnClickListener() {
+    public void Masuk(){
+        button = (Button) findViewById(R.id.mulai);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),login.class);

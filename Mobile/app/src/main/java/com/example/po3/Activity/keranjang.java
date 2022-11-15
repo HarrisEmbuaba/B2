@@ -1,8 +1,10 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.po3.R;
 
 public class keranjang extends AppCompatActivity {
 
