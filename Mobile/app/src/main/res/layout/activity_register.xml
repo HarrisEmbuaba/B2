@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/coklat"
+    android:background="@color/white"
+    android:layout_gravity="center"
     tools:context=".Activity.register">
 
     <ImageView
@@ -15,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="203dp"/>
+        android:backgroundTint="@color/coklat"
+        android:layout_marginTop="150dp"/>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input4"
         android:layout_width="match_parent"
@@ -23,8 +25,11 @@
         app:layout_constraintTop_toBottomOf="@+id/gambar1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/coklat"
         app:boxBackgroundColor="@color/coklat"
+        android:layout_marginTop="25dp"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/coklat"
         style="@style/textInputLayout.GrayLabel"
         >
     <EditText
@@ -33,10 +38,9 @@
         android:layout_height="wrap_content"
         android:hint="Nama Lengkap"
         android:ems="15"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/coklat"
         android:inputType="text"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/coklat"
         android:layout_marginHorizontal="49dp"
         />
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,8 +51,10 @@
         app:layout_constraintTop_toBottomOf="@+id/input4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/coklat"
         app:boxBackgroundColor="@color/coklat"
+        app:hintTextColor="@color/coklat"
+        app:hintEnabled="false"
         style="@style/textInputLayout.GrayLabel"
         >
     <EditText
@@ -57,9 +63,9 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:ems="15"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/coklat"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/coklat"
         android:layout_marginHorizontal="49dp"
         />
     </com.google.android.material.textfield.TextInputLayout>
@@ -70,11 +76,13 @@
         app:layout_constraintTop_toBottomOf="@id/input3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/coklat"
         app:boxBackgroundColor="@color/coklat"
         style="@style/textInputLayout.GrayLabel"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/white"
+        app:passwordToggleTint="@color/coklat"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/coklat"
         >
     <EditText
         android:id="@+id/puasword"
@@ -83,7 +91,8 @@
         android:hint="Kata Sandi"
         android:ems="15"
         android:inputType="textPassword"
-    android:backgroundTint="@color/white"
+        android:backgroundTint="@color/coklat"
+        android:textColorHint="@color/coklat"
         android:layout_marginHorizontal="49dp"
         />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,11 +103,12 @@
         app:layout_constraintTop_toBottomOf="@id/input1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColorHint="@color/white"
         app:boxBackgroundColor="@color/coklat"
         style="@style/textInputLayout.GrayLabel"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/white">
+        app:hintEnabled="false"
+        app:hintTextColor="@color/coklat"
+        app:passwordToggleTint="@color/coklat">
     <EditText
         android:id="@+id/puasword1"
         android:layout_width="match_parent"
@@ -106,8 +116,9 @@
         android:hint="Konfirmasi Kata Sandi"
         android:ems="15"
         android:inputType="textPassword"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/coklat"
         android:layout_marginHorizontal="49dp"
+        android:textColorHint="@color/coklat"
         />
     </com.google.android.material.textfield.TextInputLayout>
  <Button
@@ -115,7 +126,7 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_marginHorizontal="55dp"
-     android:backgroundTint="@color/white"
+     android:backgroundTint="@color/coklat"
      app:layout_constraintTop_toBottomOf="@+id/input2"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +134,7 @@
      android:text="DAFTAR"
      android:textSize="20dp"
      android:textStyle="bold"
-     android:textColor="@color/coklat"
+     android:textColor="@color/white"
      android:layout_marginTop="35dp"
      />
     <TextView
@@ -144,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Masuk"
-        android:textColor="@color/white"
+        android:textColor="@color/coklat"
         android:textStyle="normal"
         app:layout_constraintLeft_toRightOf="@+id/sudah"
         app:layout_constraintTop_toBottomOf="@id/reg"
