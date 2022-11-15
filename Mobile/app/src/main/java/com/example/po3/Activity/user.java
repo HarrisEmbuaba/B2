@@ -64,3 +64,4 @@ public class user extends Fragment {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 }
+

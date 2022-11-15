@@ -26,7 +26,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     Button Daftar;
     TextView tologin;
     EditText nama, email, katasandi, confirm;
-    String textNama, TextEmail, TextKataSandi, Textconfirm;
+    String TextNama, TextEmail, TextKataSandi, Textconfirm;
     ApiInterface apiInterface;
 
     @Override
@@ -62,10 +62,10 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.reg:
-                textNama = nama.getText().toString();
+                TextNama = nama.getText().toString();
                 TextEmail = email.getText().toString();
                 TextKataSandi = katasandi.getText().toString();
-                register(textNama, TextEmail, TextKataSandi);
+                register(TextNama, TextEmail, TextKataSandi);
                 break;
             case R.id.masuk:
                 Intent intent = new Intent(this, login.class);
@@ -77,9 +77,15 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
     private void register(String textNama, String textEmail, String textKataSandi){
         String matchPw = confirm.getText().toString();
+        String emailPattern = "^[\\w!#$%&'+/=?`{|}~^-]+(?:\\.[\\w!#$%&'+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
 
+        if(TextNama.equals("") || TextEmail.equals("") || TextKataSandi.equals("")){
+            Toast.makeText(register.this, "Mohon Lengkapi Data terlebih dahulu", Toast.LENGTH_LONG).show();
 
-        if (matchPw.equals(textKataSandi)){
+        }else if(!TextEmail.matches(emailPattern)||!TextEmail.contains("@gmail.com")){
+            Toast.makeText(register.this, "Email tidak valid", Toast.LENGTH_LONG).show();
+        }else if (matchPw.equals(TextKataSandi)){
+
             apiInterface = ApiClient.getClient().create(ApiInterface.class);
             Call<Register> call = apiInterface.registerResponse(textNama, textEmail, textKataSandi);
             call.enqueue(new Callback<Register>() {
@@ -93,7 +99,8 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                         Intent intent = new Intent(register.this, login.class);
                         startActivity(intent);
                         finish();
-                    } else {
+                    }
+                    else {
                         Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -104,10 +111,10 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
                 }
             });
-        } else {
+
+        } else{
+
             Toast.makeText(register.this, "Kata Sandi Tidak Cocok", Toast.LENGTH_SHORT).show();
         }
-
-
+        }
     }
-}

@@ -83,30 +83,37 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     }
     private void login(String email, String pass) {
 
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Login> loginCall = apiInterface.loginResponse(email,pass);
-        loginCall.enqueue(new Callback<Login>() {
-            @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
-                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+        if(email.equals("") || pass.equals("")){
+            Toast.makeText(login.this, "Mohon isi semua data",Toast.LENGTH_LONG).show();
 
 
-                    //Ini untuk pindah
-                    Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
-                    System.out.println("nama saya adalah"+response.body().getData().getNama());
-                    Intent intent = new Intent(login.this, home.class);
-                    intent.putExtra("namaUser",response.body().getData().getNama());
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+        } else {
+            apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            Call<Login> loginCall = apiInterface.loginResponse(email,pass);
+            loginCall.enqueue(new Callback<Login>() {
+                @Override
+                public void onResponse(Call<Login> call, Response<Login> response) {
+                    if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+
+
+
+                        //Ini untuk pindah
+                        Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
+                        System.out.println("nama saya adalah"+response.body().getData().getNama());
+                        Intent intent = new Intent(login.this, home.class);
+                        intent.putExtra("namaUser",response.body().getData().getNama());
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Login> call, Throwable t) {
-                Toast.makeText(login.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Login> call, Throwable t) {
+                    Toast.makeText(login.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 }
