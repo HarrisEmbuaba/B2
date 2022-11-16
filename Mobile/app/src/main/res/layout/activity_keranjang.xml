@@ -35,6 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/kembali"
         android:layout_marginTop="55dp"
         app:layout_constraintStart_toStartOf="parent"
+        android:buttonTint="@color/coklat"
         android:layout_marginLeft="14dp"/>
 
     <ImageView
@@ -164,6 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/lurus"
+        android:buttonTint="@color/coklat"
         android:layout_marginTop="55dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="14dp"/>
@@ -289,5 +291,61 @@
         android:layout_marginLeft="15dp"
         android:layout_marginHorizontal="13dp"
         />
+    <CheckBox
+        android:id="@+id/cek2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/coklat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="37dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="14dp"/>
+
+    <TextView
+        android:id="@+id/semua"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:text="Semua"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/cek2" />
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/hargaduit"
+        android:text="Total:"
+        android:textSize="14dp"
+        android:layout_marginRight="3dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="52dp"/>
+    <TextView
+        android:id="@+id/hargaduit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 125.000"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintRight_toLeftOf="@id/wallet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="52dp"
+        android:textSize="16dp"
+        android:layout_marginRight="15dp"
+        />
+
+    <ImageView
+        android:id="@+id/wallet"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/wallethd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/hargaduit"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="23dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -96,7 +96,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
 
 
-
                         //Ini untuk pindah
                         Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
                         System.out.println("nama saya adalah"+response.body().getData().getNama());
@@ -104,7 +103,10 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                         intent.putExtra("namaUser",response.body().getData().getNama());
                         startActivity(intent);
                         finish();
+
+                    }else{
                         Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
