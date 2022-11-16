@@ -58,78 +58,10 @@
         </li>
 
         <li class="nav-item dropdown">
-
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">99+</span>
           </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Mendekati batas akhir!</h4>
-                <p>Segera kirim paket Anda sebelum estimasi hari selesai.</p>
-                <p>30 menit yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Pesanan dibatalkan!</h4>
-                <p>Pembeli membatalkan pembelian produk Anda.</p>
-                <p>1 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Produk telah diterima pembeli!</h4>
-                <p>Produk telah sampai ke pembeli.</p>
-                <p>2 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Pesanan baru diterima!</h4>
-                <p>Cek produk yang dipesan dan kemas sekarang!</p>
-                <p>4 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Tampilkan semua notifikasi</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -138,65 +70,7 @@
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Anda punya 99+ pesan baru belum dibaca!
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
+        </li><!-- End Messages Nav -->
       </ul>
     </nav><!-- End Icons Navigation -->
 
@@ -261,27 +135,32 @@
                 </li>
 
               </ul>          
-              <div class="tab-content pt-2">
+              <div class="tab-content pt-1">
 
-                <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
+                <div class="tab-pane fade show active tersedia" id="tersedia">
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
                   <form class="row g-2">
-                    <label for="inputEmail3" class="col-sm-1 col-form-label">Nama</label>
+                    <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
+                    <div class="col-md-2">
+                      <input type="kode" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
                       <input type="text" class="form-control" placeholder="">
                     </div>
-                    <div class="col-md-1"></div>
-                    <label for="inputEmail3" class="col-sm-1 col-form-label">Ukuran</label>
+                    <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-2">
                       <input type="ukuran" class="form-control" placeholder="">
                     </div>
-                    <label for="inputEmail3" class="col-sm-1 col-form-label">Jenis</label>
+                    <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
                       <input type="jenis" class="form-control" placeholder="">
                     </div>
-                    <label for="inputKategori" class="col-sm-1 col-form-label">Kategori</label>
+                    <div class="col-md-1"></div>
+                    <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
                     <div class="col-md-4">
                       <select id="inputState" class="form-select">
                         <option></option>
@@ -291,35 +170,35 @@
                       </select>
                     </div>
                     <div class="col-md-1"></div>
-                    <label for="inputStok" class="col-sm-1 col-form-label">Stok</label>
+                    <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
                       <input type="text" class="form-control" placeholder="">
                     </div>
-                    <label for="inputEmail3" class="col-sm-1 col-form-label">Deskripsi</label>
+                    <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
                       <input type="text" class="form-control" placeholder="">
                     </div>
-                    <div class="col-md-1"></div>
+                    <div class="py-1"></div>
                     <div class="row mb-3">
-                      <label for="inputNumber" class="col-sm-1 col-form-label">File Upload</label>
+                      <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
                         <input class="form-control" type="file" id="formFile">
                       </div>
                     </div>
-                    
-                  </form>
-
-                  <div class="py-4">
-                    <div class="col-md-4">
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Cari</button>
-                        <button type="reset" class="btn btn-primary">Clear</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <button type="reset" class="btn btn-primary">Delete</button>
-                        <button type="reset" class="btn btn-primary">Save</button>
+                    <div class="py-4">
+                      <div class="col-md-4">
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-primary">Cari</button>
+                          <button type="reset" class="btn btn-primary">Clear</button>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                          <button type="reset" class="btn btn-primary">Delete</button>
+                          <button type="reset" class="btn btn-primary">Save</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
+
+                  
                   
                   <!-- DataTales Example -->
                 <div class="mb-4">
@@ -331,22 +210,28 @@
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Kategori</th>
                                       <th>Stok</th>
                                       <th>Harga</th>
                                       <th>Ukuran</th>
                                       <th>Jenis</th>
+                                      <th>Deskripsi</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
                                       <td>Buket isi bunga palsu</td>
                                       <td>Buket</td>
                                       <td>75</td>
                                       <td>Rp75.000</td>
                                       <td>L</td>
                                       <td>Mawar</td>
+                                      <td>Buket isi bunga imitasi custom</td>
                                   </tr>
                               </tbody>
                               <tbody>
@@ -357,10 +242,16 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                             <tbody>
                               <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -377,55 +268,101 @@
 
             <div class="tab-content pt-2">
 
-              <div class="tab-pane fade dikemas" id="dikemas">
+              <div class="tab-pane fade habis" id="habis">
 
                 <!-- partial:index.partial.html -->
-                <div class="search__container">
-                  <input class="search__input" type="text" placeholder="Search">
-                </div>
-
-                <div class="date__container">
-                  <input class="date__input" type="date" placeholder="Date">
-                </div>
-
-                  <!-- DataTales Example -->
-                  <div class="mb-4">
-                    <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
+                  <!-- No Labels Form -->
+                  <form class="row g-2">
+                    <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
+                    <div class="col-md-2">
+                      <input type="kode" class="form-control" placeholder="">
                     </div>
-                    <div class="card-body">
+                    <div class="col-md-1"></div>
+                    <label for="nama" class="col-sm-1 col-form-label">Nama</label>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
+                    <div class="col-md-2">
+                      <input type="ukuran" class="form-control" placeholder="">
+                    </div>
+                    <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
+                    <div class="col-md-2">
+                      <input type="jenis" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-1"></div>
+                    <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
+                    <div class="col-md-4">
+                      <select id="inputState" class="form-select">
+                        <option></option>
+                        <option>Buket</option>
+                        <option>Hampers</option>
+                        <option>Seserahan</option>
+                      </select>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <label for="stok" class="col-sm-1 col-form-label">Stok</label>
+                    <div class="col-md-1">
+                      <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
+                    <div class="col-md-3">
+                      <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="py-1"></div>
+                    <div class="row mb-3">
+                      <label for="image" class="col-sm-1 col-form-label">File Upload</label>
+                      <div class="col-md-10">
+                        <input class="form-control" type="file" id="formFile">
+                      </div>
+                    </div>
+                    <div class="py-4">
+                      <div class="col-md-4">
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-primary">Cari</button>
+                          <button type="reset" class="btn btn-primary">Clear</button>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                          <button type="reset" class="btn btn-primary">Delete</button>
+                          <button type="reset" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                  
+                  
+                  <!-- DataTales Example -->
+                <div class="mb-4">
+                  <div class="py-3">
+                      <h6 class="m-0 font-weight-bold text-primary"></h6>
+                  </div>
+                  <div class="card-body">
                       <div class="table-responsive">
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                      <th>Nomor Pesanan</th>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
-                                      <th>Produk</th>
-                                      <th>Variasi</th>
-                                      <th>Jumlah</th>
-                                      <th>Total Bayar</th>
-                                      <th>Pembayaran</th>
-                                      <th>Pengiriman</th>
-                                      <th>Catatan</th>
-                                      <th>Aksi</th>
+                                      <th>Kategori</th>
+                                      <th>Stok</th>
+                                      <th>Harga</th>
+                                      <th>Ukuran</th>
+                                      <th>Jenis</th>
+                                      <th>Deskripsi</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>5606699801</td>
-                                      <td>Lala</td>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
                                       <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <button type="submit" class="btn btn-primary">Dikirim</button>
-                                        </div>
-                                      </td>
+                                      <td>Buket</td>
+                                      <td>0</td>
+                                      <td>Rp75.000</td>
+                                      <td>L</td>
+                                      <td>Mawar</td>
+                                      <td>Buket isi bunga imitasi custom</td>
                                   </tr>
                               </tbody>
                               <tbody>
@@ -454,14 +391,11 @@
                                   <td></td>
                               </tr>
                             </tbody>
-                          </table>
-                        </div>
-                      </div>
+                        </table>
                     </div>
                   </div>
-                  <div>
-                    
-                  </div>
+                </div>
+              </div>
               </div><!-- End Bordered Tabs -->
             </div>
           </div>

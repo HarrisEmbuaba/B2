@@ -64,72 +64,6 @@
             <span class="badge bg-primary badge-number">99+</span>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Mendekati batas akhir!</h4>
-                <p>Segera kirim paket Anda sebelum estimasi hari selesai.</p>
-                <p>30 menit yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Pesanan dibatalkan!</h4>
-                <p>Pembeli membatalkan pembelian produk Anda.</p>
-                <p>1 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Produk telah diterima pembeli!</h4>
-                <p>Produk telah sampai ke pembeli.</p>
-                <p>2 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Pesanan baru diterima!</h4>
-                <p>Cek produk yang dipesan dan kemas sekarang!</p>
-                <p>4 jam yang lalu</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Tampilkan semua notifikasi</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -139,63 +73,7 @@
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Anda punya 99+ pesan baru belum dibaca!
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Profile Nav -->
+        </li><!-- End Messages Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -265,19 +143,12 @@
                 </li>
 
               </ul>          
-              <div class="tab-content pt-2">
+              <div class="tab-content pt-1">
 
                 <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
 
                   <!-- partial:index.partial.html -->
-                  <div class="search__container">
-                    <input class="search__input" type="text" placeholder="Search">
-                  </div>
-
-                  <div class="date__container">
-                    
-                    <input class="date__input" type="date" placeholder="Date">
-                  </div>
+                  
 
                   <div class="urutkan_container">
                     <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
@@ -305,6 +176,8 @@
                               <thead>
                                   <tr>
                                       <th>Nomor Pesanan</th>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Produk</th>
                                       <th>Variasi</th>
@@ -319,6 +192,8 @@
                               <tbody>
                                   <tr>
                                       <td>5606699801</td>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <td>Lala</td>
                                       <td>Buket isi bunga palsu</td>
                                       <td>XL, Mawar</td>
@@ -368,16 +243,10 @@
 
             <div class="tab-content pt-2">
 
-              <div class="tab-pane fade dikemas" id="dikemas">
+              <div class="tab-pane fade dikirim" id="dikirim">
 
                 <!-- partial:index.partial.html -->
-                <div class="search__container">
-                  <input class="search__input" type="text" placeholder="Search">
-                </div>
-
-                <div class="date__container">
-                  <input class="date__input" type="date" placeholder="Date">
-                </div>
+                
 
                   <!-- DataTales Example -->
                   <div class="mb-4">
@@ -390,6 +259,8 @@
                               <thead>
                                   <tr>
                                       <th>Nomor Pesanan</th>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Produk</th>
                                       <th>Variasi</th>
@@ -404,6 +275,8 @@
                               <tbody>
                                   <tr>
                                       <td>5606699801</td>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
                                       <td>Lala</td>
                                       <td>Buket isi bunga palsu</td>
                                       <td>XL, Mawar</td>
@@ -421,28 +294,28 @@
                               </tbody>
                               <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
                                 </tr>
                             </tbody>
                             <tbody>
                               <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                             </tbody>
                           </table>
@@ -464,6 +337,8 @@
                               <thead>
                                   <tr>
                                       <th>Nomor Pesanan</th>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Produk</th>
                                       <th>Variasi</th>
@@ -478,6 +353,8 @@
                               <tbody>
                                   <tr>
                                       <td>5606699801</td>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
                                       <td>Lala</td>
                                       <td>Buket isi bunga palsu</td>
                                       <td>XL, Mawar</td>
@@ -486,40 +363,38 @@
                                       <td>Transfer</td>
                                       <td>Diantar</td>
                                       <td>-</td>
-                                      <td>-</div>
-                                      </td>
+                                      <td>-</td>
                                   </tr>
                               </tbody>
                               <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
                                 </tr>
                             </tbody>
                             <tbody>
                               <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                             </tbody>
                           </table>
                     </div>
                   </div>
-
                 </div>
               </div><!-- End Bordered Tabs -->
             </div>
