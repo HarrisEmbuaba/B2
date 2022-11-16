@@ -164,18 +164,18 @@ h6 {
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-  background: #ffffff;
+  background: #EEC19F;
   color: #fff;
   padding: 12px 25px;
   margin-left: 30px;
-  color: #DD8B55;
+  color: #FFFFFF;
   line-height: 1;
   border-radius: 50px;
 }
 
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
-  background: #EEC19F;
+  background: #b47144; 
   color: #fff;
 }
 
@@ -608,22 +608,22 @@ section {
 }
 
 #contact .contact-address,
-#contact .contact-phone,
+#contact .contact-whatsapp,
 #contact .contact-email {
   margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 950px) {
 
   #contact .contact-address,
-  #contact .contact-phone,
+  #contact .contact-whatsapp,
   #contact .contact-email {
     padding: 20px 0;
   }
 }
 
-@media (min-width: 768px) {
-  #contact .contact-phone {
+@media (min-width: 950px) {
+  #contact .contact-whatsapp {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
   }
