@@ -3,7 +3,7 @@ include 'koneksi.php';
 error_reporting(0);
 
 session_start();
-if(isset($_SESSION['kode_barang']) != ''){
+if(isset($_SESSION['kode_barang'])){
   header("Location: produk.php");
 }
 
@@ -75,7 +75,7 @@ if(isset($_POST['submit'])){
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="ass                                          ets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
@@ -196,7 +196,7 @@ if(isset($_POST['submit'])){
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2">
+                  <form  action="produk.php" method="POST" class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                       <input type="kode" class="form-control" placeholder="" name="kode" values="<?php echo $kode;?>" required>
