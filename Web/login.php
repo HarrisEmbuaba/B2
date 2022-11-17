@@ -51,11 +51,12 @@ if (isset($_SESSION['nama'])) {
 
 if (isset($_POST['Login'])) {
     $email = $_POST['email'];
-    $pass = md5($_POST['pass']);
+    $pass = $_POST['pass'];
  
-    $sql = "SELECT * FROM pemilik WHERE email ='$email' AND Password='$pass'";
+    $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
     $result = mysqli_query($conn, $sql);
-    if ($result->num_rows > 0) {
+    $check = mysqli_num_rows($result);
+    if ($check > 0) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['nama'] = $row['nama'];
         $_SESSION['pass'] = $row['pass'];
