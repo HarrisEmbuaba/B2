@@ -22,7 +22,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.example.po3.R;
+import com.example.po3.SessionManager;
 import com.example.po3.model.login.register.Login;
+import com.example.po3.model.login.register.LoginData;
 
 public class login extends AppCompatActivity implements View.OnClickListener {
     TextView Reg, LupaPw;
@@ -30,6 +32,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     Button toLoginHome;
     String email, pass;
     ApiInterface apiInterface;
+    SessionManager sessionManager;
 
 
 
@@ -95,7 +98,10 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 public void onResponse(Call<Login> call, Response<Login> response) {
                     if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
 
-
+                        // Ini untuk menyimpan sesi
+                        sessionManager = new SessionManager(login.this);
+                        LoginData loginData = response.body().getData();
+                        sessionManager.createLoginSession(loginData);
                         //Ini untuk pindah
                         Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
                         System.out.println("nama saya adalah"+response.body().getData().getNama());
