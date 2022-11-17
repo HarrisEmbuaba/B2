@@ -1,3 +1,13 @@
+<?php
+include 'koneksi.php';
+error_reporting(0);
+
+session_start();
+if(isset($_SESSION['kode_barang']) != ''){
+  header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +79,7 @@
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
+            <img src="assets/img/chat1.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
 
@@ -87,7 +97,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan.html">
-          <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
+          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
@@ -121,8 +131,8 @@
   <main id="main" class="main">
 
     
-    <section class="section bayar">
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <section class="section chat">
+      <link href="C:/xampp/htdocs/B2/Web/home/assets/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="container">
 <div class="row clearfix">
@@ -130,10 +140,10 @@
         <div class="card chat-app">
             <div id="plist" class="people-list">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search...">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
+                    <input type="text" class="form-control" placeholder="Search...">
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0">
                     <li class="clearfix">
