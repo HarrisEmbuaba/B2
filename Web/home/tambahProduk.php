@@ -1,3 +1,59 @@
+<?php
+include 'koneksi.php';
+error_reporting(0);
+
+session_start();
+if(isset($_SESSION['kode_barang']) != ''){
+  header("Location: produk.php");
+}
+
+$err = "";
+$sukses = "";
+$kode = "";
+
+if(isset($_POST['submit'])){
+  $kode = $_POST['kode_barang'];
+  $nama = $_POST['nama_barang'];
+  $harga = $_POST['harga'];
+  $stok = $_POST['stok'];
+  $warna = $_POST['warna'];
+  $ukuran = $_POST['ukuran'];
+  $image = $_POST['image'];
+  $deskripsi = $_POST['deskripsi'];
+  $id_jenis = $_POST['id_jenis'];
+
+  if(!$result->num_rows > 0){
+    $sql1 = "INSERT INTO `barang`(`kode_barang`, `nama_barang`, `harga`, `stok`, `warna`, `ukuran`, `image`, `deskripsi`, `id_jenis`) VALUES ('$kode','$nama','$harga','$stok','$warna','$ukuran','$image','$deskripsi','$id_jenis')";
+    $result = mysqli_query($koneksi,$sql1);
+    if($result){
+      echo "<script>alert('Barang berhasil ditambahkan!')</script>";
+
+      $kode = "";
+      $nama = "";
+      $harga = "";
+      $stok = "";
+      $warna = "";
+      $ukuran = "";
+      $image = "";
+      $deskripsi = "";
+      $id_jenis = "";
+      $_POST['nama_barang'] = "";
+      $_POST['harga'] = "";
+      $_POST['stok'] = "";
+      $_POST['warna'] = "";
+      $_POST['ukuran'] = "";
+      $_POST['image'] = "";
+      $_POST['deskripsi'] = "";
+      $_POST['id_jenis'] = "";
+    } else {
+      echo "<script>alert('Barang gagal ditambahkan!')</script>";
+    }
+  }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,20 +200,20 @@
                   <form class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="">
+                      <input type="kode" class="form-control" placeholder="" name="kode" values="<?php echo $kode;?>" required>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="" name="nama" values="<?php echo $nama;?>" required>
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="">
+                      <input type="ukuran" class="form-control" placeholder="" name="ukuran" values="<?php echo $ukuran;?>" required>
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
-                      <input type="jenis" class="form-control" placeholder="">
+                      <input type="jenis" class="form-control" placeholder="" name="id_jenis" values="<?php echo $id_jenis;?>" required>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
@@ -172,17 +228,17 @@
                     <div class="col-md-1"></div>
                     <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="" name="stok" values="<?php echo $stok;?>" required>
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="" name="deskripsi" values="<?php echo $deskripsi;?>" required>
                     </div>
                     <div class="py-1"></div>
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="image" values="<?php echo $image;?>" required>
                       </div>
                     </div>
                     <div class="py-4">
