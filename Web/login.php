@@ -7,9 +7,11 @@ session_start();
 if (isset($_POST['submit']) ){
     $email = $_POST['txt_email'];
     $pass = $_POST['txt_pass'];
+
     /* 
     $emailCheck = mysqli_real_escape_string($koneksi, $email);
     $ */
+    
     if(!empty(trim($email)) && !empty(trim($pass))) {
         //select data berdasarkan username dari database
         $query = "SELECT * FROM pemilik WHERE email = '$email'";
@@ -69,33 +71,3 @@ if (isset($_POST['Login'])) {
 }
 
 ?>
-<!-- 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
-</head>
-<body>
-    <div class="left">
-        <img src="img/gbuket.png" alt="">
-        <h1>Selamat Datang</h1>
-    </div>
-    <div class="container">
-        <div class="login">
-            <form action="">
-                <img src="img/ilog.png" alt="">
-                <input type="text"
-                placeholder="Email">
-                <input type="password"
-                placeholder="Password">
-                <p>
-                    <a href="#">Lupa Kata Sandi?</a>
-                </p>
-                <button>MASUK</button>
-            </form>
-        </div>
-    </div>
-</body>
-</html> -->
