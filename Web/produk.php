@@ -63,8 +63,21 @@ if(isset($_POST['Submit'])){
   }
 }
 
+
+// $query = mysqli_query($koneksi, "SELECT max(kode) as kodeTerbesar FROM barang");
+// $data = mysqli_fetch_array($query);
+// $kodeBarang = $data['kodeTerbesar'];
+
+// $urutan = (int) substr($kodeBarang, 3, 3);
+
+// $urutan++;
+
+// $huruf = "BRG";
+// $kodeBarang = $huruf . sprintf("%03s", $urutan);
+// echo $kodeBarang;
+ 
+
 ?>
-<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html lang="en">
@@ -212,20 +225,20 @@ if(isset($_POST['Submit'])){
                   <form  action="produk.php" method="POST" class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="" name="kode" values="<?php echo $kode;?>" required>
+                      <input type="text" class="form-control" required="required" name="kode" values="<?php echo $kodeBarang;?>" readonly>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" class="form-control" placeholder="" name="nama" values="<?php echo $nama;?>" required>
+                      <input type="text" class="form-control" required="required" name="nama" values="<?php echo $nama;?>" required>
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="" name="ukuran" values="<?php echo $ukuran;?>" required>
+                      <input type="ukuran" class="form-control" required="required" name="ukuran" values="<?php echo $ukuran;?>" required>
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
-                      <input type="jenis" class="form-control" placeholder="" name="id_jenis" values="<?php echo $id_jenis;?>" required>
+                      <input type="jenis" class="form-control" required="required" name="id_jenis" values="<?php echo $id_jenis;?>" required>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
@@ -256,11 +269,11 @@ if(isset($_POST['Submit'])){
                     <div class="py-4">
                       <div class="col-md-4">
                         <div class="text-center">
-                          <button type="submit" class="btn btn-primary">Cari</button>
-                          <button type="reset" class="btn btn-primary">Clear</button>
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="reset" class="btn btn-primary">Save</button>
+                          <button type="search" value="cari" class="btn btn-primary">Cari</button>
+                          <button type="reset" value="clear" class="btn btn-primary">Clear</button>
+                          <button type="submit" value="save" class="btn btn-primary">Update</button>
+                          <button type="reset" value="delete" class="btn btn-primary">Delete</button>
+                          <button type="reset" value="save" class="btn btn-primary">Save</button>
                         </div>
                       </div>
                     </div>
@@ -420,19 +433,6 @@ if(isset($_POST['Submit'])){
                                     <td></td>
                                 </tr>
                             </tbody>
-                            <tbody>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                            </tbody>
                         </table>
                     </div>
                   </div>
@@ -472,5 +472,3 @@ if(isset($_POST['Submit'])){
 </body>
 
 </html>
-=======
->>>>>>> 5c32b2489769c42282bbb2676f5ff6fe95c673f2

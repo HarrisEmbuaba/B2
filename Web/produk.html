@@ -1,25 +1,15 @@
 <!-- <?php
- 
-// https://www.malasngoding.com
-// menghubungkan dengan koneksi database
+
 include ('koneksi.php');
- 
-// mengambil data barang dengan kode paling besar
+
 $query = mysqli_query($koneksi, "SELECT max(kode) as kodeTerbesar FROM barang");
 $data = mysqli_fetch_array($query);
 $kodeBarang = $data['kodeTerbesar'];
- 
-// mengambil angka dari kode barang terbesar, menggunakan fungsi substr
-// dan diubah ke integer dengan (int)
+
 $urutan = (int) substr($kodeBarang, 3, 3);
- 
-// bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+
 $urutan++;
- 
-// membentuk kode barang baru
-// perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
-// misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
-// angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
+
 $huruf = "BRG";
 $kodeBarang = $huruf . sprintf("%03s", $urutan);
 echo $kodeBarang;
@@ -169,28 +159,29 @@ echo $kodeBarang;
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2">
+                  <form  action="produk.php" method="POST" class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="">
+                      <input type="text" class="form-control" required="required" name="kode" values="<?php echo $kodeBarang;?>" readonly>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" name="nama_barang" class="form-control" placeholder="">
+                      <input type="text" class="form-control" required="required" name="nama" values="<?php echo $nama;?>" required>
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="ukuran" class="form-control" required="required" name="ukuran" values="<?php echo $ukuran;?>" required>
                     </div>
-                    <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
+                    <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
-                      <input type="text" name="warna" class="form-control" placeholder="">
+                      <input type="jenis" class="form-control" required="required" name="id_jenis" values="<?php echo $id_jenis;?>" required>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
                     <div class="col-md-4">
-                      <select type="option" name="barang_jenis" id="inputState" class="form-select">
+                      <select id="inputState" class="form-select">
+                        <option></option>
                         <option>Buket</option>
                         <option>Hampers</option>
                         <option>Seserahan</option>
@@ -199,27 +190,27 @@ echo $kodeBarang;
                     <div class="col-md-1"></div>
                     <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
-                      <input type="text" name="stok" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="" name="stok" values="<?php echo $stok;?>" required>
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
-                      <input type="text" name="deskripsi" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="" name="deskripsi" values="<?php echo $deskripsi;?>" required>
                     </div>
                     <div class="py-1"></div>
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input type="file" name="image" class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="image" values="<?php echo $image;?>" required>
                       </div>
                     </div>
                     <div class="py-4">
                       <div class="col-md-4">
                         <div class="text-center">
-                          <button type="submit" class="btn btn-primary">Cari</button>
-                          <button type="reset" class="btn btn-primary">Clear</button>
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="submit" name="Submit" class="btn btn-primary">Input</button>
+                          <button type="search" value="cari" class="btn btn-primary">Cari</button>
+                          <button type="reset" value="clear" class="btn btn-primary">Clear</button>
+                          <button type="submit" value="save" class="btn btn-primary">Update</button>
+                          <button type="reset" value="delete" class="btn btn-primary">Delete</button>
+                          <button type="reset" value="save" class="btn btn-primary">Save</button>
                         </div>
                       </div>
                     </div>
@@ -247,18 +238,6 @@ echo $kodeBarang;
                                       <th>Deskripsi</th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>Buket</td>
-                                      <td>75</td>
-                                      <td>Rp75.000</td>
-                                      <td>L</td>
-                                      <td>Buket isi bunga imitasi custom</td>
-                                  </tr>
-                              </tbody>
                         </table>
                     </div>
                   </div>
@@ -318,11 +297,11 @@ echo $kodeBarang;
                     <div class="py-4">
                       <div class="col-md-4">
                         <div class="text-center">
-                          <button type="submit" class="btn btn-primary">Cari</button>
-                          <button type="reset" class="btn btn-primary">Clear</button>
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="submit" class="btn btn-primary">Input</button>
+                          <button type="search" value="cari" class="btn btn-primary">Cari</button>
+                          <button type="reset" value="clear" class="btn btn-primary">Clear</button>
+                          <button type="submit" value="save" class="btn btn-primary">Update</button>
+                          <button type="reset" value="delete" class="btn btn-primary">Delete</button>
+                          <button type="reset" value="save" class="btn btn-primary">Save</button>
                         </div>
                       </div>
                     </div>
@@ -351,45 +330,6 @@ echo $kodeBarang;
                                       <th>Deskripsi</th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>Buket</td>
-                                      <td>0</td>
-                                      <td>Rp75.000</td>
-                                      <td>L</td>
-                                      <td>Mawar</td>
-                                      <td>Buket isi bunga imitasi custom</td>
-                                  </tr>
-                              </tbody>
-                              <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                            </tbody>
                         </table>
                     </div>
                   </div>

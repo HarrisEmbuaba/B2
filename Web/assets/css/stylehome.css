@@ -199,13 +199,13 @@ h6 {
 
 /* Light Backgrounds */
 .bg-primary-light {
-  background-color: #FCF3EE;
-  border-color: #FCF3EE;
+  background-color: #DD8B55;
+  border-color: #DD8B55;
 }
 
 .bg-secondary-light {
-  background-color: #e2e3e5;
-  border-color: #e2e3e5;
+  background-color: #FCF3EE;
+  border-color: #FCF3EE;
 }
 
 .bg-success-light {
@@ -245,7 +245,7 @@ h6 {
 .card-footer {
   border-color: #ebeef4;
   background-color: #fff;
-  color: #798eb3;
+  color: #DD8B55;
   padding: 15px;
 }
 
@@ -253,12 +253,12 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #DD8B55;
   font-family: "Poppins", sans-serif;
 }
 
 .card-title span {
-  color: #899bbd;
+  color: #DD8B55;
   font-size: 14px;
   font-weight: 400;
 }
@@ -281,7 +281,7 @@ h6 {
 /* Close Button */
 .btn-close {
   background-size: 25%;
-  background-color: #FCF3EE;
+  background-color: #DD8B55;
   ;
 }
 
@@ -301,7 +301,7 @@ h6 {
 }
 
 .accordion-button:not(.collapsed) {
-  color: #EEC19F;
+  color: #DD8B55;
   ;
   background-color: #FCF3EE;
   ;
@@ -364,13 +364,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #4154f1;
-  border-bottom: 2px solid #4154f1;
+  color: #DD8B55;
+  border-bottom: 2px solid #DD8B55;
 }
 
 /*--------------------------------------------------------------
@@ -479,13 +479,13 @@ h6 {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #DD8B55;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #DD8B55;
 }
 
 .header-nav .nav-profile img {
@@ -530,11 +530,11 @@ h6 {
 .header-nav .notifications .notification-item p {
   font-size: 13px;
   margin-bottom: 3px;
-  color: #919191;
+  color: #FCF3EE;
 }
 
 .header-nav .notifications .notification-item:hover {
-  background-color: #f6f9ff;
+  background-color: #FCF3EE;
 }
 
 .header-nav .messages {
@@ -559,17 +559,17 @@ h6 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #444444;
+  color: #DD8B55;
 }
 
 .header-nav .messages .message-item p {
   font-size: 13px;
   margin-bottom: 3px;
-  color: #919191;
+  color: #DD8B55;
 }
 
 .header-nav .messages .message-item:hover {
-  background-color: #f6f9ff;
+  background-color: #FCF3EE;
 }
 
 .header-nav .profile {
@@ -582,7 +582,7 @@ h6 {
   font-size: 18px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #444444;
+  color: #DD8B55;
 }
 
 .header-nav .profile .dropdown-header span {
@@ -602,7 +602,7 @@ h6 {
 }
 
 .header-nav .profile .dropdown-item:hover {
-  background-color: #f6f9ff;
+  background-color: #DD8B55;
 }
 
 /*--------------------------------------------------------------
@@ -688,7 +688,7 @@ h6 {
 .sidebar-nav .nav-link {
   display: flex;
   align-items: center;
-  color: #4154f1;
+  color: #DD8B55;
   transition: 0.3;
   padding: 10px 15px;
   border-radius: 4px;
@@ -696,7 +696,7 @@ h6 {
 
 .sidebar-nav .nav-link i {
   margin-right: 10px;
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -735,7 +735,7 @@ h6 {
 .sidebar-nav .nav-content a {
   display: flex;
   align-items: center;
-  color: #012970;
+  color: #DD8B55;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -749,11 +749,11 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
+  background-color: #DD8B55;
 }
 
 /*--------------------------------------------------------------
@@ -776,7 +776,7 @@ h6 {
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .dashboard .filter .dropdown-header {
@@ -788,7 +788,7 @@ h6 {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #aab7cf;
+  color: #FCF3EE;
   margin-bottom: 0;
   padding: 0;
 }
@@ -821,17 +821,17 @@ h6 {
 
 .dashboard .sales-card .card-icon {
   color: #DD8B55;
-  background: #f6f6fe;
+  background: #FCF3EE;
 }
 
 .dashboard .revenue-card .card-icon {
-  color: #2eca6a;
-  background: #e0f8e9;
+  color: #DD8B55;
+  background: #FCF3EE;
 }
 
 .dashboard .customers-card .card-icon {
-  color: #ff771d;
-  background: #ffecdf;
+  color: #DD8B55;
+  background: #FCF3EE;
 }
 
 /* Activity */
@@ -854,7 +854,7 @@ h6 {
   width: 4px;
   top: 0;
   bottom: 0;
-  background-color: #eceefe;
+  background-color: #FCF3EE;
 }
 
 .dashboard .activity .activity-item .activity-badge {
@@ -864,7 +864,7 @@ h6 {
   line-height: 0;
   border-radius: 50%;
   flex-shrink: 0;
-  border: 3px solid #fff;
+  border: 3px solid #DD8B55;
   flex-grow: 0;
 }
 
@@ -900,17 +900,17 @@ h6 {
 }
 
 .dashboard .news h4 a {
-  color: #012970;
+  color: #DD8B55;
   transition: 0.3s;
 }
 
 .dashboard .news h4 a:hover {
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .dashboard .news p {
   font-size: 14px;
-  color: #777777;
+  color: #DD8B55;
   margin-left: 95px;
 }
 
@@ -920,7 +920,7 @@ h6 {
 }
 
 .dashboard .recent-sales .table thead {
-  background: #f6f6fe;
+  background: #FCF3EE;
 }
 
 .dashboard .recent-sales .table thead th {
@@ -941,7 +941,7 @@ h6 {
 }
 
 .dashboard .top-selling .table thead {
-  background: #f6f6fe;
+  background: #FCF3EE;
 }
 
 .dashboard .top-selling .table thead th {
@@ -973,7 +973,7 @@ h6 {
   background-color: #fff;
   border-radius: 0.25rem;
   text-align: center;
-  color: #012970;
+  color: #DD8B55;
   padding: 15px 0;
 }
 
@@ -991,7 +991,7 @@ h6 {
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #666;
+  color: #DD8B55;
 }
 
 /*--------------------------------------------------------------
@@ -1004,7 +1004,7 @@ h6 {
 .profile .profile-card h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #2c384e;
+  color: #DD8B55;
   margin: 10px 0 0 0;
 }
 
@@ -1015,14 +1015,14 @@ h6 {
 .profile .profile-card .social-links a {
   font-size: 20px;
   display: inline-block;
-  color: rgba(1, 41, 112, 0.5);
+  color: #DD8B55(1, 41, 112, 0.5);
   line-height: 0;
   margin-right: 10px;
   transition: 0.3s;
 }
 
 .profile .profile-card .social-links a:hover {
-  color: #012970;
+  color: #DD8B55;
 }
 
 .profile .profile-overview .row {
@@ -1031,17 +1031,17 @@ h6 {
 }
 
 .profile .profile-overview .card-title {
-  color: #012970;
+  color: #DD8B55;
 }
 
 .profile .profile-overview .label {
   font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
+  color: #DD8B55(1, 41, 112, 0.6);
 }
 
 .profile .profile-edit label {
   font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
+  color: #DD8B55(1, 41, 112, 0.6);
 }
 
 .profile .profile-edit img {
@@ -1054,11 +1054,11 @@ h6 {
 .faq .basic h6 {
   font-size: 18px;
   font-weight: 600;
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .faq .basic p {
-  color: #6980aa;
+  color: #FCF3EE;
 }
 
 /*--------------------------------------------------------------
@@ -1071,12 +1071,12 @@ h6 {
 .contact .info-box i {
   font-size: 38px;
   line-height: 0;
-  color: #4154f1;
+  color: #DD8B55;
 }
 
 .contact .info-box h3 {
   font-size: 20px;
-  color: #012970;
+  color: #DD8B55;
   font-weight: 700;
   margin: 20px 0 10px 0;
 }
@@ -1091,7 +1091,7 @@ h6 {
 .contact .php-email-form .error-message {
   display: none;
   color: #fff;
-  background: #ed3c0d;
+  background: #DD8B55;
   text-align: left;
   padding: 15px;
   margin-bottom: 24px;
@@ -1101,7 +1101,7 @@ h6 {
 .contact .php-email-form .sent-message {
   display: none;
   color: #fff;
-  background: #18d26e;
+  background: #DD8B55;
   text-align: center;
   padding: 15px;
   margin-bottom: 24px;
@@ -1123,7 +1123,7 @@ h6 {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
+  border: 3px solid #DD8B55;
   border-top-color: #eee;
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
@@ -1139,7 +1139,7 @@ h6 {
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #4154f1;
+  border-color: #DD8B55;
 }
 
 .contact .php-email-form input {
@@ -1151,7 +1151,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4154f1;
+  background: #DD8B55;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1160,7 +1160,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #5969f3;
+  background: #FCF3EE;
 }
 
 @-webkit-keyframes animate-loading {
@@ -1193,7 +1193,7 @@ h6 {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #4154f1;
+  color: #FCF3EE;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1201,18 +1201,18 @@ h6 {
 .error-404 h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #012970;
+  color: #DD8B55;
   margin-bottom: 30px;
 }
 
 .error-404 .btn {
-  background: #51678f;
+  background: #DD8B55;
   color: #fff;
   padding: 8px 30px;
 }
 
 .error-404 .btn:hover {
-  background: #3e4f6f;
+  background: #FCF3EE;
 }
 
 @media (min-width: 992px) {
@@ -1233,14 +1233,14 @@ h6 {
 
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  color: #DD8B55;
 }
 
 .footer .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
-  color: #012970;
+  color: #DD8B55;
 }
 
 .search__container {
@@ -1375,11 +1375,11 @@ table {
 
 
 body{
-  background-color: #f4f7f6;
+  background-color: #FCF3EE;
   margin-top:20px;
 }
 .card {
-  background: #fff;
+  background: #FCF3EE;
   transition: .5s;
   border: 0;
   margin-bottom: 30px;
@@ -1399,7 +1399,7 @@ body{
 
 .chat-app .chat {
   margin-left: 280px;
-  border-left: 1px solid #eaeaea
+  border-left: 1px solid #FCF3EE
 }
 
 .people-list {
@@ -1416,12 +1416,12 @@ body{
 }
 
 .people-list .chat-list li:hover {
-  background: #efefef;
+  background: #FCF3EE;
   cursor: pointer
 }
 
 .people-list .chat-list li.active {
-  background: #efefef
+  background: #FCF3EE
 }
 
 .people-list .chat-list li .name {
@@ -1450,7 +1450,7 @@ body{
 
 .chat .chat-header {
   padding: 15px 20px;
-  border-bottom: 2px solid #f4f7f6
+  border-bottom: 2px solid #DD8B55
 }
 
 .chat .chat-header img {
@@ -1466,7 +1466,7 @@ body{
 
 .chat .chat-history {
   padding: 20px;
-  border-bottom: 2px solid #fff
+  border-bottom: 2px solid #FCF3EE
 }
 
 .chat .chat-history ul {
@@ -1874,3 +1874,125 @@ body{
   border-radius: 0;
 }
 
+
+.button{
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  background: #DD8B55;
+  color: #abc;
+  overflow: hidden;
+}
+
+.button:focus{
+  animation: morph 1.25s forwards;
+}
+
+.button > *{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.sent,
+.button:focus span{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.button:focus .sent{
+  animation: reveal 1s 1.25s forwards;
+}
+
+@keyframes reveal{
+  100%{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes morph{
+  10%,
+  80%{
+    width: 50px;
+    border-radius: 50%;
+    background: #DD8B55;
+    color: #abc;
+  }
+
+  100%{
+    background: #DD8B55;
+    color: #abc;
+  }
+}
+
+@keyframes takeOff{
+  5%,15%,25%,35%,45%{
+    transform: translate(-47%, -50%);
+  }
+
+  10%,20%,30%,40%,50%{
+    transform: translate(-53%, -50%);
+  }
+
+  90%{
+    transform: translate(100px, -100px);
+  }
+
+  100%{
+    transform: translate(100px, -100px);
+  }
+}
+
+.save,
+.button:focus span{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.button:focus .save{
+  animation: reveal 1s 1.25s forwards;
+}
+
+@keyframes reveal{
+  100%{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes morph{
+  10%,
+  80%{
+    width: 50px;
+    border-radius: 50%;
+    background: #DD8B55;
+    color: #abc;
+  }
+
+  100%{
+    background: #DD8B55;
+    color: #abc;
+  }
+}
+
+@keyframes takeOff{
+  5%,15%,25%,35%,45%{
+    transform: translate(-47%, -50%);
+  }
+
+  10%,20%,30%,40%,50%{
+    transform: translate(-53%, -50%);
+  }
+
+  90%{
+    transform: translate(100px, -100px);
+  }
+
+  100%{
+    transform: translate(100px, -100px);
+  }
+}
