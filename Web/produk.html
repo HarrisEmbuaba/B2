@@ -1,3 +1,31 @@
+<!-- <?php
+ 
+// https://www.malasngoding.com
+// menghubungkan dengan koneksi database
+include ('koneksi.php');
+ 
+// mengambil data barang dengan kode paling besar
+$query = mysqli_query($koneksi, "SELECT max(kode) as kodeTerbesar FROM barang");
+$data = mysqli_fetch_array($query);
+$kodeBarang = $data['kodeTerbesar'];
+ 
+// mengambil angka dari kode barang terbesar, menggunakan fungsi substr
+// dan diubah ke integer dengan (int)
+$urutan = (int) substr($kodeBarang, 3, 3);
+ 
+// bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+$urutan++;
+ 
+// membentuk kode barang baru
+// perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
+// misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
+// angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
+$huruf = "BRG";
+$kodeBarang = $huruf . sprintf("%03s", $urutan);
+echo $kodeBarang;
+ 
+?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,7 +129,7 @@
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.html">
+        <a class="nav-link collapsed" href="produk.php">
           <img src="assets/img/produk1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -156,21 +184,20 @@
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" name="nama_barang" class="form-control" placeholder="">
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="">
                     </div>
-                    <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
+                    <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
                     <div class="col-md-2">
-                      <input type="jenis" class="form-control" placeholder="">
+                      <input type="text" name="warna" class="form-control" placeholder="">
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
                     <div class="col-md-4">
-                      <select id="inputState" class="form-select">
-                        <option></option>
+                      <select type="option" name="barang_jenis" id="inputState" class="form-select">
                         <option>Buket</option>
                         <option>Hampers</option>
                         <option>Seserahan</option>
@@ -179,17 +206,17 @@
                     <div class="col-md-1"></div>
                     <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" name="stok" class="form-control" placeholder="">
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" name="deskripsi" class="form-control" placeholder="">
                     </div>
                     <div class="py-1"></div>
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input class="form-control" type="file" id="formFile">
+                        <input type="file" name="image" class="form-control" type="file" id="formFile">
                       </div>
                     </div>
                     <div class="py-4">
@@ -199,7 +226,7 @@
                           <button type="reset" class="btn btn-primary">Clear</button>
                           <button type="submit" class="btn btn-primary">Update</button>
                           <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="reset" class="btn btn-primary">Save</button>
+                          <button type="submit" name="Submit" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>
@@ -224,7 +251,6 @@
                                       <th>Stok</th>
                                       <th>Harga</th>
                                       <th>Ukuran</th>
-                                      <th>Jenis</th>
                                       <th>Deskripsi</th>
                                   </tr>
                               </thead>
@@ -237,36 +263,9 @@
                                       <td>75</td>
                                       <td>Rp75.000</td>
                                       <td>L</td>
-                                      <td>Mawar</td>
                                       <td>Buket isi bunga imitasi custom</td>
                                   </tr>
                               </tbody>
-                              <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                            </tbody>
                         </table>
                     </div>
                   </div>
@@ -330,7 +329,7 @@
                           <button type="reset" class="btn btn-primary">Clear</button>
                           <button type="submit" class="btn btn-primary">Update</button>
                           <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="reset" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/kembali"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kembalioren"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24px"
+        />
+
+    <TextView
+        android:id="@+id/alamat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Alamat"
+        android:textColor="#DD8B55"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/alamatrumah"
+        android:layout_width="402dp"
+        android:layout_height="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="12"
+        android:hint="Alamat Rumah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alamat" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="403dp"
+        android:layout_height="58dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="12"
+        android:hint="username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alamatrumah" />
+
+
+    <EditText
+        android:id="@+id/nomortelfon"
+        android:layout_width="402dp"
+        android:layout_height="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:ems="12"
+        android:hint="Nomor Telfon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <Spinner
+        android:id="@+id/provinsi"
+        android:layout_width="413dp"
+        android:layout_height="47dp"
+        app:layout_constraintTop_toBottomOf="@+id/kabupaten"
+        tools:layout_editor_absoluteX="-9dp" /><![CDATA[
+
+    />
+
+    ]]>
+
+    <Spinner
+        android:id="@+id/kabupaten"
+        android:layout_width="405dp"
+        android:layout_height="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomortelfon" />
+
+    <Spinner
+        android:id="@+id/kecamatan"
+        android:layout_width="405dp"
+        android:layout_height="52dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/provinsi" />
+
+
+    <EditText
+        android:id="@+id/KodePos"
+        android:layout_width="402dp"
+        android:layout_height="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="152dp"
+        android:ems="12"
+        android:hint="Kode Pos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomortelfon"/>
+
+    <EditText
+        android:id="@+id/AlamatLengkap"
+        android:layout_width="409dp"
+        android:layout_height="73dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:ems="12"
+        android:hint="Alamat Lengkap (nama gedung, jalan, dan lainnya)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/KodePos"
+
+    <Button
+        android:id="@+id/Simpan"
+        android:layout_width="343dp"
+        android:layout_height="58dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#DD8B55"
+        android:text="SIMPAN"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="596dp" />
+
+    <Button
+        android:layout_width="345dp"
+        android:layout_height="54dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#DD8B55"
+        android:text="HAPUS ALAMAT"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="661dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
