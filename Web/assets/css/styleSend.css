@@ -1,0 +1,121 @@
+.button{
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  background: #DD8B55;
+  color: #abc;
+  overflow: hidden;
+}
+
+.button:focus{
+  animation: morph 1.25s forwards;
+}
+
+.button > *{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.sent,
+.button:focus span{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.button:focus .sent{
+  animation: reveal 1s 1.25s forwards;
+}
+
+@keyframes reveal{
+  100%{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes morph{
+  10%,
+  80%{
+    width: 50px;
+    border-radius: 50%;
+    background: #DD8B55;
+    color: #abc;
+  }
+
+  100%{
+    background: #DD8B55;
+    color: #abc;
+  }
+}
+
+@keyframes takeOff{
+  5%,15%,25%,35%,45%{
+    transform: translate(-47%, -50%);
+  }
+
+  10%,20%,30%,40%,50%{
+    transform: translate(-53%, -50%);
+  }
+
+  90%{
+    transform: translate(100px, -100px);
+  }
+
+  100%{
+    transform: translate(100px, -100px);
+  }
+}
+
+.save,
+.button:focus span{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.button:focus .save{
+  animation: reveal 1s 1.25s forwards;
+}
+
+@keyframes reveal{
+  100%{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes morph{
+  10%,
+  80%{
+    width: 50px;
+    border-radius: 50%;
+    background: #DD8B55;
+    color: #abc;
+  }
+
+  100%{
+    background: #DD8B55;
+    color: #abc;
+  }
+}
+
+@keyframes takeOff{
+  5%,15%,25%,35%,45%{
+    transform: translate(-47%, -50%);
+  }
+
+  10%,20%,30%,40%,50%{
+    transform: translate(-53%, -50%);
+  }
+
+  90%{
+    transform: translate(100px, -100px);
+  }
+
+  100%{
+    transform: translate(100px, -100px);
+  }
+}
