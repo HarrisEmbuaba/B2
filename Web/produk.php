@@ -1,5 +1,5 @@
 <?php
-include ('koneksi.php');
+require ('koneksi.php');
 include ('produk.html');
 
 error_reporting(0);
