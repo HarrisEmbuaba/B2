@@ -1,30 +1,69 @@
-<!-- <?php
- 
-// https://www.malasngoding.com
-// menghubungkan dengan koneksi database
-include ('koneksi.php');
- 
-// mengambil data barang dengan kode paling besar
-$query = mysqli_query($koneksi, "SELECT max(kode) as kodeTerbesar FROM barang");
-$data = mysqli_fetch_array($query);
-$kodeBarang = $data['kodeTerbesar'];
- 
-// mengambil angka dari kode barang terbesar, menggunakan fungsi substr
-// dan diubah ke integer dengan (int)
-$urutan = (int) substr($kodeBarang, 3, 3);
- 
-// bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
-$urutan++;
- 
-// membentuk kode barang baru
-// perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
-// misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
-// angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
-$huruf = "BRG";
-$kodeBarang = $huruf . sprintf("%03s", $urutan);
-echo $kodeBarang;
- 
-?> -->
+<?php
+require ('koneksi.php');
+
+error_reporting(0);
+session_start();
+
+if(isset($_SESSION['id_barang'])){
+  header("Location: produk.php");
+}
+
+$err = "";
+$sukses = "";
+$kode = "";
+
+if(isset($_POST['Submit'])){
+  // $kode = $_POST['id_barang'];
+  $nama = $_POST['nama_barang'];
+  $image = $_POST['image'];
+  $deskripsi = $_POST['deskripsi'];
+  $harga = $_POST['harga'];
+  $stok = $_POST['stok'];
+  $warna = $_POST['warna'];
+  $ukuran = $_POST['ukuran'];
+  $kategori = $_POST['barang_jenis'];
+
+  if(!$result->num_rows > 0){
+    $sql1 = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`, 'id_ukuran', 'id_warna','id_jenis')
+    VALUES ('$nama','$image','$deskripsi')";
+    $sql2 = "INSERT INTO `jenis_barang`(`id_jenis`,`barang_jenis`)
+    VALUES ('','$kategori')";
+    $sql3 = "INSERT INTO `jenis_ukuran`(`id_ukuran`,`ukuran`)
+    VALUES ('','$ukuran')";
+    $sql4 = "INSERT INTO `jenis_warna`(`id_warna`,`warna`)
+    VALUES ('','$warna')";
+    $sql5 = "INSERT INTO `detail_barang`(`id`,`harga`, `stok`)
+    VALUES ('','$harga','$stok')";
+
+    $result = mysqli_query($koneksi,$sql1);
+   
+
+    if($result){
+      echo "<script>alert('Barang berhasil ditambahkan!')</script>";
+      
+      $nama = "";
+      $image = "";
+      $deskripsi = "";
+      $harga = "";
+      $stok = "";
+      $warna = "";
+      $ukuran = "";
+      $kategori = "";
+      $_POST['nama_barang'] = "";
+      $_POST['image'] = "";
+      $_POST['deskripsi'] = "";
+      $_POST['harga'] = "";
+      $_POST['stok'] = "";
+      $_POST['warna'] = "";
+      $_POST['ukuran'] = "";
+      $_POST['barang_jenis'] = "";
+    } else {
+      echo "<script>alert('Barang gagal ditambahkan!')</script>";
+    }
+  }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -122,7 +161,7 @@ echo $kodeBarang;
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -180,8 +219,23 @@ echo $kodeBarang;
                       <input type="text" name="nama_barang" class="form-control" placeholder="">
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
-                    <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="">
+                    <div class="col-md-4">
+                      <select type="option" name="ukuran" id="inputState" class="form-select">
+                      <?php
+                            while ($uk = mysqli_fetch_array("SELECT * FROM jenis_ukuran")):;
+                        ?>
+                            <option value="<?php echo $uk["id_ukuran"];
+                                // The value we usually set is the primary key
+                            ?>">
+                                <?php echo $uk["ukuran"];
+                                    // To show the category name to the user
+                                ?>
+                            </option>
+                        <?php
+                            endwhile;
+                            // While loop must be terminated
+                        ?>
+                      </select>
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
                     <div class="col-md-2">
@@ -283,8 +337,13 @@ echo $kodeBarang;
                       <input type="text" class="form-control" placeholder="">
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
-                    <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="">
+                    <div class="col-md-4">
+                      <select type="option" name="barang_jenis" id="inputState" class="form-select">
+                        
+                        <option>s</option>
+                        <option>m</option>
+                        <option>l</option>
+                      </select>
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
