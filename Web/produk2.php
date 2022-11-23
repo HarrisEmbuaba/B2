@@ -5,7 +5,7 @@ error_reporting(0);
 session_start();
 
 if(isset($_SESSION['id_barang'])){
-  header("Location: produk.php");
+  header("Location: produk2.php");
 }
 
 $err = "";
@@ -13,7 +13,7 @@ $sukses = "";
 $kode = "";
 
 if(isset($_POST['Submit'])){
-  // $kode = $_POST['id_barang'];
+  $kode = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
   $image = $_POST['image'];
   $deskripsi = $_POST['deskripsi'];
@@ -22,9 +22,10 @@ if(isset($_POST['Submit'])){
   $warna = $_POST['warna'];
   $ukuran = $_POST['ukuran'];
   $kategori = $_POST['barang_jenis'];
+  
 
   if(!$result->num_rows > 0){
-    $sql1 = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`, 'id_ukuran', 'id_warna','id_jenis')
+    $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`, 'id_ukuran', 'id_warna','id_jenis')
     VALUES ('$nama','$image','$deskripsi')";
     $sql2 = "INSERT INTO `jenis_barang`(`id_jenis`,`barang_jenis`)
     VALUES ('','$kategori')";
@@ -35,7 +36,7 @@ if(isset($_POST['Submit'])){
     $sql5 = "INSERT INTO `detail_barang`(`id`,`harga`, `stok`)
     VALUES ('','$harga','$stok')";
 
-    $result = mysqli_query($koneksi,$sql1);
+    $result = mysqli_query($koneksi,$sql);
    
 
     if($result){
