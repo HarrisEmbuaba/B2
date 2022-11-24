@@ -19,26 +19,18 @@ if(isset($_POST['Submit'])){
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
   $stok = $_POST['stok'];
-  $warna = $_POST['warna'];
+  $kategori = $_POST['barang_jenis'];
   $ukuran = $_POST['ukuran'];
+  $warna = $_POST['warna'];
+  $id_jenis = $_POST['id_jenis'];
   $id_ukuran = $_POST['id_ukuran'];
   $id_warna = $_POST['id_warna'];
-  $id_jenis = $_POST['id_jenis'];
 
   if(!$result->num_rows > 0){
-    $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`, 'id_ukuran', 'id_warna','id_jenis')
-    VALUES ('$nama','$image','$deskripsi')";
-    $sql2 = "INSERT INTO `jenis_barang`(`id_jenis`,`barang_jenis`)
-    VALUES ('','$kategori')";
-    $sql3 = "INSERT INTO `jenis_ukuran`(`id_ukuran`,`ukuran`)
-    VALUES ('','$ukuran')";
-    $sql4 = "INSERT INTO `jenis_warna`(`id_warna`,`warna`)
-    VALUES ('','$warna')";
-    $sql5 = "INSERT INTO `detail_barang`(`id`,`harga`, `stok`)
-    VALUES ('','$harga','$stok')";
+    $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
+    VALUES ('$nama','$image','$deskripsi','$harga','$stok','$id_jenis','$id_ukuran','$id_warna')";
 
     $result = mysqli_query($koneksi,$sql);
-   
 
     if($result){
       echo "<script>alert('Barang berhasil ditambahkan!')</script>";
@@ -48,17 +40,17 @@ if(isset($_POST['Submit'])){
       $deskripsi = "";
       $harga = "";
       $stok = "";
-      $warna = "";
-      $ukuran = "";
       $kategori = "";
+      $ukuran = "";
+      $warna = "";
       $_POST['nama_barang'] = "";
       $_POST['image'] = "";
       $_POST['deskripsi'] = "";
       $_POST['harga'] = "";
       $_POST['stok'] = "";
-      $_POST['warna'] = "";
-      $_POST['ukuran'] = "";
       $_POST['barang_jenis'] = "";
+      $_POST['ukuran'] = "";
+      $_POST['warna'] = "";
     } else {
       echo "<script>alert('Barang gagal ditambahkan!')</script>";
     }
@@ -213,7 +205,12 @@ if(isset($_POST['Submit'])){
                   <form class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="">
+                    <select name="id_barang" class="form-control">
+                      <?php
+                            $sql = "SELECT id_barang FROM barang";
+                            $all_categories = mysqli_query($mysqli, $sql);
+                        ?>
+                    </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
@@ -240,7 +237,21 @@ if(isset($_POST['Submit'])){
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
                     <div class="col-md-2">
-                      <input type="text" name="warna" class="form-control" placeholder="">
+                        <select name="warna" class="form-select">
+                        <?php
+                                $sql = "SELECT * FROM jenis_warna";
+                                $all_categories = mysqli_query($mysqli, $sql);
+                            ?>
+                            <?php
+                                while ($category = mysqli_fetch_array($all_categories)){
+                            ?>
+                                <option value="<?php echo $category["id_warna"];?>">
+                                    <?php echo $category["warna"]; ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
@@ -303,8 +314,8 @@ if(isset($_POST['Submit'])){
                               <thead>
                                   <tr>
                                       <th>Kode Barang</th>
-                                      <th>Gambar</th>
                                       <th>Nama</th>
+                                      <th>Gambar</th>
                                       <th>Deskripsi</th>
                                       <th>Harga</th>
                                       <th>Stok</th>
@@ -313,7 +324,37 @@ if(isset($_POST['Submit'])){
                                       <th>Warna</th>
                                   </tr>
                               </thead>
-                              
+                              <tbody>
+                            <?php
+                            $query="SELECT * FROM barang";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $field1name = $row["id_barang"];
+                                        $field2name = $row["nama_barang"];
+                                        $field3name = $row["image"];
+                                        $field4name = $row["deskripsi"];
+                                        $field5name = $row["harga"];
+                                        $field6name = $row["stok"];
+                                        $field7name = $row["id_jenis"]; 
+                                        $field8name = $row["id_ukuran"]; 
+                                        $field9name = $row["id_warna"]; 
+
+                                        echo '<tr>  
+                                                <th>'.$field1name.'</th> 
+                                                <td>'.$field2name.'</td> 
+                                                <td>'.$field3name.'</td> 
+                                                <td>'.$field4name.'</td> 
+                                                <td>'.$field5name.'</td> 
+                                                <td>'.$field6name.'</td>
+                                                <td>'.$field7name.'</td>
+                                                <td>'.$field8name.'</td>
+                                                <td>'.$field9name.'</td>
+                                            </tr>';
+                                    }
+                                    $result->free();
+                                } 
+                            ?>
+                        </tbody>
                         </table>
                     </div>
                   </div>
