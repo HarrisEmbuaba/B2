@@ -1,3 +1,20 @@
+<?php
+require ('koneksi.php');
+// require ('kirim.html');
+
+error_reporting(0);
+session_start();
+
+if(isset($_SESSION['id_barang'])){
+  header("Location: produk2.php");
+}
+
+$err = "";
+$sukses = "";
+$kode = "";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,13 +103,13 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.html">
+        <a class="nav-link collapsed" href="pesan.php">
           <img src="assets/img/pesan.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.html">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
@@ -104,13 +121,13 @@
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.html">
+        <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="logout.html">
+        <a class="nav-link collapsed" href="logout.php">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Logout Page Nav -->
@@ -167,12 +184,9 @@
                       <li class="dropdown-header text-periode">
                         <h6>Urutkan</h6>
                       </li>
-  
-                      <li><a class="dropdown-item" href="#">Hari ini</a></li>
-                      <li><a class="dropdown-item" href="#">Kemarin</a></li>
-                      <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
-                      <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
-                      <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                      <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
+                      
+                      </select>
                     </ul>
                   </div>
 
@@ -183,12 +197,31 @@
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
+                        <?php
+                        $result = mysqli_query($con,"SELECT `transaksi_id`, `id_barang` FROM `transaksi`");
+                        
+                        echo "<table border='1'>
+                        <tr>
+                        <th>Nomor Pesanan</th>
+                        <th>Kode Barang</th>
+                        </tr>";
+                        
+                        while($row = mysqli_fetch_array($result))
+                        {
+                        echo "<tr>";
+                        echo "<td>" . $row['Nomor Pesanan'] . "</td>";
+                        echo "<td>" . $row['Kode Barang'] . "</td>";
+                        echo "</tr>";
+                        }
+                        echo "</table>";
+                        
+                        mysqli_close($con);
+                        ?>
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
                                       <th>Nomor Pesanan</th>
                                       <th>Kode Barang</th>
-                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Produk</th>
                                       <th>Variasi</th>
@@ -203,17 +236,16 @@
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>5606699801</td>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
+                                      <td><?php ?></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                       <td>-</td>
                                       <td>
                                         <div class="text-center">
