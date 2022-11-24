@@ -1,5 +1,5 @@
 <?php
-require ('koneksi.php');
+include ('koneksi.php');
 
 error_reporting(0);
 session_start();
@@ -21,8 +21,9 @@ if(isset($_POST['Submit'])){
   $stok = $_POST['stok'];
   $warna = $_POST['warna'];
   $ukuran = $_POST['ukuran'];
-  $kategori = $_POST['barang_jenis'];
-  
+  $id_ukuran = $_POST['id_ukuran'];
+  $id_warna = $_POST['id_warna'];
+  $id_jenis = $_POST['id_jenis'];
 
   if(!$result->num_rows > 0){
     $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`, 'id_ukuran', 'id_warna','id_jenis')
@@ -221,20 +222,19 @@ if(isset($_POST['Submit'])){
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
                     <div class="col-md-4">
-                      <select type="option" name="ukuran" id="inputState" class="form-select">
+                      <select name="ukuran" class="form-select">
                       <?php
-                            while ($uk = mysqli_fetch_array("SELECT * FROM jenis_ukuran")):;
+                            $sql = "SELECT * FROM jenis_ukuran";
+                            $all_categories = mysqli_query($mysqli, $sql);
                         ?>
-                            <option value="<?php echo $uk["id_ukuran"];
-                                // The value we usually set is the primary key
-                            ?>">
-                                <?php echo $uk["ukuran"];
-                                    // To show the category name to the user
-                                ?>
+                        <?php
+                            while ($category = mysqli_fetch_array($all_categories)){
+                        ?>
+                            <option value="<?php echo $category["id_ukuran"];?>">
+                                <?php echo $category["ukuran"]; ?>
                             </option>
                         <?php
-                            endwhile;
-                            // While loop must be terminated
+                        }
                         ?>
                       </select>
                     </div>
@@ -245,11 +245,20 @@ if(isset($_POST['Submit'])){
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
                     <div class="col-md-4">
-                      <select type="option" name="barang_jenis" id="inputState" class="form-select">
-                        
-                        <option>Buket</option>
-                        <option>Hampers</option>
-                        <option>Seserahan</option>
+                      <select type="option" name="jenis_barang" class="form-select">
+                      <?php
+                            $sql = "SELECT * FROM jenis_barang";
+                            $all_categories = mysqli_query($mysqli, $sql);
+                        ?>
+                        <?php
+                            while ($category = mysqli_fetch_array($all_categories)){
+                        ?>
+                            <option value="<?php echo $category["id_jenis"];?>">
+                                <?php echo $category["barang_jenis"]; ?>
+                            </option>
+                        <?php
+                        }
+                        ?>
                       </select>
                     </div>
                     <div class="col-md-1"></div>
@@ -296,25 +305,15 @@ if(isset($_POST['Submit'])){
                                       <th>Kode Barang</th>
                                       <th>Gambar</th>
                                       <th>Nama</th>
-                                      <th>Kategori</th>
-                                      <th>Stok</th>
-                                      <th>Harga</th>
-                                      <th>Ukuran</th>
                                       <th>Deskripsi</th>
+                                      <th>Harga</th>
+                                      <th>Stok</th>
+                                      <th>Kategori</th>
+                                      <th>Ukuran</th>
+                                      <th>Warna</th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>Buket</td>
-                                      <td>75</td>
-                                      <td>Rp75.000</td>
-                                      <td>L</td>
-                                      <td>Buket isi bunga imitasi custom</td>
-                                  </tr>
-                              </tbody>
+                              
                         </table>
                     </div>
                   </div>
@@ -330,10 +329,14 @@ if(isset($_POST['Submit'])){
                   <form class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="">
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="nama" class="col-sm-1 col-form-label">Harga</label>
                     <div class="col-md-4">
                       <input type="text" class="form-control" placeholder="">
                     </div>

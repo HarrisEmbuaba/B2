@@ -1,14 +1,14 @@
-<?php 
- 
-$server = "localhost";
-$user = "root";
-$pass = "";
+<?php
 $database = "project3";
- 
-$conn = mysqli_connect($server, $user, $pass, $database);
- 
-if (!$conn) {
-    die("<script>alert('Gagal tersambung dengan database.')</script>");
-}
+$host = "localhost";
+$user = "root"; // ganti dengan username database km
+$password = ""; // ganti dengan password database km
 
+$mysqli = new mysqli($host,$user,$password,$database);
+
+// Check connection
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  exit();
+}
 ?>
