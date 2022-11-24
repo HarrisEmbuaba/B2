@@ -1,6 +1,6 @@
 <?php
 require ('koneksi.php');
-// require ('kirim.html');
+require ('kirim.html');
 
 error_reporting(0);
 session_start();
@@ -12,6 +12,21 @@ if(isset($_SESSION['id_barang'])){
 $err = "";
 $sukses = "";
 $kode = "";
+
+$id = mysqli_query($con,"SELECT transaksi_id FROM `transaksi`");
+$kode = mysqli_query($con,"SELECT id_barang FROM `transaksi`");
+$nama = mysqli_query($con,"SELECT nama FROM `pembeli`");
+$produk = mysqli_query($con,"SELECT nama_barang FROM `barang`");
+$variasi1 = mysqli_query($con,"SELECT ukuran FROM `jenis_ukuran`");
+$variasi2 = mysqli_query($con,"SELECT warna FROM `transaksi`");
+$qty = mysqli_query($con,"SELECT qty FROM `transaksi`");
+$total = mysqli_query($con,"SELECT total FROM `transaksi`");
+$alamat = mysqli_query($con,"SELECT alamat FROM `transaksi`");
+$bayar = mysqli_query($con,"SELECT pembayaran FROM `transaksi`");
+$kirim = mysqli_query($con,"SELECT pengiriman FROM `transaksi`");
+$catatan = mysqli_query($con,"SELECT catatan FROM `transaksi`");
+
+mysqli_close($con);
 
 ?>
 
@@ -197,26 +212,6 @@ $kode = "";
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
-                        <?php
-                        $result = mysqli_query($con,"SELECT `transaksi_id`, `id_barang` FROM `transaksi`");
-                        
-                        echo "<table border='1'>
-                        <tr>
-                        <th>Nomor Pesanan</th>
-                        <th>Kode Barang</th>
-                        </tr>";
-                        
-                        while($row = mysqli_fetch_array($result))
-                        {
-                        echo "<tr>";
-                        echo "<td>" . $row['Nomor Pesanan'] . "</td>";
-                        echo "<td>" . $row['Kode Barang'] . "</td>";
-                        echo "</tr>";
-                        }
-                        echo "</table>";
-                        
-                        mysqli_close($con);
-                        ?>
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
@@ -236,16 +231,16 @@ $kode = "";
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td><?php ?></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
+                                      <td><?php echo $id?></td>
+                                      <td><?php echo $kode?></td>
+                                      <td><?php echo $nama?></td>
+                                      <td><?php echo $produk?></td>
+                                      <td><?php echo $variasi1, $variasi2?></td>
+                                      <td><?php echo $qty?></td>
+                                      <td><?php echo $total?></td>
+                                      <td><?php echo $alamat?></td>
+                                      <td><?php echo $bayar?></td>
+                                      <td><?php echo $kirim?></td>
                                       <td>-</td>
                                       <td>
                                         <div class="text-center">
@@ -320,17 +315,16 @@ $kode = "";
                               </thead>
                               <tbody>
                                   <tr>
-                                    <td>5606699801</td>
-                                    <td>0000001</td>
-                                    <td>image-buket.png</td>
-                                    <td>Lala</td>
-                                    <td>Buket isi bunga palsu</td>
-                                    <td>XL, Mawar</td>
-                                    <td>x1</td>
-                                    <td>Rp125.000</td>
-                                    <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                    <td>Transfer</td>
-                                    <td>Diantar</td>
+                                    <td><?php echo $id?></td>
+                                    <td><?php echo $kode?></td>
+                                    <td><?php echo $nama?></td>
+                                    <td><?php echo $produk?></td>
+                                    <td><?php echo $variasi1, $variasi2?></td>
+                                    <td><?php echo $qty?></td>
+                                    <td><?php echo $total?></td>
+                                    <td><?php echo $alamat?></td>
+                                    <td><?php echo $bayar?></td>
+                                    <td><?php echo $kirim?></td>
                                     <td>-</td>
                                     <td>
                                       <div class="text-center">
@@ -403,17 +397,16 @@ $kode = "";
                               </thead>
                               <tbody>
                                   <tr>
-                                    <td>5606699801</td>
-                                    <td>0000001</td>
-                                    <td>image-buket.png</td>
-                                    <td>Lala</td>
-                                    <td>Buket isi bunga palsu</td>
-                                    <td>XL, Mawar</td>
-                                    <td>x1</td>
-                                    <td>Rp125.000</td>
-                                    <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                    <td>Transfer</td>
-                                    <td>Diantar</td>
+                                    <td><?php echo $id?></td>
+                                    <td><?php echo $kode?></td>
+                                    <td><?php echo $nama?></td>
+                                    <td><?php echo $produk?></td>
+                                    <td><?php echo $variasi1, $variasi2?></td>
+                                    <td><?php echo $qty?></td>
+                                    <td><?php echo $total?></td>
+                                    <td><?php echo $alamat?></td>
+                                    <td><?php echo $bayar?></td>
+                                    <td><?php echo $kirim?></td>
                                     <td>-</td>
                                     <td>-</td>
                                   </tr>
