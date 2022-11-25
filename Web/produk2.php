@@ -28,6 +28,7 @@ if(isset($_POST['Submit'])){
   $image = $_FILES['image']['name'];
   $source = $_FILES['image']['tmp_name'];
   $folder = 'gambarproduk/';
+  move_uploaded_file($source, $folder.$image);
   
   if(!$result->num_rows > 0){
     $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
@@ -208,16 +209,11 @@ if(isset($_POST['Submit'])){
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
                   <form class="row g-2" action="produk2.php" method="post">
-                    <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
+                    <!-- <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                         <select name="id_barang" class="form-control">
-                        <?php
-                                $sql = "SELECT id_barang FROM barang";
-                                $all_categories = mysqli_query($mysqli, $sql);
-                                echo $row["id_barang"];
-                            ?>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
@@ -387,10 +383,10 @@ if(isset($_POST['Submit'])){
                 <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
                   <form class="row g-2">
-                    <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
+                    <!-- <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                       <input type="text" class="form-control" placeholder="">
-                    </div>
+                    </div> -->
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
