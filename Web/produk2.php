@@ -330,7 +330,13 @@ if(isset($_POST['Submit'])){
                               </thead>
                               <tbody>
                             <?php
-                            $query="SELECT * FROM barang WHERE stok > 0";
+                            $query="SELECT barang.id_barang, barang.nama_barang, barang.image, barang.deskripsi, 
+                            barang.harga, barang.stok, jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                            FROM barang 
+                            RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis 
+                            RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran 
+                            RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna 
+                            WHERE stok > 0;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                         $field1name = $row["id_barang"];
@@ -339,9 +345,9 @@ if(isset($_POST['Submit'])){
                                         $field4name = $row["deskripsi"];
                                         $field5name = $row["harga"];
                                         $field6name = $row["stok"];
-                                        $field7name = $row["id_jenis"]; 
-                                        $field8name = $row["id_ukuran"]; 
-                                        $field9name = $row["id_warna"]; 
+                                        $field7name = $row["barang_jenis"]; 
+                                        $field8name = $row["ukuran"]; 
+                                        $field9name = $row["warna"]; 
                                         $field10name = $row["action"];
                                         ?>
                                         <tr>  
@@ -351,16 +357,11 @@ if(isset($_POST['Submit'])){
                                             <td><?php echo $field4name ?></td> 
                                             <td><?php echo $field5name ?></td> 
                                             <td><?php echo $field6name ?></td>
-                                            <td>
-                                                <?php
-                                                    $sql = "SELECT FROM jenis_barang";
-                                                    $category = mysqli_query($mysqli, $sql);
-                                                ?>
-                                            </td>
+                                            <td><?php echo $field7name ?></td>
                                             <td><?php echo $field8name ?></td>
                                             <td><?php echo $field9name ?></td> 
                                             <td>
-                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a>
+                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a><br><br><br><br>
                                                 <a href="proses_hapus.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                             </td>
                                         </tr>
@@ -474,7 +475,13 @@ if(isset($_POST['Submit'])){
                               </thead>
                               <tbody>
                             <?php
-                            $query="SELECT * FROM barang WHERE stok = 0 ";
+                            $query="SELECT barang.id_barang, barang.nama_barang, barang.image, barang.deskripsi, 
+                            barang.harga, barang.stok, jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                            FROM barang 
+                            RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis 
+                            RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran 
+                            RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna 
+                            WHERE stok = 0;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                         $field1name = $row["id_barang"];
@@ -483,9 +490,9 @@ if(isset($_POST['Submit'])){
                                         $field4name = $row["deskripsi"];
                                         $field5name = $row["harga"];
                                         $field6name = $row["stok"];
-                                        $field7name = $row["id_jenis"]; 
-                                        $field8name = $row["id_ukuran"]; 
-                                        $field9name = $row["id_warna"]; 
+                                        $field7name = $row["barang_jenis"]; 
+                                        $field8name = $row["ukuran"]; 
+                                        $field9name = $row["warna"]; 
                                         $field10name = $row["action"];
                                         ?>
                                         <tr>  
@@ -495,16 +502,11 @@ if(isset($_POST['Submit'])){
                                             <td><?php echo $field4name ?></td> 
                                             <td><?php echo $field5name ?></td> 
                                             <td><?php echo $field6name ?></td>
-                                            <td>
-                                                <?php 
-                                                $sql = "SELECT jenis_barang.barang_jenis FROM barang INNER JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis WHERE stok = 0;";
-                                                $category = mysqli_query($mysqli, $sql);
-                                                ?>
-                                            </td>
+                                            <td><?php echo $field7name ?></td>
                                             <td><?php echo $field8name ?></td>
                                             <td><?php echo $field9name ?></td> 
                                             <td>
-                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a>
+                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a><br><br><br><br>
                                                 <a href="proses_hapus.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                             </td>
                                         </tr>
