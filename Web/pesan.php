@@ -1,35 +1,3 @@
-<?php
-require ('koneksi.php');
-require ('kirim.html');
-
-error_reporting(0);
-session_start();
-
-if(isset($_SESSION['id_barang'])){
-  header("Location: produk2.php");
-}
-
-$err = "";
-$sukses = "";
-$kode = "";
-
-$id = mysqli_query($koneksi,"SELECT transaksi_id FROM `transaksi`");
-$kode = mysqli_query($koneksi,"SELECT id_barang FROM `transaksi`");
-$nama = mysqli_query($koneksi,"SELECT nama FROM `pembeli`");
-$produk = mysqli_query($koneksi,"SELECT nama_barang FROM `barang`");
-$variasi1 = mysqli_query($koneksi,"SELECT ukuran FROM `jenis_ukuran`");
-$variasi2 = mysqli_query($koneksi,"SELECT warna FROM `transaksi`");
-$qty = mysqli_query($koneksi,"SELECT qty FROM `transaksi`");
-$total = mysqli_query($koneksi,"SELECT total FROM `transaksi`");
-$alamat = mysqli_query($koneksi,"SELECT alamat FROM `transaksi`");
-$bayar = mysqli_query($koneksi,"SELECT pembayaran FROM `transaksi`");
-$kirim = mysqli_query($koneksi,"SELECT pengiriman FROM `transaksi`");
-$catatan = mysqli_query($koneksi,"SELECT catatan FROM `transaksi`");
-
-mysqli_close($koneksi);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +5,7 @@ mysqli_close($koneksi);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pengiriman</title>
+  <title>Pesanan</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -105,6 +73,13 @@ mysqli_close($koneksi);
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
 
+        </li><!-- Profile Nav -->
+        <li class="nav-item">
+          <a class="nav-link nav-icon" href="users-profile.html">
+            <img src="assets/img/user.png" width="35px" height="35px"></i>
+          </a>
+        </li><!-- End Profile Nav -->
+
         </li><!-- End Messages Nav -->
 
       </ul>
@@ -118,14 +93,14 @@ mysqli_close($koneksi);
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.php">
-          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
+        <a class="nav-link collapsed" href="pesan.html">
+          <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.php">
-          <img src="assets/img/kirim1.png" width="35px" height="35px"></i>
+        <a class="nav-link collapsed" href="kirim.html">
+          <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
@@ -136,13 +111,13 @@ mysqli_close($koneksi);
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.php">
+        <a class="nav-link collapsed" href="bayar.html">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="logout.php">
+        <a class="nav-link collapsed" href="logout.html">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Logout Page Nav -->
@@ -163,21 +138,17 @@ mysqli_close($koneksi);
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#perlu-dikirim">Perlu Dikirim</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#belum-bayar">Belum Bayar</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikirim">Dikirim</button>
-                </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Diterima</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
                 </li>
 
               </ul>          
               <div class="tab-content pt-1">
 
-                <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
+                <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
 
                   <!-- partial:index.partial.html -->
                   <div class="row mb-3">
@@ -193,19 +164,21 @@ mysqli_close($koneksi);
                     </div>
                   </div>
 
+                  <div class="col-sm-10">
                   <div class="urutkan_container">
                     <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                      <option value=""></option>
-                      <?php
-                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                      while($r = mysqli_fetch_array($waktu)){
-                        ?>
-                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                      <?php } ?>
-                      </select>
+                      <li class="dropdown-header text-periode">
+                        <h6>Urutkan</h6>
+                      </li>
+  
+                      <li><a class="dropdown-item" href="#">Hari ini</a></li>
+                      <li><a class="dropdown-item" href="#">Kemarin</a></li>
+                      <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
+                      <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
+                      <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
                     </ul>
+                  </div>
                   </div>
 
                   <!-- DataTales Example -->
@@ -220,6 +193,7 @@ mysqli_close($koneksi);
                                   <tr>
                                       <th>Nomor Pesanan</th>
                                       <th>Kode Barang</th>
+                                      <th>Gambar</th>
                                       <th>Nama</th>
                                       <th>Produk</th>
                                       <th>Variasi</th>
@@ -234,22 +208,19 @@ mysqli_close($koneksi);
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td><?php echo $id?></td>
-                                      <td><?php echo $kode?></td>
-                                      <td><?php echo $nama?></td>
-                                      <td><?php echo $produk?></td>
-                                      <td><?php echo $variasi1, $variasi2?></td>
-                                      <td><?php echo $qty?></td>
-                                      <td><?php echo $total?></td>
-                                      <td><?php echo $alamat?></td>
-                                      <td><?php echo $bayar?></td>
-                                      <td><?php echo $kirim?></td>
+                                      <td>5606699801</td>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
+                                      <td>Lala</td>
+                                      <td>Buket isi bunga palsu</td>
+                                      <td>XL, Mawar</td>
+                                      <td>x1</td>
+                                      <td>Rp125.000</td>
+                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
+                                      <td>Transfer</td>
+                                      <td>Diantar</td>
                                       <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <a href="#" class="btn btn-primary">Kirim</a>
-                                        </div>
-                                      </td>
+                                      <td>-</td>
                                   </tr>
                               </tbody>
                         </table>
@@ -260,7 +231,7 @@ mysqli_close($koneksi);
 
             <div class="tab-content pt-2">
 
-              <div class="tab-pane fade dikirim" id="dikirim">
+              <div class="tab-pane fade dikemas" id="dikemas">
 
                 <!-- partial:index.partial.html -->
                 <div class="row mb-3">
@@ -276,21 +247,22 @@ mysqli_close($koneksi);
                   </div>
                 </div>
 
+                <div class="col-sm-10">
                 <div class="urutkan_container">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                      <option value=""></option>
-                      <?php
-                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                      while($r = mysqli_fetch_array($waktu)){
-                        ?>
-                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                      <?php } ?>
-                      </select>
+                    <li class="dropdown-header text-periode">
+                      <h6>Urutkan</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Hari ini</a></li>
+                    <li><a class="dropdown-item" href="#">Kemarin</a></li>
+                    <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
+                    <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
+                    <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
                   </ul>
                 </div>
-
+                </div>
                   <!-- DataTales Example -->
                   <div class="mb-4">
                     <div class="py-3">
@@ -301,39 +273,40 @@ mysqli_close($koneksi);
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                    <th>Nomor Pesanan</th>
-                                    <th>Kode Barang</th>
-                                    <th>Gambar</th>
-                                    <th>Nama</th>
-                                    <th>Produk</th>
-                                    <th>Variasi</th>
-                                    <th>Jumlah</th>
-                                    <th>Total Bayar</th>
-                                    <th>Alamat</th>
-                                    <th>Pembayaran</th>
-                                    <th>Pengiriman</th>
-                                    <th>Catatan</th>
-                                    <th>Aksi</th>
+                                      <th>Nomor Pesanan</th>
+                                      <th>Kode Barang</th>
+                                      <th>Gambar</th>
+                                      <th>Nama</th>
+                                      <th>Produk</th>
+                                      <th>Variasi</th>
+                                      <th>Jumlah</th>
+                                      <th>Total Bayar</th>
+                                      <th>Alamat</th>
+                                      <th>Pembayaran</th>
+                                      <th>Pengiriman</th>
+                                      <th>Catatan</th>
+                                      <th>Aksi</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
-                                    <td>
-                                      <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Selesai</button>
-                                      </div>
-                                    </td>
+                                      <td>5606699801</td>
+                                      <td>0000001</td>
+                                      <td>image-buket.png</td>
+                                      <td>Lala</td>
+                                      <td>Buket isi bunga palsu</td>
+                                      <td>XL, Mawar</td>
+                                      <td>x1</td>
+                                      <td>Rp125.000</td>
+                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
+                                      <td>Transfer</td>
+                                      <td>Diantar</td>
+                                      <td>-</td>
+                                      <td>
+                                        <div class="text-center">
+                                          <a href="kirim.html" class="btn btn-primary">Selesai</a>
+                                        </div>
+                                      </td>
                                   </tr>
                               </tbody>
                           </table>
@@ -341,83 +314,9 @@ mysqli_close($koneksi);
                       </div>
                     </div>
                   </div>
-
-                  <div class="tab-content pt-3">
-                    <div class="tab-pane fade diterima" id="diterima">
-
-                      <div class="row mb-3">
-                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                        <div class="col-sm-10">
-                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="urutkan_container">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                            <option value=""></option>
-                            <?php
-                            $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                            while($r = mysqli_fetch_array($waktu)){
-                              ?>
-                              <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                              <?php } ?>
-                          </select>
-                        </ul>
-                      </div>
-                      
-                      <!-- DataTales Example -->
-                  <div class="mb-4">
-                    <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                  <tr>
-                                    <th>Nomor Pesanan</th>
-                                    <th>Kode Barang</th>
-                                    <th>Gambar</th>
-                                    <th>Nama</th>
-                                    <th>Produk</th>
-                                    <th>Variasi</th>
-                                    <th>Jumlah</th>
-                                    <th>Total Bayar</th>
-                                    <th>Alamat</th>
-                                    <th>Pembayaran</th>
-                                    <th>Pengiriman</th>
-                                    <th>Catatan</th>
-                                    <th>Aksi</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                    </div>
+                  <div>
+                    
                   </div>
-                </div>
               </div><!-- End Bordered Tabs -->
             </div>
           </div>
