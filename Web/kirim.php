@@ -1,32 +1,113 @@
 <?php
-require ('koneksi.php');
-require ('kirim.html');
+include ('koneksi.php');
 
 error_reporting(0);
 session_start();
 
-if(isset($_SESSION['id_barang'])){
-  header("Location: produk2.php");
+if(isset($_SESSION['transaksi_id'])){
+  header("Location: kirim.php");
 }
 
 $err = "";
 $sukses = "";
 $kode = "";
 
-$id = mysqli_query($koneksi,"SELECT transaksi_id FROM `transaksi`");
-$kode = mysqli_query($koneksi,"SELECT id_barang FROM `transaksi`");
-$nama = mysqli_query($koneksi,"SELECT nama FROM `pembeli`");
-$produk = mysqli_query($koneksi,"SELECT nama_barang FROM `barang`");
-$variasi1 = mysqli_query($koneksi,"SELECT ukuran FROM `jenis_ukuran`");
-$variasi2 = mysqli_query($koneksi,"SELECT warna FROM `transaksi`");
-$qty = mysqli_query($koneksi,"SELECT qty FROM `transaksi`");
-$total = mysqli_query($koneksi,"SELECT total FROM `transaksi`");
-$alamat = mysqli_query($koneksi,"SELECT alamat FROM `transaksi`");
-$bayar = mysqli_query($koneksi,"SELECT pembayaran FROM `transaksi`");
-$kirim = mysqli_query($koneksi,"SELECT pengiriman FROM `transaksi`");
-$catatan = mysqli_query($koneksi,"SELECT catatan FROM `transaksi`");
+if(isset($_POST['Perlu Dikirim'])){
+  $kode = $_POST['id_barang'];
+  $nama = $_POST['nama_barang'];
+  $image = $_POST['image'];
+  $deskripsi = $_POST['deskripsi'];
+  $harga = $_POST['harga'];
+  $stok = $_POST['stok'];
+  $kategori = $_POST['barang_jenis'];
+  $ukuran = $_POST['ukuran'];
+  $warna = $_POST['warna'];
+  $id_jenis = $_POST['id_jenis'];
+  $id_ukuran = $_POST['id_ukuran'];
+  $id_warna = $_POST['id_warna'];
 
-mysqli_close($koneksi);
+  if(!$result->num_rows > 0){
+    $sql = "SELECT `transaksi_id`, `id_barang`, `qty`, `alamat`, `pembayaran`, `pengiriman`, `catatan`, `total`, `status`, `id_user` FROM `transaksi`) 
+    VALUES ('$id','$kode','$qty','$total','$alamat','$bayar','$kirim','$catatan','$status', '$id_user')";
+
+    $sql1 = "SELECT `nama` FROM `pembeli` WHERE id_user='') 
+    VALUES ('$nama')";
+
+    $sql2 = "SELECT `ukuran` FROM `jenis_ukuran`) 
+    VALUES ('$variasi1')";
+    
+    $sql3 = "SELECT `warna` FROM `jenis_warna`) 
+    VALUES ('$variasi2')";
+
+    $result = mysqli_query($conn,$sql,$sql1,$sql2,$sql3);
+
+    if($result){
+      echo "<script>alert('Barang berhasil ditampilkan!')</script>";
+      
+      $id = "";
+      $kode = "";
+      $image = "";
+      $id_user = "";
+      $nama_barang = "";
+      $variasi1 = "";
+      $variasi2 = "";
+      $qty = "";
+      $total = "";
+      $alamat = "";
+      $bayar = "";
+      $kirim = "";
+      $catatan = "";
+      $status = "";
+
+      $_POST['transaksi_id'] = "";
+      $_POST['id_barang'] = "";
+      $_POST['image'] = "";
+      $_POST['id_user'] = "";
+      $_POST['nama_barang'] = "";
+      $_POST['ukuran'.'warna'] = "";
+      $_POST['qty'] = "";
+      $_POST['total'] = "";
+      $_POST['alamat'] = "";
+      $_POST['pembayaran'] = "";
+      $_POST['pengiriman'] = "";
+      $_POST['catatan'] = "";
+      $_POST['status'] = "";
+
+    } else {
+      echo "<script>alert('Barang gagal ditampilkan!')</script>";
+    }
+  }
+}
+
+mysqli_close($conn);
+
+require ('koneksi.php');
+include ('kirim.php');
+
+session_start();
+error_reporting(0);
+if (isset($_SESSION['nama'])) {
+   // header("Location: kirim.php");
+}
+
+if (isset($_POST['Dikirim'])) {
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+ 
+    $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
+    $result = mysqli_query($conn, $sql);
+    $check = mysqli_num_rows($result);
+    if ($check > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['nama'] = $row['nama'];
+        $_SESSION['pass'] = $row['pass'];
+        $_SESSION['email'] = $row['email'];
+        echo "<script>alert('BERHASIL LOGIN. Silahkan coba lagi!')</script>";
+        header("Location: berhasil_login.php");
+    } else {
+        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
+    }
+}
 
 ?>
 
@@ -233,24 +314,55 @@ mysqli_close($koneksi);
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td><?php echo $id?></td>
-                                      <td><?php echo $kode?></td>
-                                      <td><?php echo $nama?></td>
-                                      <td><?php echo $produk?></td>
-                                      <td><?php echo $variasi1, $variasi2?></td>
-                                      <td><?php echo $qty?></td>
-                                      <td><?php echo $total?></td>
-                                      <td><?php echo $alamat?></td>
-                                      <td><?php echo $bayar?></td>
-                                      <td><?php echo $kirim?></td>
-                                      <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <a href="#" class="btn btn-primary">Kirim</a>
-                                        </div>
-                                      </td>
-                                  </tr>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 4";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td>
+                                        <button name="Dikirim">Kirim</button>
+                                          <a href="dikirim.php?id=<?php echo $field1name = "UPDATE `status` WHERE id=''"?>">Kirim</a><br><br><br><br>
+                                        </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
                               </tbody>
                         </table>
                     </div>
@@ -317,24 +429,55 @@ mysqli_close($koneksi);
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
-                                    <td>
-                                      <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Selesai</button>
-                                      </div>
-                                    </td>
-                                  </tr>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 4";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td>
+                                        <button name="Dikirim">Selesai</button>
+                                          <a href="dikirim.php?id=<?php echo $field1name = "UPDATE `status` WHERE id=''"?>">Selesai</a><br><br><br><br>
+                                        </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
                               </tbody>
                           </table>
                         </div>
@@ -399,20 +542,52 @@ mysqli_close($koneksi);
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                  </tr>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 4";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
                               </tbody>
                           </table>
                     </div>
