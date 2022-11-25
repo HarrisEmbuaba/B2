@@ -1,12 +1,11 @@
 <?php
-require ('koneksi.php');
-require ('kirim.html');
+include ('koneksi.php');
 
 error_reporting(0);
 session_start();
 
 if(isset($_SESSION['id_barang'])){
-  header("Location: produk2.php");
+  header("Location: kirim.php");
 }
 
 $err = "";
@@ -25,6 +24,7 @@ $alamat = mysqli_query($koneksi,"SELECT alamat FROM `transaksi`");
 $bayar = mysqli_query($koneksi,"SELECT pembayaran FROM `transaksi`");
 $kirim = mysqli_query($koneksi,"SELECT pengiriman FROM `transaksi`");
 $catatan = mysqli_query($koneksi,"SELECT catatan FROM `transaksi`");
+$status = mysqli_query($koneksi,"SELECT `status` FROM `transaksi`");
 
 mysqli_close($koneksi);
 
@@ -233,24 +233,41 @@ mysqli_close($koneksi);
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td><?php echo $id?></td>
-                                      <td><?php echo $kode?></td>
-                                      <td><?php echo $nama?></td>
-                                      <td><?php echo $produk?></td>
-                                      <td><?php echo $variasi1, $variasi2?></td>
-                                      <td><?php echo $qty?></td>
-                                      <td><?php echo $total?></td>
-                                      <td><?php echo $alamat?></td>
-                                      <td><?php echo $bayar?></td>
-                                      <td><?php echo $kirim?></td>
-                                      <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <a href="#" class="btn btn-primary">Kirim</a>
-                                        </div>
-                                      </td>
-                                  </tr>
+                              <?php
+                              $query="SELECT * FROM transaksi";
+                                if ($result->num_rows>0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $field1name = $row["transaksi_id"];
+                                        $field2name = $row["id_barang"];
+                                        $field3name = $row["image"];
+                                        $field4name = $row["id_user"];
+                                        $field5name = $row["nama_barang"];
+                                        $field6name = $row["qty"];
+                                        $field7name = $row["total"]; 
+                                        $field8name = $row["pembayaran"]; 
+                                        $field9name = $row["pengiriman"]; 
+                                        $field7name = $row["catatan"]; 
+                                        $field8name = $row["status"]; 
+                                        $field9name = $row[TIDY_TAG_BUTTON]; 
+
+                                        echo '<tr>  
+                                                <th>'.$field1name.'</th> 
+                                                <td>'.$field2name.'</td> 
+                                                <td>'.$field3name.'</td> 
+                                                <td>'.$field4name.'</td> 
+                                                <td>'.$field5name.'</td> 
+                                                <td>'.$field6name.'</td>
+                                                <td>'.$field7name.'</td>
+                                                <td>'.$field8name.'</td>
+                                                <td>'.$field9name.'</td>
+                                                <td>'.$field10name.'</td>
+                                                <td>'.$field11name.'</td>
+                                                <td>'.$field12name.'</td>
+                                            </tr>';
+                                    }
+                                    $result->free();
+                                } 
+                              ?>  
                               </tbody>
                         </table>
                     </div>
@@ -318,17 +335,17 @@ mysqli_close($koneksi);
                               </thead>
                               <tbody>
                                   <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
+                                    <td><?php echo $id;?></td>
+                                    <td><?php echo $kode;?></td>
+                                    <td><?php echo $nama;?></td>
+                                    <td><?php echo $produk;?></td>
+                                    <td><?php echo $variasi1, $variasi2;?></td>
+                                    <td><?php echo $qty;?></td>
+                                    <td><?php echo $total;?></td>
+                                    <td><?php echo $alamat;?></td>
+                                    <td><?php echo $bayar;?></td>
+                                    <td><?php echo $kirim;?></td>
+                                    <td><?php echo $catatan;?></td>
                                     <td>
                                       <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Selesai</button>
@@ -400,17 +417,17 @@ mysqli_close($koneksi);
                               </thead>
                               <tbody>
                                   <tr>
-                                    <td><?php echo $id?></td>
-                                    <td><?php echo $kode?></td>
-                                    <td><?php echo $nama?></td>
-                                    <td><?php echo $produk?></td>
-                                    <td><?php echo $variasi1, $variasi2?></td>
-                                    <td><?php echo $qty?></td>
-                                    <td><?php echo $total?></td>
-                                    <td><?php echo $alamat?></td>
-                                    <td><?php echo $bayar?></td>
-                                    <td><?php echo $kirim?></td>
-                                    <td>-</td>
+                                    <td><?php echo $id;?></td>
+                                    <td><?php echo $kode;?></td>
+                                    <td><?php echo $nama;?></td>
+                                    <td><?php echo $produk;?></td>
+                                    <td><?php echo $variasi1.$variasi2;?></td>
+                                    <td><?php echo $qty;?></td>
+                                    <td><?php echo $total;?></td>
+                                    <td><?php echo $alamat;?></td>
+                                    <td><?php echo $bayar;?></td>
+                                    <td><?php echo $kirim;?></td>
+                                    <td><?php echo $catatan;?></td>
                                     <td>-</td>
                                   </tr>
                               </tbody>
