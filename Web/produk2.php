@@ -15,7 +15,6 @@ $kode = "";
 if(isset($_POST['Submit'])){
   $kode = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
-  $image = $_FILES['image'];
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
   $stok = $_POST['stok'];
@@ -25,6 +24,10 @@ if(isset($_POST['Submit'])){
   $id_jenis = $_POST['id_jenis'];
   $id_ukuran = $_POST['id_ukuran'];
   $id_warna = $_POST['id_warna'];
+
+  $image = $_FILES['image']['name'];
+  $source = $_FILES['image']['tmp_name'];
+  $folder = 'gambarproduk/';
   
   if(!$result->num_rows > 0){
     $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
@@ -353,7 +356,7 @@ if(isset($_POST['Submit'])){
                                         <tr>  
                                             <th><?php echo $field1name ?></th> 
                                             <td><?php echo $field2name ?></td> 
-                                            <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td> 
+                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $field3name ?>" style="width: 120px;"></td> 
                                             <td><?php echo $field4name ?></td> 
                                             <td><?php echo $field5name ?></td> 
                                             <td><?php echo $field6name ?></td>
@@ -498,7 +501,7 @@ if(isset($_POST['Submit'])){
                                         <tr>  
                                             <th><?php echo $field1name ?></th> 
                                             <td><?php echo $field2name ?></td> 
-                                            <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td> 
+                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $field3name ?>" style="width: 120px;"></td> 
                                             <td><?php echo $field4name ?></td> 
                                             <td><?php echo $field5name ?></td> 
                                             <td><?php echo $field6name ?></td>
