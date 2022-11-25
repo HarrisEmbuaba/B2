@@ -15,7 +15,7 @@ $kode = "";
 if(isset($_POST['Submit'])){
   $kode = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
-  $image = $_POST['image'];
+  $image = $_FILES['image'];
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
   $stok = $_POST['stok'];
@@ -25,7 +25,7 @@ if(isset($_POST['Submit'])){
   $id_jenis = $_POST['id_jenis'];
   $id_ukuran = $_POST['id_ukuran'];
   $id_warna = $_POST['id_warna'];
-
+  
   if(!$result->num_rows > 0){
     $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
     VALUES ('$nama','$image','$deskripsi','$harga','$stok','$id_jenis','$id_ukuran','$id_warna')";
@@ -54,6 +54,8 @@ if(isset($_POST['Submit'])){
     } else {
       echo "<script>alert('Barang gagal ditambahkan!')</script>";
     }
+
+    
   }
 }
 
@@ -202,15 +204,16 @@ if(isset($_POST['Submit'])){
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2">
+                  <form class="row g-2" action="produk2.php" method="post">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                    <select name="id_barang" class="form-control">
-                      <?php
-                            $sql = "SELECT id_barang FROM barang";
-                            $all_categories = mysqli_query($mysqli, $sql);
-                        ?>
-                    </select>
+                        <select name="id_barang" class="form-control">
+                        <?php
+                                $sql = "SELECT id_barang FROM barang";
+                                $all_categories = mysqli_query($mysqli, $sql);
+                                echo $row["id_barang"];
+                            ?>
+                        </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
@@ -322,11 +325,12 @@ if(isset($_POST['Submit'])){
                                       <th>Kategori</th>
                                       <th>Ukuran</th>
                                       <th>Warna</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
                             <?php
-                            $query="SELECT * FROM barang";
+                            $query="SELECT * FROM barang WHERE stok > 0";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                         $field1name = $row["id_barang"];
@@ -338,18 +342,29 @@ if(isset($_POST['Submit'])){
                                         $field7name = $row["id_jenis"]; 
                                         $field8name = $row["id_ukuran"]; 
                                         $field9name = $row["id_warna"]; 
-
-                                        echo '<tr>  
-                                                <th>'.$field1name.'</th> 
-                                                <td>'.$field2name.'</td> 
-                                                <td>'.$field3name.'</td> 
-                                                <td>'.$field4name.'</td> 
-                                                <td>'.$field5name.'</td> 
-                                                <td>'.$field6name.'</td>
-                                                <td>'.$field7name.'</td>
-                                                <td>'.$field8name.'</td>
-                                                <td>'.$field9name.'</td>
-                                            </tr>';
+                                        $field10name = $row["action"];
+                                        ?>
+                                        <tr>  
+                                            <th><?php echo $field1name ?></th> 
+                                            <td><?php echo $field2name ?></td> 
+                                            <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td> 
+                                            <td><?php echo $field4name ?></td> 
+                                            <td><?php echo $field5name ?></td> 
+                                            <td><?php echo $field6name ?></td>
+                                            <td>
+                                                <?php
+                                                    $sql = "SELECT FROM jenis_barang";
+                                                    $category = mysqli_query($mysqli, $sql);
+                                                ?>
+                                            </td>
+                                            <td><?php echo $field8name ?></td>
+                                            <td><?php echo $field9name ?></td> 
+                                            <td>
+                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a>
+                                                <a href="proses_hapus.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php
                                     }
                                     $result->free();
                                 } 
@@ -443,58 +458,62 @@ if(isset($_POST['Submit'])){
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
+                          <thead>
                                   <tr>
                                       <th>Kode Barang</th>
-                                      <th>Gambar</th>
                                       <th>Nama</th>
-                                      <th>Kategori</th>
-                                      <th>Stok</th>
-                                      <th>Harga</th>
-                                      <th>Ukuran</th>
-                                      <th>Jenis</th>
+                                      <th>Gambar</th>
                                       <th>Deskripsi</th>
+                                      <th>Harga</th>
+                                      <th>Stok</th>
+                                      <th>Kategori</th>
+                                      <th>Ukuran</th>
+                                      <th>Warna</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>Buket</td>
-                                      <td>0</td>
-                                      <td>Rp75.000</td>
-                                      <td>L</td>
-                                      <td>Mawar</td>
-                                      <td>Buket isi bunga imitasi custom</td>
-                                  </tr>
-                              </tbody>
-                              <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                            </tbody>
+                            <?php
+                            $query="SELECT * FROM barang WHERE stok = 0 ";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $field1name = $row["id_barang"];
+                                        $field2name = $row["nama_barang"];
+                                        $field3name = $row["image"];
+                                        $field4name = $row["deskripsi"];
+                                        $field5name = $row["harga"];
+                                        $field6name = $row["stok"];
+                                        $field7name = $row["id_jenis"]; 
+                                        $field8name = $row["id_ukuran"]; 
+                                        $field9name = $row["id_warna"]; 
+                                        $field10name = $row["action"];
+                                        ?>
+                                        <tr>  
+                                            <th><?php echo $field1name ?></th> 
+                                            <td><?php echo $field2name ?></td> 
+                                            <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td> 
+                                            <td><?php echo $field4name ?></td> 
+                                            <td><?php echo $field5name ?></td> 
+                                            <td><?php echo $field6name ?></td>
+                                            <td>
+                                                <?php 
+                                                $sql = "SELECT jenis_barang.barang_jenis FROM barang INNER JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis WHERE stok = 0;";
+                                                $category = mysqli_query($mysqli, $sql);
+                                                ?>
+                                            </td>
+                                            <td><?php echo $field8name ?></td>
+                                            <td><?php echo $field9name ?></td> 
+                                            <td>
+                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a>
+                                                <a href="proses_hapus.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                } 
+                            ?>
+                        </tbody>
                         </table>
                     </div>
                   </div>
