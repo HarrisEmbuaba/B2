@@ -28,7 +28,6 @@ public class SessionManager {
         editor.putBoolean(IS_LOGGED_IN, true);
         editor.putString(USER_ID, user.getEmail());
         editor.putString(USERNAME, user.getNama());
-        editor.putString(NAME, user.getTelp());
         editor.commit();
     }
 

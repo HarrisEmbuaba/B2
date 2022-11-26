@@ -96,23 +96,29 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             loginCall.enqueue(new Callback<Login>() {
                 @Override
                 public void onResponse(Call<Login> call, Response<Login> response) {
-                    if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+                    if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
+                        String verif = response.body().getData().getVerifyStatus();
+                        if (!verif.equals("verifikasi")) {
+                            Toast.makeText(login.this, "Akun Belum Verified", Toast.LENGTH_LONG).show();
+                            // Ini untuk menyimpan sesi
+                            sessionManager = new SessionManager(login.this);
+                            LoginData loginData = response.body().getData();
+                            sessionManager.createLoginSession(loginData);
+                            //Ini untuk pindah
 
-                        // Ini untuk menyimpan sesi
-                        sessionManager = new SessionManager(login.this);
-                        LoginData loginData = response.body().getData();
-                        sessionManager.createLoginSession(loginData);
-                        //Ini untuk pindah
-                        Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
-                        System.out.println("nama saya adalah"+response.body().getData().getNama());
-                        Intent intent = new Intent(login.this, home.class);
-                        intent.putExtra("namaUser",response.body().getData().getNama());
-                        startActivity(intent);
-                        finish();
 
-                    }else{
+                        } else {
+                            Toast.makeText(login.this, response.body().getData().getNama(), Toast.LENGTH_SHORT).show();
+                            System.out.println("nama saya adalah" + response.body().getData().getNama());
+                            Intent intent = new Intent(login.this, home.class);
+                            intent.putExtra("namaUser", response.body().getData().getNama());
+                            startActivity(intent);
+                            finish();
+
+
+                        }
+                    }else {
                         Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
                 }
 

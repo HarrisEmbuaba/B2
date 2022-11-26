@@ -4,24 +4,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
-	@SerializedName("telp")
-	private String telp;
+	@SerializedName("pass")
+	private String pass;
 
 	@SerializedName("nama")
 	private String nama;
 
-	@SerializedName("id")
-	private int id;
+	@SerializedName("status")
+	private String verifyStatus;
+
+	@SerializedName("id_user")
+	private String idUser;
 
 	@SerializedName("email")
 	private String email;
 
-	public void setTelp(String telp){
-		this.telp = telp;
+	public void setPassword(String password){
+		this.pass = password;
 	}
 
-	public String getTelp(){
-		return telp;
+	public String getPassword(){
+		return pass;
 	}
 
 	public void setNama(String nama){
@@ -32,12 +35,20 @@ public class LoginData {
 		return nama;
 	}
 
-	public void setId(int id){
-		this.id = id;
+	public void setVerifyStatus(String verifyStatus){
+		this.verifyStatus = verifyStatus;
 	}
 
-	public int getId(){
-		return id;
+	public String getVerifyStatus(){
+		return verifyStatus;
+	}
+
+	public void setIdUser(String idUser){
+		this.idUser = idUser;
+	}
+
+	public String getIdUser(){
+		return idUser;
 	}
 
 	public void setEmail(String email){

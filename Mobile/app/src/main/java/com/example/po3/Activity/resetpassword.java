@@ -1,6 +1,7 @@
 package com.example.po3.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -13,63 +14,78 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.po3.API.ApiClient;
+import com.example.po3.API.ApiInterface;
 import com.example.po3.R;
+import com.example.po3.model.login.register.CheckEmail;
+import com.example.po3.reserpassword3;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class resetpassword extends AppCompatActivity {
     private EditText emailedittext;
-    private Button resetpasswordbutton;
-
-    FirebaseAuth auth;
+    private Button resetpasswordbutton, kembali;
+    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resetpassword);
         notif(resetpassword.this);
+        kembali();
+        getEmailUser();
 
+
+
+    }
+
+    public void getEmailUser(){
         emailedittext = (EditText) findViewById(R.id.email2);
         resetpasswordbutton = (Button) findViewById(R.id.kirim);
-
-        auth = FirebaseAuth.getInstance();
         resetpasswordbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AturUlangSandi();
+                String eml = emailedittext.getText().toString();
+                apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                Call<CheckEmail> check = apiInterface.getCheckEmail(eml);
+                check.enqueue(new Callback<CheckEmail>() {
+                    @Override
+                    public void onResponse(Call<CheckEmail> call, Response<CheckEmail> response) {
+                        int kode = response.body().getKode();
+                        if (kode == 1){
+                            Intent i = new Intent(getApplicationContext(), reserpassword3.class);
+                            i.putExtra("EmailLupa",eml);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Toast.makeText(resetpassword.this,"Email Tidak Terdaftar",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CheckEmail> call, Throwable t) {
+
+                    }
+                });
             }
         });
-
     }
-    private void  AturUlangSandi(){
-        String email = emailedittext.getText().toString().trim();
-
-        if(email.isEmpty()){
-            emailedittext.setError("Email tidak boleh kosong");
-            emailedittext.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            emailedittext.setError("Harap berikan email yang valid");
-            emailedittext.requestFocus();
-            return;
-        }
-
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void kembali(){
+        kembali = (Button) findViewById(R.id.back);
+        kembali.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                if (task.isSuccessful()){
-                    Toast.makeText(resetpassword.this,"Periksa email anda untuk mengatur ulang kata sandi", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(resetpassword.this, "Coba lagi!, sesuatu yang salah terjadi", Toast.LENGTH_LONG).show();
-                }
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),login.class);
+                startActivity(i);
             }
         });
-
     }
+
     public void notif(Activity activity){
         //change color notif bar
         Window window = this.getWindow();

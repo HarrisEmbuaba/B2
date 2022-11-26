@@ -7,33 +7,22 @@ public class Register{
 	@SerializedName("data")
 	private RegisterData data;
 
-	@SerializedName("message")
-	private String message;
+	@SerializedName("kode")
+	private int kode;
 
-	@SerializedName("status")
-	private boolean status;
-
-	public void setData(RegisterData data){
+	public void setData(RegisterData data) {
 		this.data = data;
 	}
 
-	public RegisterData getData(){
+	public RegisterData getData() {
 		return data;
 	}
 
-	public void setMessage(String message){
-		this.message = message;
+	public void setKode(int kode){
+		this.kode = kode;
 	}
 
-	public String getMessage(){
-		return message;
-	}
-
-	public void setStatus(boolean status){
-		this.status = status;
-	}
-
-	public boolean isStatus(){
-		return status;
+	public int getKode(){
+		return kode;
 	}
 }
