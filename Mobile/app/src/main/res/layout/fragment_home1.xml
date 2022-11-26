@@ -25,7 +25,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
 <EditText
     android:id="@+id/search"
     android:layout_width="235dp"
@@ -120,23 +121,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bingkisan"
-                android:layout_marginLeft="11dp"
+                android:layout_marginLeft="5dp"
                 android:backgroundTint="#EEC19F"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seserahan"
-                android:layout_marginLeft="11dp"
+                android:layout_marginLeft="5dp"
                 android:backgroundTint="#EEC19F"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="28dp"
             android:id="@+id/rv_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/puan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="4dp"
+            tools:listitem="@layout/kosongan"
             />
 <!--            tools:listitem="@layout/kosongan"-->
             />
