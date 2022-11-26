@@ -247,7 +247,7 @@ mysqli_close($koneksi);
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 0";
+                                WHERE 'status' = 1";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
@@ -278,8 +278,9 @@ mysqli_close($koneksi);
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
                                         <td>
-                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='1'"; ?>Dibayar</button>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dibayar</button>
                                           <a href="pesan.php" onclick="return confirm('Barang sudah dibayar!')"></a>
                                         </td>
                                       </tr>
@@ -363,7 +364,7 @@ mysqli_close($koneksi);
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 1";
+                                WHERE 'status' = 2";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
@@ -394,8 +395,9 @@ mysqli_close($koneksi);
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
                                         <td>
-                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dikemas</button>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='3'"; ?>Dikemas</button>
                                           <a href="kirim.php" onclick="return confirm('Barang siap dikemas!')"></a>
                                         </td>
                                       </tr>
