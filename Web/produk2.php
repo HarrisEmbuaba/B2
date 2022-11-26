@@ -13,22 +13,22 @@ $sukses = "";
 $kode = "";
 
 if(isset($_POST['Submit'])){
-  $kode = $_POST['id_barang'];
+  $id = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
   $stok = $_POST['stok'];
-  $kategori = $_POST['barang_jenis'];
-  $ukuran = $_POST['ukuran'];
-  $warna = $_POST['warna'];
-  $id_jenis = $_POST['id_jenis'];
-  $id_ukuran = $_POST['id_ukuran'];
-  $id_warna = $_POST['id_warna'];
 
   $image = $_FILES['image']['name'];
   $source = $_FILES['image']['tmp_name'];
   $folder = 'gambarproduk/';
   move_uploaded_file($source, $folder.$image);
+
+  $name = mysqli_real_escape_string($con,$_POST['nama_barang']);
+
+  $id_jenis = mysqli_real_escape_string($con,$_POST['barang_jenis']);
+  $id_ukuran = mysqli_real_escape_string($con,$_POST['ukuran']);
+  $id_warna = mysqli_real_escape_string($con,$_POST['warna']);
   
   if(!$result->num_rows > 0){
     $sql = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
