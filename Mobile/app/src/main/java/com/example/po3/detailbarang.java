@@ -14,16 +14,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class detailbarang extends MyFunction {
-    @BindView(R.id.bucketbunga)
+
     ImageView image;
-    @BindView(R.id.bucket)
     TextView barang_jenis;
-    @BindView(R.id.palsu)
     TextView nama_barang;
-    @BindView(R.id.hargabucket)
     TextView harga;
-    @BindView(R.id.panjang)
     TextView deskripsi;
+    String id,jenis,nama,detail,gambar,harga1;
+
 
 
 
@@ -33,13 +31,25 @@ public class detailbarang extends MyFunction {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailbarang);
 
-        ButterKnife.bind(this);
-        Intent terima = getIntent();
-        barang_jenis.setText(terima.getStringExtra("barang_jenis"));
-        nama_barang.setText(terima.getStringExtra("nama_barang"));
-        deskripsi.setText(terima.getStringExtra("deskripsi"));
-        harga.setText(terima.getStringExtra("harga"));
+        image = findViewById(R.id.bucketbunga);
+        barang_jenis= findViewById(R.id.bucket);
+        nama_barang = findViewById(R.id.palsu);
+        harga = findViewById(R.id.hargabucket);
+        deskripsi = findViewById(R.id.panjang);
+        //tambahan
+        id = getIntent().getStringExtra("id");
+        jenis = getIntent().getStringExtra("barang_jenis");
+        nama = getIntent().getStringExtra("nama_barang");
+        detail = getIntent().getStringExtra("deskripsi");
+        harga1 = getIntent().getStringExtra("harga");
+        gambar = getIntent().getStringExtra("image");
 
-        Picasso.get().load(ApiClient.IMAGES_URL+terima.getStringExtra("image")).error(R.mipmap.ic_launcher).into(image);
+        barang_jenis.setText(jenis);
+        // Hehe
+        deskripsi.setText(detail);
+        nama_barang.setText(nama);
+        harga.setText(harga1);
+        Picasso.get().load(ApiClient.IMAGES_URL+gambar).
+                error(R.mipmap.ic_launcher).into(image);
     }
 }
