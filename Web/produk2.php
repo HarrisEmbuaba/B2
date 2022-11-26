@@ -167,7 +167,7 @@ if(isset($_POST['Submit'])){
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.html">
+        <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
