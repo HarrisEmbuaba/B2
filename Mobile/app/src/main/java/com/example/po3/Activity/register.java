@@ -17,6 +17,7 @@ import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
 import com.example.po3.R;
 import com.example.po3.model.login.register.Register;
+import com.example.po3.validasi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,17 +92,19 @@ public class register extends AppCompatActivity implements View.OnClickListener 
             call.enqueue(new Callback<Register>() {
                 @Override
                 public void onResponse(Call<Register> call, Response<Register> response) {
-                    if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
-
-
-                        //Ini untuk pindah
-                        Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(register.this, login.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else {
-                        Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    int kode = response.body().getKode();
+                    if (kode == 1){
+                        Toast.makeText(register.this,"Berhasil Daftar",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), validasi.class);
+                        String id = String.valueOf(response.body().getData().getIdUser());
+                        System.out.println("ID USERNYA PADA REGIST "+id);
+                        i.putExtra("Userid",id);
+                        i.putExtra("EmailUser",textEmail);
+                        startActivity(i);
+                    } else if(kode == 3){
+                        Toast.makeText(register.this,"Email Already Exist",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(register.this,"Gagal Daftar",Toast.LENGTH_SHORT).show();
                     }
                 }
 

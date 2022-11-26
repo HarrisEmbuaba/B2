@@ -1,3 +1,35 @@
+<?php
+require ('koneksi.php');
+require ('kirim.html');
+
+error_reporting(0);
+session_start();
+
+if(isset($_SESSION['id_barang'])){
+  header("Location: produk2.php");
+}
+
+$err = "";
+$sukses = "";
+$kode = "";
+
+$id = mysqli_query($koneksi,"SELECT transaksi_id FROM `transaksi`");
+$kode = mysqli_query($koneksi,"SELECT id_barang FROM `transaksi`");
+$nama = mysqli_query($koneksi,"SELECT nama FROM `pembeli`");
+$produk = mysqli_query($koneksi,"SELECT nama_barang FROM `barang`");
+$variasi1 = mysqli_query($koneksi,"SELECT ukuran FROM `jenis_ukuran`");
+$variasi2 = mysqli_query($koneksi,"SELECT warna FROM `transaksi`");
+$qty = mysqli_query($koneksi,"SELECT qty FROM `transaksi`");
+$total = mysqli_query($koneksi,"SELECT total FROM `transaksi`");
+$alamat = mysqli_query($koneksi,"SELECT alamat FROM `transaksi`");
+$bayar = mysqli_query($koneksi,"SELECT pembayaran FROM `transaksi`");
+$kirim = mysqli_query($koneksi,"SELECT pengiriman FROM `transaksi`");
+$catatan = mysqli_query($koneksi,"SELECT catatan FROM `transaksi`");
+
+mysqli_close($koneksi);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,15 +200,15 @@
                   <div class="urutkan_container">
                     <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-periode">
-                        <h6>Urutkan</h6>
-                      </li>
-  
-                      <li><a class="dropdown-item" href="#">Hari ini</a></li>
-                      <li><a class="dropdown-item" href="#">Kemarin</a></li>
-                      <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
-                      <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
-                      <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                      <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
+                      <option value=""></option>
+                      <?php
+                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                      while($r = mysqli_fetch_array($waktu)){
+                        ?>
+                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
+                      <?php } ?>
+                      </select>
                     </ul>
                   </div>
                   </div>
@@ -207,21 +239,56 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>5606699801</td>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
-                                      <td>-</td>
-                                  </tr>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 1";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dibayar</button>
+                                          <a href="pesan.php" onclick="return confirm('Barang sudah dibayar!')"></a>
+                                        </td>
+                                      </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
                               </tbody>
                         </table>
                     </div>
@@ -251,15 +318,15 @@
                 <div class="urutkan_container">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-periode">
-                      <h6>Urutkan</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Hari ini</a></li>
-                    <li><a class="dropdown-item" href="#">Kemarin</a></li>
-                    <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
-                    <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
-                    <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                    <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
+                      <option value=""></option>
+                      <?php
+                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                      while($r = mysqli_fetch_array($waktu)){
+                        ?>
+                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
+                      <?php } ?>
+                    </select>
                   </ul>
                 </div>
                 </div>
@@ -289,34 +356,64 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>5606699801</td>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <a href="kirim.html" class="btn btn-primary">Selesai</a>
-                                        </div>
-                                      </td>
-                                  </tr>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 2";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='3'"; ?>Dikemas</button>
+                                          <a href="kirim.php" onclick="return confirm('Barang siap dikemas!')"></a>
+                                        </td>
+                                      </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
                               </tbody>
-                          </table>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    
-                  </div>
+                  <div>    
+                </div>
               </div><!-- End Bordered Tabs -->
             </div>
           </div>
