@@ -149,6 +149,10 @@
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Diterima</button>
                 </li>
 
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Dibatalkan</button>
+                </li>
+
               </ul>          
               <div class="tab-content pt-1">
 
@@ -206,7 +210,7 @@
                                     <th>Pengiriman</th>
                                     <th>Catatan</th>
                                     <th>Status</th>
-                                    <th>Aksi</th>>
+                                    <th>Aksi</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -344,6 +348,73 @@
                               <tbody>
                               </tbody>
                           </table>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="tab-content pt-4">
+
+                    <div class="tab-pane fade dibatalkan" id="dibatalkan">
+    
+                      <!-- partial:index.partial.html -->
+                      <div class="row mb-3">
+                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control">
+                        </div>
+                      </div>
+    
+                      <div class="urutkan_container">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                          <li class="dropdown-header text-periode">
+                            <h6>Urutkan</h6>
+                          </li>
+      
+                          <li><a class="dropdown-item" href="#">Hari ini</a></li>
+                          <li><a class="dropdown-item" href="#">Kemarin</a></li>
+                          <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
+                          <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
+                          <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                        </ul>
+                      </div>
+    
+                      <!-- DataTales Example -->
+                    <div class="mb-4">
+                      <div class="py-3">
+                          <h6 class="m-0 font-weight-bold text-primary"></h6>
+                      </div>
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <thead>
+                                      <tr>
+                                        <th>ID Transaksi</th>
+                                        <th>Kode Barang</th>
+                                        <th>Gambar</th>
+                                        <th>ID User</th>
+                                        <th>Nama Barang</th>
+                                        <th>Variasi</th>
+                                        <th>Jumlah</th>
+                                        <th>Total</th>
+                                        <th>Alamat</th>
+                                        <th>Pembayaran</th>
+                                        <th>Pengiriman</th>
+                                        <th>Catatan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                            </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

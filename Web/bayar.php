@@ -128,21 +128,50 @@
 
   <main id="main" class="main">
 
-    <section class="section">
+  <section class="section dashboard">
       <div class="row">
-        <div class="col-lg-6">
 
-          <div class="card1">
-            <div class="card-body">
-              <h5 class="card-title">Informasi Penghasilan</h5>
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
 
-                    <div class="alert border-primary alert-dismissible fade show" role="alert">
-                      Total Hari Ini
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+
+              <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Perhari</a></li>
+                    <li><a class="dropdown-item" href="#">Perbulan</a></li>
+                    <li><a class="dropdown-item" href="#">Pertahun</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Informasi Penghasilan <span>| Rekening: 274698745639 a/n Maulita</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-currency-dollar"></i>
                     </div>
-      
-                    <div class="alert border-secondary alert-dismissible fade show" role="alert">
-                      Rekening saya: 274698745639 a/n Maulita
+                    <div class="ps-3">
+                      <h6>1244</h6>
+                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+
                     </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- End Customers Card -->
+                    
       
                   </div>
                 </div>
