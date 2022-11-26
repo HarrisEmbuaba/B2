@@ -1,70 +1,6 @@
 <?php
-include ('koneksi.php');
-include ('produk.html');
-
-error_reporting(0);
-session_start();
-
-if(isset($_SESSION['id_barang'])){
-  header("Location: produk.php");
-}
-
-$err = "";
-$sukses = "";
-$kode = "";
-
-if(isset($_POST['Submit'])){
-  // $kode = $_POST['id_barang'];
-  $nama = $_POST['nama_barang'];
-  $image = $_POST['image'];
-  $deskripsi = $_POST['deskripsi'];
-  $harga = $_POST['harga'];
-  $stok = $_POST['stok'];
-  $warna = $_POST['warna'];
-  $ukuran = $_POST['ukuran'];
-  $kategori = $_POST['barang_jenis'];
-
-  if(!$result->num_rows > 0){
-    $sql1 = "INSERT INTO `barang`('id_barang',`nama_barang`,`image`,`deskripsi`)
-    VALUES ('','$nama','$image','$deskripsi')";
-    $sql2 = "INSERT INTO `jenis_barang`(`id_jenis`,`barang_jenis`)
-    VALUES ('','$kategori')";
-    $sql3 = "INSERT INTO `jenis_ukuran`(`id_ukuran`,`ukuran`)
-    VALUES ('','$ukuran')";
-    $sql4 = "INSERT INTO `jenis_warna`(`id_warna`,`warna`)
-    VALUES ('','$warna')";
-    $sql5 = "INSERT INTO `detail_barang`(`id`,`harga`, `stok`)
-    VALUES ('','$harga','$stok')";
-
-    $result = mysqli_query($koneksi,$sql1,$sql2,$sql3,$sql4,$sql5);
-
-    if($result){
-      echo "<script>alert('Barang berhasil ditambahkan!')</script>";
-      
-      $nama = "";
-      $image = "";
-      $deskripsi = "";
-      $harga = "";
-      $stok = "";
-      $warna = "";
-      $ukuran = "";
-      $kategori = "";
-      $_POST['nama_barang'] = "";
-      $_POST['image'] = "";
-      $_POST['deskripsi'] = "";
-      $_POST['harga'] = "";
-      $_POST['stok'] = "";
-      $_POST['warna'] = "";
-      $_POST['ukuran'] = "";
-      $_POST['barang_jenis'] = "";
-    } else {
-      echo "<script>alert('Barang gagal ditambahkan!')</script>";
-    }
-  }
-}
-
+require ('koneksi.php');
 ?>
-<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,29 +9,29 @@ if(isset($_POST['Submit'])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pesanan</title>
+  <title>Produk</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/logo milanicraft.png" rel="icon">
+  <link href="assets/img/logo milanicraft.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="ass                                          ets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstraphome.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstraphome-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxiconshome.min.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/stylehome.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -113,7 +49,7 @@ if(isset($_POST['Submit'])){
     
 
     <div class="d-flex align-items-center">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="home.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -162,7 +98,7 @@ if(isset($_POST['Submit'])){
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.html">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -209,48 +145,90 @@ if(isset($_POST['Submit'])){
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form  action="produk.php" method="POST" class="row g-2">
+                  <form class="row g-2" action="produk2.php" method="post">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="" name="kode" values="<?php echo $kode;?>" required>
+                    <select name="id_barang" class="form-control">
+                      <?php
+                            $sql = "SELECT id_barang FROM barang";
+                            $all_categories = mysqli_query($mysqli, $sql);
+                        ?>
+                    </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" class="form-control" placeholder="" name="nama" values="<?php echo $nama;?>" required>
+                      <input type="text" name="nama_barang" class="form-control" placeholder="">
                     </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
-                    <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="" name="ukuran" values="<?php echo $ukuran;?>" required>
+                    <div class="col-md-4">
+                      <select name="ukuran" class="form-select">
+                      <?php
+                            $sql = "SELECT * FROM jenis_ukuran";
+                            $all_categories = mysqli_query($mysqli, $sql);
+                        ?>
+                        <?php
+                            while ($category = mysqli_fetch_array($all_categories)){
+                        ?>
+                            <option value="<?php echo $category["id_ukuran"];?>">
+                                <?php echo $category["ukuran"]; ?>
+                            </option>
+                        <?php
+                        }
+                        ?>
+                      </select>
                     </div>
-                    <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
+                    <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
                     <div class="col-md-2">
-                      <input type="jenis" class="form-control" placeholder="" name="id_jenis" values="<?php echo $id_jenis;?>" required>
+                        <select name="warna" class="form-select">
+                        <?php
+                                $sql = "SELECT * FROM jenis_warna";
+                                $all_categories = mysqli_query($mysqli, $sql);
+                            ?>
+                            <?php
+                                while ($category = mysqli_fetch_array($all_categories)){
+                            ?>
+                                <option value="<?php echo $category["id_warna"];?>">
+                                    <?php echo $category["warna"]; ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
                     <div class="col-md-4">
-                      <select id="inputState" class="form-select">
-                        <option></option>
-                        <option>Buket</option>
-                        <option>Hampers</option>
-                        <option>Seserahan</option>
+                      <select type="option" name="jenis_barang" class="form-select">
+                      <?php
+                            $sql = "SELECT * FROM jenis_barang";
+                            $all_categories = mysqli_query($mysqli, $sql);
+                        ?>
+                        <?php
+                            while ($category = mysqli_fetch_array($all_categories)){
+                        ?>
+                            <option value="<?php echo $category["id_jenis"];?>">
+                                <?php echo $category["barang_jenis"]; ?>
+                            </option>
+                        <?php
+                        }
+                        ?>
                       </select>
                     </div>
                     <div class="col-md-1"></div>
                     <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
-                      <input type="text" class="form-control" placeholder="" name="stok" values="<?php echo $stok;?>" required>
+                      <input type="text" name="stok" class="form-control" placeholder="">
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
-                      <input type="text" class="form-control" placeholder="" name="deskripsi" values="<?php echo $deskripsi;?>" required>
+                      <input type="text" name="deskripsi" class="form-control" placeholder="">
                     </div>
                     <div class="py-1"></div>
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input class="form-control" type="file" id="formFile" name="image" values="<?php echo $image;?>" required>
+                        <input type="file" name="image" class="form-control" type="file" id="formFile">
                       </div>
                     </div>
                     <div class="py-4">
@@ -260,7 +238,7 @@ if(isset($_POST['Submit'])){
                           <button type="reset" class="btn btn-primary">Clear</button>
                           <button type="submit" class="btn btn-primary">Update</button>
                           <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="reset" class="btn btn-primary">Save</button>
+                          <button type="submit" name="Submit" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>
@@ -279,29 +257,54 @@ if(isset($_POST['Submit'])){
                               <thead>
                                   <tr>
                                       <th>Kode Barang</th>
-                                      <th>Gambar</th>
                                       <th>Nama</th>
-                                      <th>Kategori</th>
-                                      <th>Stok</th>
-                                      <th>Harga</th>
-                                      <th>Ukuran</th>
-                                      <th>Jenis</th>
+                                      <th>Gambar</th>
                                       <th>Deskripsi</th>
+                                      <th>Harga</th>
+                                      <th>Stok</th>
+                                      <th>Kategori</th>
+                                      <th>Ukuran</th>
+                                      <th>Warna</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>Buket</td>
-                                      <td>75</td>
-                                      <td>Rp75.000</td>
-                                      <td>L</td>
-                                      <td>Mawar</td>
-                                      <td>Buket isi bunga imitasi custom</td>
-                                  </tr>
-                              </tbody>
+                            <?php
+                            $query="SELECT * FROM barang";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $field1name = $row["id_barang"];
+                                        $field2name = $row["nama_barang"];
+                                        $field3name = $row["image"];
+                                        $field4name = $row["deskripsi"];
+                                        $field5name = $row["harga"];
+                                        $field6name = $row["stok"];
+                                        $field7name = $row["id_jenis"]; 
+                                        $field8name = $row["id_ukuran"]; 
+                                        $field9name = $row["id_warna"]; 
+                                        $field10name = $row["action"];
+                                        ?>
+                                        <tr>  
+                                            <th><?php echo $field1name ?></th> 
+                                            <td><?php echo $field2name ?></td> 
+                                            <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td> 
+                                            <td><?php echo $field4name ?></td> 
+                                            <td><?php echo $field5name ?></td> 
+                                            <td><?php echo $field6name ?></td>
+                                            <td><?php echo $field7name ?></td>
+                                            <td><?php echo $field8name ?></td>
+                                            <td><?php echo $field9name ?></td> 
+                                            <td>
+                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a>
+                                                <a href="proses_hapus.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                } 
+                            ?>
+                        </tbody>
                         </table>
                     </div>
                   </div>
@@ -317,16 +320,25 @@ if(isset($_POST['Submit'])){
                   <form class="row g-2">
                     <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
-                      <input type="kode" class="form-control" placeholder="">
+                      <input type="text" class="form-control" placeholder="">
                     </div>
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
                       <input type="text" class="form-control" placeholder="">
                     </div>
+                    <label for="nama" class="col-sm-1 col-form-label">Harga</label>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" placeholder="">
+                    </div>
                     <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
-                    <div class="col-md-2">
-                      <input type="ukuran" class="form-control" placeholder="">
+                    <div class="col-md-4">
+                      <select type="option" name="barang_jenis" id="inputState" class="form-select">
+                        
+                        <option>s</option>
+                        <option>m</option>
+                        <option>l</option>
+                      </select>
                     </div>
                     <label for="jenis" class="col-sm-1 col-form-label">Jenis</label>
                     <div class="col-md-2">
@@ -365,7 +377,7 @@ if(isset($_POST['Submit'])){
                           <button type="reset" class="btn btn-primary">Clear</button>
                           <button type="submit" class="btn btn-primary">Update</button>
                           <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="reset" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>
@@ -458,19 +470,17 @@ if(isset($_POST['Submit'])){
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstraphome.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.min.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
   <script src="assets/vendor/quill/quill.min.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/php-email-form/validatehome.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mainhome.js"></script>
 
 </body>
 
 </html>
-=======
->>>>>>> 5c32b2489769c42282bbb2676f5ff6fe95c673f2

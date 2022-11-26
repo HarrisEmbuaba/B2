@@ -73,6 +73,13 @@
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
 
+        </li><!-- Profile Nav -->
+        <li class="nav-item">
+          <a class="nav-link nav-icon" href="users-profile.html">
+            <img src="assets/img/user.png" width="35px" height="35px"></i>
+          </a>
+      </li><!-- End Profile Nav -->
+
         </li><!-- End Messages Nav -->
 
       </ul>
@@ -98,13 +105,13 @@
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.html">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.html">
+        <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
@@ -148,7 +155,18 @@
                 <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
 
                   <!-- partial:index.partial.html -->
-                  
+                  <div class="row mb-3">
+                    <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control">
+                    </div>
+                  </div>
 
                   <div class="urutkan_container">
                     <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
@@ -192,18 +210,18 @@
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>5606699801</td>
-                                      <td>Kode Barang</td>
-                                      <th>Gambar</th>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Jl. Abc Perumahan Abjad, Desa Huruf, Kecamatan Ini, Kabupaten Ini, 123456</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                       <td>
                                         <div class="text-center">
                                           <a href="#" class="btn btn-primary">Kirim</a>
@@ -222,7 +240,33 @@
               <div class="tab-pane fade dikirim" id="dikirim">
 
                 <!-- partial:index.partial.html -->
-                
+                <div class="row mb-3">
+                  <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+
+                <div class="urutkan_container">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-periode">
+                      <h6>Urutkan</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Hari ini</a></li>
+                    <li><a class="dropdown-item" href="#">Kemarin</a></li>
+                    <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
+                    <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
+                    <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                  </ul>
+                </div>
 
                   <!-- DataTales Example -->
                   <div class="mb-4">
@@ -234,66 +278,42 @@
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                      <th>Nomor Pesanan</th>
-                                      <th>Kode Barang</th>
-                                      <th>Gambar</th>
-                                      <th>Nama</th>
-                                      <th>Produk</th>
-                                      <th>Variasi</th>
-                                      <th>Jumlah</th>
-                                      <th>Total Bayar</th>
-                                      <th>Pembayaran</th>
-                                      <th>Pengiriman</th>
-                                      <th>Catatan</th>
-                                      <th>Aksi</th>
+                                    <th>Nomor Pesanan</th>
+                                    <th>Kode Barang</th>
+                                    <th>Gambar</th>
+                                    <th>Nama</th>
+                                    <th>Produk</th>
+                                    <th>Variasi</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Bayar</th>
+                                    <th>Alamat</th>
+                                    <th>Pembayaran</th>
+                                    <th>Pengiriman</th>
+                                    <th>Catatan</th>
+                                    <th>Aksi</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>5606699801</td>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
-                                      <td>
-                                        <div class="text-center">
-                                          <button type="submit" class="btn btn-primary">Selesai</button>
-                                        </div>
-                                      </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                      <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Selesai</button>
+                                      </div>
+                                    </td>
                                   </tr>
                               </tbody>
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
                           </table>
                         </div>
                       </div>
@@ -302,6 +322,35 @@
 
                   <div class="tab-content pt-3">
                     <div class="tab-pane fade diterima" id="diterima">
+
+                      <div class="row mb-3">
+                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="urutkan_container">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                          <li class="dropdown-header text-periode">
+                            <h6>Urutkan</h6>
+                          </li>
+      
+                          <li><a class="dropdown-item" href="#">Hari ini</a></li>
+                          <li><a class="dropdown-item" href="#">Kemarin</a></li>
+                          <li><a class="dropdown-item" href="#">Seminggu yang lalu</a></li>
+                          <li><a class="dropdown-item" href="#">Sebulan yang lalu</a></li>
+                          <li><a class="dropdown-item" href="#">Setahun yang lalu</a></li>
+                        </ul>
+                      </div>
+                      
                       <!-- DataTales Example -->
                   <div class="mb-4">
                     <div class="py-3">
@@ -312,62 +361,36 @@
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                      <th>Nomor Pesanan</th>
-                                      <th>Kode Barang</th>
-                                      <th>Gambar</th>
-                                      <th>Nama</th>
-                                      <th>Produk</th>
-                                      <th>Variasi</th>
-                                      <th>Jumlah</th>
-                                      <th>Total Bayar</th>
-                                      <th>Pembayaran</th>
-                                      <th>Pengiriman</th>
-                                      <th>Catatan</th>
-                                      <th>Aksi</th>
+                                    <th>Nomor Pesanan</th>
+                                    <th>Kode Barang</th>
+                                    <th>Nama</th>
+                                    <th>Produk</th>
+                                    <th>Variasi</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Bayar</th>
+                                    <th>Alamat</th>
+                                    <th>Pembayaran</th>
+                                    <th>Pengiriman</th>
+                                    <th>Catatan</th>
+                                    <th>Aksi</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>5606699801</td>
-                                      <td>0000001</td>
-                                      <td>image-buket.png</td>
-                                      <td>Lala</td>
-                                      <td>Buket isi bunga palsu</td>
-                                      <td>XL, Mawar</td>
-                                      <td>x1</td>
-                                      <td>Rp125.000</td>
-                                      <td>Transfer</td>
-                                      <td>Diantar</td>
-                                      <td>-</td>
-                                      <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                   </tr>
                               </tbody>
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
                           </table>
                     </div>
                   </div>

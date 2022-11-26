@@ -69,7 +69,16 @@ form label {
     padding: 5px;
 }
 
-input {
+.inputem {
+    width: 100%;
+    margin: 5px;
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-bottom: 1px solid #DD8B55;
+}
+
+.inputpass {
     width: 100%;
     margin: 5px;
     border: none;
