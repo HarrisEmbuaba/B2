@@ -322,7 +322,7 @@ if (isset($_POST['Dikirim'])) {
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 4";
+                                WHERE 'status' = 2";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
@@ -437,7 +437,7 @@ if (isset($_POST['Dikirim'])) {
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 4";
+                                WHERE 'status' = 3";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
@@ -507,7 +507,7 @@ if (isset($_POST['Dikirim'])) {
                           <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
                             <option value=""></option>
                             <?php
-                            $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                            $waktu = mysqli_query($conn, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
                             while($r = mysqli_fetch_array($waktu)){
                               ?>
                               <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
@@ -550,7 +550,7 @@ if (isset($_POST['Dikirim'])) {
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 4";
+                                WHERE 'status' >= 4";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
