@@ -550,7 +550,7 @@ if (isset($_POST['Dikirim'])) {
                                 RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
                                 RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
                                 RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' >= 4";
+                                WHERE 'status' >= 4 ";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
@@ -581,8 +581,120 @@ if (isset($_POST['Dikirim'])) {
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='6'"; ?>Selesai</button>
+                                        </td>
+                                      </tr>
+                                    <?php
+                                    }
+                                    $result->free();
+                                  }
+                              ?>  
+                              </tbody>
+                          </table>
+                    </div>
+                  </div>
+
+                  <div class="tab-content pt-4">
+                    <div class="tab-pane fade diterima" id="dibatalkan">
+
+                      <div class="row mb-3">
+                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="urutkan_container">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                          <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
+                            <option value=""></option>
+                            <?php
+                            $waktu = mysqli_query($conn, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                            while($r = mysqli_fetch_array($waktu)){
+                              ?>
+                              <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
+                              <?php } ?>
+                          </select>
+                        </ul>
+                      </div>
+                      
+                      <!-- DataTales Example -->
+                  <div class="mb-4">
+                    <div class="py-3">
+                      <h6 class="m-0 font-weight-bold text-primary"></h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                              <thead>
+                                  <tr>
+                                    <th>Nomor Pesanan</th>
+                                    <th>Kode Barang</th>
+                                    <th>Gambar</th>
+                                    <th>Nama</th>
+                                    <th>Produk</th>
+                                    <th>Variasi</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Bayar</th>
+                                    <th>Alamat</th>
+                                    <th>Pembayaran</th>
+                                    <th>Pengiriman</th>
+                                    <th>Catatan</th>
+                                    <th>Aksi</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <?php
+                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
+                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
+                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
+                                FROM transaksi 
+                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
+                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
+                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
+                                WHERE 'status' = 6 ";
+                                if ($result = $mysqli->query($query)) {
+                                    while ($row = $result->fetch_assoc()) {
+                                      $field1name = $row["transaksi_id"];
+                                      $field2name = $row["id_barang"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["id_user"];
+                                      $field5name = $row["nama_barang"];
+                                      $field6name = $row["ukuran"."warna"];
+                                      $field7name = $row["qty"];
+                                      $field8name = $row["total"]; 
+                                      $field9name = $row["alamat"];
+                                      $field10name = $row["pembayaran"]; 
+                                      $field11name = $row["pengiriman"]; 
+                                      $field12name = $row["catatan"]; 
+                                      $field13name = $row["status"];
+                                      $field14name = $row["aksi"];
+                                      ?>
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
+                                        <td><?php echo $field5name ?></td>
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
+                                        <td><?php echo $field10name ?></td>
+                                        <td><?php echo $field11name ?></td>
+                                        <td><?php echo $field12name ?></td>
+                                        <td><?php echo $field13name ?></td>
                                         <td></td>
-                                        </tr>
+                                      </tr>
                                     <?php
                                     }
                                     $result->free();

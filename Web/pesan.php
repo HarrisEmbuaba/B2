@@ -278,8 +278,11 @@ mysqli_close($koneksi);
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
-                                        <td></td>
-                                        </tr>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='1'"; ?>Dibayar</button>
+                                          <a href="pesan.php" onclick="return confirm('Barang sudah dibayar!')"></a>
+                                        </td>
+                                      </tr>
                                     <?php
                                     }
                                     $result->free();
@@ -391,22 +394,24 @@ mysqli_close($koneksi);
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
-                                        <td></td>
-                                        </tr>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dikemas</button>
+                                          <a href="kirim.php" onclick="return confirm('Barang siap dikemas!')"></a>
+                                        </td>
+                                      </tr>
                                     <?php
                                     }
                                     $result->free();
                                   }
                               ?>  
                               </tbody>
-                          </table>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    
-                  </div>
+                  <div>    
+                </div>
               </div><!-- End Bordered Tabs -->
             </div>
           </div>
