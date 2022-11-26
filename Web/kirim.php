@@ -255,6 +255,10 @@ if (isset($_POST['Dikirim'])) {
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Diterima</button>
                 </li>
 
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Dibatalkan</button>
+                </li>
+
               </ul>          
               <div class="tab-content pt-1">
 
