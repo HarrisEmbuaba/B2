@@ -183,6 +183,8 @@
             <div class="card-body">
               <h5 class="card-title">Rincian Pesanan</h5>
               <div class="card-body">
+                <button><a target="_blank" href="cetak.php">CETAK</a></button>
+                
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -222,104 +224,6 @@
                                 </table>
                             </div>
                         </div>
-                        
-                
-              
-              
-    <section class="section bayar">
-        <div class="col-lg-6">
-            <div class="container">
-              <h5 class="card-title">Catatan Transaksi Penghasilan</h5>
-
-              <!-- Accordion without outline borders -->
-              <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <a href=".html">Januari 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon1" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingTwo">
-                      <a href=".html">Februari 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon2" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Maret 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon3" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">April 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon4" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Mei 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon5" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Juni 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon6" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Juli 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon7" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Agustus 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon8" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">September 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon9" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Oktober 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon10" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">November 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon11" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingThree">
-                    <a href=".html">Desember 2022</a>
-                    </button>
-                  </h2>
-                  <a class="icon12" href="#"><img src="assets/img/unduh.png" width="25px" length="25px"></i></a>
-
-                </div>
-              </div><!-- End Accordion without outline borders -->
-
             </div>
           </div>
 
