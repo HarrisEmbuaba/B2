@@ -1,6 +1,7 @@
 <?php
 require ('koneksi.php');
 require ('kirim.html');
+include ('pesan.html');
 
 error_reporting(0);
 session_start();
