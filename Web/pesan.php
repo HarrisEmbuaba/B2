@@ -125,25 +125,25 @@ mysqli_close($koneksi);
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.html">
+        <a class="nav-link collapsed" href="pesan.php">
           <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.html">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.html">
+        <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
