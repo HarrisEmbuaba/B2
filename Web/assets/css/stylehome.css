@@ -14,7 +14,7 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: #FCF3EE;
+  background: #ffffff;
   ;
   color: #DD8B55;
 }
@@ -204,8 +204,8 @@ h6 {
 }
 
 .bg-secondary-light {
-  background-color: #FCF3EE;
-  border-color: #FCF3EE;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 
 .bg-success-light {
@@ -303,7 +303,7 @@ h6 {
 .accordion-button:not(.collapsed) {
   color: #DD8B55;
   ;
-  background-color: #FCF3EE;
+  background-color: #ffffff;
   ;
 }
 
@@ -530,11 +530,11 @@ h6 {
 .header-nav .notifications .notification-item p {
   font-size: 13px;
   margin-bottom: 3px;
-  color: #FCF3EE;
+  color: #ffffff;
 }
 
 .header-nav .notifications .notification-item:hover {
-  background-color: #FCF3EE;
+  background-color: #ffffff;
 }
 
 .header-nav .messages {
@@ -569,7 +569,7 @@ h6 {
 }
 
 .header-nav .messages .message-item:hover {
-  background-color: #FCF3EE;
+  background-color: #ffffff;
 }
 
 .header-nav .profile {
@@ -788,7 +788,7 @@ h6 {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #FCF3EE;
+  color: #ffffff;
   margin-bottom: 0;
   padding: 0;
 }
@@ -821,17 +821,17 @@ h6 {
 
 .dashboard .sales-card .card-icon {
   color: #DD8B55;
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 .dashboard .revenue-card .card-icon {
   color: #DD8B55;
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 .dashboard .customers-card .card-icon {
   color: #DD8B55;
-  background: #FCF3EE;
+  background: #ffffff
 }
 
 /* Activity */
@@ -854,7 +854,7 @@ h6 {
   width: 4px;
   top: 0;
   bottom: 0;
-  background-color: #FCF3EE;
+  background-color: #ffffff;
 }
 
 .dashboard .activity .activity-item .activity-badge {
@@ -920,7 +920,7 @@ h6 {
 }
 
 .dashboard .recent-sales .table thead {
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 .dashboard .recent-sales .table thead th {
@@ -941,7 +941,7 @@ h6 {
 }
 
 .dashboard .top-selling .table thead {
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 .dashboard .top-selling .table thead th {
@@ -1058,7 +1058,7 @@ h6 {
 }
 
 .faq .basic p {
-  color: #FCF3EE;
+  color: #ffffff;
 }
 
 /*--------------------------------------------------------------
@@ -1160,7 +1160,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 @-webkit-keyframes animate-loading {
@@ -1193,7 +1193,7 @@ h6 {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #FCF3EE;
+  color: #ffffff;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1212,7 +1212,7 @@ h6 {
 }
 
 .error-404 .btn:hover {
-  background: #FCF3EE;
+  background: #ffffff;
 }
 
 @media (min-width: 992px) {
@@ -1375,11 +1375,11 @@ table {
 
 
 body{
-  background-color: #FCF3EE;
+  background-color: #ffffff;
   margin-top:20px;
 }
 .card {
-  background: #FCF3EE;
+  background: #ffffff;
   transition: .5s;
   border: 0;
   margin-bottom: 30px;
@@ -1399,7 +1399,7 @@ body{
 
 .chat-app .chat {
   margin-left: 280px;
-  border-left: 1px solid #FCF3EE
+  border-left: 1px solid #ffffff
 }
 
 .people-list {
@@ -1416,12 +1416,12 @@ body{
 }
 
 .people-list .chat-list li:hover {
-  background: #FCF3EE;
+  background: #ffffff;
   cursor: pointer
 }
 
 .people-list .chat-list li.active {
-  background: #FCF3EE
+  background: #ffffff
 }
 
 .people-list .chat-list li .name {
@@ -1466,7 +1466,7 @@ body{
 
 .chat .chat-history {
   padding: 20px;
-  border-bottom: 2px solid #FCF3EE
+  border-bottom: 2px solid #ffffff
 }
 
 .chat .chat-history ul {
