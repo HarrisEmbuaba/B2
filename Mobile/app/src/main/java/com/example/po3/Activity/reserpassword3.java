@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.example.po3.JavaMailAPI;
+import com.example.po3.R;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
-import com.example.po3.Activity.login;
+import com.example.po3.R;
 import com.example.po3.model.login.register.UpdatePassword;
 
 import retrofit2.Call;

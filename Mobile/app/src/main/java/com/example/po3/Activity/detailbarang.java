@@ -1,4 +1,4 @@
-package com.example.po3;
+package com.example.po3.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.po3.API.ApiClient;
+import com.example.po3.MyFunction;
+import com.example.po3.R;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
