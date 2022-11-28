@@ -4,6 +4,7 @@ import com.example.po3.model.login.register.CheckEmail;
 import com.example.po3.model.login.register.Login;
 import com.example.po3.model.login.register.Register;
 import com.example.po3.model.login.register.ResponseBarang;
+import com.example.po3.model.login.register.ResponseBarangBaru;
 import com.example.po3.model.login.register.ResponseEmail;
 import com.example.po3.model.login.register.UpdatePassword;
 import com.example.po3.model.login.register.VerifEmail;
@@ -32,6 +33,9 @@ public interface ApiInterface {
     );
     @GET("retrieve.php")
     Call<ResponseBarang> ardretriveData();
+
+    @GET("retrieveNew.php")
+    Call<ResponseBarangBaru> ardretriveNewData();
 
     @FormUrlEncoded
     @POST("DataVerif_Email.php")
