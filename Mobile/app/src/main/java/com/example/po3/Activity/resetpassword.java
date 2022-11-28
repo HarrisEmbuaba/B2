@@ -3,7 +3,6 @@ package com.example.po3.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -11,17 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
 import com.example.po3.R;
 import com.example.po3.model.login.register.CheckEmail;
-import com.example.po3.reserpassword3;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;

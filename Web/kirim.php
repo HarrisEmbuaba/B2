@@ -1,5 +1,6 @@
 <?php
 include ('koneksi.php');
+include ('kirim.html');
 
 error_reporting(0);
 session_start();

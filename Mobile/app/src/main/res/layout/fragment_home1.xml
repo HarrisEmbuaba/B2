@@ -122,19 +122,36 @@
                 android:layout_height="wrap_content"
                 android:text="Bingkisan"
                 android:layout_marginLeft="5dp"
-                android:backgroundTint="#EEC19F"/>
+                android:backgroundTint="@color/coklat"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seserahan"
                 android:layout_marginLeft="5dp"
-                android:backgroundTint="#EEC19F"/>
+                android:backgroundTint="@color/coklat"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/terbaru"
+            app:layout_constraintTop_toBottomOf="@+id/puan"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Produk Terbaru"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/puan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:text="View All"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/puan"
+            app:layout_constraintTop_toBottomOf="@id/terbaru"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="4dp"

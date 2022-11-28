@@ -21,7 +21,9 @@ import com.example.po3.R;
 import com.example.po3.Adapter.AdapterBarang;
 import com.example.po3.R;
 import com.example.po3.model.login.register.DataBarang;
+import com.example.po3.model.login.register.DataItem;
 import com.example.po3.model.login.register.ResponseBarang;
+import com.example.po3.model.login.register.ResponseBarangBaru;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class home1 extends Fragment {
     private RecyclerView rvData;
     private RecyclerView.Adapter adData;
     private RecyclerView.LayoutManager lmData;
-    private List<DataBarang> listData = new ArrayList<>();
+    private List<DataItem> listData = new ArrayList<>();
 
     TextView setGreteing;
     @Override
@@ -78,14 +80,12 @@ public class home1 extends Fragment {
 
     public void retrieveData() {
         ApiInterface ai = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponseBarang> tampilData = ai.ardretriveData();
-
-
-        tampilData.enqueue(new Callback<ResponseBarang>() {
+        Call<ResponseBarangBaru> tampilData = ai.ardretriveNewData();
+        tampilData.enqueue(new Callback<ResponseBarangBaru>() {
             @Override
-            public void onResponse(Call<ResponseBarang> call, Response<ResponseBarang> response) {
+            public void onResponse(Call<ResponseBarangBaru> call, Response<ResponseBarangBaru> response) {
                 int kode = response.body().getKode();
-                String pesan = response.body().getPesan();
+                String pesan = response.body().getMessage();
 
 
                 Toast.makeText(getActivity(), "Kode : "+kode+" | Pesan : "+pesan, Toast.LENGTH_SHORT).show();
@@ -99,7 +99,7 @@ public class home1 extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseBarang> call, Throwable t) {
+            public void onFailure(Call<ResponseBarangBaru> call, Throwable t) {
                 Toast.makeText(getActivity(), "Gagal Menghubungi Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
