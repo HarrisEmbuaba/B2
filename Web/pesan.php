@@ -281,6 +281,7 @@ mysqli_close($koneksi);
                                         <td><?php echo $field13name ?></td>
                                         <td>
                                           <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dibayar</button>
+                                          <a href="load.php"></a>
                                           <a href="pesan.php" onclick="return confirm('Barang sudah dibayar!')"></a>
                                         </td>
                                       </tr>
@@ -295,7 +296,7 @@ mysqli_close($koneksi);
                   </div>
                 </div>
               </div>
-
+              
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade dikemas" id="dikemas">

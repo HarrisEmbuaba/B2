@@ -362,6 +362,10 @@ if (isset($_POST['Dikirim'])) {
                                         <td>
                                           <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='5'"; ?>Dikemas</button>
                                           <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
+                                          <?php ?>
+                                          <button class="btn btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...
+                                          </button>
                                         </td>
                                       </tr>
                                     <?php

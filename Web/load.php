@@ -1,3 +1,14 @@
+<?php
+include ('koneksi.php');
+require ('load.html');
+
+session_start();
+session_destroy();
+ 
+header("Location: home.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
