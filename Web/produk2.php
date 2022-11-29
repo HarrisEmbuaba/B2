@@ -18,7 +18,7 @@ if(isset($_SESSION['nama_barang'])){
 // $result = mysqli_query($koneksi,$sql1);
 
 if(isset($_POST['Insert'])){
-  //$id = $_POST['id_barang'];
+//   $id = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
@@ -41,24 +41,47 @@ if(isset($_POST['Insert'])){
   
   $result = mysqli_query($koneksi,$sql2);
 
-  echo "<script>
-  eval(Location='produk2.php');
-  alert('Barang berhasil ditambahkan!');
-  </script>";
+//   echo "<script>
+//   eval(Location='produk2.php');
+//   alert('Barang berhasil ditambahkan!');
+//   </script>";
+
+  if($result){
+    echo "<script>alert('Barang berhasil ditambahkan!')</script>";
+    
+    $nama = "";
+    $image = "";
+    $deskripsi = "";
+    $harga = "";
+    $stok = "";
+    $warna = "";
+    $ukuran = "";
+    $kategori = "";
+    $_POST['nama_barang'] = "";
+    $_POST['image'] = "";
+    $_POST['deskripsi'] = "";
+    $_POST['harga'] = "";
+    $_POST['stok'] = "";
+    $_POST['warna'] = "";
+    $_POST['ukuran'] = "";
+    $_POST['barang_jenis'] = "";
+  } else {
+    echo "<script>alert('Barang gagal ditambahkan!')</script>";
+  }
+}
 
 //   if(!$result->num_rows > 0){
     
     // $result = mysqli_query($koneksi,$sql);
 
     // if($result){
-    
-      
-    } else {
-      echo "<script>
-      eval(Location='produk2.php');
-      alert('Barang gagal ditambahkan!');
-      </script>";
-    }
+        
+    // } else {
+    //   echo "<script>
+    //   eval(Location='produk2.php');
+    //   alert('Barang gagal ditambahkan!');
+    //   </script>";
+    // }
 }
 
 ?>
