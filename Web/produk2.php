@@ -147,13 +147,13 @@ if(isset($_POST['Insert'])){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.html">
-          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
+        <a class="nav-link collapsed" href="pesan.php">
+          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.html">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->

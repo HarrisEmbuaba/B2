@@ -1,6 +1,5 @@
 <?php
 require ('koneksi.php');
-require ('kirim.html');
 include ('pesan.html');
 
 error_reporting(0);
@@ -127,7 +126,7 @@ mysqli_close($koneksi);
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan.php">
-          <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
+          <img src="assets/img/pesan1.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 

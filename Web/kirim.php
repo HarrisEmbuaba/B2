@@ -201,7 +201,7 @@ if (isset($_POST['Dikirim'])) {
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan.php">
-          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
+          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
@@ -212,7 +212,7 @@ if (isset($_POST['Dikirim'])) {
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
