@@ -1,65 +1,90 @@
 <?php
-require ('koneksi.php');
-include ('produk.php');
+include ('koneksi.php');
 
-error_reporting(0);
-session_start();
+// error_reporting(0);
+// session_start();
 
-if(isset($_SESSION['id_barang'])){
-  header("Location: tambahProduk.php");
-}
+if(isset($_SESSION['nama_barang'])){
+  header("Location: produk2.php");
 
-$err = "";
-$sukses = "";
-$kode = "";
 
-if(isset($_POST['Submit'])){
-  // $kode = $_POST['id_barang'];
+// $err = "";
+// $sukses = "";
+// $kode = "";
+
+// $sql1 = "SELECT * FROM `barang`";
+// $all_categories = mysqli_query($koneksi,$sql1);
+
+// $result = mysqli_query($koneksi,$sql1);
+
+if(isset($_POST['Insert'])){
+//   $id = $_POST['id_barang'];
   $nama = $_POST['nama_barang'];
-  $image = $_POST['image'];
   $deskripsi = $_POST['deskripsi'];
   $harga = $_POST['harga'];
   $stok = $_POST['stok'];
-  $warna = $_POST['warna'];
-  $ukuran = $_POST['ukuran'];
-  $kategori = $_POST['barang_jenis'];
+  
+  $image = $_FILES['image']['name'];
+  $source = $_FILES['image']['tmp_name'];
+  $folder = 'gambarproduk/';
+  
+  move_uploaded_file($source, $folder.$image);
+  
+  $nama = mysqli_real_escape_string($koneksi,$_POST['nama_barang']);
 
-  if(!$result->num_rows > 0){
-    $sql1 = "INSERT INTO `barang`('id_barang',`nama_barang`,`image`,`deskripsi`)
-    VALUES ('','$nama','$image','$deskripsi')";
-    $sql2 = "INSERT INTO `jenis_barang`(`id_jenis`,`barang_jenis`)
-    VALUES ('','$kategori')";
-    $sql3 = "INSERT INTO `jenis_ukuran`(`id_ukuran`,`ukuran`)
-    VALUES ('','$ukuran')";
-    $sql4 = "INSERT INTO `jenis_warna`(`id_warna`,`warna`)
-    VALUES ('','$warna')";
-    $sql5 = "INSERT INTO `detail_barang`(`id`,`harga`, `stok`)
-    VALUES ('','$harga','$stok')";
+  $id_jenis = mysqli_real_escape_string($koneksi,$_POST['barang_jenis']);
+  $id_ukuran = mysqli_real_escape_string($koneksi,$_POST['ukuran']);
+  $id_warna = mysqli_real_escape_string($koneksi,$_POST['warna']);
+  
+  $sql2 = "INSERT INTO `barang`(`nama_barang`,`image`,`deskripsi`,`harga`,`stok`,`id_jenis`,`id_ukuran`,`id_warna`)
+  VALUES ('$nama','$image','$deskripsi','$harga','$stok','$id_jenis','$id_ukuran','$id_warna')";
+  
+  $result = mysqli_query($koneksi,$sql2);
 
-    $result = mysqli_query($koneksi,$sql1,$sql2,$sql3,$sql4,$sql5);
+//   echo "<script>
+//   eval(Location='produk2.php');
+//   alert('Barang berhasil ditambahkan!');
+//   </script>";
 
-    if($result){
-      echo "<script>alert('Barang berhasil ditambahkan!')</script>";
-      
-      $nama = "";
-      $image = "";
-      $deskripsi = "";
-      $harga = "";
-      $stok = "";
-      $warna = "";
-      $ukuran = "";
-      $kategori = "";
-      $_POST['nama_barang'] = "";
-      $_POST['image'] = "";
-      $_POST['deskripsi'] = "";
-      $_POST['harga'] = "";
-      $_POST['stok'] = "";
-      $_POST['warna'] = "";
-      $_POST['ukuran'] = "";
-      $_POST['barang_jenis'] = "";
-    } else {
-      echo "<script>alert('Barang gagal ditambahkan!')</script>";
-    }
+  if($result){
+    echo "<script>alert('Barang berhasil ditambahkan!')</script>";
+    
+    $nama = "";
+    $image = "";
+    $deskripsi = "";
+    $harga = "";
+    $stok = "";
+    $warna = "";
+    $ukuran = "";
+    $kategori = "";
+    $_POST['nama_barang'] = "";
+    $_FILES['image'] = "";
+    $_POST['deskripsi'] = "";
+    $_POST['harga'] = "";
+    $_POST['stok'] = "";
+    $_POST['warna'] = "";
+    $_POST['ukuran'] = "";
+    $_POST['barang_jenis'] = "";
+  } else {
+    echo "<script>alert('Barang gagal ditambahkan!')</script>";
   }
 }
+
+//   if(!$result->num_rows > 0){
+    
+    // $result = mysqli_query($koneksi,$sql);
+
+    // if($result){
+        
+    // } else {
+    //   echo "<script>
+    //   eval(Location='produk2.php');
+    //   alert('Barang gagal ditambahkan!');
+    //   </script>";
+    // }
+}
+?>
+
+
+
 
