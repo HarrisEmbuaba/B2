@@ -287,8 +287,13 @@ include ('koneksi.php');
                                             <td><?php echo $row["ukuran"]; ?></td>
                                             <td><?php echo $row["warna"];  ?></td> 
                                             <td>
+<<<<<<< Updated upstream
                                                 <a href="editProduk.php?id=<?php echo $id; ?>">Edit</a><br><br><br><br>
                                                 <a href="hapusProduk.php?id=<?php echo $id; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+=======
+                                                <a href="edit_produk.php?id=<?php echo $field10name ?>">Edit</a><br><br><br><br>
+                                                <a href="proses_hapus.php?id=<?php echo $field10name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+>>>>>>> Stashed changes
                                             </td>
                                         </tr>
                                     <?php
