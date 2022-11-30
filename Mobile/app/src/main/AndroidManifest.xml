@@ -17,6 +17,18 @@
         android:theme="@style/Theme.PO3"
         tools:targetApi="31">
         <activity
+            android:name=".Seserahan"
+            android:exported="false" />
+        <activity
+            android:name=".Hampers"
+            android:exported="false" />
+        <activity
+            android:name=".Bucket"
+            android:exported="false" />
+        <activity
+            android:name=".viewall"
+            android:exported="false" />
+        <activity
             android:name=".Activity.detailbarang"
             android:exported="false" />
         <activity

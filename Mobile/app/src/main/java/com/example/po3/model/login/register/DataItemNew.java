@@ -2,7 +2,7 @@ package com.example.po3.model.login.register;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DataItem{
+public class DataItemNew {
 
 	@SerializedName("image")
 	private String image;

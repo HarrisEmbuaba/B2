@@ -13,64 +13,66 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.po3.API.ApiClient;
-import com.example.po3.R;
 import com.example.po3.Activity.detailbarang;
-import com.example.po3.model.login.register.DataItemNew;
+import com.example.po3.R;
+import com.example.po3.model.login.register.DataBarang;
+import com.example.po3.model.login.register.DataItemBucket;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData> {
-     Context ctx;
-     List<DataItemNew> listData;
+public class AdapterBucket extends RecyclerView.Adapter<AdapterBucket.HolderDataBucket>{
+    Context ctx;
+    List<DataItemBucket> listData2;
 
-    public AdapterBarang(Context ctx, List<DataItemNew> listData) {
+    public AdapterBucket(Context ctx, List<DataItemBucket> listData2) {
         this.ctx = ctx;
-        this.listData = listData;
+        this.listData2 = listData2;
     }
 
     @NonNull
     @Override
-    public AdapterBarang.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterBucket.HolderDataBucket onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(ctx).inflate(R.layout.kosongan, parent, false);
 //        HolderData holder = new HolderData(layout);
-        return new HolderData(layout);
+        return new AdapterBucket.HolderDataBucket(layout);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderData holder, @SuppressLint("RecyclerView") int position) {
-        DataItemNew db = listData.get(position);
+    public void onBindViewHolder(@NonNull AdapterBucket.HolderDataBucket holder, @SuppressLint("RecyclerView") int position) {
+        DataItemBucket db = listData2.get(position);
 
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getBarangJenis()));
         holder.tvNama.setText(String.valueOf(db.getNamaBarang()));
         holder.tvHarga.setText(String.valueOf(db.getHarga()));
         holder.tvStok.setText(String.valueOf(db.getStok()));
-        Picasso.get().load(ApiClient.IMAGES_URL+listData.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
+        Picasso.get().load(ApiClient.IMAGES_URL+listData2.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent =  new Intent(view.getContext(), detailbarang.class);
-                mIntent.putExtra("image", listData.get(position).getImage());
-                mIntent.putExtra("barang_jenis", listData.get(position).getBarangJenis());
-                mIntent.putExtra("nama_barang", listData.get(position).getNamaBarang());
-                mIntent.putExtra("harga", listData.get(position).getHarga());
-                mIntent.putExtra("deskripsi", listData.get(position).getDeskripsi());
+                mIntent.putExtra("image", listData2.get(position).getImage());
+                mIntent.putExtra("barang_jenis", listData2.get(position).getBarangJenis());
+                mIntent.putExtra("nama_barang", listData2.get(position).getNamaBarang());
+                mIntent.putExtra("harga", listData2.get(position).getHarga());
+                mIntent.putExtra("deskripsi", listData2.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        return listData2.size();
     }
 
-    public class HolderData extends RecyclerView.ViewHolder {
+    public class HolderDataBucket extends RecyclerView.ViewHolder {
         TextView tvId, tvJenis,tvNama,tvHarga, tvStok;
         ImageView ivIcon;
 
-        public HolderData(@NonNull View itemView) {
+        public HolderDataBucket(@NonNull View itemView) {
             super(itemView);
 
             tvId = itemView.findViewById(R.id.tvId);
