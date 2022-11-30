@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class home1 extends Fragment {
     private RecyclerView.Adapter adData;
     private RecyclerView.LayoutManager lmData;
     private List<DataItemNew> listData = new ArrayList<>();
+    private SearchView searchView;
     TextView viewSemua;
     Button TvBucket, TvHampers, TvSeserahan;
 
@@ -73,9 +75,26 @@ public class home1 extends Fragment {
         LihatHampers();
         LihatSeserahan();
 
+        searchView = view.findViewById(R.id.search);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
         rvData = view.findViewById(R.id.rv_data);
         rvData.setHasFixedSize(true);
         rvData.setLayoutManager(new GridLayoutManager(getActivity(),2));
+    }
+
+    private void filterList(String text) {
     }
 
     public void LihatSemua(){
@@ -84,10 +103,13 @@ public class home1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), viewall.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
                 startActivity(i);
             }
         });
     }
+
+
 
     public void LihatBucket(){
         TvBucket = getView().findViewById(R.id.buket);
@@ -95,6 +117,7 @@ public class home1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), Bucket.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
                 startActivity(i);
             }
         });
@@ -106,6 +129,7 @@ public class home1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), Hampers.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
                 startActivity(i);
             }
         });
@@ -117,6 +141,7 @@ public class home1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), Seserahan.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
                 startActivity(i);
             }
         });

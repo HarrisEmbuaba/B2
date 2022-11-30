@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
+import com.example.po3.Activity.home;
 import com.example.po3.Adapter.AdapterBarang;
 import com.example.po3.Adapter.AdapterBucket;
 import com.example.po3.Adapter.AdapterSeserahan;
@@ -30,12 +34,14 @@ public class Seserahan extends AppCompatActivity {
     private RecyclerView.Adapter AvData;
     private RecyclerView.LayoutManager lmData;
     private List<DataItemSeserahan> listData4 = new ArrayList<>();
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seserahan);
         retrieveData4();
+        toHome();
 
         RvView = this.findViewById(R.id.Rc_view2);
         RvView.setHasFixedSize(true);
@@ -65,6 +71,18 @@ public class Seserahan extends AppCompatActivity {
             public void onFailure(Call<ResponseSeserahan> call, Throwable t) {
                 Toast.makeText(Seserahan.this, "Gagal Menghubungi Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+
+    public void toHome(){
+        imageButton = findViewById(R.id.backto2);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Seserahan.this, home.class);
+                i.putExtra("namaUser", getIntent().getStringExtra("namaUser"));
+                startActivity(i);
             }
         });
     }

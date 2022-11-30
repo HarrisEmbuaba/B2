@@ -18,8 +18,9 @@
         <entry key="..\:/Users/bagus/AndroidStudioProjects/PO3/app/src/main/res/layout/fragment_notif.xml" value="0.25" />
         <entry key="..\:/Users/bagus/AndroidStudioProjects/PO3/app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/drawable/rounded.xml" value="0.1505" />
+        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/drawable/search_view_bg.xml" value="0.1505" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/drawable/textrounded.xml" value="0.1505" />
-        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_bucket.xml" value="0.20244565217391305" />
+        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_bucket.xml" value="0.22" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_detailbarang.xml" value="0.25" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_hampers.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_home.xml" value="0.22" />
@@ -31,14 +32,16 @@
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_reserpassword3.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_resetpassword.xml" value="0.22" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_resetpassword2.xml" value="0.25" />
+        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_search_view.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_seserahan.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_validasi.xml" value="0.25" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/activity_viewall.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/fragment_favorit.xml" value="0.5" />
-        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/fragment_home1.xml" value="0.16" />
+        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/fragment_home1.xml" value="0.2" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/kosongan.xml" value="0.5" />
+        <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/search.xml" value="0.33" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/layout/validasi.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1505" />
         <entry key="..\:/Users/bagus/Documents/GitHub/B2/Mobile/app/src/main/res/xml/network_security_config.xml" value="0.1" />

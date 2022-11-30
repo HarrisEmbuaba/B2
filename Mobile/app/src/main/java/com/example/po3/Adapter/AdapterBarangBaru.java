@@ -18,6 +18,8 @@ import com.example.po3.R;
 import com.example.po3.model.login.register.DataBarang;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.HolderDataBaru> {
@@ -46,8 +48,11 @@ public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.Ho
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getJenis()));
         holder.tvNama.setText(String.valueOf(db.getNama()));
-        holder.tvHarga.setText(String.valueOf(db.getHarga()));
-        holder.tvStok.setText(String.valueOf(db.getStok()));
+        String hrg = db.getHarga();
+        int cv = Integer.parseInt(hrg);
+        String hasilConvert = toRupiah(cv);
+        holder.tvHarga.setText(String.valueOf(hasilConvert));
+        holder.tvStok.setText(String.valueOf(db.getUkuran()));
         Picasso.get().load(ApiClient.IMAGES_URL+listData1.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +88,16 @@ public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.Ho
             tvStok = itemView.findViewById(R.id.stok);
             ivIcon = itemView.findViewById(R.id.fotobunga);
         }
+    }
+
+    public static String toRupiah(int rupiah){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator('.');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        return kursIndonesia.format(rupiah);
     }
 }

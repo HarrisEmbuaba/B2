@@ -18,11 +18,14 @@ import com.example.po3.Activity.detailbarang;
 import com.example.po3.model.login.register.DataItemNew;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData> {
      Context ctx;
      List<DataItemNew> listData;
+
 
     public AdapterBarang(Context ctx, List<DataItemNew> listData) {
         this.ctx = ctx;
@@ -44,13 +47,17 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getBarangJenis()));
         holder.tvNama.setText(String.valueOf(db.getNamaBarang()));
-        holder.tvHarga.setText(String.valueOf(db.getHarga()));
-        holder.tvStok.setText(String.valueOf(db.getStok()));
+        String hrg = db.getHarga();
+        int cv = Integer.parseInt(hrg);
+        String hasilConvert = toRupiah(cv);
+        holder.tvHarga.setText(String.valueOf(hasilConvert));
+        holder.tvStok.setText(String.valueOf(db.getUkuran()));
         Picasso.get().load(ApiClient.IMAGES_URL+listData.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent =  new Intent(view.getContext(), detailbarang.class);
+                mIntent.putExtra("id", listData.get(position).getId());
                 mIntent.putExtra("image", listData.get(position).getImage());
                 mIntent.putExtra("barang_jenis", listData.get(position).getBarangJenis());
                 mIntent.putExtra("nama_barang", listData.get(position).getNamaBarang());
@@ -80,5 +87,15 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
             tvStok = itemView.findViewById(R.id.stok);
             ivIcon = itemView.findViewById(R.id.fotobunga);
         }
+    }
+    public static String toRupiah(int rupiah){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator('.');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        return kursIndonesia.format(rupiah);
     }
 }

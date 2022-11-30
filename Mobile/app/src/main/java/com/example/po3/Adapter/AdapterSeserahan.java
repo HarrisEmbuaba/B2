@@ -20,6 +20,8 @@ import com.example.po3.model.login.register.DataItemHampers;
 import com.example.po3.model.login.register.DataItemSeserahan;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class AdapterSeserahan extends RecyclerView.Adapter<AdapterSeserahan.HolderDataSeserahan>{
@@ -47,8 +49,11 @@ public class AdapterSeserahan extends RecyclerView.Adapter<AdapterSeserahan.Hold
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getBarangJenis()));
         holder.tvNama.setText(String.valueOf(db.getNamaBarang()));
-        holder.tvHarga.setText(String.valueOf(db.getHarga()));
-        holder.tvStok.setText(String.valueOf(db.getStok()));
+        String hrg = db.getHarga();
+        int cv = Integer.parseInt(hrg);
+        String hasilConvert = toRupiah(cv);
+        holder.tvHarga.setText(String.valueOf(hasilConvert));
+        holder.tvStok.setText(String.valueOf(db.getUkuran()));
         Picasso.get().load(ApiClient.IMAGES_URL+listData3.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +68,6 @@ public class AdapterSeserahan extends RecyclerView.Adapter<AdapterSeserahan.Hold
                 view.getContext().startActivity(mIntent);
             }
         });
-
     }
 
     @Override
@@ -85,5 +89,15 @@ public class AdapterSeserahan extends RecyclerView.Adapter<AdapterSeserahan.Hold
             tvStok = itemView.findViewById(R.id.stok);
             ivIcon = itemView.findViewById(R.id.fotobunga);
         }
+    }
+    public static String toRupiah(int rupiah){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator('.');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        return kursIndonesia.format(rupiah);
     }
 }

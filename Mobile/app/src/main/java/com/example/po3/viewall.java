@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
+import com.example.po3.Activity.home;
 import com.example.po3.Adapter.AdapterBarangBaru;
 import com.example.po3.model.login.register.DataBarang;
 import com.example.po3.model.login.register.ResponseBarang;
@@ -26,6 +30,7 @@ public class viewall extends AppCompatActivity {
     private RecyclerView.Adapter acData;
     private RecyclerView.LayoutManager lmData;
     private List<DataBarang> listData1 = new ArrayList<>();
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class viewall extends AppCompatActivity {
         setContentView(R.layout.activity_viewall);
 
         retrieveDataBaru();
+        toHome();
 
         rcData = this.findViewById(R.id.rc_data);
         rcData.setHasFixedSize(true);
@@ -62,6 +68,18 @@ public class viewall extends AppCompatActivity {
             public void onFailure(Call<ResponseBarang> call, Throwable t) {
                 Toast.makeText(viewall.this, "Gagal Menghubungi Server : "+t.getMessage(), Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+
+    public void toHome(){
+        imageButton = findViewById(R.id.backto4);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(viewall.this, home.class);
+                i.putExtra("namaUser", getIntent().getStringExtra("namaUser"));
+                startActivity(i);
             }
         });
     }

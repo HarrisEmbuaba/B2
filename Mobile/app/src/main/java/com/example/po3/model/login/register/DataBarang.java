@@ -1,8 +1,8 @@
 package com.example.po3.model.login.register;
 
 public class DataBarang {
-    private int id,harga,stok,id_ukuran,id_warna,id_barang,id_jenis;
-    private String barang_jenis,ukuran,warna,nama_barang,image,deskripsi;
+    private int id,stok,id_ukuran,id_warna,id_barang,id_jenis;
+    private String barang_jenis,ukuran,warna,nama_barang,image,deskripsi,harga;
 
     public int getId() {
         return id;
@@ -12,11 +12,11 @@ public class DataBarang {
         this.id = id;
     }
 
-    public int getHarga() {
+    public String getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(String harga) {
         this.harga = harga;
     }
 

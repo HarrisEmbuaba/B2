@@ -135,7 +135,7 @@
         />
     <TextView
         android:id="@+id/panjang"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/deskripsi"
         app:layout_constraintTop_toBottomOf="@+id/textdes"
