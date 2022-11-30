@@ -417,7 +417,7 @@ include ('koneksi.php');
                                     while ($row = $result->fetch_assoc()) {
                                         ?>
                                         <tr>  
-                                            <th><?php echo $row["id_barang"]; ?></th> 
+                                            <th><?php echo $no; ?></th> 
                                             <td><?php echo $row["nama_barang"]; ?></td> 
                                             <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
                                             <td><?php echo $row["deskripsi"]; ?></td> 
@@ -427,11 +427,12 @@ include ('koneksi.php');
                                             <td><?php echo $row["ukuran"]; ?></td>
                                             <td><?php echo $row["warna"];  ?></td> 
                                             <td>
-                                                <a href="editProduk.php?id=<?php echo $id; ?>">Edit</a><br><br><br><br>
-                                                <a href="hapusProduk.php?id=<?php echo $id; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                                <a href="editProduk.php?id=<?php echo $row["id_barang"]; ?>">Edit</a><br><br><br><br>
+                                                <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php
+                                    $no++;
                                     }
                                     $result->free();
                                 } 
