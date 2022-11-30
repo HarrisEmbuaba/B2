@@ -1,5 +1,6 @@
 <?php
 include ('koneksi.php');
+include ('kirim.html');
 
 error_reporting(0);
 session_start();
@@ -200,7 +201,7 @@ if (isset($_POST['Dikirim'])) {
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan.php">
-          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
+          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
@@ -211,7 +212,7 @@ if (isset($_POST['Dikirim'])) {
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -361,6 +362,10 @@ if (isset($_POST['Dikirim'])) {
                                         <td>
                                           <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='5'"; ?>Dikemas</button>
                                           <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
+                                          <?php ?>
+                                          <button class="btn btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...
+                                          </button>
                                         </td>
                                       </tr>
                                     <?php

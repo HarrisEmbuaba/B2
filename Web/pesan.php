@@ -1,6 +1,6 @@
 <?php
 require ('koneksi.php');
-require ('kirim.html');
+include ('pesan.html');
 
 error_reporting(0);
 session_start();
@@ -125,25 +125,25 @@ mysqli_close($koneksi);
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.html">
-          <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
+        <a class="nav-link collapsed" href="pesan.php">
+          <img src="assets/img/pesan1.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.html">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="bayar.html">
+        <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
@@ -281,6 +281,7 @@ mysqli_close($koneksi);
                                         <td><?php echo $field13name ?></td>
                                         <td>
                                           <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='2'"; ?>Dibayar</button>
+                                          <a href="load.php"></a>
                                           <a href="pesan.php" onclick="return confirm('Barang sudah dibayar!')"></a>
                                         </td>
                                       </tr>
@@ -295,7 +296,7 @@ mysqli_close($koneksi);
                   </div>
                 </div>
               </div>
-
+              
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade dikemas" id="dikemas">
