@@ -49,7 +49,7 @@ include ('koneksi.php');
       } else {
         //tampil alert dan akan redirect ke halaman index.php
         //silahkan ganti index.php sesuai halaman yang akan dituju
-          echo "<script>alert('Data berhasil diubah.');window.location='index.php';</script>";
+          echo "<script>alert('Data berhasil diubah.');window.location='produk2.php';</script>";
       }
     }
 

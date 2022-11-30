@@ -275,30 +275,20 @@ include ('koneksi.php');
                             WHERE stok > 0 ";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
-                                        $field1name = $row["id_barang"];
-                                        $field2name = $row["nama_barang"];
-                                        $field3name = $row["image"];
-                                        $field4name = $row["deskripsi"];
-                                        $field5name = $row["harga"];
-                                        $field6name = $row["stok"];
-                                        $field7name = $row["barang_jenis"]; 
-                                        $field8name = $row["ukuran"]; 
-                                        $field9name = $row["warna"]; 
-                                        $field10name;
-                                        ?>
+                                      ?>
                                         <tr>  
-                                            <th><?php echo $field1name ?></th> 
-                                            <td><?php echo $field2name ?></td> 
-                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $field3name ?>" style="width: 120px;"></td> 
-                                            <td><?php echo $field4name ?></td> 
-                                            <td><?php echo $field5name ?></td> 
-                                            <td><?php echo $field6name ?></td>
-                                            <td><?php echo $field7name ?></td>
-                                            <td><?php echo $field8name ?></td>
-                                            <td><?php echo $field9name ?></td> 
+                                            <th><?php echo $row["id_barang"]; ?></th> 
+                                            <td><?php echo $row["nama_barang"]; ?></td> 
+                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
+                                            <td><?php echo $row["deskripsi"]; ?></td> 
+                                            <td><?php echo $row["harga"]; ?></td> 
+                                            <td><?php echo $row["stok"]; ?></td>
+                                            <td><?php echo $row["barang_jenis"];  ?></td>
+                                            <td><?php echo $row["ukuran"]; ?></td>
+                                            <td><?php echo $row["warna"];  ?></td> 
                                             <td>
-                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a><br><br><br><br>
-                                                <a href="hapusProduk.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                                <a href="editProduk.php?id=<?php echo $id; ?>">Edit</a><br><br><br><br>
+                                                <a href="hapusProduk.php?id=<?php echo $id; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php
@@ -420,30 +410,20 @@ include ('koneksi.php');
                             WHERE stok = 0;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
-                                        $field1name = $row["id_barang"];
-                                        $field2name = $row["nama_barang"];
-                                        $field3name = $row["image"];
-                                        $field4name = $row["deskripsi"];
-                                        $field5name = $row["harga"];
-                                        $field6name = $row["stok"];
-                                        $field7name = $row["barang_jenis"]; 
-                                        $field8name = $row["ukuran"]; 
-                                        $field9name = $row["warna"]; 
-                                        $field10name;
                                         ?>
                                         <tr>  
-                                            <th><?php echo $field1name ?></th> 
-                                            <td><?php echo $field2name ?></td> 
-                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $field3name ?>" style="width: 120px;"></td> 
-                                            <td><?php echo $field4name ?></td> 
-                                            <td><?php echo $field5name ?></td> 
-                                            <td><?php echo $field6name ?></td>
-                                            <td><?php echo $field7name ?></td>
-                                            <td><?php echo $field8name ?></td>
-                                            <td><?php echo $field9name ?></td> 
+                                            <th><?php echo $row["id_barang"]; ?></th> 
+                                            <td><?php echo $row["nama_barang"]; ?></td> 
+                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
+                                            <td><?php echo $row["deskripsi"]; ?></td> 
+                                            <td><?php echo $row["harga"]; ?></td> 
+                                            <td><?php echo $row["stok"]; ?></td>
+                                            <td><?php echo $row["barang_jenis"];  ?></td>
+                                            <td><?php echo $row["ukuran"]; ?></td>
+                                            <td><?php echo $row["warna"];  ?></td> 
                                             <td>
-                                                <a href="edit_produk.php?id=<?php echo $field1name ?>">Edit</a><br><br><br><br>
-                                                <a href="hapusProduk.php?id=<?php echo $field1name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                                <a href="editProduk.php?id=<?php echo $id; ?>">Edit</a><br><br><br><br>
+                                                <a href="hapusProduk.php?id=<?php echo $id; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php
