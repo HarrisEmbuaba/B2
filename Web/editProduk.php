@@ -21,13 +21,13 @@ include ('koneksi.php');
                   move_uploaded_file($file_tmp, 'gambarproduk/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
                       
                     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-                   $query  = "UPDATE barang SET nama_barang = '$nama_produk', deskripsi = '$deskripsi', harga = '$harga', stok = '$stok', gambar_produk = '$nama_gambar_baru'";
-                    $query .= "WHERE id = '$id'";
-                    $result = mysqli_query($koneksi, $query);
+                    $sql  = "UPDATE `barang` SET `nama_barang` = '$nama_produk', `image` = '$nama_gambar_baru', `deskripsi` = '$deskripsi', `harga` = '$harga'";
+                    $sql .= "WHERE `id` = '$id'";
+                    $result = mysqli_query($mysqli, $sql);
                     // periska query apakah ada error
                     if(!$result){
-                        die ("Query gagal dijalankan: ".mysqli_errno($koneksi).
-                             " - ".mysqli_error($koneksi));
+                        die ("Query gagal dijalankan: ".mysqli_errno($mysqli).
+                             " - ".mysqli_error($mysqli));
                     } else {
                       //tampil alert dan akan redirect ke halaman index.php
                       //silahkan ganti index.php sesuai halaman yang akan dituju
@@ -39,13 +39,13 @@ include ('koneksi.php');
               }
     } else {
       // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-      $query  = "UPDATE barang SET nama_barang = '$nama_produk', deskripsi = '$deskripsi', harga = '$harga', stok = '$stok'";
-      $query .= "WHERE id_barang = '$id'";
-      $result = mysqli_query($koneksi, $query);
+      $sql  = "UPDATE `barang` SET `nama_barang` = '$nama_produk', `deskripsi` = '$deskripsi', `harga` = '$harga', stok = '$stok'";
+      $sql .= "WHERE `id_barang` = '$id'";
+      $result = mysqli_query($mysqli, $sql);
       // periska query apakah ada error
       if(!$result){
-            die ("Query gagal dijalankan: ".mysqli_errno($koneksi).
-                             " - ".mysqli_error($koneksi));
+            die ("Query gagal dijalankan: ".mysqli_errno($mysqli).
+                             " - ".mysqli_error($mysqli));
       } else {
         //tampil alert dan akan redirect ke halaman index.php
         //silahkan ganti index.php sesuai halaman yang akan dituju

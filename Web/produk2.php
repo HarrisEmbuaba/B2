@@ -145,7 +145,7 @@ include ('koneksi.php');
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2" action="produk2.php" method="post">
+                  <form class="row g-2" action="tambahProduk.php" method="post">
                     <!-- <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                         <select name="id_barang" class="form-control">
@@ -154,71 +154,16 @@ include ('koneksi.php');
                     <div class="col-md-1"></div>
                     <label for="nama" class="col-sm-1 col-form-label">Nama</label>
                     <div class="col-md-4">
-                      <input type="text" name="nama_barang" class="form-control" placeholder="">
-                    </div>
-                    <label for="ukuran" class="col-sm-1 col-form-label">Ukuran</label>
-                    <div class="col-md-4">
-                      <select name="ukuran" class="form-select">
-                      <?php
-                            $sql = "SELECT * FROM jenis_ukuran";
-                            $all_categories = mysqli_query($mysqli, $sql);
-                        ?>
-                        <?php
-                            while ($category = mysqli_fetch_array($all_categories)){
-                        ?>
-                            <option value="<?php echo $category["id_ukuran"];?>">
-                                <?php echo $category["ukuran"]; ?>
-                            </option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </div>
-                    <label for="jenis" class="col-sm-1 col-form-label">Warna</label>
-                    <div class="col-md-2">
-                        <select name="warna" class="form-select">
-                        <?php
-                                $sql = "SELECT * FROM jenis_warna";
-                                $all_categories = mysqli_query($mysqli, $sql);
-                            ?>
-                            <?php
-                                while ($category = mysqli_fetch_array($all_categories)){
-                            ?>
-                                <option value="<?php echo $category["id_warna"];?>">
-                                    <?php echo $category["warna"]; ?>
-                                </option>
-                            <?php
-                            }
-                            ?>
-                        </select>
+                      <input type="text" name="nama_barang" class="form-control">
                     </div>
                     <div class="col-md-1"></div>
-                    <label for="kategori" class="col-sm-1 col-form-label">Kategori</label>
-                    <div class="col-md-4">
-                      <select type="option" name="barang_jenis" class="form-select">
-                      <?php
-                            $sql = "SELECT * FROM jenis_barang";
-                            $all_categories = mysqli_query($mysqli, $sql);
-                        ?>
-                        <?php
-                            while ($category = mysqli_fetch_array($all_categories)){
-                        ?>
-                            <option value="<?php echo $category["id_jenis"];?>">
-                                <?php echo $category["barang_jenis"]; ?>
-                            </option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <label for="stok" class="col-sm-1 col-form-label">Stok</label>
+                    <label for="stok" class="col-sm-1 col-form-label">Harga</label>
                     <div class="col-md-1">
-                      <input type="text" name="stok" class="form-control" placeholder="">
+                      <input type="text" name="harga" class="form-control">
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
-                      <input type="text" name="deskripsi" class="form-control" placeholder="">
+                      <input type="text" name="deskripsi" class="form-control">
                     </div>
                     <div class="py-1"></div>
                     <div class="row mb-3">
@@ -231,10 +176,10 @@ include ('koneksi.php');
                       <div class="col-md-4">
                         <div class="text-center">
                           <button type="submit" class="btn btn-primary">Cari</button>
-                          <button type="reset" class="btn btn-primary">Clear</button>
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="submit" name="Insert" class="btn btn-primary">Input</button>
+                          <button type="reset" name="" class="btn btn-primary">Clear</button>
+                          <button type="submit" name="" class="btn btn-primary">Update</button>
+                          <button type="reset" name="" class="btn btn-primary">Delete</button>
+                          <button type="submit" name="tambah" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>
@@ -248,58 +193,41 @@ include ('koneksi.php');
                       <h6 class="m-0 font-weight-bold text-primary"></h6>
                   </div>
                   <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                  <tr>
-                                      <th>Kode Barang</th>
-                                      <th>Nama</th>
-                                      <th>Gambar</th>
-                                      <th>Deskripsi</th>
-                                      <th>Harga</th>
-                                      <th>Stok</th>
-                                      <th>Kategori</th>
-                                      <th>Ukuran</th>
-                                      <th>Warna</th>
-                                      <th>Action</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Gambar</th>
+                            <th>Deskripsi</th>
+                            <th>Harga</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                             <?php
-                            $query="SELECT barang.id_barang, barang.nama_barang, barang.image, barang.deskripsi, 
-                            barang.harga, barang.stok, jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
-                            FROM barang 
-                            RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis 
-                            RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran 
-                            RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna 
-                            WHERE stok > 0 ";
-                                if ($result = $mysqli->query($query)) {
-                                    while ($row = $result->fetch_assoc()) {
-                                      ?>
-                                        <tr>  
-                                            <th><?php echo $row["id_barang"]; ?></th> 
-                                            <td><?php echo $row["nama_barang"]; ?></td> 
-                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
-                                            <td><?php echo $row["deskripsi"]; ?></td> 
-                                            <td><?php echo $row["harga"]; ?></td> 
-                                            <td><?php echo $row["stok"]; ?></td>
-                                            <td><?php echo $row["barang_jenis"];  ?></td>
-                                            <td><?php echo $row["ukuran"]; ?></td>
-                                            <td><?php echo $row["warna"];  ?></td> 
-                                            <td>
-<<<<<<< Updated upstream
-                                                <a href="editProduk.php?id=<?php echo $id; ?>">Edit</a><br><br><br><br>
-                                                <a href="hapusProduk.php?id=<?php echo $id; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
-=======
-                                                <a href="edit_produk.php?id=<?php echo $field10name ?>">Edit</a><br><br><br><br>
-                                                <a href="proses_hapus.php?id=<?php echo $field10name ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
->>>>>>> Stashed changes
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    $result->free();
-                                } 
+                            $query="SELECT * FROM barang";
+                              if ($result = $mysqli->query($query)) {
+                                $no = 1;
+                                while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr>  
+                                  <th><?php echo $no; ?></th> 
+                                  <td><?php echo $row['nama_barang']; ?></td> 
+                                  <td style="text-align: center;"><img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;"></td> 
+                                  <td><?php echo $row['deskripsi']; ?></td> 
+                                  <td>Rp.<?php echo $row['harga']; ?></td> 
+                                  <td>
+                                    <a href="editProduk.php?id=<?php echo $row["id"]; ?>">Edit</a><br><br><br><br>
+                                    <a href="hapusProduk.php?id=<?php echo $row["id"]; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                  </td>
+                                </tr>
+                                <?php
+                                $no++;
+                                }
+                                $result->free();
+                              } 
                             ?>
                         </tbody>
                         </table>
@@ -354,7 +282,7 @@ include ('koneksi.php');
                     <div class="col-md-1"></div>
                     <label for="stok" class="col-sm-1 col-form-label">Stok</label>
                     <div class="col-md-1">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" placeholder="">
                     </div>
                     <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                     <div class="col-md-3">
@@ -364,7 +292,7 @@ include ('koneksi.php');
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input class="form-control" type="file" id="formFile">
+                        <input  type="file" class="form-control" id="formFile">
                       </div>
                     </div>
                     <div class="py-4">
@@ -374,7 +302,7 @@ include ('koneksi.php');
                           <button type="reset" class="btn btn-primary">Clear</button>
                           <button type="submit" class="btn btn-primary">Update</button>
                           <button type="reset" class="btn btn-primary">Delete</button>
-                          <button type="submit" class="btn btn-primary">Input</button>
+                          <button type="submit" name="tambah" class="btn btn-primary">Input</button>
                         </div>
                       </div>
                     </div>
@@ -389,52 +317,39 @@ include ('koneksi.php');
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
-                                  <tr>
-                                      <th>Kode Barang</th>
-                                      <th>Nama</th>
-                                      <th>Gambar</th>
-                                      <th>Deskripsi</th>
-                                      <th>Harga</th>
-                                      <th>Stok</th>
-                                      <th>Kategori</th>
-                                      <th>Ukuran</th>
-                                      <th>Warna</th>
-                                      <th>Action</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
+                            <tr>
+                              <th>No</th>
+                              <th>Nama</th>
+                              <th>Gambar</th>
+                              <th>Deskripsi</th>
+                              <th>Harga</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
                             <?php
-                            $query="SELECT barang.id_barang, barang.nama_barang, barang.image, barang.deskripsi, 
-                            barang.harga, barang.stok, jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
-                            FROM barang 
-                            RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis 
-                            RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran 
-                            RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna 
-                            WHERE stok = 0;";
-                                if ($result = $mysqli->query($query)) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        ?>
-                                        <tr>  
-                                            <th><?php echo $no; ?></th> 
-                                            <td><?php echo $row["nama_barang"]; ?></td> 
-                                            <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
-                                            <td><?php echo $row["deskripsi"]; ?></td> 
-                                            <td><?php echo $row["harga"]; ?></td> 
-                                            <td><?php echo $row["stok"]; ?></td>
-                                            <td><?php echo $row["barang_jenis"];  ?></td>
-                                            <td><?php echo $row["ukuran"]; ?></td>
-                                            <td><?php echo $row["warna"];  ?></td> 
-                                            <td>
-                                                <a href="editProduk.php?id=<?php echo $row["id_barang"]; ?>">Edit</a><br><br><br><br>
-                                                <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    $no++;
-                                    }
-                                    $result->free();
+                            $query="SELECT * FROM barang";
+                              if ($result = $mysqli->query($query)) {
+                                $no = 1;
+                                while ($row = $result->fetch_assoc()) {
+                                ?>
+                                  <tr>  
+                                    <th><?php echo $no; ?></th> 
+                                    <td><?php echo $row["nama_barang"]; ?></td> 
+                                    <td style="text-align: center;"><img src="gambarproduk/<?php echo $row["image"]; ?>" style="width: 120px;"></td> 
+                                    <td><?php echo $row["deskripsi"]; ?></td> 
+                                    <td><?php echo $row["harga"]; ?></td> 
+                                    <td>
+                                      <a href="editProduk.php?id=<?php echo $row["id_barang"]; ?>">Edit</a><br><br><br><br>
+                                      <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                    </td>
+                                  </tr>
+                                  <?php
+                                  $no++;
+                                  }
+                                  $result->free();
                                 } 
                             ?>
                         </tbody>
