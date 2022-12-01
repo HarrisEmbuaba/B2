@@ -214,13 +214,12 @@ include ('koneksi.php');
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <a href="http://localhost/po3/web/editStatus.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
                                 $result->free(); 
-                            }  
+                              }  
                         ?> 
                       </tbody> 
                   </table>
@@ -305,11 +304,10 @@ include ('koneksi.php');
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
-                                            <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Launch demo modal</button>
                                             </td> 
-                                        </tr>'; 
+                                        </tr>';
                                 } 
                                 $result->free(); 
                             }  
