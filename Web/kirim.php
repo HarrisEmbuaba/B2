@@ -1,98 +1,98 @@
 <?php
 include ('koneksi.php');
 
-if(isset($_SESSION['transaksi_id'])){
-  header("Location: kirim.php");
-}
+// if(isset($_SESSION['transaksi_id'])){
+//   header("Location: kirim.php");
+// }
 
-if(isset($_POST['Perlu Dikirim'])){
-  $kode = $_POST['id_barang'];
-  $nama = $_POST['nama_barang'];
-  $image = $_POST['image'];
-  $alamat = $_POST['alamat'];
-  $harga = $_POST['harga'];
-  $stok = $_POST['stok'];
-  $kategori = $_POST['barang_jenis'];
-  $ukuran = $_POST['ukuran'];
-  $warna = $_POST['warna'];
-  $id_jenis = $_POST['id_jenis'];
-  $id_ukuran = $_POST['id_ukuran'];
-  $id_warna = $_POST['id_warna'];
+// if(isset($_POST['Perlu Dikirim'])){
+//   $kode = $_POST['id_barang'];
+//   $nama = $_POST['nama_barang'];
+//   $image = $_POST['image'];
+//   $alamat = $_POST['alamat'];
+//   $harga = $_POST['harga'];
+//   $stok = $_POST['stok'];
+//   $kategori = $_POST['barang_jenis'];
+//   $ukuran = $_POST['ukuran'];
+//   $warna = $_POST['warna'];
+//   $id_jenis = $_POST['id_jenis'];
+//   $id_ukuran = $_POST['id_ukuran'];
+//   $id_warna = $_POST['id_warna'];
 
-  if(!$result->num_rows > 0){
-    $sql = "SELECT `transaksi_id`, `id_barang`, `qty`, `alamat`, `pembayaran`, `pengiriman`, `catatan`, `total`, `status`, `id_user` FROM `transaksi`) 
-    VALUES ('$id','$kode','$qty','$total','$alamat','$bayar','$kirim','$catatan','$status', '$id_user')";
+//   if(!$result->num_rows > 0){
+//     $sql = "SELECT `transaksi_id`, `id_barang`, `qty`, `alamat`, `pembayaran`, `pengiriman`, `catatan`, `total`, `status`, `id_user` FROM `transaksi`) 
+//     VALUES ('$id','$kode','$qty','$total','$alamat','$bayar','$kirim','$catatan','$status', '$id_user')";
 
-    $sql1 = "SELECT `nama` FROM `pembeli` WHERE id_user='') 
-    VALUES ('$nama')";
+//     $sql1 = "SELECT `nama` FROM `pembeli` WHERE id_user='') 
+//     VALUES ('$nama')";
 
-    $result = mysqli_query($conn,$sql,$sql1,$sql2,$sql3);
+//     $result = mysqli_query($conn,$sql,$sql1,$sql2,$sql3);
 
-    if($result){
-      echo "<script>alert('Barang berhasil ditampilkan!')</script>";
+//     if($result){
+//       echo "<script>alert('Barang berhasil ditampilkan!')</script>";
       
-      $id = "";
-      $kode = "";
-      $image = "";
-      $id_user = "";
-      $nama_barang = "";
-      $variasi1 = "";
-      $variasi2 = "";
-      $qty = "";
-      $total = "";
-      $alamat = "";
-      $bayar = "";
-      $kirim = "";
-      $catatan = "";
-      $status = "";
+//       $id = "";
+//       $kode = "";
+//       $image = "";
+//       $id_user = "";
+//       $nama_barang = "";
+//       $variasi1 = "";
+//       $variasi2 = "";
+//       $qty = "";
+//       $total = "";
+//       $alamat = "";
+//       $bayar = "";
+//       $kirim = "";
+//       $catatan = "";
+//       $status = "";
 
-      $_POST['transaksi_id'] = "";
-      $_POST['id_barang'] = "";
-      $_POST['image'] = "";
-      $_POST['id_user'] = "";
-      $_POST['nama_barang'] = "";
-      $_POST['ukuran'.'warna'] = "";
-      $_POST['qty'] = "";
-      $_POST['total'] = "";
-      $_POST['alamat'] = "";
-      $_POST['pembayaran'] = "";
-      $_POST['pengiriman'] = "";
-      $_POST['catatan'] = "";
-      $_POST['status'] = "";
+//       $_POST['transaksi_id'] = "";
+//       $_POST['id_barang'] = "";
+//       $_POST['image'] = "";
+//       $_POST['id_user'] = "";
+//       $_POST['nama_barang'] = "";
+//       $_POST['ukuran'.'warna'] = "";
+//       $_POST['qty'] = "";
+//       $_POST['total'] = "";
+//       $_POST['alamat'] = "";
+//       $_POST['pembayaran'] = "";
+//       $_POST['pengiriman'] = "";
+//       $_POST['catatan'] = "";
+//       $_POST['status'] = "";
 
-    } else {
-      echo "<script>alert('Barang gagal ditampilkan!')</script>";
-    }
-  }
-}
+//     } else {
+//       echo "<script>alert('Barang gagal ditampilkan!')</script>";
+//     }
+//   }
+// }
 
-mysqli_close($koneksi);
+// mysqli_close($conn);
 
-session_start();
-error_reporting(0);
+// session_start();
+// error_reporting(0);
 
-if (isset($_SESSION['nama'])) {
-   // header("Location: kirim.php");
-}
+// if (isset($_SESSION['nama'])) {
+//    // header("Location: kirim.php");
+// }
 
-if (isset($_POST['Dikirim'])) {
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+// if (isset($_POST['Dikirim'])) {
+//     $email = $_POST['email'];
+//     $pass = $_POST['pass'];
  
-    $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
-    $result = mysqli_query($conn, $sql);
-    $check = mysqli_num_rows($result);
-    if ($check > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['nama'] = $row['nama'];
-        $_SESSION['pass'] = $row['pass'];
-        $_SESSION['email'] = $row['email'];
-        echo "<script>alert('BERHASIL LOGIN. Silahkan coba lagi!')</script>";
-        header("Location: berhasil_login.php");
-    } else {
-        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
-    }
-}
+//     $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
+//     $result = mysqli_query($conn, $sql);
+//     $check = mysqli_num_rows($result);
+//     if ($check > 0) {
+//         $row = mysqli_fetch_assoc($result);
+//         $_SESSION['nama'] = $row['nama'];
+//         $_SESSION['pass'] = $row['pass'];
+//         $_SESSION['email'] = $row['email'];
+//         echo "<script>alert('BERHASIL LOGIN. Silahkan coba lagi!')</script>";
+//         header("Location: berhasil_login.php");
+//     } else {
+//         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
+//     }
+// }
 
 ?>
 
@@ -228,6 +228,7 @@ if (isset($_POST['Dikirim'])) {
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
 
+                
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#perlu-dikirim">Perlu Dikirim</button>
                 </li>
@@ -250,7 +251,7 @@ if (isset($_POST['Dikirim'])) {
                 <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
 
                   <!-- partial:index.partial.html -->
-                  <div class="row mb-3">
+                  <div class="row mb-3" action="kirim.php" method="post">
                     <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
                     <div class="col-sm-10">
                       <input class="form-control" type="search" id="formSearch" name="search" values="" required>
@@ -304,22 +305,21 @@ if (isset($_POST['Dikirim'])) {
                               </thead>
                               <tbody>
                               <?php
-                                $query="SELECT * FROM transaksi 
-                                WHERE 'status' = 4";
+                                $query="SELECT t.transaksi_id, b.nama_barang, b.image, t.qty, u.nama, a.alamat, t.pembayaran, t.pengiriman, t.catatan, t.status, t.total FROM alamat a, barang b, transaksi t, pembeli u WHERE t.id_barang = b.id_barang and t.id_user=u.id_user and t.id_alamat=a.id_alamat and `status` = 'dikemas'";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
-                                      $field2name = $row["id_barang"];
-                                      $field3name = $row["id_user"];
+                                      $field2name = $row["nama_barang"];
+                                      $field3name = $row["image"];
                                       $field4name = $row["qty"];
-                                      $field50name = $row["total"];
-                                      $field6name = $row["id_alamat"];
+                                      $field50name = $row["nama"];
+                                      $field6name = $row["alamat"];
                                       $field7name = $row["pembayaran"];
                                       $field8name = $row["pengiriman"];
                                       $field9name = $row["catatan"];
-                                      $field10name = $row["waktu_transaksi"];
-                                      $field11name = $row["waktu_pengambilan"];
-                                      $field12name = $row["status"];
+                                      $field10name = $row["status"];
+                                      $field11name = $row["total"];
+                                      // $field12name = $row["aksi"];
                                       ?>
                                       <tr>
                                         <th><?php echo $field1name ?></th>
@@ -333,15 +333,13 @@ if (isset($_POST['Dikirim'])) {
                                         <td><?php echo $field9name ?></td>
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
-                                        <td><?php echo $field12name ?></td>
-                                        <td><?php echo $field13name ?></td>
                                         <td>
-                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='5'"; ?>Dikemas</button>
+                                          <a href=""> update |</a>
+                                          <a href=""> delete</a>
+                                        </td>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='dikemas'"; ?>Dikemas</button>
                                           <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
-                                          <?php ?>
-                                          <button class="btn btn-primary" type="button" disabled>
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...
-                                          </button>
                                         </td>
                                       </tr>
                                     <?php
@@ -416,49 +414,38 @@ if (isset($_POST['Dikirim'])) {
                               </thead>
                               <tbody>
                               <?php
-                                $query="SELECT transaksi.transaksi_id, barang.nama_barang, transaksi.qty, alamat.alamat, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, 
-                                transaksi.waktu_transaksi, transaksi.waktu_pengambilan, transaksi.total, transaksi.status, pembeli.nama 
-                                FROM transaksi 
-                                JOIN barang ON transaksi.id_barang=barang.id_barang 
-                                JOIN alamat ON transaksi.id_alamat=alamat.id_alamat 
-                                JOIN pembeli ON transaksi.id_user=pembeli.id_user 
-                                WHERE 'status'= 'Diterima' ";
+                                $query="SELECT t.transaksi_id, b.nama_barang, b.image, t.qty, u.nama, a.alamat, t.pembayaran, t.pengiriman, t.catatan, t.status, t.total FROM alamat a, barang b, transaksi t, pembeli u WHERE t.id_barang = b.id_barang and t.id_user=u.id_user and t.id_alamat=a.id_alamat;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
                                       $field2name = $row["nama_barang"];
-                                      $field3name = $row["qty"];
-                                      $field4name = $row["alamat"];
-                                      $field5name = $row["pembayaran"];
-                                      $field6name = $row["pengiriman"];
-                                      $field7name = $row["catatan"];
-                                      $field8name = $row["waktu_transaksi"];
-                                      $field9name = $row["waktu_pengambilan"];
-                                      $field10name = $row["total"]; 
-                                      $field11name = $row["status"];
-                                      $field12name = $row["nama"];
-                                      $field13name = $row["aksi"];
+                                      $field3name = $row["image"];
+                                      $field4name = $row["qty"];
+                                      $field50name = $row["nama"];
+                                      $field6name = $row["alamat"];
+                                      $field7name = $row["pembayaran"];
+                                      $field8name = $row["pengiriman"];
+                                      $field9name = $row["catatan"];
+                                      $field10name = $row["status"];
+                                      $field11name = $row["total"];
+                                      $field12name = $row["aksi"];
                                       ?>
-                              
-                                      <tr> 
-                                        <td><?php echo $field1name ?></td> 
-                                        <td><?php echo $field2name ?></td> 
-                                        <td><?php echo $field3name ?></td> 
-                                        <td><?php echo $field4name ?></td> 
+                                      <tr>
+                                        <th><?php echo $field1name ?></th>
+                                        <td><?php echo $field2name ?></td>
+                                        <td style="text-align: center;"><img src="gambar/<?php echo $field3name ?>" style="width: 120px;"></td>
+                                        <td><?php echo $field4name ?></td>
                                         <td><?php echo $field5name ?></td>
-                                        <td><?php echo $field6name ?></td> 
-                                        <td><?php echo $field7name ?></td> 
-                                        <td><?php echo $field8name ?></td> 
-                                        <td><?php echo $field9name ?></td> 
+                                        <td><?php echo $field6name ?></td>
+                                        <td><?php echo $field7name ?></td>
+                                        <td><?php echo $field8name ?></td>
+                                        <td><?php echo $field9name ?></td>
                                         <td><?php echo $field10name ?></td>
-                                        <td><?php echo $field11name ?></td> 
+                                        <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
                                         <td>
-                                          <button class="btn btn-outline-primary<?php echo $field13name ?>">
-                                          <?php 
-                                          $sql = "UPDATE transaksi SET `status`='Diterima'"; 
-                                          $result = mysqli_query($koneksi, $sql); ?>Terima</button>
-                                          <a href="kirim.php" onclick="return confirm('Barang telah diterima!')"></a>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='dikemas'"; ?>Dikemas</button>
+                                          <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
                                         </td>
                                       </tr>
                                     <?php
@@ -531,30 +518,21 @@ if (isset($_POST['Dikirim'])) {
                               </thead>
                               <tbody>
                               <?php
-                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
-                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
-                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
-                                FROM transaksi 
-                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
-                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
-                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' < 4 ";
+                                $query="SELECT t.transaksi_id, b.nama_barang, b.image, t.qty, u.nama, a.alamat, t.pembayaran, t.pengiriman, t.catatan, t.status, t.total FROM alamat a, barang b, transaksi t, pembeli u WHERE t.id_barang = b.id_barang and t.id_user=u.id_user and t.id_alamat=a.id_alamat;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
-                                      $field2name = $row["id_barang"];
+                                      $field2name = $row["nama_barang"];
                                       $field3name = $row["image"];
-                                      $field4name = $row["id_user"];
-                                      $field5name = $row["nama_barang"];
-                                      $field6name = $row["ukuran"."warna"];
-                                      $field7name = $row["qty"];
-                                      $field8name = $row["total"]; 
-                                      $field9name = $row["alamat"];
-                                      $field10name = $row["pembayaran"]; 
-                                      $field11name = $row["pengiriman"]; 
-                                      $field12name = $row["catatan"]; 
-                                      $field13name = $row["status"];
-                                      $field14name = $row["aksi"];
+                                      $field4name = $row["qty"];
+                                      $field50name = $row["nama"];
+                                      $field6name = $row["alamat"];
+                                      $field7name = $row["pembayaran"];
+                                      $field8name = $row["pengiriman"];
+                                      $field9name = $row["catatan"];
+                                      $field10name = $row["status"];
+                                      $field11name = $row["total"];
+                                      $field12name = $row["aksi"];
                                       ?>
                                       <tr>
                                         <th><?php echo $field1name ?></th>
@@ -569,10 +547,9 @@ if (isset($_POST['Dikirim'])) {
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
-                                        <td><?php echo $field13name ?></td>
                                         <td>
-                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='7'"; ?>Batal</button>
-                                          <a href="kirim.php" onclick="return confirm('Barang dibatalkan!')"></a>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='dikemas'"; ?>Dikemas</button>
+                                          <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
                                         </td>
                                       </tr>
                                     <?php
@@ -643,30 +620,21 @@ if (isset($_POST['Dikirim'])) {
                               </thead>
                               <tbody>
                               <?php
-                                $query="SELECT transaksi.transaksi_id, transaksi.id_barang, barang.image, transaksi.id_user,
-                                transaksi.qty, transaksi.total, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, transaksi.status,
-                                jenis_barang.barang_jenis, jenis_ukuran.ukuran, jenis_warna.warna 
-                                FROM transaksi 
-                                RIGHT JOIN jenis_barang ON barang.id_jenis=jenis_barang.id_jenis
-                                RIGHT JOIN jenis_ukuran ON barang.id_ukuran=jenis_ukuran.id_ukuran
-                                RIGHT JOIN jenis_warna ON barang.id_warna=jenis_warna.id_warna
-                                WHERE 'status' = 7 ";
+                                $query="SELECT t.transaksi_id, b.nama_barang, b.image, t.qty, u.nama, a.alamat, t.pembayaran, t.pengiriman, t.catatan, t.status, t.total FROM alamat a, barang b, transaksi t, pembeli u WHERE t.id_barang = b.id_barang and t.id_user=u.id_user and t.id_alamat=a.id_alamat;";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
                                       $field1name = $row["transaksi_id"];
-                                      $field2name = $row["id_barang"];
+                                      $field2name = $row["nama_barang"];
                                       $field3name = $row["image"];
-                                      $field4name = $row["id_user"];
-                                      $field5name = $row["nama_barang"];
-                                      $field6name = $row["ukuran"."warna"];
-                                      $field7name = $row["qty"];
-                                      $field8name = $row["total"]; 
-                                      $field9name = $row["alamat"];
-                                      $field10name = $row["pembayaran"]; 
-                                      $field11name = $row["pengiriman"]; 
-                                      $field12name = $row["catatan"]; 
-                                      $field13name = $row["status"];
-                                      $field14name = $row["aksi"];
+                                      $field4name = $row["qty"];
+                                      $field50name = $row["nama"];
+                                      $field6name = $row["alamat"];
+                                      $field7name = $row["pembayaran"];
+                                      $field8name = $row["pengiriman"];
+                                      $field9name = $row["catatan"];
+                                      $field10name = $row["status"];
+                                      $field11name = $row["total"];
+                                      $field12name = $row["aksi"];
                                       ?>
                                       <tr>
                                         <th><?php echo $field1name ?></th>
@@ -681,8 +649,10 @@ if (isset($_POST['Dikirim'])) {
                                         <td><?php echo $field10name ?></td>
                                         <td><?php echo $field11name ?></td>
                                         <td><?php echo $field12name ?></td>
-                                        <td><?php echo $field13name ?></td>
-                                        <td></td>
+                                        <td>
+                                          <button class="btn btn-outline-primary"><?php $sql = "UPDATE transaksi SET `status`='dikemas'"; ?>Dikemas</button>
+                                          <a href="kirim.php" onclick="return confirm('Barang akan dikirim!')"></a>
+                                        </td>
                                       </tr>
                                     <?php
                                     }

@@ -1,32 +1,8 @@
 <?php
 require ('koneksi.php');
-include ('pesan.html');
 
-error_reporting(0);
-session_start();
-
-if(isset($_SESSION['id_barang'])){
-  header("Location: produk2.php");
+if(isset($_SESSION['transaksi_id'])){
 }
-
-$err = "";
-$sukses = "";
-$kode = "";
-
-$id = mysqli_query($koneksi,"SELECT transaksi_id FROM `transaksi`");
-$kode = mysqli_query($koneksi,"SELECT id_barang FROM `transaksi`");
-$nama = mysqli_query($koneksi,"SELECT nama FROM `pembeli`");
-$produk = mysqli_query($koneksi,"SELECT nama_barang FROM `barang`");
-$variasi1 = mysqli_query($koneksi,"SELECT ukuran FROM `jenis_ukuran`");
-$variasi2 = mysqli_query($koneksi,"SELECT warna FROM `transaksi`");
-$qty = mysqli_query($koneksi,"SELECT qty FROM `transaksi`");
-$total = mysqli_query($koneksi,"SELECT total FROM `transaksi`");
-$alamat = mysqli_query($koneksi,"SELECT alamat FROM `transaksi`");
-$bayar = mysqli_query($koneksi,"SELECT pembayaran FROM `transaksi`");
-$kirim = mysqli_query($koneksi,"SELECT pengiriman FROM `transaksi`");
-$catatan = mysqli_query($koneksi,"SELECT catatan FROM `transaksi`");
-
-mysqli_close($koneksi);
 
 ?>
 
@@ -196,22 +172,11 @@ mysqli_close($koneksi);
                     </div>
                   </div>
 
-                  <div class="col-sm-10">
-                  <div class="urutkan_container">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                      <option value=""></option>
-                      <?php
-                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                      while($r = mysqli_fetch_array($waktu)){
-                        ?>
-                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                      <?php } ?>
-                      </select>
-                    </ul>
-                  </div>
-                  </div>
+                  <label for="urutkan" class="col-sm-2 col-form-label" href="#" data-bs-toggle="dropdown">Urutkan</label>
+                    <div class="col-sm-10">
+                      <select name="urutkan" class="form-select">
+                      </div>
+                    </div>
 
                   <!-- DataTales Example -->
                 <div class="mb-4">
@@ -321,12 +286,6 @@ mysqli_close($koneksi);
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
                       <option value=""></option>
-                      <?php
-                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                      while($r = mysqli_fetch_array($waktu)){
-                        ?>
-                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                      <?php } ?>
                     </select>
                   </ul>
                 </div>
