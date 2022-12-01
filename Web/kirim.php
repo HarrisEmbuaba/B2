@@ -1,17 +1,9 @@
 <?php
 include ('koneksi.php');
-include ('kirim.html');
-
-error_reporting(0);
-session_start();
 
 if(isset($_SESSION['transaksi_id'])){
   header("Location: kirim.php");
 }
-
-$err = "";
-$sukses = "";
-$kode = "";
 
 if(isset($_POST['Perlu Dikirim'])){
   $kode = $_POST['id_barang'];
@@ -33,12 +25,6 @@ if(isset($_POST['Perlu Dikirim'])){
 
     $sql1 = "SELECT `nama` FROM `pembeli` WHERE id_user='') 
     VALUES ('$nama')";
-
-    $sql2 = "SELECT `ukuran` FROM `jenis_ukuran`) 
-    VALUES ('$variasi1')";
-    
-    $sql3 = "SELECT `warna` FROM `jenis_warna`) 
-    VALUES ('$variasi2')";
 
     $result = mysqli_query($conn,$sql,$sql1,$sql2,$sql3);
 
@@ -80,13 +66,11 @@ if(isset($_POST['Perlu Dikirim'])){
   }
 }
 
-mysqli_close($conn);
-
-require ('koneksi.php');
-include ('kirim.php');
+mysqli_close($koneksi);
 
 session_start();
 error_reporting(0);
+
 if (isset($_SESSION['nama'])) {
    // header("Location: kirim.php");
 }
@@ -435,9 +419,9 @@ if (isset($_POST['Dikirim'])) {
                                 $query="SELECT transaksi.transaksi_id, barang.nama_barang, transaksi.qty, alamat.alamat, transaksi.pembayaran, transaksi.pengiriman, transaksi.catatan, 
                                 transaksi.waktu_transaksi, transaksi.waktu_pengambilan, transaksi.total, transaksi.status, pembeli.nama 
                                 FROM transaksi 
-                                RIGHT JOIN barang ON transaksi.id_barang=barang.id_barang 
-                                RIGHT JOIN alamat ON transaksi.id_alamat=alamat.id_alamat 
-                                RIGHT JOIN pembeli ON transaksi.id_user=pembeli.id_user 
+                                JOIN barang ON transaksi.id_barang=barang.id_barang 
+                                JOIN alamat ON transaksi.id_alamat=alamat.id_alamat 
+                                JOIN pembeli ON transaksi.id_user=pembeli.id_user 
                                 WHERE 'status'= 'Diterima' ";
                                 if ($result = $mysqli->query($query)) {
                                     while ($row = $result->fetch_assoc()) {
