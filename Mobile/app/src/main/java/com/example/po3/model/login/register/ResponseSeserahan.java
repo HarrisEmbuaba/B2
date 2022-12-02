@@ -3,10 +3,10 @@ package com.example.po3.model.login.register;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseBarangBaru{
+public class ResponseSeserahan{
 
 	@SerializedName("data")
-	private List<DataItemNew> data;
+	private List<DataItemSeserahan> data;
 
 	@SerializedName("kode")
 	private int kode;
@@ -14,11 +14,11 @@ public class ResponseBarangBaru{
 	@SerializedName("message")
 	private String message;
 
-	public void setData(List<DataItemNew> data){
+	public void setData(List<DataItemSeserahan> data){
 		this.data = data;
 	}
 
-	public List<DataItemNew> getData(){
+	public List<DataItemSeserahan> getData(){
 		return data;
 	}
 

@@ -13,36 +13,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.po3.API.ApiClient;
-import com.example.po3.R;
 import com.example.po3.Activity.detailbarang;
-import com.example.po3.model.login.register.DataItemNew;
+import com.example.po3.R;
+import com.example.po3.model.login.register.DataItemBucket;
+import com.example.po3.model.login.register.DataItemHampers;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
-public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData> {
-     Context ctx;
-     List<DataItemNew> listData;
+public class AdapterHampers extends RecyclerView.Adapter<AdapterHampers.HolderDataHampers>{
+    Context ctx;
+    List<DataItemHampers> listData3;
 
-
-    public AdapterBarang(Context ctx, List<DataItemNew> listData) {
+    public AdapterHampers(Context ctx, List<DataItemHampers> listData3) {
         this.ctx = ctx;
-        this.listData = listData;
+        this.listData3 = listData3;
     }
 
     @NonNull
     @Override
-    public AdapterBarang.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterHampers.HolderDataHampers onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(ctx).inflate(R.layout.kosongan, parent, false);
 //        HolderData holder = new HolderData(layout);
-        return new HolderData(layout);
+        return new AdapterHampers.HolderDataHampers(layout);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderData holder, @SuppressLint("RecyclerView") int position) {
-        DataItemNew db = listData.get(position);
+    public void onBindViewHolder(@NonNull AdapterHampers.HolderDataHampers holder, @SuppressLint("RecyclerView") int position) {
+        DataItemHampers db = listData3.get(position);
 
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getBarangJenis()));
@@ -52,32 +52,32 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
         String hasilConvert = toRupiah(cv);
         holder.tvHarga.setText(String.valueOf(hasilConvert));
         holder.tvStok.setText(String.valueOf(db.getUkuran()));
-        Picasso.get().load(ApiClient.IMAGES_URL+listData.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
+        Picasso.get().load(ApiClient.IMAGES_URL+listData3.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent =  new Intent(view.getContext(), detailbarang.class);
-                mIntent.putExtra("id", listData.get(position).getId());
-                mIntent.putExtra("image", listData.get(position).getImage());
-                mIntent.putExtra("barang_jenis", listData.get(position).getBarangJenis());
-                mIntent.putExtra("nama_barang", listData.get(position).getNamaBarang());
-                mIntent.putExtra("harga", listData.get(position).getHarga());
-                mIntent.putExtra("deskripsi", listData.get(position).getDeskripsi());
+                mIntent.putExtra("image", listData3.get(position).getImage());
+                mIntent.putExtra("barang_jenis", listData3.get(position).getBarangJenis());
+                mIntent.putExtra("nama_barang", listData3.get(position).getNamaBarang());
+                mIntent.putExtra("harga", listData3.get(position).getHarga());
+                mIntent.putExtra("deskripsi", listData3.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        return listData3.size();
     }
 
-    public class HolderData extends RecyclerView.ViewHolder {
+    public class HolderDataHampers extends RecyclerView.ViewHolder {
         TextView tvId, tvJenis,tvNama,tvHarga, tvStok;
         ImageView ivIcon;
 
-        public HolderData(@NonNull View itemView) {
+        public HolderDataHampers(@NonNull View itemView) {
             super(itemView);
 
             tvId = itemView.findViewById(R.id.tvId);
@@ -88,6 +88,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
             ivIcon = itemView.findViewById(R.id.fotobunga);
         }
     }
+
     public static String toRupiah(int rupiah){
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols formatRp = new DecimalFormatSymbols();

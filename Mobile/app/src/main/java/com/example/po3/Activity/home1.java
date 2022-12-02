@@ -1,29 +1,32 @@
 package com.example.po3.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.po3.API.ApiClient;
 import com.example.po3.API.ApiInterface;
+import com.example.po3.Bucket;
+import com.example.po3.Hampers;
 import com.example.po3.R;
 import com.example.po3.Adapter.AdapterBarang;
-import com.example.po3.R;
-import com.example.po3.model.login.register.DataBarang;
-import com.example.po3.model.login.register.DataItem;
-import com.example.po3.model.login.register.ResponseBarang;
+import com.example.po3.Seserahan;
+import com.example.po3.model.login.register.DataItemNew;
 import com.example.po3.model.login.register.ResponseBarangBaru;
+import com.example.po3.viewall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,10 @@ public class home1 extends Fragment {
     private RecyclerView rvData;
     private RecyclerView.Adapter adData;
     private RecyclerView.LayoutManager lmData;
-    private List<DataItem> listData = new ArrayList<>();
+    private List<DataItemNew> listData = new ArrayList<>();
+    private SearchView searchView;
+    TextView viewSemua;
+    Button TvBucket, TvHampers, TvSeserahan;
 
     TextView setGreteing;
     @Override
@@ -64,11 +70,81 @@ public class home1 extends Fragment {
 //        lmData = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
 //        rvData.setLayoutManager(lmData);
         retrieveData();
+        LihatSemua();
+        LihatBucket();
+        LihatHampers();
+        LihatSeserahan();
 
+        searchView = view.findViewById(R.id.search);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
         rvData = view.findViewById(R.id.rv_data);
         rvData.setHasFixedSize(true);
         rvData.setLayoutManager(new GridLayoutManager(getActivity(),2));
+    }
+
+    private void filterList(String text) {
+    }
+
+    public void LihatSemua(){
+        viewSemua = getView().findViewById(R.id.view);
+        viewSemua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), viewall.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
+    }
+
+
+
+    public void LihatBucket(){
+        TvBucket = getView().findViewById(R.id.buket);
+        TvBucket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), Bucket.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void LihatHampers(){
+        TvHampers = getView().findViewById(R.id.hampers);
+        TvHampers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), Hampers.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void LihatSeserahan(){
+        TvSeserahan = getView().findViewById(R.id.seserahan);
+        TvSeserahan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), Seserahan.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
     }
 
     @Override

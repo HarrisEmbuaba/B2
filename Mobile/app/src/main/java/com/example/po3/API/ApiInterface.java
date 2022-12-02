@@ -5,7 +5,10 @@ import com.example.po3.model.login.register.Login;
 import com.example.po3.model.login.register.Register;
 import com.example.po3.model.login.register.ResponseBarang;
 import com.example.po3.model.login.register.ResponseBarangBaru;
+import com.example.po3.model.login.register.ResponseBucket;
 import com.example.po3.model.login.register.ResponseEmail;
+import com.example.po3.model.login.register.ResponseHampers;
+import com.example.po3.model.login.register.ResponseSeserahan;
 import com.example.po3.model.login.register.UpdatePassword;
 import com.example.po3.model.login.register.VerifEmail;
 
@@ -61,6 +64,25 @@ public interface ApiInterface {
     Call<CheckEmail> getCheckEmail(
             @Field("email") String email
     );
+
+    @FormUrlEncoded
+    @POST("bucket.php")
+    Call<ResponseBucket> getBucket(
+            @Field("barang_jenis") String barang_jenis
+    );
+
+    @FormUrlEncoded
+    @POST("hampers.php")
+    Call<ResponseHampers> getHampers(
+            @Field("barang_jenis") String barang_jenis
+    );
+
+    @FormUrlEncoded
+    @POST("seserahan.php")
+    Call<ResponseSeserahan> getSeserahan(
+            @Field("barang_jenis") String barang_jenis
+    );
+
 
 
 

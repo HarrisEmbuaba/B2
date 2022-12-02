@@ -1,10 +1,5 @@
 <?php
 include ('koneksi.php');
-
-if(isset($_SESSION['transaksi_id'])){
-  header("Location: kirim.php");
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +9,7 @@ if(isset($_SESSION['transaksi_id'])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pengiriman</title>
+  <title>Pesanan</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -67,12 +62,10 @@ if(isset($_SESSION['transaksi_id'])){
         </li>
 
         <li class="nav-item dropdown">
-
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">99+</span>
           </a>
-
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -81,9 +74,7 @@ if(isset($_SESSION['transaksi_id'])){
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
-
         </li><!-- End Messages Nav -->
-
       </ul>
     </nav><!-- End Icons Navigation -->
 
@@ -96,13 +87,13 @@ if(isset($_SESSION['transaksi_id'])){
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan2.php">
-          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
+          <img src="assets/img/pesan1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="kirim.php">
-          <img src="assets/img/kirim1.png" width="35px" height="35px"></i>
+          <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
@@ -119,7 +110,7 @@ if(isset($_SESSION['transaksi_id'])){
       </li><!-- End Bayar Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="logout.php">
+        <a class="nav-link collapsed" href="logout.html">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Logout Page Nav -->
@@ -139,42 +130,34 @@ if(isset($_SESSION['transaksi_id'])){
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
 
-                
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#perlu-dikirim">Perlu Dikirim</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#belum-bayar">Belum Bayar</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikirim">Dikirim</button>
-                </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Diterima</button>
-                </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Dibatalkan</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
                 </li>
 
               </ul>          
               <div class="tab-content pt-1">
 
-                <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
+                <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
 
                   <!-- partial:index.partial.html -->
-                  <div class="row mb-3" action="kirim.php" method="post">
-                    <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                    </div>
+                  <!-- No Labels Form -->
+                  <div class="row mb-3">
+                  <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                  </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                     <div class="col-sm-10">
                       <input type="date" class="form-control">
                     </div>
-                  </div>
-
+                  </div> 
+                  
                   <!-- DataTales Example -->
                   <div class="mb-4">
                   <div class="py-3">
@@ -189,183 +172,6 @@ if(isset($_SESSION['transaksi_id'])){
  
                   <!-- Table with stripped rows --> 
                   <table class="table table-striped"> 
-                    <thead> 
-                      <tr> 
-                        <th scope="col">No</th> 
-                        <th scope="col">Id Transaksi</th> 
-                        <th scope="col">Nama Barang</th> 
-                        <th scope="col">Gambar</th> 
-                        <th scope="col">Kuantitas</th> 
-                        <th scope="col">Nama Pembeli</th> 
-                        <th scope="col">Alamat</th> 
-                        <th scope="col">Pembayaran</th> 
-                        <th scope="col">Total</th> 
-                        <th scope="col">Status</th> 
-                        <th scope="col">Action</th> 
-                      </tr> 
-                    </thead> 
-                    <tbody> 
-                        <?php 
-                            if ($result = $mysqli->query($query)) { 
-                                while ($row = $result->fetch_assoc()) { 
-                                    $no++;
-                                    $field2name = $row["transaksi_id"]; 
-                                    $field3name = $row["nama_barang"]; 
-                                    $field4name = $row["image"]; 
-                                    $field5name = $row["qty"];  
-                                    $field6name = $row["nama"];  
-                                    $field7name = $row["alamat"];  
-                                    $field8name = $row["pembayaran"];  
-                                    $field9name = $row["total"];  
-                                    $field10name = $row["status"];  
-    
-                                    echo '<tr>   
-                                            <th>' .$no.'</th>  
-                                            <td>'.$field2name.'</td>  
-                                            <td>'.$field3name.'</td>  
-                                            <td>'.$field4name.'</td>  
-                                            <td>'.$field5name.'</td>  
-                                            <td>'.$field6name.'</td> 
-                                            <td>'.$field7name.'</td> 
-                                            <td>'.$field8name.'</td> 
-                                            <td>'.$field9name.'</td> 
-                                            <td>'.$field10name.'</td> 
-                                            <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
-                                            </td> 
-                                        </tr>'; 
-                                } 
-                                $result->free(); 
-                            }  
-                        ?> 
-                      </tbody> 
-                  </table>
-
-            <div class="tab-content pt-2">
-
-              <div class="tab-pane fade dikirim" id="dikirim">
-
-                <!-- partial:index.partial.html -->
-                <div class="row mb-3">
-                  <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-
-                  <!-- DataTales Example -->
-                  <div class="mb-4">
-                  <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
-                  </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                      <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
-                        $no = 0; 
-                      ?> 
- 
-                  <!-- Table with stripped rows --> 
-                  <table class="table table-striped"> 
-                    <thead> 
-                      <tr> 
-                        <th scope="col">No</th> 
-                        <th scope="col">Id Transaksi</th> 
-                        <th scope="col">Nama Barang</th> 
-                        <th scope="col">Gambar</th> 
-                        <th scope="col">Kuantitas</th> 
-                        <th scope="col">Nama Pembeli</th> 
-                        <th scope="col">Alamat</th> 
-                        <th scope="col">Pembayaran</th> 
-                        <th scope="col">Total</th> 
-                        <th scope="col">Status</th> 
-                        <th scope="col">Action</th> 
-                      </tr> 
-                    </thead> 
-                    <tbody> 
-                        <?php 
-                            if ($result = $mysqli->query($query)) { 
-                                while ($row = $result->fetch_assoc()) { 
-                                    $no++;
-                                    $field2name = $row["transaksi_id"]; 
-                                    $field3name = $row["nama_barang"]; 
-                                    $field4name = $row["image"]; 
-                                    $field5name = $row["qty"];  
-                                    $field6name = $row["nama"];  
-                                    $field7name = $row["alamat"];  
-                                    $field8name = $row["pembayaran"];  
-                                    $field9name = $row["total"];  
-                                    $field10name = $row["status"];  
-    
-                                    echo '<tr>   
-                                            <th>' .$no.'</th>  
-                                            <td>'.$field2name.'</td>  
-                                            <td>'.$field3name.'</td>  
-                                            <td>'.$field4name.'</td>  
-                                            <td>'.$field5name.'</td>  
-                                            <td>'.$field6name.'</td> 
-                                            <td>'.$field7name.'</td> 
-                                            <td>'.$field8name.'</td> 
-                                            <td>'.$field9name.'</td> 
-                                            <td>'.$field10name.'</td> 
-                                            <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
-                                            </td> 
-                                        </tr>'; 
-                                } 
-                                $result->free(); 
-                            }  
-                        ?> 
-                      </tbody> 
-                  </table>
-
-                  <div class="tab-content pt-3">
-                    <div class="tab-pane fade diterima" id="diterima">
-
-                      <div class="row mb-3">
-                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                        <div class="col-sm-10">
-                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="urutkan_container">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                            <option value=""></option>
-                            <?php
-                            $waktu = mysqli_query($conn, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                            while($r = mysqli_fetch_array($waktu)){
-                              ?>
-                              <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                              <?php } ?>
-                          </select>
-                        </ul>
-                      </div>
-                      
-                      <!-- DataTales Example -->
-                  <div class="mb-4">
-                    <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                      <table class="table table-striped"> 
                     <thead> 
                       <tr> 
                         <th scope="col">No</th> 
@@ -416,26 +222,35 @@ if(isset($_SESSION['transaksi_id'])){
                               }  
                         ?> 
                       </tbody> 
-                  </table>  
+                  </table>
 
-                  <div class="tab-content pt-4">
-                    <div class="tab-pane fade diterima" id="dibatalkan">
+            <div class="tab-content pt-2">
 
-                      <div class="row mb-3">
-                        <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                        <div class="col-sm-10">
-                          <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control">
-                        </div>
-                      </div>
-                      
-                      <!-- DataTales Example -->
-                      <div class="mb-4">
+              <div class="tab-pane fade dikemas" id="dikemas">
+
+                <!-- partial:index.partial.html -->
+                  <!-- No Labels Form -->
+                  <div class="row mb-3">
+                  <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
+                    <?php 
+                      $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `transaksi_id`";
+                    ?> 
+                  </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control">
+                      <?php 
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi`=''";
+                      ?> 
+                    </div>
+                  </div> 
+                  
+                  <!-- DataTales Example -->
+                  <div class="mb-4">
                   <div class="py-3">
                       <h6 class="m-0 font-weight-bold text-primary"></h6>
                   </div>
@@ -489,11 +304,10 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
-                                            <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Launch demo modal</button>
                                             </td> 
-                                        </tr>'; 
+                                        </tr>';
                                 } 
                                 $result->free(); 
                             }  
