@@ -1,7 +1,7 @@
 <?php
 //memanggil file koneksi.php untuk melakukan koneksi database
 include 'koneksi.php';
-
+if(isset($_POST['tambah'])){
 	// membuat variabel untuk menampung data dari form
   $nama_barang   = $_POST['nama_barang'];
   $gambar_barang = $_FILES['image']['name'];
@@ -49,6 +49,7 @@ if($gambar_barang != "") {
                     echo "<script>alert('Data berhasil ditambah.');window.location='produk2.php';</script>";
                   }
 }
+}
 
 
 
@@ -65,25 +66,22 @@ if($gambar_barang != "") {
 // $sukses = "";
 // $kode = "";
 
-// $sql1 = "SELECT * FROM `barang`";
+// $sql = "SELECT * FROM `barang`";
 // $all_categories = mysqli_query($koneksi,$sql1);
 
 // $result = mysqli_query($koneksi,$sql1);
 
 // if(isset($_POST['tambah'])){
-//   $id = $_POST['txt_id'];
-//   $nama_barang = $_POST['txt_nama'];
-  
-//   $image = $_FILES['gambar']['name'];
-//   $source = $_FILES['gambar']['tmp_name'];
-//   $folder = 'gambarproduk/';
-  
-//   $deskripsi = $_POST['txt_deskripsi'];
-//   $harga = $_POST['txt_harga'];
+//   $nama_barang = $_POST['nama_barang'];
+//   $deskripsi = $_POST['deskripsi'];
+//   $harga = $_POST['harga'];
 
-//   move_uploaded_file($source, $folder.$image);
-//   $sql = "INSERT INTO `barang`(`id_barang`,`nama_barang`,`image`,`deskripsi`,`harga`)
-//   VALUES ('$id','$nama_barang','$image','$deskripsi','$harga')";
+//   $nama_file = $_FILES ['gambar']['name'];
+//   $source = $_FILES ['gambar']['tmp_name'];
+//   $folder = 'gambarproduk/';
+
+//   move_uploaded_file($source, $folder.$nama_file);
+//   $sql = "INSERT INTO `barang`(`id_barang`, `nama_barang`, `image`, `deskripsi`, `harga`) VALUES ('','$nama_barang','$nama_file','$deskripsi','$harga')";
   
 //   $result = mysqli_query($mysqli,$sql);
 
@@ -120,7 +118,7 @@ if($gambar_barang != "") {
     //   alert('Barang gagal ditambahkan!');
     //   </script>";
     // }
-  // }
+
 ?>
 
 
