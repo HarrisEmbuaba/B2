@@ -145,7 +145,7 @@ include ('koneksi.php');
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2" action="tambahProduk.php" method="post" enctype="multi/form-data">
+                  <form class="row g-2" action="tambahProduk.php" method="post" enctype="multipart/form-data">
                     <!-- <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                         <select name="id_barang" class="form-control">
@@ -169,7 +169,7 @@ include ('koneksi.php');
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input type="file" name="gambar" class="form-control" required>
+                        <input type="file" name="image" class="form-control" required>
                       </div>
                     </div>
                     <div class="py-4">
@@ -213,11 +213,11 @@ include ('koneksi.php');
                                 while ($row = $result->fetch_assoc()) {
                                 ?>
                                 <tr>  
-                                  <th><?php echo $no; ?></th> 
-                                  <td><?php echo $row['nama_barang']; ?></td> 
-                                  <td style="text-align: center;"><img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;"></td> 
-                                  <td><?php echo $row['deskripsi']; ?></td> 
-                                  <td>Rp.<?php echo $row['harga']; ?></td> 
+                                  <th data-id="<?php echo $row["id_barang"]; ?>" ><?php echo $no; ?></th> 
+                                  <td data-id="<?php echo $row["id_barang"]; ?>" ><?php echo $row['nama_barang']; ?></td> 
+                                  <td  data-id="<?php echo $row["id_barang"]; ?>" style="text-align: center;"><img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;"></td> 
+                                  <td data-id="<?php echo $row["id_barang"]; ?>" ><?php echo $row['deskripsi']; ?></td> 
+                                  <td data-id="<?php echo $row["id_barang"]; ?>" >Rp.<?php echo $row['harga']; ?></td> 
                                   <td>
                                     <a href="editProduk.php?id=<?php echo $row["id_barang"]; ?>">Edit</a><br><br><br><br>
                                     <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
