@@ -160,9 +160,17 @@
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-currency-dollar"></i>
                     </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                      <?php
+                        include 'koneksi.php';
+                        $sql = mysqli_query($mysqli, "SELECT SUM(total) FROM transaksi");
+                        while($data = mysqli_fetch_array($sql)) {
+                        ?>
+                        <div class="ps-3">
+                            <h6><?php echo "Rp." . number_format($data['SUM(total)']) ;?></h6>
+                        <?php
+                        }
+                        ?>
+                      <span class="text-muted small pt-2 ps-1">perhari</span>
 
                     </div>
                   </div>
@@ -197,16 +205,17 @@
               }
               ?>
                 
-                            <div class="table-responsive">
+                <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Transaksi ID</th>
                                             <th>Waktu Transaksi</th>
-                                            <th>Waktu Pengambilan</th>
+                                            <th>Nama Pembeli</th>
+                                            <th>Nama Barang</th>
+                                            <th>Pembayaran</th>
                                             <th>Total</th>
-                                            <th>ID User</th>
                                         </tr>
                                     </thead>
                                     
@@ -215,21 +224,24 @@
                                         include ('koneksi.php');
         
                                         $no=1;
-                                        $sql = mysqli_query($mysqli, "SELECT * FROM transaksi");
+                                        $sql = mysqli_query($mysqli, "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi_id ASC");
                                         while ($data=mysqli_fetch_array($sql)) {
                                             $transaksi_id = $data['transaksi_id'];
                                             $waktu_transaksi = $data['waktu_transaksi'];
-                                            $waktu_pengambilan = $data['waktu_pengambilan'];
+                                            $nama = $data['nama'];
+                                            $nama_barang = $data['nama_barang'];
+                                            $pembayaran = $data['pembayaran'];
                                             $total = $data['total'];
-                                            $id_user = $data['id_user'];
+                                            
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $transaksi_id; ?></td>
                                                 <td><?php echo $waktu_transaksi; ?></td>
-                                                <td><?php echo $waktu_pengambilan; ?></td>
+                                                <td><?php echo $nama; ?></td>
+                                                <td><?php echo $nama_barang; ?></td>
+                                                <td><?php echo $pembayaran; ?></td>
                                                 <td><?php echo $total; ?></td>
-                                                <td><?php echo $id_user; ?></td>
                                             </tr>
                                             <?php ; }?>
                                     </tbody>
