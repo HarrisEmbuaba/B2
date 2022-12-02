@@ -183,7 +183,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -231,8 +231,7 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <a href="editPerluKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -268,7 +267,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -315,9 +314,8 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
-                                            <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <td> 
+                                            <a href="editKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -359,13 +357,19 @@ if(isset($_SESSION['transaksi_id'])){
                       </div>
                       
                       <!-- DataTales Example -->
-                  <div class="mb-4">
-                    <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    </div>
-                    <div class="card-body">
+                      <div class="mb-4">
+                        <div class="py-3">
+                          <h6 class="m-0 font-weight-bold text-primary"></h6>
+                        </div>
+                        <div class="card-body">
                       <div class="table-responsive">
-                      <table class="table table-striped"> 
+                      <?php 
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Diterima' ORDER BY `waktu_transaksi` DESC ";
+                        $no = 0; 
+                      ?> 
+ 
+                  <!-- Table with stripped rows --> 
+                  <table class="table table-striped"> 
                     <thead> 
                       <tr> 
                         <th scope="col">No</th> 
@@ -407,16 +411,16 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
-                                            <td>  
-                                            <a href="http://localhost/po3/web/editStatus.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <td> 
+                                            <a href="editKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
                                 $result->free(); 
-                              }  
+                            }  
                         ?> 
                       </tbody> 
-                  </table>  
+                  </table>
 
                   <div class="tab-content pt-4">
                     <div class="tab-pane fade diterima" id="dibatalkan">
@@ -442,7 +446,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Dibatalkan' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -490,8 +494,7 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                                <a href="tambah_barang.php">Edit</a> 
-                                                <a href="">Hapus</a>  
+                                            <a href="editBatal.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
