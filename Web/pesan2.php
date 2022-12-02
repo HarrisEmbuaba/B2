@@ -166,7 +166,7 @@ include ('koneksi.php');
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status='Belum bayar' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -214,7 +214,7 @@ include ('koneksi.php');
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                            <a href="http://localhost/po3/web/editStatus.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editBayar.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -257,7 +257,7 @@ include ('koneksi.php');
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikemas' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -304,8 +304,8 @@ include ('koneksi.php');
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
-                                            <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Launch demo modal</button>
+                                            <td> 
+                                            <a href="editKemas.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>';
                                 } 

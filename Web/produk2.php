@@ -86,7 +86,7 @@ include ('koneksi.php');
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.php">
+        <a class="nav-link collapsed" href="pesan2.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
@@ -145,7 +145,7 @@ include ('koneksi.php');
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <form class="row g-2" action="tambahProduk.php" method="post" enctype="multi/form-data">
+                  <form class="row g-2" action="tambahProduk.php" method="post" enctype="multipart/form-data">
                     <!-- <label for="kode" class="col-sm-1 col-form-label">Kode Barang</label>
                     <div class="col-md-2">
                         <select name="id_barang" class="form-control">
@@ -169,7 +169,7 @@ include ('koneksi.php');
                     <div class="row mb-3">
                       <label for="image" class="col-sm-1 col-form-label">File Upload</label>
                       <div class="col-md-10">
-                        <input type="file" name="gambar" class="form-control" required>
+                        <input type="file" name="image" class="form-control" required>
                       </div>
                     </div>
                     <div class="py-4">

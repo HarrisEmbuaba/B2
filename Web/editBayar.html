@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/stylelog.css">
+</head>
+<body>
+    <div class="container-center">
+        <div class="statusBayar">
+            <form action="editBayar.php" method="post">
+                <input type="text" name="transaksi_id" id="showIDTransaksi" placeholder="$id">
+                <input type="status" name="status" id="inputStatus" placeholder="$status">
+                <button name="Edit Status">Simpan</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("inputStatus");
+            if (x.type === "inputStatus") {
+                x.type = "text";
+            } else {
+                x.type = "inputStatus";
+            }
+        }
+    </script>
+</body>
+</html>

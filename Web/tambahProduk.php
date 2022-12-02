@@ -1,6 +1,7 @@
 <?php
 //memanggil file koneksi.php untuk melakukan koneksi database
 include 'koneksi.php';
+
 if(isset($_POST['tambah'])){
 	// membuat variabel untuk menampung data dari form
   $nama_barang   = $_POST['nama_barang'];
@@ -14,7 +15,8 @@ if($gambar_barang != "") {
   $ekstensi_diperbolehkan = array('png','jpg'); //ekstensi file gambar yang bisa diupload 
   $x = explode('.', $gambar_barang); //memisahkan nama file dengan ekstensi yang diupload
   $ekstensi = strtolower(end($x));
-  $file_tmp = $_FILES['image']['tmp_name'];   
+  $file_tmp = $_FILES['image']['tmp_name']; 
+  $gambar_barang = $_FILES['image']['name'];  
   $angka_acak     = rand(1,999);
   $nama_gambar_baru = $angka_acak.'-'.$gambar_barang; //menggabungkan angka acak dengan nama file sebenarnya
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
@@ -37,7 +39,7 @@ if($gambar_barang != "") {
                 echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='tambahProduk.php';</script>";
             }
 } else {
-   $sql = "INSERT INTO `barang` (`nama_barang`, `image`, `deskripsi`, `harga`) VALUES ('$nama_barang', '$nama_gambar_baru', '$deskripsi', '$harga')";
+   $sql = "INSERT INTO `barang` (`nama_barang`, `image`, `deskripsi`, `harga`) VALUES ('$nama_barang', null, '$deskripsi', '$harga')";
                   $result = mysqli_query($mysqli, $sql);
                   // periska query apakah ada error
                   if(!$result){
@@ -65,11 +67,6 @@ if($gambar_barang != "") {
 // $err = "";
 // $sukses = "";
 // $kode = "";
-
-// $sql = "SELECT * FROM `barang`";
-// $all_categories = mysqli_query($koneksi,$sql1);
-
-// $result = mysqli_query($koneksi,$sql1);
 
 // if(isset($_POST['tambah'])){
 //   $nama_barang = $_POST['nama_barang'];
