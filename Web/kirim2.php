@@ -1,8 +1,11 @@
 <?php
 include ('koneksi.php');
 
+error_reporting(0);
+session_start();
+
 if(isset($_SESSION['transaksi_id'])){
-  header("Location: kirim.php");
+  header("Location: kirim2.php");
 }
 
 ?>
@@ -183,7 +186,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Belum dikirim' ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -267,7 +270,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -364,7 +367,7 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Diterima' ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Diterima' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  
@@ -446,7 +449,7 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dibatalkan' ORDER BY `waktu_transaksi` DESC ";
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and 'status' = 'Dibatalkan' ORDER BY `waktu_transaksi` DESC ";
                         $no = 0; 
                       ?> 
  

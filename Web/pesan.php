@@ -1,8 +1,10 @@
 <?php
 require ('koneksi.php');
+include ('pesan.html');
 
-if(isset($_SESSION['transaksi_id'])){
-}
+error_reporting(0);
+session_start();
+
 
 ?>
 
@@ -172,11 +174,22 @@ if(isset($_SESSION['transaksi_id'])){
                     </div>
                   </div>
 
-                  <label for="urutkan" class="col-sm-2 col-form-label" href="#" data-bs-toggle="dropdown">Urutkan</label>
-                    <div class="col-sm-10">
-                      <select name="urutkan" class="form-select">
-                      </div>
-                    </div>
+                  <div class="col-sm-10">
+                  <div class="urutkan_container">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                      <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
+                      <option value=""></option>
+                      <?php
+                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                      while($r = mysqli_fetch_array($waktu)){
+                        ?>
+                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
+                      <?php } ?>
+                      </select>
+                    </ul>
+                  </div>
+                  </div>
 
                   <!-- DataTales Example -->
                 <div class="mb-4">
@@ -286,6 +299,12 @@ if(isset($_SESSION['transaksi_id'])){
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
                       <option value=""></option>
+                      <?php
+                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
+                      while($r = mysqli_fetch_array($waktu)){
+                        ?>
+                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
+                      <?php } ?>
                     </select>
                   </ul>
                 </div>

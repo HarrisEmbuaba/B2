@@ -5,7 +5,7 @@ include ('pesan2.php');
 
 
 if (isset($_POST['Edit Status'])) {
-    $id = $_POST['transaksi'];
+    $id = $_GET['transaksi_id'];
     $status = $_POST['status'];
  
     $sql = "UPDATE transaksi set status='$status'";
