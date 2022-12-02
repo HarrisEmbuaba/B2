@@ -183,7 +183,19 @@
             <div class="card-body">
               <h5 class="card-title">Rincian Pesanan</h5>
               <div class="card-body">
-                <button><a target="_blank" href="cetak.php">CETAK</a></button>
+
+              <form action="bayar.php" method="get">
+                <label>Cari :</label>
+                <input type="text" name="cari">
+                <input type="submit" value="Cari">
+              </form>
+              
+              <?php 
+              if(isset($_GET['cari'])){
+                $cari = $_GET['cari'];
+                
+              }
+              ?>
                 
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -223,6 +235,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <button><a target="_blank" href="cetak.php">Cetak</a></button>
                         </div>
             </div>
           </div>
