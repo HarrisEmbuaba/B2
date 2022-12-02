@@ -1,7 +1,7 @@
 <?php 
 
 require ('koneksi.php');
-include ('pesan2.php');
+include ('editPerluKirim.html');
 
 
 if (isset($_POST['Edit Status'])) {
