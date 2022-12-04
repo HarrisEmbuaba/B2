@@ -1,25 +1,34 @@
 <?php 
+include('koneksi.php');
 
-require ('koneksi.php');
-include ('editBatal.html');
+if (isset($_POST['Edit'])) {
+    $conn->autocommit(false);
+    try{
+        $idTransaksi = $_POST['transaksi_id'];
+        $status = $_POST['status'];
 
-
-if (isset($_POST['Edit Status'])) {
-    $id = $_GET['transaksi_id'];
-    $status = $_POST['status'];
- 
-    $sql = "UPDATE transaksi set status='$status'";
-    $result = mysqli_query($conn, $sql);
-    $check = mysqli_num_rows($result);
-    if ($check > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['id'] = $row['transaksi_id'];
-        $_SESSION['status'] = $row['status'];
-        echo "<script>alert('Status berhasil diupdate!')</script>";
-        header("Location: pesan2.php");
-    } else {
-        echo "<script>alert('Status gagal diupdate!')</script>";
-    }
+        if ($status=="Dikirim"){
+            $conn->query("UPDATE transaksi SET status = '$status' WHERE transaksi_id = '$idTransaksi'");
+            $conn->commit();
+            $response['message'] = "Edit berhasil";
+            echo "<script>
+            alert('Update status berhasil!'); 
+            </script>";
+        }else{
+            $conn->query("UPDATE transaksi SET status = '$status' WHERE transaksi_id = '$idTransaksi'");
+            $conn->commit();
+            $response['message'] = "Edit berhasil";
+            echo "<script>
+            alert('Ubah Barang Sukses!'); 
+            </script>";
+        }
+    }catch(Exception $e){
+        $conn->rollback();
+        $response['message'] = $e->getMessage();
+        echo "<script>
+        alert('Ubah Barang Gagal!'); 
+        </script>";
+    }
 }
 
 ?>
