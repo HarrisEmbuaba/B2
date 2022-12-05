@@ -52,7 +52,7 @@ public class AdapterBucket extends RecyclerView.Adapter<AdapterBucket.HolderData
         String hasilConvert = toRupiah(cv);
         holder.tvHarga.setText(String.valueOf(hasilConvert));
         holder.tvStok.setText(String.valueOf(db.getUkuran()));
-        Picasso.get().load(ApiClient.IMAGES_URL+listData2.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
+        Picasso.get().load(ApiClient.IMAGES_URL+listData2.get(position).getImage()).resize(150, 157).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +60,7 @@ public class AdapterBucket extends RecyclerView.Adapter<AdapterBucket.HolderData
                 mIntent.putExtra("image", listData2.get(position).getImage());
                 mIntent.putExtra("barang_jenis", listData2.get(position).getBarangJenis());
                 mIntent.putExtra("nama_barang", listData2.get(position).getNamaBarang());
+                mIntent.putExtra("ukuran", listData2.get(position).getUkuran());
                 mIntent.putExtra("harga", listData2.get(position).getHarga());
                 mIntent.putExtra("deskripsi", listData2.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);

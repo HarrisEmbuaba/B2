@@ -8,6 +8,8 @@ import com.example.po3.model.login.register.ResponseBarangBaru;
 import com.example.po3.model.login.register.ResponseBucket;
 import com.example.po3.model.login.register.ResponseEmail;
 import com.example.po3.model.login.register.ResponseHampers;
+import com.example.po3.model.login.register.ResponseInsertKeranjang;
+import com.example.po3.model.login.register.ResponseKeranjang;
 import com.example.po3.model.login.register.ResponseSeserahan;
 import com.example.po3.model.login.register.UpdatePassword;
 import com.example.po3.model.login.register.VerifEmail;
@@ -82,6 +84,13 @@ public interface ApiInterface {
     Call<ResponseSeserahan> getSeserahan(
             @Field("barang_jenis") String barang_jenis
     );
+
+    @GET("keranjang.php")
+    Call<ResponseKeranjang> getKeranjang();
+
+    @FormUrlEncoded
+    @POST("InsertKeranjang.php")
+    Call<ResponseInsertKeranjang> SetKeranjang();
 
 
 

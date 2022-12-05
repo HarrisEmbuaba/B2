@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.example.po3.Hampers;
 import com.example.po3.R;
 import com.example.po3.Adapter.AdapterBarang;
 import com.example.po3.Seserahan;
+import com.example.po3.cardata;
 import com.example.po3.model.login.register.DataItemNew;
 import com.example.po3.model.login.register.ResponseBarangBaru;
 import com.example.po3.viewall;
@@ -41,9 +44,11 @@ public class home1 extends Fragment {
     private RecyclerView.Adapter adData;
     private RecyclerView.LayoutManager lmData;
     private List<DataItemNew> listData = new ArrayList<>();
-    private SearchView searchView;
+//    private SearchView searchView;
     TextView viewSemua;
     Button TvBucket, TvHampers, TvSeserahan;
+    ImageButton Tvkeranjang;
+    CardView cardView;
 
     TextView setGreteing;
     @Override
@@ -74,21 +79,23 @@ public class home1 extends Fragment {
         LihatBucket();
         LihatHampers();
         LihatSeserahan();
+        LihatKeranjang();
+        Tosearch();
 
-        searchView = view.findViewById(R.id.search);
-        searchView.clearFocus();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return true;
-            }
-        });
+//        searchView = view.findViewById(R.id.search);
+//        searchView.clearFocus();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                filterList(newText);
+//                return true;
+//            }
+//        });
         rvData = view.findViewById(R.id.rv_data);
         rvData.setHasFixedSize(true);
         rvData.setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -103,6 +110,30 @@ public class home1 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), viewall.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void Tosearch(){
+        cardView = getView().findViewById(R.id.search);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), cardata.class);
+                i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void LihatKeranjang(){
+        Tvkeranjang = getView().findViewById(R.id.belanja);
+        Tvkeranjang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), keranjang.class);
                 i.putExtra("namaUser", getActivity().getIntent().getStringExtra("namaUser"));
                 startActivity(i);
             }

@@ -8,4 +8,22 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="coklat">#DD8B55</color>
+    <color name="maroon">#820000</color>
+    <color name="pink">#FF008E</color>
+    <color name="biru">#0000FF</color>
+    <color name="Abu_abu">#868B8E</color>
+    <color name="coksu">#D6AD60</color>
+    <color name="hijau">#58E481</color>
+
+    <array name="demo_colors">
+        <item>@color/white</item>
+        <item>@color/black</item>
+        <item>@color/Abu_abu</item>
+        <item>@color/biru</item>
+        <item>@color/coksu</item>
+        <item>@color/maroon</item>
+        <item>@color/pink</item>
+        <item>@color/hijau</item>
+    </array>
+
 </resources>
