@@ -56,12 +56,16 @@
                 <div class="card-body">
                   <h5 class="card-title">Edit Status <span>| Status: Bayar</span></h5>
                   <div class="row mb-3" action="kirim.php" method="post">
-                    <label for="search" class="col-sm-2 col-form-label">Ubah Status</label>
+                    <label for="search" class="col-sm-2 col-form-label">ID Transaksi</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                      <button class="btn btn-info" name="Edit Status">Simpan</button>
+                      <input class="form-control" type="input" id="inputID" name="ID" values="" required>
+                    </div>
+                    <label for="search" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="input" id="inputStatus" name="status" values="" required>
                     </div>
                   </div>
+                  <button class="btn btn-info" name="Edit Status">Simpan</button>
                 </div>
               </div>
             </div>

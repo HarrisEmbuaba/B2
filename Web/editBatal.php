@@ -1,34 +1,24 @@
-<?php 
-include('koneksi.php');
+<?php
 
-if (isset($_POST['Edit'])) {
-    $conn->autocommit(false);
-    try{
-        $idTransaksi = $_POST['transaksi_id'];
-        $status = $_POST['status'];
+include ('pesan2.php');
 
-        if ($status=="Dikirim"){
-            $conn->query("UPDATE transaksi SET status = '$status' WHERE transaksi_id = '$idTransaksi'");
-            $conn->commit();
-            $response['message'] = "Edit berhasil";
-            echo "<script>
-            alert('Update status berhasil!'); 
-            </script>";
-        }else{
-            $conn->query("UPDATE transaksi SET status = '$status' WHERE transaksi_id = '$idTransaksi'");
-            $conn->commit();
-            $response['message'] = "Edit berhasil";
-            echo "<script>
-            alert('Ubah Barang Sukses!'); 
-            </script>";
-        }
-    }catch(Exception $e){
-        $conn->rollback();
-        $response['message'] = $e->getMessage();
-        echo "<script>
-        alert('Ubah Barang Gagal!'); 
-        </script>";
-    }
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "project3";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
 }
+
+$sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
+
+// if (mysqli_query($conn, $sql)) {
+//   echo "Update status successfully";
+// } else {
+//   echo "Error updating status: " . mysqli_error($conn);
+// }
 
 ?>

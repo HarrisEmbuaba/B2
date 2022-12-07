@@ -1,25 +1,24 @@
-<?php 
+<?php
 
-require ('koneksi.php');
-include ('editTerima.html');
+include ('pesan2.php');
 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "project3";
 
-if (isset($_POST['Edit Status'])) {
-    $id = $_GET['transaksi_id'];
-    $status = $_POST['status'];
- 
-    $sql = "UPDATE transaksi set status='$status'";
-    $result = mysqli_query($conn, $sql);
-    $check = mysqli_num_rows($result);
-    if ($check > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['id'] = $row['transaksi_id'];
-        $_SESSION['status'] = $row['status'];
-        echo "<script>alert('Status berhasil diupdate!')</script>";
-        header("Location: pesan2.php");
-    } else {
-        echo "<script>alert('Status gagal diupdate!')</script>";
-    }
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
 }
+
+$sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
+
+// if (mysqli_query($conn, $sql)) {
+//   echo "Update status successfully";
+// } else {
+//   echo "Error updating status: " . mysqli_error($conn);
+// }
 
 ?>
