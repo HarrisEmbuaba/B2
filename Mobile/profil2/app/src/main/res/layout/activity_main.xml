@@ -26,14 +26,7 @@
             android:src="@drawable/user"/>
 
     </androidx.cardview.widget.CardView>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/kembali"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24px"
-        />
+
 
     <Button
         android:id="@+id/btnSELESAI"
@@ -50,7 +43,7 @@
         />
 
     <EditText
-        android:id="@+id/textView"
+        android:id="@+id/Username_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,51 +63,55 @@
         android:backgroundTint="@color/white"/>
 
     <EditText
-        android:id="@+id/textView"
+        android:id="@+id/Fullname_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/white"
         android:text="Fullname"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362"
-        android:backgroundTint="@color/white"/>
+        app:layout_constraintTop_toBottomOf="@+id/Username_login"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/email_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="Email :"
-        android:padding="15dp"
+        android:backgroundTint="@color/white"
+        android:text="Email :"
         android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        tools:layout_editor_absoluteX="-19dp"
-        tools:layout_editor_absoluteY="308dp"
-        android:backgroundTint="@color/white"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Fullname_login"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
         android:hint="Password :"
         android:inputType="textPassword"
         android:padding="15dp"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="362dp"
-        android:backgroundTint="@color/white"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_login"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -126,4 +123,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/kembali"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
