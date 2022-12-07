@@ -92,7 +92,11 @@ if (isset($_POST['Edit'])) {
             echo "<script> Error updating record: </script>" . mysqli_error($conn);
         }
     } catch (Exception $e){
-        
+        $conn->rollback();
+        $response['message'] = $e->getMessage();
+        echo "<script>
+        alert('Ubah Barang Gagal!'); 
+        </script>";
     }
 }
 

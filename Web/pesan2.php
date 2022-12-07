@@ -214,7 +214,7 @@ include ('koneksi.php');
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                            <a href="editBayar.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editBayar.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
