@@ -26,9 +26,11 @@ import java.util.List;
 public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.HolderDataKeranjang> {
     Context ctx;
     List<DataItemKeranjang> listDataKeranjang;
-    int count = 0;
+    int count = 1;
+    int total = 0;
 
-    public AdapterKeranjang (Context ctx, List<DataItemKeranjang> listDataKeranjang) {
+
+    public AdapterKeranjang(Context ctx, List<DataItemKeranjang> listDataKeranjang) {
         this.ctx = ctx;
         this.listDataKeranjang = listDataKeranjang;
     }
@@ -54,8 +56,38 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
         holder.tvVariasi.setText(String.valueOf(db.getUkuran()));
         holder.tvNama.setText(String.valueOf(db.getNamaBarang()));
         holder.tvJumlah.setText(String.valueOf(db.getJumlah()));
-        Picasso.get().load(ApiClient.IMAGES_URL+listDataKeranjang.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
+        holder.tvStok.setText(String.valueOf(db.getStok()));
+        Picasso.get().load(ApiClient.IMAGES_URL + listDataKeranjang.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
 
+        holder.ivKurang.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SuspiciousIndentation")
+            @Override
+            public void onClick(View v) {
+                if (count <= 1) count = 1;
+                else
+                    count--;
+                holder.tvJumlah.setText("" + count);
+//                holder.tvJumlah.setText(String.valueOf(db.getJumlah() + count));
+                total = Integer.parseInt(holder.tvJumlah.getText().toString()) * Integer.parseInt(db.getHarga());
+                String hasilConvert = toRupiah(total);
+                holder.tvtotal.setText(hasilConvert);
+
+            }
+        });
+
+        holder.ivJumlah.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SuspiciousIndentation")
+            @Override
+            public void onClick(View v) {
+                if (count >= Integer.parseInt(holder.tvStok.getText().toString()));
+                else
+                    count++;
+                holder.tvJumlah.setText("" + count);
+                total = Integer.parseInt(holder.tvJumlah.getText().toString()) * Integer.parseInt(db.getHarga());
+                String hasikConvert = toRupiah(total);
+                holder.tvtotal.setText(hasikConvert);
+            }
+        });
     }
 
     @Override
@@ -64,9 +96,8 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
     }
 
     public class HolderDataKeranjang extends RecyclerView.ViewHolder {
-        TextView tvHarga, tvVariasi,tvNama,tvJumlah, tvWarna;
-        ImageView ivIcon;
-
+        TextView tvHarga, tvVariasi, tvNama, tvJumlah, tvWarna, tvtotal, tvStok;
+        ImageView ivIcon, ivKurang, ivJumlah;
 
         public HolderDataKeranjang(@NonNull View itemView) {
             super(itemView);
@@ -77,10 +108,18 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
             tvNama = itemView.findViewById(R.id.hpxjudul);
             tvJumlah = itemView.findViewById(R.id.hpxjumlah);
             ivIcon = itemView.findViewById(R.id.hpximage);
+            ivKurang = itemView.findViewById(R.id.fkerximagemin);
+            ivJumlah = itemView.findViewById(R.id.fkerximageplus);
+            tvtotal = itemView.findViewById(R.id.hpxtotal);
+            tvStok = itemView.findViewById(R.id.stokGone);
+
+
         }
     }
 
+    public void  kali(){
 
+    }
 
     public static String toRupiah(int rupiah){
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -93,3 +132,9 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
         return kursIndonesia.format(rupiah);
     }
 }
+
+
+
+
+
+

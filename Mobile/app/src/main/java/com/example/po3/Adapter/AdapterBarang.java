@@ -35,7 +35,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
     @NonNull
     @Override
     public AdapterBarang.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(ctx).inflate(R.layout.kosongan, parent, false);
+        View layout = LayoutInflater.from(ctx).inflate(R.layout.produkterbaru, parent, false);
 //        HolderData holder = new HolderData(layout);
         return new HolderData(layout);
     }
@@ -51,7 +51,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
         int cv = Integer.parseInt(hrg);
         String hasilConvert = toRupiah(cv);
         holder.tvHarga.setText(String.valueOf(hasilConvert));
-        holder.tvStok.setText(String.valueOf(db.getUkuran()));
+//        holder.tvStok.setText(String.valueOf(db.getUkuran()));
         Picasso.get().load(ApiClient.IMAGES_URL+listData.get(position).getImage()).resize(150, 157).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +63,8 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
                 mIntent.putExtra("nama_barang", listData.get(position).getNamaBarang());
                 mIntent.putExtra("ukuran", listData.get(position).getUkuran());
                 mIntent.putExtra("harga", listData.get(position).getHarga());
+                mIntent.putExtra("ukuran", listData.get(position).getUkuran());
+                mIntent.putExtra("stok", listData.get(position).getStok());
                 mIntent.putExtra("deskripsi", listData.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);
             }
@@ -81,12 +83,12 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.HolderData
         public HolderData(@NonNull View itemView) {
             super(itemView);
 
-            tvId = itemView.findViewById(R.id.tvId);
-            tvJenis = itemView.findViewById(R.id.inpo);
-            tvNama = itemView.findViewById(R.id.deskripsi);
-            tvHarga = itemView.findViewById(R.id.harga);
-            tvStok = itemView.findViewById(R.id.stok);
-            ivIcon = itemView.findViewById(R.id.fotobunga);
+            tvId = itemView.findViewById(R.id.tvId1);
+            tvJenis = itemView.findViewById(R.id.inp);
+            tvNama = itemView.findViewById(R.id.desk);
+            tvHarga = itemView.findViewById(R.id.hrg);
+//            tvStok = itemView.findViewById(R.id.stok);
+            ivIcon = itemView.findViewById(R.id.foto);
         }
     }
     public static String toRupiah(int rupiah){

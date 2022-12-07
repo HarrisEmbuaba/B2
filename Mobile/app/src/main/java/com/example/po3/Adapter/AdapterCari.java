@@ -51,7 +51,7 @@ public class AdapterCari extends RecyclerView.Adapter<AdapterCari.HolderDataCari
         holder.tvId.setText(String.valueOf(db.getId()));
         holder.tvJenis.setText(String.valueOf(db.getJenis()));
         holder.tvNama.setText(String.valueOf(db.getNama()));
-        holder.tvUkuran.setText(String.valueOf(db.getUkuran()));
+//        holder.tvUkuran.setText(String.valueOf(db.getUkuran()));
         Picasso.get().load(ApiClient.IMAGES_URL+listCariData.get(position).getImage()).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +62,8 @@ public class AdapterCari extends RecyclerView.Adapter<AdapterCari.HolderDataCari
                 mIntent.putExtra("barang_jenis", listCariData.get(position).getJenis());
                 mIntent.putExtra("nama_barang", listCariData.get(position).getJenis());
                 mIntent.putExtra("ukuran", listCariData.get(position).getUkuran());
-                mIntent.putExtra("ukuran", listCariData.get(position).getUkuran());
                 mIntent.putExtra("harga", listCariData.get(position).getHarga());
+                mIntent.putExtra("stok", listCariData.get(position).getStok());
                 mIntent.putExtra("deskripsi", listCariData.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);
             }
@@ -86,7 +86,6 @@ public class AdapterCari extends RecyclerView.Adapter<AdapterCari.HolderDataCari
             tvId = itemView.findViewById(R.id.tvIdSearch);
             tvJenis = itemView.findViewById(R.id.tbucket);
             tvNama = itemView.findViewById(R.id.namabarang);
-            tvUkuran = itemView.findViewById(R.id.ukuran);
             ivIcon = itemView.findViewById(R.id.tvimageView);
         }
     }

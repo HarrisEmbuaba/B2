@@ -52,7 +52,7 @@ public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.Ho
         int cv = Integer.parseInt(hrg);
         String hasilConvert = toRupiah(cv);
         holder.tvHarga.setText(String.valueOf(hasilConvert));
-        holder.tvStok.setText(String.valueOf(db.getUkuran()));
+//        holder.tvStok.setText(String.valueOf(db.getStok()));
         Picasso.get().load(ApiClient.IMAGES_URL+listData1.get(position).getImage()).resize(150, 157).error(R.mipmap.ic_launcher).into(holder.ivIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +63,8 @@ public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.Ho
                 mIntent.putExtra("nama_barang", listData1.get(position).getNama());
                 mIntent.putExtra("ukuran", listData1.get(position).getUkuran());
                 mIntent.putExtra("harga", listData1.get(position).getHarga());
+                mIntent.putExtra("stok", listData1.get(position).getStok());
+                mIntent.putExtra("ukuran", listData1.get(position).getUkuran());
                 mIntent.putExtra("deskripsi", listData1.get(position).getDeskripsi());
                 view.getContext().startActivity(mIntent);
             }
@@ -86,7 +88,7 @@ public class AdapterBarangBaru extends RecyclerView.Adapter<AdapterBarangBaru.Ho
             tvJenis = itemView.findViewById(R.id.inpo);
             tvNama = itemView.findViewById(R.id.deskripsi);
             tvHarga = itemView.findViewById(R.id.harga);
-            tvStok = itemView.findViewById(R.id.stok);
+//            tvStok = itemView.findViewById(R.id.stok);
             ivIcon = itemView.findViewById(R.id.fotobunga);
         }
     }
