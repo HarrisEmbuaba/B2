@@ -1,6 +1,6 @@
 <?php
 
-include ('pesan2.php');
+include ('kirim3.php');
 
 $servername = "localhost";
 $username = "root";
@@ -13,7 +13,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "UPDATE transaksi SET status='Dikirim' WHERE transaksi_id = $field2name";
+$sql = "UPDATE transaksi SET status='Diterima' WHERE transaksi_id = $field2name";
 
 if (mysqli_query($conn, $sql)){
 }

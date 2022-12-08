@@ -1,6 +1,5 @@
 <?php
 require ('koneksi.php');
-include ('pesan.html');
 
 error_reporting(0);
 session_start();

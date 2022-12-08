@@ -93,7 +93,7 @@ include ('koneksi.php');
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.php">
+        <a class="nav-link collapsed" href="kirim3.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
@@ -141,16 +141,16 @@ include ('koneksi.php');
 
               </ul>          
               <div class="tab-content pt-1">
-
                 <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
 
                   <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <div class="row mb-3">
-                  <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                  </div>
+                  <div class="row mb-3" action="kirim.php" method="post">
+                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
+                    <div class="col-sm-10">
+                      <input type="cari" name="search" method="get" required>
+                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
+                    </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
@@ -225,21 +225,18 @@ include ('koneksi.php');
                         ?> 
                       </tbody> 
                   </table>
-
-            <div class="tab-content pt-2">
-
+                </div>
+                <div class="tab-content pt-2">
               <div class="tab-pane fade dikemas" id="dikemas">
 
                 <!-- partial:index.partial.html -->
                   <!-- No Labels Form -->
-                  <div class="row mb-3">
-                  <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="search" id="formSearch" name="search" values="" required>
-                    <?php 
-                      $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `transaksi_id`";
-                    ?> 
-                  </div>
+                  <div class="row mb-3" action="kirim.php" method="post">
+                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
+                    <div class="col-sm-10">
+                      <input type="cari" name="search" method="get" required>
+                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
+                    </div>
                   </div>
                   <div class="row mb-3">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
@@ -317,7 +314,8 @@ include ('koneksi.php');
                         ?> 
                       </tbody> 
                   </table>
-              </div><!-- End Bordered Tabs -->
+                </div>
+              </div>
             </div>
           </div>
         </div>

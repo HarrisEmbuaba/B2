@@ -1,6 +1,6 @@
 <?php
 
-include ('pesan2.php');
+include ('kirim3.php');
 
 $servername = "localhost";
 $username = "root";
