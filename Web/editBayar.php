@@ -15,11 +15,8 @@ if (!$conn) {
 
 $sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
 
-// if (mysqli_query($conn, $sql)) {
-//   echo "Update status successfully";
-// } else {
-//   echo "Error updating status: " . mysqli_error($conn);
-// }
+if (mysqli_query($conn, $sql)){
+}
 
 
 mysqli_close($conn);

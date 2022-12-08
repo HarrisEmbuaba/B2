@@ -287,28 +287,15 @@ session_start();
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-
-                <div class="col-sm-10">
-                <div class="urutkan_container">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                      <option value=""></option>
-                      <?php
-                      $waktu = mysqli_query($koneksi, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                      while($r = mysqli_fetch_array($waktu)){
-                        ?>
-                        <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                      <?php } ?>
-                    </select>
-                  </ul>
-                </div>
-                </div>
+                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control">
+                      <?php 
+                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user ORDER BY `waktu_transaksi`=''";
+                      ?> 
+                    </div>
+                </div> 
+          
                   <!-- DataTales Example -->
                   <div class="mb-4">
                     <div class="py-3">

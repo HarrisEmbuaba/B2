@@ -153,7 +153,7 @@ if(isset($_SESSION['transaksi_id'])){
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diterima">Dibatalkan</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dibatalkan">Dibatalkan</button>
                 </li>
 
               </ul>          
@@ -231,7 +231,8 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                            <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -240,6 +241,10 @@ if(isset($_SESSION['transaksi_id'])){
                         ?> 
                       </tbody> 
                   </table>
+                  </div>
+                  </div>
+                </div>
+              </div>
 
             <div class="tab-content pt-2">
 
@@ -315,7 +320,8 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td> 
-                                            <a href="editKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -412,7 +418,8 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td> 
-                                            <a href="editKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editTerima.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -494,7 +501,7 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
                                             <td>  
-                                            <a href="editBatal.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             </td> 
                                         </tr>'; 
                                 } 

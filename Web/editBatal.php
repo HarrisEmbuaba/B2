@@ -13,12 +13,12 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
+$sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = $field2name";
 
-// if (mysqli_query($conn, $sql)) {
-//   echo "Update status successfully";
-// } else {
-//   echo "Error updating status: " . mysqli_error($conn);
-// }
+if (mysqli_query($conn, $sql)){
+}
+
+
+mysqli_close($conn);
 
 ?>
