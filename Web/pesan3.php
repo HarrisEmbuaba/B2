@@ -163,27 +163,9 @@ if(isset($_SESSION['transaksi_id'])){
                   <!-- partial:index.partial.html -->
                   <div class="row mb-3" action="pesan3.php" method="post">
                   <form method="GET" action="pesan3.php" style="text-align: left;">
-		<label>Kata Pencarian : </label>
-		<input type="text" name="kata_cari" value="<?php 
-    
-    if(isset($_GET['kata_cari'])) {
-
-      // $kata_cari = $_GET['kata_cari'];
-    
-      // $query = "SELECT * FROM transaksi WHERE transaksi_id like '%".$kata_cari."%' OR nama_barang like '%".$kata_cari."%' OR total like '%".$kata_cari."%' ORDER BY transaksi_id ASC";
-
-      echo $_GET['kata_cari'];
-
-    } else {
-        
-      // $query = "SELECT * FROM transaksi ORDER BY transaksi_id ASC";
-
-      echo $_GET['kata_cari'];
-
-    }
-    
-    ?>" />
-		<button type="submit" class="btn btn-sm-info">Cari</button>
+		<label>Kata Pencarian</label>
+		<input type="text" name="kata_cari" value="" />
+		<button type="submit" class="btn btn-sm-info" href="update.php">Cari</button>
 	</form>
                   </div>
                   <div class="row mb-3">

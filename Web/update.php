@@ -1,46 +1,48 @@
-<?
-require ('koneksi.php');
 
-session_start();
 
-if(isset($_GET['kata_cari'])) {
+<?php
 
-	$kata_cari = $_GET['kata_cari'];
+include ('kirim3.php');
 
-	$query = "SELECT * FROM transaksi WHERE transaksi_id like '%".$kata_cari."%' OR nama_barang like '%".$kata_cari."%' OR total like '%".$kata_cari."%' ORDER BY transaksi_id ASC";
-} else {
-    
-	$query = "SELECT * FROM transaksi ORDER BY transaksi_id ASC";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "project3";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
 }
+
+// $sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = $field2name";
+
+if(isset($_GET['update'])){
+	$name = $_GET['transaksi_id'];
+	$name = $_POST['transaksi_id'];
+	if(isset($_POST['Update'])){
+		$result = mysqli_query($conn, "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE transaksi_id '%$name%' ORDER BY transaksi_id ASC");
+		
+		
+		if (mysqli_query($conn, $result)){
+	
+		}
+	
+	}
+} else {
+	$name = $_GET['nama_barang'];
+	$name = $_POST['nama_barang'];
+	if(isset($_POST['Update'])){
+		$result = mysqli_query($conn, "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE nama_barang '%$name%' ORDER BY transaksi_id ASC");
+		$name = $_POST['nama_barang'];
+		
+		if (mysqli_query($conn, $result)){
+	
+		}
+	
+	}
+}
+
+mysqli_close($conn);
+
 ?>
-
-<!-- </?php 
-// require ('koneksi.php');
-// include ('login.html');
-
-// session_start();
-// error_reporting(0);
-// if (isset($_SESSION['nama'])) {
-//    // header("Location: login.php");
-// }
-
-// if (isset($_POST['Login'])) {
-//     $email = $_POST['email'];
-//     $pass = $_POST['pass'];
- 
-//     $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
-//     $result = mysqli_query($conn, $sql);
-//     $check = mysqli_num_rows($result);
-//     if ($check > 0) {
-//         $row = mysqli_fetch_assoc($result);
-//         $_SESSION['nama'] = $row['nama'];
-//         $_SESSION['pass'] = $row['pass'];
-//         $_SESSION['email'] = $row['email'];
-//         echo "<script>alert('BERHASIL LOGIN. Silahkan coba lagi!')</script>";
-//         header("Location: berhasil_login.php");
-//     } else {
-//         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
-//     }
-// }
-
-?> -->
