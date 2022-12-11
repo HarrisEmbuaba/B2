@@ -102,7 +102,7 @@ if(isset($_SESSION['transaksi_id'])){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan3.php">
+        <a class="nav-link collapsed" href="pesan2.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
       </li><!-- End Pesan Page Nav -->
@@ -161,18 +161,15 @@ if(isset($_SESSION['transaksi_id'])){
                 <div class="tab-pane fade show active perlu-dikirim" id="perlu-dikirim">
 
                   <!-- partial:index.partial.html -->
-                  <div class="row mb-3" action="pesan3.php" method="post">
-                  <form method="GET" action="pesan3.php" style="text-align: left;">
+                  <div class="row mb-3" action="pesan3.php" method="GET">
+                  <form method="GET" action="pesan3.php" style="text-align: center;">
 		<label>Kata Pencarian</label>
 		<input type="text" name="kata_cari" value="" />
 		<button type="submit" class="btn btn-sm-info" href="update.php">Cari</button>
+    <label style="text-align: right;">Tanggal</label>
+		<input type="date" name="kata_cari" value="" style="text-align: center" />
+		<button type="submit" class="btn btn-sm-info" href="update1.php">Cari</button>
 	</form>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control">
-                    </div>
                   </div>
 
                   <!-- DataTales Example -->

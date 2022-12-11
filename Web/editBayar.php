@@ -16,6 +16,8 @@ if (!$conn) {
 $sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
 
 if (mysqli_query($conn, $sql)){
+} else {
+  echo "<script>Tidak ada data!</script>";
 }
 
 

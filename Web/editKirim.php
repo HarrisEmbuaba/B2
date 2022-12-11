@@ -16,9 +16,27 @@ if (!$conn) {
 $sql = "UPDATE transaksi SET status='Diterima' WHERE transaksi_id = $field2name";
 
 if (mysqli_query($conn, $sql)){
+  echo "<script>
+  alert 'Data berhasil diupdate!'
+  </script>";
+} else {
+  echo "<script>
+  alert 'Tidak ada data!'
+  </script>";
 }
 
 
 mysqli_close($conn);
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <body>
+    <div href="kirim3.php"></div>
+  </body>
+</head>
+
+</html>

@@ -1,5 +1,3 @@
-
-
 <?php
 
 include ('kirim3.php');
