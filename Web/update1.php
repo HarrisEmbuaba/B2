@@ -1,6 +1,6 @@
 <?php
 
-include ('kirim3.php');
+include ('pesan2.php');
 
 $servername = "localhost";
 $username = "root";
@@ -16,31 +16,10 @@ if (!$conn) {
 // $sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = $field2name";
 
 if(isset($_GET['date'])){
-	$name = $_GET['waktu_transaksi'];
-	$name = $_POST['waktu_transaksi'];
-	if(isset($_POST['date'])){
-		$result = mysqli_query($conn, "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE waktu_transaksi '%$name%' ORDER BY transaksi_id ASC");
-		
-		
-		if (mysqli_query($conn, $result)){
-	
-		}
-	
-	}
-// } else {
-// 	$name = $_GET['nama_barang'];
-// 	$name = $_POST['nama_barang'];
-// 	if(isset($_POST['Update'])){
-// 		$result = mysqli_query($conn, "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE nama_barang '%$name%' ORDER BY transaksi_id ASC");
-// 		$name = $_POST['nama_barang'];
-		
-// 		if (mysqli_query($conn, $result)){
-	
-// 		}
-	
-// 	}
-}
-
-mysqli_close($conn);
+	$query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Dikemas' ORDER BY `waktu_transaksi` DESC";
+  } else{
+	$query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikemas' ORDER BY `waktu_transaksi` DESC ";
+  
+  }
 
 ?>

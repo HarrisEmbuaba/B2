@@ -171,15 +171,9 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="input-group mb-3">
                       <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
                       <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
-                  <div class="row mb-3">
-                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control">
-                    </div>
-                  </div>
 
                   <!-- DataTales Example -->
                   <div class="mb-4">
@@ -266,15 +260,9 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="input-group mb-3">
                       <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
                       <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
-                    <div class="row mb-3">
-                      <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                      <div class="col-sm-10">
-                        <input type="date" class="form-control">
-                      </div>
-                    </div>
 
                     <!-- DataTales Example -->
                     <div class="mb-4">
@@ -361,15 +349,9 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="input-group mb-3">
                       <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
                       <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="kirim3.php?transaksi_id='1'">Search</button>
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
-                    <div class="row mb-3">
-                      <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                      <div class="col-sm-10">
-                        <input type="date" class="form-control">
-                      </div>
-                    </div>
                         
                         <!-- DataTales Example -->
                         <div class="mb-4">
@@ -455,15 +437,9 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="input-group mb-3">
                       <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
                       <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
-                  <div class="row mb-3">
-                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control">
-                    </div>
-                  </div>
 
                   <!-- DataTales Example -->
                   <div class="mb-4">
