@@ -151,9 +151,12 @@ if(isset($_SESSION['transaksi_id'])){
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sudah-dibayar">Sudah Dibayar</button>
                 </li>
 
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
+                </li>
               </ul> 
 
               <div class="tab-content pt-1">
@@ -161,13 +164,13 @@ if(isset($_SESSION['transaksi_id'])){
                 <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
 
                   <!-- partial:index.partial.html -->
-                  <div class="row mb-3" action="pesan2.php" method="post">
-                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-10">
-                      <input type="cari" name="search" method="get" required>
-                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
+                  <form action="" method="GET">
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
                     </div>
-                  </div>
+                  </form>
                   <div class="row mb-3">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                     <div class="col-sm-10">
@@ -183,7 +186,12 @@ if(isset($_SESSION['transaksi_id'])){
                   <div class="card-body">
                       <div class="table-responsive">
                       <?php 
-                        $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Belum bayar' ORDER BY `waktu_transaksi` DESC ";
+                        if(isset($_GET['search'])){
+                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Belum bayar' ORDER BY `waktu_transaksi` DESC";
+                        } else{
+                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Belum bayar' ORDER BY `waktu_transaksi` DESC ";
+                        
+                        }
                         $no = 0; 
                       ?> 
  
@@ -248,16 +256,16 @@ if(isset($_SESSION['transaksi_id'])){
 
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade dikemas" id="dikemas">
+                <div class="tab-pane fade sudah-bayar" id="sudah-dibayar">
 
                   <!-- partial:index.partial.html -->
-                  <div class="row mb-3" action="kirim.php" method="post">
-                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-10">
-                      <input type="cari" name="search" method="get" required>
-                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
+                  <form action="" method="GET">
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
                     </div>
-                  </div>
+                  </form>
                     <div class="row mb-3">
                       <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                       <div class="col-sm-10">
@@ -273,8 +281,13 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="card-body">
                         <div class="table-responsive">
                         <?php 
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikemas' ORDER BY `waktu_transaksi` DESC ";
-                          $no = 0; 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Sudah bayar' ORDER BY `waktu_transaksi` DESC";
+                        } else{
+                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Sudah bayar' ORDER BY `waktu_transaksi` DESC ";
+                        
+                        }
+                        $no = 0; 
                         ?> 
   
                     <!-- Table with stripped rows --> 
@@ -321,7 +334,7 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field9name.'</td> 
                                               <td>'.$field10name.'</td> 
                                               <td> 
-                                              <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                              <a href="editKemas.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                               <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                               </td> 
                                           </tr>'; 
@@ -340,14 +353,14 @@ if(isset($_SESSION['transaksi_id'])){
               </div>
 
               <div class="tab-content pt-3">
-                <div class="tab-pane fade diterima" id="diterima">
-                <div class="row mb-3" action="kirim.php" method="post">
-                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-10">
-                      <input type="cari" name="search" method="get" required>
-                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
+                <div class="tab-pane fade dikemas" id="dikemas">
+                <form action="" method="GET">
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
                     </div>
-                  </div>
+                  </form>
                     <div class="row mb-3">
                       <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                       <div class="col-sm-10">
@@ -363,9 +376,14 @@ if(isset($_SESSION['transaksi_id'])){
                           <div class="card-body">
                         <div class="table-responsive">
                         <?php 
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Diterima' ORDER BY `waktu_transaksi` DESC ";
-                          $no = 0; 
-                        ?> 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Dikemas' ORDER BY `waktu_transaksi` DESC";
+                        } else{
+                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikemas' ORDER BY `waktu_transaksi` DESC ";
+                        
+                        }
+                        $no = 0; 
+                      ?>
   
                     <!-- Table with stripped rows --> 
                     <table class="table table-striped"> 
@@ -411,7 +429,7 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field9name.'</td> 
                                               <td>'.$field10name.'</td> 
                                               <td> 
-                                              <a href="editTerima.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                              <a href="editPerluKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                               <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                               </td> 
                                           </tr>'; 
@@ -426,88 +444,7 @@ if(isset($_SESSION['transaksi_id'])){
                     </div>
 
               </div>
-              
-              <div class="tab-content pt-4">
-                <div class="tab-pane fade dibatalkan" id="dibatalkan">
-                  <!-- partial:index.partial.html -->
-                  <div class="row mb-3" action="kirim.php" method="post">
-                    <label for="cari" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-10">
-                      <input type="cari" name="search" method="get" required>
-                      <input type="submit" value="Cari" href="cari.php" class="btn btn-sm btn-info">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control">
-                    </div>
-                  </div>
-
-                  <!-- DataTales Example -->
-                  <div class="mb-4">
-                    <div class="py-3">
-                      <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                    <?php 
-                      $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dibatalkan' ORDER BY `waktu_transaksi` DESC ";
-                      $no = 0; 
-                    ?> 
-                    <!-- Table with stripped rows --> 
-                    <table class="table table-striped"> 
-                    <thead> 
-                      <tr> 
-                        <th scope="col">No</th> 
-                        <th scope="col">Id Transaksi</th> 
-                        <th scope="col">Nama Barang</th> 
-                        <th scope="col">Gambar</th> 
-                        <th scope="col">Kuantitas</th> 
-                        <th scope="col">Nama Pembeli</th> 
-                        <th scope="col">Alamat</th> 
-                        <th scope="col">Pembayaran</th> 
-                        <th scope="col">Total</th> 
-                        <th scope="col">Status</th> 
-                        <th scope="col">Action</th> 
-                      </tr> 
-                    </thead> 
-                    <tbody> 
-                    <?php 
-                        if ($result = $mysqli->query($query)) { 
-                            while ($row = $result->fetch_assoc()) { 
-                                $no++;
-                                $field2name = $row["transaksi_id"]; 
-                                $field3name = $row["nama_barang"]; 
-                                $field4name = $row["image"]; 
-                                $field5name = $row["qty"];  
-                                $field6name = $row["nama"];  
-                                $field7name = $row["alamat"];  
-                                $field8name = $row["pembayaran"];  
-                                $field9name = $row["total"];  
-                                $field10name = $row["status"];  
-
-                                echo '<tr>   
-                                        <th>' .$no.'</th>  
-                                        <td>'.$field2name.'</td>  
-                                        <td>'.$field3name.'</td>  
-                                        <td>'.$field4name.'</td>  
-                                        <td>'.$field5name.'</td>  
-                                        <td>'.$field6name.'</td> 
-                                        <td>'.$field7name.'</td> 
-                                        <td>'.$field8name.'</td> 
-                                        <td>'.$field9name.'</td> 
-                                        <td>'.$field10name.'</td> 
-                                        <td>  
-                                        <a class="text" >Dibatalkan</a> 
-                                        </td> 
-                                    </tr>'; 
-                            } 
-                            $result->free(); 
-                        }  
-                    ?> 
-                    </tbody> 
-                    </table>
+             
     </div>
   </div>
 </div>

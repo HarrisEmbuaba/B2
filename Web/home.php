@@ -105,7 +105,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.php">
+        <a class="nav-link collapsed" href="kirim3.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Profile Page Nav -->

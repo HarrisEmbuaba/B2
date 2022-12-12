@@ -346,21 +346,6 @@ if(isset($_SESSION['transaksi_id'])){
                           <input type="date" class="form-control">
                         </div>
                       </div>
-
-                      <div class="urutkan_container">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><img src="assets/img/urut.png" width="20px" length="20px"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <select type="option" name="waktu_pengambilan" id="inputState" class="form-select">
-                            <option value=""></option>
-                            <?php
-                            $waktu = mysqli_query($conn, "SELECT waktu_pengambilan FROM transaksi ORDER BY waktu_pengambilan DESC");
-                            while($r = mysqli_fetch_array($waktu)){
-                              ?>
-                              <option value="<?php echo $r['waktu_pengembalian'] ?>"><?php echo $r['waktu_pengembalian'] ?></option>
-                              <?php } ?>
-                          </select>
-                        </ul>
-                      </div>
                       
                       <!-- DataTales Example -->
                       <div class="mb-4">
