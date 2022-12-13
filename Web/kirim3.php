@@ -54,7 +54,7 @@ if(isset($_SESSION['transaksi_id'])){
     
 
     <div class="d-flex align-items-center">
-      <a href="home.html" class="logo d-flex align-items-center">
+      <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -73,6 +73,13 @@ if(isset($_SESSION['transaksi_id'])){
             <span class="badge bg-primary badge-number">99+</span>
           </a>
 
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Anda punya 99+ Notifikasi belum dibaca!
+              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
+            </li>
+          </ul><!-- End Notification Dropdown Items -->
+
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -81,13 +88,6 @@ if(isset($_SESSION['transaksi_id'])){
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
-
-        </li><!-- Profile Nav -->
-        <li class="nav-item">
-          <a class="nav-link nav-icon" href="users-profile.html">
-            <img src="assets/img/user.png" width="35px" height="35px"></i>
-          </a>
-      </li><!-- End Profile Nav -->
 
         </li><!-- End Messages Nav -->
 
@@ -184,9 +184,9 @@ if(isset($_SESSION['transaksi_id'])){
                       <div class="table-responsive">
                       <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC";
+                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Belum dikirim' ORDER BY `waktu_transaksi` DESC";
                         } else{
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC ";
+                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Belum dikirim' ORDER BY `waktu_transaksi` DESC ";
                         
                         }
                         $no = 0; 

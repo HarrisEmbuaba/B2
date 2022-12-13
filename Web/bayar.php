@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pesanan</title>
+  <title>Penghasilan</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,7 +45,7 @@
     
 
     <div class="d-flex align-items-center">
-      <a href="home.html" class="logo d-flex align-items-center">
+      <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -64,6 +64,12 @@
             <span class="badge bg-primary badge-number">99+</span>
           </a>
 
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Anda punya 99+ Notifikasi belum dibaca!
+              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
+            </li>
+          </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -72,13 +78,6 @@
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
-
-        </li><!-- Profile Nav -->
-        <li class="nav-item">
-          <a class="nav-link nav-icon" href="users-profile.html">
-            <img src="assets/img/user.png" width="35px" height="35px"></i>
-          </a>
-      </li><!-- End Profile Nav -->
 
         </li><!-- End Messages Nav -->
 

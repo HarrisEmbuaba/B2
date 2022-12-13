@@ -1,3 +1,37 @@
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "project3";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$jan = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 1";
+$feb = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 2";
+$mar = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 3";
+$apr = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 4";
+$may = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 5";
+$jun = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 6";
+$jul = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 7";
+$aug = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 8";
+$sep = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 9";
+$oct = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 10";
+$nov = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 11";
+$des = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 12";
+
+// $jml = "SELECT SUM(total) FROM transaksi";
+
+// $bagi = 2;
+
+//$rata = ($jml / $bagi);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +79,7 @@
     
 
     <div class="d-flex align-items-center">
-      <a href="home.html" class="logo d-flex align-items-center">
+      <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -59,7 +93,7 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
             <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">99+</span>
           </a>
@@ -67,7 +101,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               Anda punya 99+ Notifikasi belum dibaca!
-              <a href="notif.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
+              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->
 
@@ -75,7 +109,7 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-icon" href="chat.php" data-bs-toggle="dropdown">
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
@@ -185,7 +219,16 @@
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
-                      <h6>Rp 1,050,000</h6>
+                      <h5><?php
+                      include 'koneksi.php';
+                      $sql = mysqli_query($mysqli, "SELECT SUM(total) FROM transaksi");
+                      while($data = mysqli_fetch_array($sql)) {
+                      ?>
+                      <div class="ps-3">
+                          <h6><?php echo "Rp." . number_format($data['SUM(total)']) ;?></h6>
+                      <?php
+                      }
+                      ?></h5>
                     </div>
                   </div>
                 </div>
@@ -201,7 +244,16 @@
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
-                      <h6>135</h6>
+                      <h5><?php
+                      include 'koneksi.php';
+                      $sql = mysqli_query($mysqli, "SELECT SUM(qty) FROM transaksi");
+                      while($data = mysqli_fetch_array($sql)) {
+                      ?>
+                      <div class="ps-3">
+                          <h6><?php echo number_format($data['SUM(qty)']) ;?></h6>
+                      <?php
+                      }
+                      ?></h5>
                     </div>
                   </div>
                 </div>
@@ -221,10 +273,130 @@
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
                           name: 'Pendapatan',
-                          data: [1000, 1500, 2000, 1250, 2500, 1900, 2250, 2000, 1400, 2000, 2750, 3000],
+                          data: [<?php
+                          if (mysqli_query($conn, $jan)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $feb)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $mar)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $apr)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $may)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $jun)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $jul)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $aug)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $sep)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $oct)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $nov)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $des)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>],
                         }, {
                           name: 'Rata-rata',
-                          data: [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000],
+                          data: [<?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>, <?php
+                          if (mysqli_query($conn, $rata)){
+                          } else {
+                            echo "<script>Tidak ada data!</script>";
+                          }
+                          ?>],
                         }],
                         chart: {
                           height: 350,
