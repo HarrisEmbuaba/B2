@@ -1,3 +1,15 @@
+<?php
+require "function.php";
+
+$transaksi = tampil("SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi_id ASC");
+
+
+if(isset($_POST["Cari"])){
+    $transaksi = Cari($_POST["keyword"]);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,24 +200,16 @@
 
           <div class="card2">
             <div class="card-body">
-              <h5 class="card-title">Rincian Pesanan</h5>
+              <h5 class="card-title">Laporan Transaksi</h5>
               <div class="card-body">
 
-              <form action="bayar.php" method="get">
-                <label>Cari :</label>
-                <input type="text" name="cari">
-                <input type="submit" value="Cari">
-              </form>
-              
-              <?php 
-              if(isset($_GET['cari'])){
-                $cari = $_GET['cari'];
+              <form action="" method="post">
+                <input type="text" name="keyword" autocomplete="off" autofokus>
+                <button type="submit" name="Cari">Cari</button>
+              </form><br/>
+                  
                 
-              }
-              ?>
-                
-                <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -217,32 +221,19 @@
                                             <th>Total</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tbody>
-                                    <?php
-                                        include ('koneksi.php');
-        
-                                        $no=1;
-                                        $sql = mysqli_query($mysqli, "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi_id ASC");
-                                        while ($data=mysqli_fetch_array($sql)) {
-                                            $transaksi_id = $data['transaksi_id'];
-                                            $waktu_transaksi = $data['waktu_transaksi'];
-                                            $nama = $data['nama'];
-                                            $nama_barang = $data['nama_barang'];
-                                            $pembayaran = $data['pembayaran'];
-                                            $total = $data['total'];
-                                            
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo $transaksi_id; ?></td>
-                                                <td><?php echo $waktu_transaksi; ?></td>
-                                                <td><?php echo $nama; ?></td>
-                                                <td><?php echo $nama_barang; ?></td>
-                                                <td><?php echo $pembayaran; ?></td>
-                                                <td><?php echo $total; ?></td>
-                                            </tr>
-                                            <?php ; }?>
+                                    <?php $no = 1; ?>
+                                    <?php foreach($transaksi as $trs) : ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $trs["transaksi_id"];?></td>
+                                            <td><?= $trs["waktu_transaksi"];?></td>
+                                            <td><?= $trs["nama"];?></td>
+                                            <td><?= $trs["nama_barang"];?>
+                                            <td><?= $trs["pembayaran"];?></td>
+                                            <td><?= $trs["total"];?></td></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                      
                                     </tbody>
                                 </table>
                             </div>
