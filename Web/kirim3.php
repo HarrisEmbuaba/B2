@@ -184,10 +184,11 @@ if(isset($_SESSION['transaksi_id'])){
                       <div class="table-responsive">
                       <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Belum dikirim' ORDER BY `waktu_transaksi` DESC";
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Belum dikirim' ORDER BY `waktu_transaksi` ASC";
+                          
                         } else{
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Belum dikirim' ORDER BY `waktu_transaksi` DESC ";
-                        
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Belum dikirim' ORDER BY `waktu_transaksi` ASC";
+                          
                         }
                         $no = 0; 
                       ?> 
@@ -203,7 +204,6 @@ if(isset($_SESSION['transaksi_id'])){
                         <th scope="col">Kuantitas</th> 
                         <th scope="col">Nama Pembeli</th> 
                         <th scope="col">Alamat</th> 
-                        <th scope="col">Pembayaran</th> 
                         <th scope="col">Total</th> 
                         <th scope="col">Status</th> 
                         <th scope="col">Action</th> 
@@ -217,12 +217,11 @@ if(isset($_SESSION['transaksi_id'])){
                                     $field2name = $row["transaksi_id"]; 
                                     $field3name = $row["nama_barang"]; 
                                     $field4name = $row["image"]; 
-                                    $field5name = $row["qty"];  
+                                    $field5name = $row["jumlah"];  
                                     $field6name = $row["nama"];  
-                                    $field7name = $row["alamat"];  
-                                    $field8name = $row["pembayaran"];  
-                                    $field9name = $row["total"];  
-                                    $field10name = $row["status"];  
+                                    $field7name = $row["alamat_lengkap"]; 
+                                    $field8name = $row["total"];  
+                                    $field9name = $row["status"];  
     
                                     echo '<tr>   
                                             <th>' .$no.'</th>  
@@ -234,7 +233,6 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field7name.'</td> 
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
-                                            <td>'.$field10name.'</td> 
                                             <td>  
                                             <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                             <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
@@ -273,10 +271,11 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Dikirim' ORDER BY `waktu_transaksi` DESC";
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Dikirim' ORDER BY `waktu_transaksi` ASC";
+                          
                         } else{
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                        
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Dikirim' ORDER BY `waktu_transaksi` ASC";
+                          
                         }
                         $no = 0; 
                       ?> 
@@ -291,8 +290,7 @@ if(isset($_SESSION['transaksi_id'])){
                           <th scope="col">Gambar</th> 
                           <th scope="col">Kuantitas</th> 
                           <th scope="col">Nama Pembeli</th> 
-                          <th scope="col">Alamat</th> 
-                          <th scope="col">Pembayaran</th> 
+                          <th scope="col">Alamat</th>  
                           <th scope="col">Total</th> 
                           <th scope="col">Status</th> 
                           <th scope="col">Action</th> 
@@ -306,12 +304,11 @@ if(isset($_SESSION['transaksi_id'])){
                                       $field2name = $row["transaksi_id"]; 
                                       $field3name = $row["nama_barang"]; 
                                       $field4name = $row["image"]; 
-                                      $field5name = $row["qty"];  
+                                      $field5name = $row["jumlah"];  
                                       $field6name = $row["nama"];  
-                                      $field7name = $row["alamat"];  
-                                      $field8name = $row["pembayaran"];  
-                                      $field9name = $row["total"];  
-                                      $field10name = $row["status"];  
+                                      $field7name = $row["alamat_lengkap"]; 
+                                      $field8name = $row["total"];  
+                                      $field9name = $row["status"];  
       
                                       echo '<tr>   
                                               <th>' .$no.'</th>  
@@ -322,8 +319,7 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field6name.'</td> 
                                               <td>'.$field7name.'</td> 
                                               <td>'.$field8name.'</td> 
-                                              <td>'.$field9name.'</td> 
-                                              <td>'.$field10name.'</td> 
+                                              <td>'.$field9name.'</td>  
                                               <td> 
                                               <a href="editKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                               <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
@@ -362,10 +358,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC";
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Diterima' ORDER BY `waktu_transaksi` ASC";
+                          
                         } else{
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                        
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Diterima' ORDER BY `waktu_transaksi` ASC";
                         }
                         $no = 0; 
                         ?> 
@@ -381,7 +377,6 @@ if(isset($_SESSION['transaksi_id'])){
                           <th scope="col">Kuantitas</th> 
                           <th scope="col">Nama Pembeli</th> 
                           <th scope="col">Alamat</th> 
-                          <th scope="col">Pembayaran</th> 
                           <th scope="col">Total</th> 
                           <th scope="col">Status</th> 
                           <th scope="col">Action</th> 
@@ -395,12 +390,11 @@ if(isset($_SESSION['transaksi_id'])){
                                       $field2name = $row["transaksi_id"]; 
                                       $field3name = $row["nama_barang"]; 
                                       $field4name = $row["image"]; 
-                                      $field5name = $row["qty"];  
+                                      $field5name = $row["jumlah"];  
                                       $field6name = $row["nama"];  
-                                      $field7name = $row["alamat"];  
-                                      $field8name = $row["pembayaran"];  
-                                      $field9name = $row["total"];  
-                                      $field10name = $row["status"];  
+                                      $field7name = $row["alamat_lengkap"]; 
+                                      $field8name = $row["total"];  
+                                      $field9name = $row["status"];  
       
                                       echo '<tr>   
                                               <th>' .$no.'</th>  
@@ -411,8 +405,7 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field6name.'</td> 
                                               <td>'.$field7name.'</td> 
                                               <td>'.$field8name.'</td> 
-                                              <td>'.$field9name.'</td> 
-                                              <td>'.$field10name.'</td> 
+                                              <td>'.$field9name.'</td>  
                                               <td> 
                                               <a href="editTerima.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                               <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
@@ -450,10 +443,11 @@ if(isset($_SESSION['transaksi_id'])){
                     <div class="table-responsive">
                     <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT `alamat`.`alamat`,`transaksi`.`transaksi_id`, `barang`.`nama_barang`,`barang`.`image` , `transaksi`.`qty`, `pembeli`.`nama` , `transaksi`.`pembayaran`, `transaksi`.`total`,`transaksi`.`status` FROM `transaksi` JOIN `barang` on `transaksi`.`id_barang` = `barang`.`id_barang` JOIN `pembeli` ON `transaksi`.`id_user` = `pembeli`.`id_user` JOIN `alamat` ON `transaksi`.`id_alamat`  = `alamat`.`id_alamat` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] . "' AND status = 'Perlu dikirim' ORDER BY `waktu_transaksi` DESC";
-                        } else{
-                          $query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                        
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Dibatalkan' ORDER BY `waktu_transaksi` ASC";
+                          
+                        } else {
+                          $query = "SELECT `transaksi`.`transaksi_id`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Dibatalkanr' ORDER BY `waktu_transaksi` ASC";
+                          
                         }
                         $no = 0; 
                     ?> 
@@ -468,7 +462,6 @@ if(isset($_SESSION['transaksi_id'])){
                         <th scope="col">Kuantitas</th> 
                         <th scope="col">Nama Pembeli</th> 
                         <th scope="col">Alamat</th> 
-                        <th scope="col">Pembayaran</th> 
                         <th scope="col">Total</th> 
                         <th scope="col">Status</th> 
                         <th scope="col">Action</th> 
@@ -482,12 +475,11 @@ if(isset($_SESSION['transaksi_id'])){
                                 $field2name = $row["transaksi_id"]; 
                                 $field3name = $row["nama_barang"]; 
                                 $field4name = $row["image"]; 
-                                $field5name = $row["qty"];  
+                                $field5name = $row["jumlah"];  
                                 $field6name = $row["nama"];  
-                                $field7name = $row["alamat"];  
-                                $field8name = $row["pembayaran"];  
-                                $field9name = $row["total"];  
-                                $field10name = $row["status"];  
+                                $field7name = $row["alamat_lengkap"]; 
+                                $field8name = $row["total"];  
+                                $field9name = $row["status"];  
 
                                 echo '<tr>   
                                         <th>' .$no.'</th>  
@@ -499,7 +491,6 @@ if(isset($_SESSION['transaksi_id'])){
                                         <td>'.$field7name.'</td> 
                                         <td>'.$field8name.'</td> 
                                         <td>'.$field9name.'</td> 
-                                        <td>'.$field10name.'</td> 
                                         <td>  
                                         <a class="text" >Dibatalkan</a> 
                                         </td> 

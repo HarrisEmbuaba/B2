@@ -1,36 +1,4 @@
-<?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project3";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-$jan = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 1";
-$feb = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 2";
-$mar = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 3";
-$apr = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 4";
-$may = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 5";
-$jun = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 6";
-$jul = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 7";
-$aug = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 8";
-$sep = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 9";
-$oct = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 10";
-$nov = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 11";
-$des = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 12";
-
-// $jml = "SELECT SUM(total) FROM transaksi";
-
-// $bagi = 2;
-
-//$rata = ($jml / $bagi);
-
-?>
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -174,58 +142,25 @@ $des = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 12";
         <div>
           <div class="row">
 
-            <!-- Periode Data Card -->
-            <div class="col-xxl-50 col-xl-12">
-
-              <div class="card info-card periode-card">
-
-                
-
-                <div class="card-body">
-                  <h5 class="card-title">Periode Data <span>| Bulan: November</span></h5>
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-calendar"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-periode">
-                        <h6>Filter</h6>
-                      </li>
-  
-                      <li><a class="dropdown-item" href="#">Januari</a></li>
-                      <li><a class="dropdown-item" href="#">Februari</a></li>
-                      <li><a class="dropdown-item" href="#">Maret</a></li>
-                      <li><a class="dropdown-item" href="#">April</a></li>
-                      <li><a class="dropdown-item" href="#">Mei</a></li>
-                      <li><a class="dropdown-item" href="#">Juni</a></li>
-                      <li><a class="dropdown-item" href="#">Juli</a></li>
-                      <li><a class="dropdown-item" href="#">Agustus</a></li>
-                      <li><a class="dropdown-item" href="#">September</a></li>
-                      <li><a class="dropdown-item" href="#">Oktober</a></li>
-                      <li><a class="dropdown-item" href="#">November</a></li>
-                      <li><a class="dropdown-item" href="#">Desember</a></li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Periode Data Card -->
-
             <!-- Pendapatan Penjualan Card -->
             <div class="col-xxl-25 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h5 class="card-title">Pendapatan Penjualan <span></h5>
+                  <h5 class="card-title">Pendapatan Penjualan | Bulan: 
+                    <!-- <?php 
+                    //$bulan = "SELECT waktu_transaksi FROM transaksi WHERE month(waktu_transaksi) = MONTH(CURRENT_DATE());";
+                    ?> -->
+                    <span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
                       <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(total) FROM transaksi");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi ORDER BY month(waktu_transaksi)");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                       <div class="ps-3">
-                          <h6><?php echo "Rp." . number_format($data['SUM(total)']) ;?></h6>
+                          <h6><?php echo "Rp." . number_format($data['SUM(grand_total)']) ;?></h6>
                       <?php
                       }
                       ?></h5>
@@ -246,11 +181,11 @@ $des = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 12";
                     <div class="ps-3">
                       <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(qty) FROM transaksi");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                       <div class="ps-3">
-                          <h6><?php echo number_format($data['SUM(qty)']) ;?></h6>
+                          <h6><?php echo number_format($data['qty']) ;?></h6>
                       <?php
                       }
                       ?></h5>
@@ -268,177 +203,80 @@ $des = "SELECT total FROM transaksi WHERE month(waktu_pengambilan) = 12";
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
 
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Pendapatan',
-                          data: [<?php
-                          if (mysqli_query($conn, $jan)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $feb)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $mar)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $apr)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $may)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $jun)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $jul)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $aug)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $sep)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $oct)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $nov)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $des)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>],
-                        }, {
-                          name: 'Rata-rata',
-                          data: [<?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>, <?php
-                          if (mysqli_query($conn, $rata)){
-                          } else {
-                            echo "<script>Tidak ada data!</script>";
-                          }
-                          ?>],
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'month',
-                          categories: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
+                  <?php
 
+                  include ('koneksi.php');
+
+                  $jan = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 1";
+                  $feb = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 2";
+                  $mar = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 3";
+                  $apr = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 4";
+                  $may = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 5";
+                  $jun = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 6";
+                  $jul = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 7";
+                  $aug = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 8";
+                  $sep = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 9";
+                  $oct = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 10";
+                  $nov = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 11";
+                  $dec = "SELECT grand_total FROM transaksi WHERE month(waktu_transaksi) = 12";
+
+                  $jml = "SELECT SUM(grand_total) as total  FROM transaksi";
+                  if ($result = $mysqli->query($jml)) { 
+                    while ($row = $result->fetch_assoc()) { 
+                      $bagi = 12;
+
+                      $rata = ($row['total'] / $bagi);
+                      
+                    } 
+                    $result->free(); 
+                  }
+
+                  $dataPoints = array(
+                    array("y" => $jan, "label" => "January"),
+                    array("y" => $feb, "label" => "February"),
+                    array("y" => $mar, "label" => "March"),
+                    array("y" => $apr, "label" => "April"),
+                    array("y" => $may, "label" => "May"),
+                    array("y" => $jun, "label" => "June"),
+                    array("y" => $jul, "label" => "July"),
+                    array("y" => $aug, "label" => "August"),
+                    array("y" => $sep, "label" => "September"),
+                    array("y" => $oct, "label" => "October"),
+                    array("y" => $nov, "label" => "November"),
+                    array("y" => $dec, "label" => "December"),
+
+                  );
+                  
+                  ?>
+                  <!DOCTYPE HTML>
+                  <html>
+                  <head>
+                  <script>
+                  window.onload = function () {
+                  
+                  var chart = new CanvasJS.Chart("chartContainer", {
+                    title: {
+                      text: "Pendapatan Perbulan"
+                    },
+                    axisY: {
+                      title: "Pendapatan"
+                    },
+                    data: [{
+                      type: "line",
+                      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                    }]
+                  });
+                  chart.render();
+                  
+                  }
+
+                  </script>
+                  </head>
+                  <body>
+                  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                  </body>
+                  </html>
                 </div>
 
               </div>
