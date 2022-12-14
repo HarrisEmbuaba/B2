@@ -220,7 +220,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     $field5name = $row["jumlah"];  
                                     $field6name = $row["nama"];  
                                     $field7name = $row["alamat_lengkap"]; 
-                                    $field8name = $row["total"];  
+                                    $field8name = $row["grand_total"];  
                                     $field9name = $row["status"];  
     
                                     echo '<tr>   
@@ -307,7 +307,7 @@ if(isset($_SESSION['transaksi_id'])){
                                       $field5name = $row["jumlah"];  
                                       $field6name = $row["nama"];  
                                       $field7name = $row["alamat_lengkap"]; 
-                                      $field8name = $row["total"];  
+                                      $field8name = $row["grand_total"];  
                                       $field9name = $row["status"];  
       
                                       echo '<tr>   
@@ -393,7 +393,7 @@ if(isset($_SESSION['transaksi_id'])){
                                       $field5name = $row["jumlah"];  
                                       $field6name = $row["nama"];  
                                       $field7name = $row["alamat_lengkap"]; 
-                                      $field8name = $row["total"];  
+                                      $field8name = $row["grand_total"];  
                                       $field9name = $row["status"];  
       
                                       echo '<tr>   
@@ -478,7 +478,7 @@ if(isset($_SESSION['transaksi_id'])){
                                 $field5name = $row["jumlah"];  
                                 $field6name = $row["nama"];  
                                 $field7name = $row["alamat_lengkap"]; 
-                                $field8name = $row["total"];  
+                                $field8name = $row["grand_total"];  
                                 $field9name = $row["status"];  
 
                                 echo '<tr>   

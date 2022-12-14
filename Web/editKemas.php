@@ -13,11 +13,12 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "UPDATE transaksi SET status='Belum kirim' WHERE transaksi_id = $field2name";
+$sql = "UPDATE transaksi SET status='Belum dikirim' WHERE transaksi_id = $field2name";
 
 if (mysqli_query($conn, $sql)){
 } else {
   echo "<script>Tidak ada data!</script>";
+  echo "<script>alert('Data berhasil ditambah.');window.location='pesan2.php';</script>";
 }
 
 
