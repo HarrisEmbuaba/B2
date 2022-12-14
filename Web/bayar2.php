@@ -1,6 +1,9 @@
 <?php
 require "function.php";
 
+$transaksi = tampil("SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi_id ASC");
+
+
 if(isset($_POST["Cari"])){
     $transaksi = Cari($_POST["keyword"]);
 }
@@ -217,6 +220,19 @@ if(isset($_POST["Cari"])){
                                             <th>Total</th>
                                         </tr>
                                     </thead>
+                                    <?php $no = 1; ?>
+                                    <?php foreach($transaksi as $trs) : ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $trs["transaksi_id"];?></td>
+                                            <td><?= $trs["waktu_transaksi"];?></td>
+                                            <td><?= $trs["nama"];?></td>
+                                            <td><?= $trs["nama_barang"];?>
+                                            <td><?= $trs["total"];?></td></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                      
+                                    
                                     <tbody>
                                     <?php
                                         include ('koneksi.php');
