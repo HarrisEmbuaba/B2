@@ -111,13 +111,13 @@ if(isset($_POST["Cari"])){
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.php">
+        <a class="nav-link collapsed" href="kirim3.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -173,11 +173,11 @@ if(isset($_POST["Cari"])){
                     </div>
                       <?php
                         include 'koneksi.php';
-                        $sql = mysqli_query($mysqli, "SELECT SUM(total) FROM transaksi");
+                        $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi");
                         while($data = mysqli_fetch_array($sql)) {
                         ?>
                         <div class="ps-3">
-                            <h6><?php echo "Rp." . number_format($data['SUM(total)']) ;?></h6>
+                            <h6><?php echo "Rp." . number_format($data['SUM(grand_total)']) ;?></h6>
                         <?php
                         }
                         ?>
@@ -221,6 +221,7 @@ if(isset($_POST["Cari"])){
                                             <th>Total</th>
                                         </tr>
                                     </thead>
+<<<<<<< Updated upstream
                                     <?php $no = 1; ?>
                                     <?php foreach($transaksi as $trs) : ?>
                                         <tr>
@@ -234,6 +235,32 @@ if(isset($_POST["Cari"])){
                                         </tr>
                                     <?php endforeach; ?>
                       
+=======
+                                    
+                                    <tbody>
+                                    <?php
+                                        include ('koneksi.php');
+        
+                                        $no=1;
+                                        $sql = mysqli_query($mysqli, "SELECT `transaksi`.`transaksi_id`, `transaksi`.`waktu_transaksi`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` ORDER BY `waktu_transaksi` ASC");
+                                        while ($data=mysqli_fetch_array($sql)) {
+                                            $transaksi_id = $data['transaksi_id'];
+                                            $waktu_transaksi = $data['waktu_transaksi'];
+                                            $nama = $data['nama'];
+                                            $nama_barang = $data['nama_barang'];
+                                            $total = $data['grand_total'];
+                                            
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $transaksi_id; ?></td>
+                                                <td><?php echo $waktu_transaksi; ?></td>
+                                                <td><?php echo $nama; ?></td>
+                                                <td><?php echo $nama_barang; ?></td>
+                                                <td><?php echo $total; ?></td>
+                                            </tr>
+                                            <?php ; }?>
+>>>>>>> Stashed changes
                                     </tbody>
                                 </table>
                             </div>
