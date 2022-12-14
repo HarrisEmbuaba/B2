@@ -222,7 +222,7 @@ if(isset($_POST["Cari"])){
                                         include ('koneksi.php');
         
                                         $no=1;
-                                        $sql = mysqli_query($mysqli, "SELECT `transaksi`.`transaksi_id`, `transaksi`.`waktu_transaksi`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` ORDER BY `waktu_transaksi` ASC");
+                                        $sql = mysqli_query($mysqli, "SELECT `transaksi`.`transaksi_id`, `transaksi`.`waktu_transaksi`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Diterima' ORDER BY `waktu_transaksi` ASC");
                                         while ($data=mysqli_fetch_array($sql)) {
                                             $transaksi_id = $data['transaksi_id'];
                                             $waktu_transaksi = $data['waktu_transaksi'];

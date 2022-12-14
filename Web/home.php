@@ -1,4 +1,21 @@
- 
+<?php
+    $database = "project3";
+    $host = "localhost";
+    $user = "root"; // ganti dengan username database km
+    $password = ""; // ganti dengan password database km
+    
+    $mysqli = new mysqli($host,$user,$password,$database);
+    
+    // Check connection
+    if ($mysqli -> connect_errno) {
+      echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+      exit();
+    } else {
+      if( !$connect ) {
+        echo '<script>window.location.href="custom-404-page.php";</script>';
+    }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
