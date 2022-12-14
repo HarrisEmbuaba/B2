@@ -175,11 +175,15 @@ include ('koneksi.php');
                     <div class="py-4">
                       <div class="col-md-4">
                         <div class="text-center">
-                          <button type="submit" class="btn btn-primary">Cari</button>
-                          <button type="reset" name="" class="btn btn-primary">Clear</button>
-                          <button type="submit" name="" class="btn btn-primary">Update</button>
-                          <button type="reset" name="" class="btn btn-primary">Delete</button>
-                          <button type="submit" name="tambah" class="btn btn-primary">Input</button>
+                          <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" autocomplate="off" autofocus>
+                            <div class="input-group-append">
+                              <button type="submit" name="cari" class="btn btn-warning pl-4 pr-4">Cari</button>
+                            </div>
+                          </div>
+                          <button type="reset" name="breset" class="btn btn-danger">Clear</button>
+                          <button type="submit" name="" class="btn btn-warning">Update</button>
+                          <button type="submit" name="tambah" class="btn btn-warning">Input</button>
                         </div>
                       </div>
                     </div>
