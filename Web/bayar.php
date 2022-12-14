@@ -1,11 +1,8 @@
 <?php
 require "function.php";
 
-if(isset($_POST["Cari"])){
-    $transaksi = Cari($_POST["keyword"]);
-}
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +11,7 @@ if(isset($_POST["Cari"])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Penghasilan</title>
+  <title>Pesanan</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -40,7 +37,6 @@ if(isset($_POST["Cari"])){
   <link rel="stylesheet" href="plugin/jquery-ui/jquery-ui.min.css" /> <!-- Load file css jquery-ui -->
     <script src="js/jquery.min.js"></script> <!-- Load file jquery -->
 
-
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -57,7 +53,7 @@ if(isset($_POST["Cari"])){
     
 
     <div class="d-flex align-items-center">
-      <a href="home.php" class="logo d-flex align-items-center">
+      <a href="home.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -76,12 +72,6 @@ if(isset($_POST["Cari"])){
             <span class="badge bg-primary badge-number">99+</span>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
-              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-            </li>
-          </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown">
@@ -90,6 +80,13 @@ if(isset($_POST["Cari"])){
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-success badge-number">99+</span>
           </a><!-- End Messages Icon -->
+
+        </li><!-- Profile Nav -->
+        <li class="nav-item">
+          <a class="nav-link nav-icon" href="users-profile.html">
+            <img src="assets/img/user.png" width="35px" height="35px"></i>
+          </a>
+      </li><!-- End Profile Nav -->
 
         </li><!-- End Messages Nav -->
 
@@ -104,20 +101,20 @@ if(isset($_POST["Cari"])){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan2.php">
+        <a class="nav-link collapsed" href="pesan.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
         
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk2.php">
+        <a class="nav-link collapsed" href="produk.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -142,65 +139,7 @@ if(isset($_POST["Cari"])){
   <section class="section dashboard">
       <div class="row">
 
-<<<<<<< HEAD
-=======
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Perhari</a></li>
-                    <li><a class="dropdown-item" href="#">Perbulan</a></li>
-                    <li><a class="dropdown-item" href="#">Pertahun</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Informasi Penghasilan <span>| Rekening: 274698745639 a/n Maulita</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                      <?php
-                        include 'koneksi.php';
-                        $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi");
-                        while($data = mysqli_fetch_array($sql)) {
-                        ?>
-                        <div class="ps-3">
-                            <h6><?php echo "Rp." . number_format($data['SUM(grand_total)']) ;?></h6>
-                        <?php
-                        }
-                        ?>
-                      <span class="text-muted small pt-2 ps-1">perhari</span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-                    
-      
-                  </div>
-                </div>
-              </ul><!-- End Default List group -->
-            </div>
-          </div>
-
->>>>>>> 049a218b359be79cecf07a7430c9a712f0223d92
+        
           <div class="card2">
             <div class="card-body">
               <h5 class="card-title">LAPORAN TRANSAKSI</h5>
@@ -257,48 +196,8 @@ if(isset($_POST["Cari"])){
                   <input href="bayar.php" name="btnTampil" class="btn btn-success" type="submit"value="Riset Filter" />
                 </div>
                 
-<<<<<<< HEAD
             </form>
             <hr />
-=======
-                                  <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Transaksi ID</th>
-                                            <th>Waktu Transaksi</th>
-                                            <th>Nama Pembeli</th>
-                                            <th>Nama Barang</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                        include ('koneksi.php');
-        
-                                        $no=1;
-                                        $sql = mysqli_query($mysqli, "SELECT `transaksi`.`transaksi_id`, `transaksi`.`waktu_transaksi`, `barang`.`nama_barang`, `barang`.`image`, `transaksi_detail`.`jumlah`, `pembeli`.`nama`, `alamat`.`alamat_lengkap`, `transaksi`.`grand_total`, `transaksi`.`status` FROM `transaksi` JOIN `transaksi_detail` ON `transaksi`.`transaksi_id` = `transaksi_detail`.`id_TransaksiDetail` JOIN `pembeli` ON `transaksi_detail`.`id_UserDetail` = `pembeli`.`id_user` JOIN `barang` ON `transaksi_detail`.`id_BarangDetail` = `barang`.`id_barang` JOIN `alamat` ON `alamat`.`id_userPembeli` = `pembeli`.`id_user` WHERE status = 'Diterima' ORDER BY `waktu_transaksi` ASC");
-                                        while ($data=mysqli_fetch_array($sql)) {
-                                            $transaksi_id = $data['transaksi_id'];
-                                            $waktu_transaksi = $data['waktu_transaksi'];
-                                            $nama = $data['nama'];
-                                            $nama_barang = $data['nama_barang'];
-                                            $total = $data['grand_total'];
-                                            
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo $transaksi_id; ?></td>
-                                                <td><?php echo $waktu_transaksi; ?></td>
-                                                <td><?php echo $nama; ?></td>
-                                                <td><?php echo $nama_barang; ?></td>
-                                                <td><?php echo $total; ?></td>
-                                            </tr>
-                                            <?php ; }?>
-                                    </tbody>
-                                </table>
-                            </div>
->>>>>>> 049a218b359be79cecf07a7430c9a712f0223d92
 
             <?php
             if(isset($_GET['filter']) && ! empty($_GET['filter'])){ // Cek apakah user telah memilih filter dan klik tombol tampilkan
@@ -385,9 +284,6 @@ if(isset($_POST["Cari"])){
             })
             </script>
               <script src="plugin/jquery-ui/jquery-ui.min.js"></script> <!-- Load file plugin js jquery-ui -->
-    
-          
-            </div>
           </div>
 
         </div>
@@ -418,6 +314,7 @@ if(isset($_POST["Cari"])){
 
   <!-- Template Main JS File -->
   <script src="assets/js/mainhome.js"></script>
+  
 
 </body>
 

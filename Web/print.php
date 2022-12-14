@@ -29,21 +29,21 @@
                 if($filter == '1'){ // Jika filter nya 1 (per tanggal)
                     $tgl = date('d-m-y', strtotime($_GET['tanggal']));
                     
-                    echo '<b>Data Transaksi Tanggal '.$tgl.'</b><br /><br />';
-                    echo '<a href="print.php?filter=1&tanggal='.$_GET['tanggal'].'">Cetak PDF</a><br /><br />';
+                    echo '<b>Data Transaksi Tanggal '.$tgl.'</b><br />';
+                    echo '<a href="print.php?filter=1&tanggal='.$_GET['tanggal'].'"></a><br /><br />';
                     $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE DATE(transaksi.waktu_transaksi)='".$_GET['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
                 
                   }else if($filter == '2'){ // Jika filter nya 2 (per bulan)
                     $nama_bulan = array('', 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
                     
-                    echo '<b>Data Transaksi Bulan '.$nama_bulan[$_GET['bulan']].' '.$_GET['tahun'].'</b><br /><br />';
-                    echo '<a href="print.php?filter=2&bulan='.$_GET['bulan'].'&tahun='.$_GET['tahun'].'">Cetak PDF</a><br /><br />';
+                    echo '<b>Data Transaksi Bulan '.$nama_bulan[$_GET['bulan']].' '.$_GET['tahun'].'</b><br />';
+                    echo '<a href="print.php?filter=2&bulan='.$_GET['bulan'].'&tahun='.$_GET['tahun'].'"></a><br /><br />';
                     $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE MONTH(transaksi.waktu_transaksi)='".$_GET['bulan']."' AND YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
                 
                   }else{ // Jika filter nya 3 (per tahun)
                     
-                    echo '<b>Data Transaksi Tahun '.$_GET['tahun'].'</b><br /><br />';
-                    echo '<a href="print.php?filter=3&tahun='.$_GET['tahun'].'">Cetak PDF</a><br /><br />';
+                    echo '<b>Data Transaksi Tahun '.$_GET['tahun'].'</b><br />';
+                    echo '<a href="print.php?filter=3&tahun='.$_GET['tahun'].'"></a><br /><br />';
                     $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
                 }
             }else{ // Jika user tidak mengklik tombol tampilkan
