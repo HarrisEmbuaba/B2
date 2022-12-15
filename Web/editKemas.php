@@ -16,9 +16,9 @@ if (!$conn) {
 $sql = "UPDATE transaksi SET status='Belum dikirim' WHERE transaksi_id = $field2name";
 
 if (mysqli_query($conn, $sql)){
+  echo "<script>alert('Data berhasil ditambah.');window.location='produk2.php';</script>";
 } else {
-  echo "<script>Tidak ada data!</script>";
-  echo "<script>alert('Data berhasil ditambah.');window.location='pesan2.php';</script>";
+  echo "<script>alert('Data gagal terupdate!.');window.location='pesan2.php';</script>";
 }
 
 
