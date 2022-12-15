@@ -148,13 +148,13 @@ require "function.php";
                 <label>Filter Berdasarkan</label><br>
                 <select name="filter" id="filter">
                     <option value="">Pilih</option>
-                    <option value="1">Per Tanggal</option>
+                    <option value="1">Per Hari</option>
                     <option value="2">Per Bulan</option>
                     <option value="3">Per Tahun</option>
                 </select>
                 <br /><br />
                 <div id="form-tanggal">
-                    <label>Tanggal</label><br>
+                    <label>Hari</label><br>
                     <input type="text" name="tanggal" class="input-tanggal" />
                     <br /><br />
                 </div>
