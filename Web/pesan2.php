@@ -404,7 +404,7 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field8name.'</td> 
                                               <td>'.$field9name.'</td> 
                                               <td> 
-                                              <a href="editPerluKirim.html" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
+                                              <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
                                               <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                               </td> 
                                           </tr>'; 

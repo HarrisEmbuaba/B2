@@ -9,7 +9,7 @@ if (!$mysqli) {
 } else {
   $sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
   if (!mysqli_query($mysqli, $sql)){
-    echo "<script>Tidak ada data!</script>";
+    echo "<script>alert('Status berhasil terupdate!');window.location='pesan2.php';</script>";
   }
   
 }
