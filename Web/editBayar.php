@@ -2,25 +2,18 @@
 
 include ('pesan2.php');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project3";
+require ('koneksi.php');
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
+if (!$mysqli) {
   die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
-
-if (mysqli_query($conn, $sql)){
 } else {
-  echo "<script>Tidak ada data!</script>";
+  $sql = "UPDATE transaksi SET status='Sudah bayar' WHERE transaksi_id = $field2name";
+  if (!mysqli_query($mysqli, $sql)){
+    echo "<script>Tidak ada data!</script>";
+  }
+  
 }
 
-
-mysqli_close($conn);
+mysqli_close($mysqli);
 
 ?>

@@ -13,7 +13,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "UPDATE transaksi SET status='Dikirim' WHERE transaksi_id = $field2name";
+$sql = "UPDATE transaksi SET status='Dikirim' WHERE transaksi_id = $transaksi_id";
 
 if (mysqli_query($conn, $sql)){
   echo "<script>
