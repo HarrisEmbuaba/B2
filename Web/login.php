@@ -64,7 +64,7 @@ if (isset($_POST['Login'])) {
         $_SESSION['pass'] = $row['pass'];
         $_SESSION['email'] = $row['email'];
         echo "<script>alert('BERHASIL LOGIN. Silahkan coba lagi!')</script>";
-        header("Location: berhasil_login.php");
+        header("Location: home.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }

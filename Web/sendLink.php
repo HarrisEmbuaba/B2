@@ -1,54 +1,57 @@
 <?php
+//ini wajib dipanggil paling atas
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-require 'koneksi.php';
+//ini sesuaikan foldernya ke file 3 ini
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require "koneksi.php";
+session_start();
 
-if(isset($_POST['submit_email']) && $_POST['email']) {
+        $kode =  rand(pow(10, 5 - 1), pow(10, 5) - 1); 
+        $email = $_SESSION['email'];
+        // $query1 = mysqli_query($mysqli, "SELECT `email` FROM `pemilik` WHERE `email` ='$email'");
+        // $row = mysqli_fetch_array($query1);
+        // $email = $row['email'];
+        $query = mysqli_query($mysqli, "INSERT INTO `password_reset_temp`(`kode_verifikasi`, `status`, `email`) VALUES ('$kode','','$email')");
 
-  $query = "SELECT email, password FROM pemilik where email = '$email'";
-  $select=mysqli_query($conn, $query);
+        //sesuaikan name dengan di form nya ya 
+        $judul = "Verification Code for Your New Password.";
+        $pesan = "Verification Code: $kode";
 
-  if(mysqli_num_rows($select)==$email) {
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+try {
+  //Server settings
+  $mail->SMTPDebug = 2;                      //Enable verbose debug output
+  $mail->isSMTP();                                            //Send using SMTP
+  $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+  $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+  $mail->Username   = '';                     //SMTP username
+  $mail->Password   = '';                               //SMTP password
+  $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+  $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    while($row=mysqli_fetch_array($select)){
-      $email=md5($row['email']);
-      $pass=md5($row['password']);
-    }
+  //pengirim
+  $mail->setFrom('', '');
+  $mail->addAddress($email);     //Add a recipient
 
-    $link="<a href='www.samplewebsite.com/reset.php?key=".$email."&reset=".$pass."'>Click To Reset password</a>";
-    require_once('phpmail/PHPMailerAutoload.php');
+  //Content
+  $mail->isHTML(true);                                  //Set email format to HTML
+  $mail->Subject = $judul;
+  $mail->Body    = $pesan;
+  $mail->AltBody = '';
+  //$mail->AddEmbeddedImage('gambar/logo.png', 'logo'); //abaikan jika tidak ada logo
+  //$mail->addAttachment(''); 
 
-    $mail = new PHPMailer();
-    $mail->CharSet =  "utf-8";
-    $mail->IsSMTP();
-    // enable SMTP authentication
-    $mail->SMTPAuth = true;                  
-    // GMAIL username
-    $mail->Username = "your_email_id@gmail.com";
-    // GMAIL password
-    $mail->Password = "your_gmail_password";
-    $mail->SMTPSecure = "ssl";  
-    // sets GMAIL as the SMTP server
-    $mail->Host = "smtp.gmail.com";
-    // set the SMTP port for the GMAIL server
+  $mail->send();
+  echo 'Message has been sent.';
+} catch (Exception $e) {
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 
-    $mail->Port = "465";
-    $mail->From='your_gmail_id@gmail.com';
-    $mail->FromName='your_name';
-    $mail->AddAddress('reciever_email_id', 'reciever_name');
-    $mail->Subject  =  'Reset Password';
-    $mail->IsHTML(true);
-    $mail->Body    = 'Click On This Link to Reset Password '.$pass.'';
-
-    if($mail->Send()) {
-
-      echo "Check Your Email and Click on the link sent to your email";
-
-    } else {
-
-      echo "Mail Error - >".$mail->ErrorInfo;
-
-    }
-  }	
 }
-
+      //redirect ke halaman index.php
+      echo "<script>alert('Email sent successfully!');window.location='resetPass.php';</script>";
 ?>

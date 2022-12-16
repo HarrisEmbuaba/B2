@@ -242,18 +242,18 @@ var myLineChart = new Chart(ctx, {
 
   <?php
   
-  $data1 = $jan =date('Y-m-d', strtotime("-1 day", strtotime(date("Y-m-d"))));
-  $data2 = $feb =date('Y-m-d', strtotime("-2 day", strtotime(date("Y-m-d"))));
-  $data3 = $mar =date('Y-m-d', strtotime("-3 day", strtotime(date("Y-m-d"))));
-  $data4 = $apr =date('Y-m-d', strtotime("-4 day", strtotime(date("Y-m-d"))));
-  $data5 = $may =date('Y-m-d', strtotime("-5 day", strtotime(date("Y-m-d"))));
-  $data6 = $jun =date('Y-m-d', strtotime("-6 day", strtotime(date("Y-m-d"))));
-  $data7 = $jul =date('Y-m-d', strtotime("-1 day", strtotime(date("Y-m-d"))));
-  $data8 = $aug =date('Y-m-d', strtotime("-2 day", strtotime(date("Y-m-d"))));
-  $data9 = $sep =date('Y-m-d', strtotime("-3 day", strtotime(date("Y-m-d"))));
-  $data10 = $oct =date('Y-m-d', strtotime("-4 day", strtotime(date("Y-m-d"))));
-  $data11 = $nov =date('Y-m-d', strtotime("-5 day", strtotime(date("Y-m-d"))));
-  $data12 = $des =date('Y-m-d', strtotime("-6 day", strtotime(date("Y-m-d"))));
+  $data1 = $jan =date('Y-m-d', strtotime("-1 month", strtotime(date("Y-m-d"))));
+  $data2 = $feb =date('Y-m-d', strtotime("-2 month", strtotime(date("Y-m-d"))));
+  $data3 = $mar =date('Y-m-d', strtotime("-3 month", strtotime(date("Y-m-d"))));
+  $data4 = $apr =date('Y-m-d', strtotime("-4 month", strtotime(date("Y-m-d"))));
+  $data5 = $may =date('Y-m-d', strtotime("-5 month", strtotime(date("Y-m-d"))));
+  $data6 = $jun =date('Y-m-d', strtotime("-6 month", strtotime(date("Y-m-d"))));
+  $data7 = $jul =date('Y-m-d', strtotime("-7 month", strtotime(date("Y-m-d"))));
+  $data8 = $aug =date('Y-m-d', strtotime("-8 month", strtotime(date("Y-m-d"))));
+  $data9 = $sep =date('Y-m-d', strtotime("-9 month", strtotime(date("Y-m-d"))));
+  $data10 = $oct =date('Y-m-d', strtotime("-10 month", strtotime(date("Y-m-d"))));
+  $data11 = $nov =date('Y-m-d', strtotime("-11 month", strtotime(date("Y-m-d"))));
+  $data12 = $des =date('Y-m-d', strtotime("-12 month", strtotime(date("Y-m-d"))));
 
   ?>
   data: {
