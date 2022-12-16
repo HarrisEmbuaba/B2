@@ -56,7 +56,7 @@ if (isset($_POST['Login'])) {
     $pass = $_POST['pass'];
  
     $sql = "SELECT * FROM pemilik WHERE email ='$email' AND pass='$pass'";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($mysqli, $sql);
     $check = mysqli_num_rows($result);
     if ($check > 0) {
         $row = mysqli_fetch_assoc($result);

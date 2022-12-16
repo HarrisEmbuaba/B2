@@ -21,11 +21,13 @@ if (!isset($_SESSION['nama'])) {
 <body>
     <div class="container-logout">
         <form action="" method="POST" class="login-email">
+        <div class="py-1">
             <?php echo "<h1>Selamat Datang, " . $_SESSION['nama'] ."!". "</h1>"; ?>
              
             <div class="input-group">
             <a href="home.html" class="btn">Lanjutkan</a>
             </div>
+        </div>    
         </form>
     </div>
 </body>
