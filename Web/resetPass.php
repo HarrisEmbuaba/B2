@@ -29,20 +29,6 @@ if (isset($_GET["kode_verifikasi"]) && isset($_GET["email"]) && isset($_GET["act
   if ($status >= $curDate) {
   ?>
 
-  <br/>
-  <form method="post" action="" name="update">
-    <input type="hidden" name="action" value="update" />
-    <br /><br />
-    <label><strong>Enter New Password:</strong></label><br />
-    <input type="password" name="pass1" maxlength="15" required />
-    <br /><br />
-    <label><strong>Re-Enter New Password:</strong></label><br />
-    <input type="password" name="pass2" maxlength="15" required/>
-    <br /><br />
-    <input type="hidden" name="email" value="<?php echo $email;?>"/>
-    <input type="submit" value="Reset Password" />
-  </form>
-  
   <?php
   } else {
     $error .= "<h2>Code Expired</h2>
@@ -84,3 +70,23 @@ Click here</a> to Login.</p></div><br />';
 	  }		
 }
 ?>
+
+<html>
+<link href="assets/css/stylelog.css" rel="stylesheet">
+  <body>
+    
+  <form method="post" action="" name="update">
+    <input type="hidden" name="action" value="update" />
+    <br /><br />
+    <label><strong>Enter New Password:</strong></label><br />
+    <input type="password" name="pass1" maxlength="15" required />
+    <br /><br />
+    <label><strong>Re-Enter New Password:</strong></label><br />
+    <input type="password" name="pass2" maxlength="15" required/>
+    <br /><br />
+    <input type="hidden" name="email" value="<?php echo $email;?>"/>
+    <input type="submit" value="Reset Password" />
+  </form>
+  
+  </body>
+</html>
