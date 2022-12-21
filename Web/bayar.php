@@ -101,20 +101,20 @@ require "function.php";
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan2.php">
+        <a class="nav-link collapsed" href="pesan.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a>
         
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk2.php">
+        <a class="nav-link collapsed" href="produk.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Produk Page Nav -->
@@ -148,13 +148,13 @@ require "function.php";
                 <label>Filter Berdasarkan</label><br>
                 <select name="filter" id="filter">
                     <option value="">Pilih</option>
-                    <option value="1">Per Hari</option>
+                    <option value="1">Per Tanggal</option>
                     <option value="2">Per Bulan</option>
                     <option value="3">Per Tahun</option>
                 </select>
                 <br /><br />
                 <div id="form-tanggal">
-                    <label>Hari</label><br>
+                    <label>Tanggal</label><br>
                     <input type="text" name="tanggal" class="input-tanggal" />
                     <br /><br />
                 </div>

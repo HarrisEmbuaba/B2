@@ -47,8 +47,8 @@
                     $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
                 }
             }else{ // Jika user tidak mengklik tombol tampilkan
-                echo '<b>Semua Data Transaksi</b><br /><br />';
-                echo '<a href="print.php">Cetak PDF</a><br /><br />';
+                echo '<b>Semua Data Transaksi</b><br />';
+                echo '<a href="print.php"></a><br />';
                 $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi.waktu_transaksi ASC"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
             }
             ?>
