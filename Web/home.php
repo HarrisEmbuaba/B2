@@ -63,34 +63,25 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">99+</span>
+        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
+            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
+            <span class="badge bg-primary badge-number">
+              <?php 
+              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
+              $result = mysqli_query($mysqli, $query);
+              $count = mysqli_fetch_row($result)[0];
+
+              echo $count;
+              ?>
+            </span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
+              Anda punya <?php echo $count;?> notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="chat.php" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-success badge-number">99+</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Anda punya 99+ pesan baru belum dibaca!
-              <a href="chat.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat</span></a>
-            </li>
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -109,7 +100,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Profile Page Nav -->

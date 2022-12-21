@@ -1996,3 +1996,27 @@ body{
     transform: translate(100px, -100px);
   }
 }
+
+/*--------------------------------------------------------------
+# Notifikasi
+--------------------------------------------------------------*/
+/* Notifikasi dropdown */
+
+body{
+  margin-top:20px;
+  background-color: #f0f2f5;
+}
+.dropdown-list-image {
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.dropdown-list-image img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.btn-light {
+  color: #DD8B55;
+  background-color: #e5f7f0;
+  border-color: #d8f7eb;
+}

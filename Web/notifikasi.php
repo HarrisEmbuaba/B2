@@ -1,3 +1,9 @@
+<?php
+
+require 'koneksi.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,32 +67,25 @@
 
           <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
             <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">99+</span>
+            <span class="badge bg-primary badge-number">
+              <?php 
+              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
+              $result = mysqli_query($mysqli, $query);
+              $count = mysqli_fetch_row($result)[0];
+
+              echo $count;
+              ?>
+            </span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
+              Anda punya <?php echo $count;?> Notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="chat.php" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-success badge-number">99+</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Anda punya 99+ pesan baru belum dibaca!
-              <a href="chat.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat</span></a>
-            </li>
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -105,7 +104,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Profile Page Nav -->
@@ -142,84 +141,152 @@
           <div class="col-xxl-50 col-xl-12">
             <div class="card">
               <div class="card-body pt-3">
-                <h1>Notifikasi</h1>
-                <ul class="d-flex align-items-center">
-                <div class="filter">
-                  <a class="icon ms-auto" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                <h1>Notifikasi</h1>                
+                <u class="nav nav-tabs nav-tabs-bordered"></u>
 
-                    <li><a class="dropdown-item" href="#">Perhari</a></li>
-                    <li><a class="dropdown-item" href="#">Perbulan</a></li>
-                    <li><a class="dropdown-item" href="#">Pertahun</a></li>
-                  </ul>
+                <h4>Pesanan Baru</h4>
+                <!-- DataTales Example -->
+                <div class="mb-4">
+                  <div class="py-3">
+                        <?php 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Belum bayar' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          
+                        } else{
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Belum bayar' ORDER BY transaksi_id DESC";
+                          
+                        }
+                        $no = 0; 
+                      ?>
+  
+                    <!-- Table with stripped rows --> 
+                    <table class="table table-borderless"> 
+                      <thead> 
+                        <tr>  
+                          <th scope="col">Notifikasi</th> 
+                        </tr> 
+                      </thead> 
+                      <tbody> 
+                          <?php 
+                              if ($result = $mysqli->query($query)) { 
+                                  while ($row = $result->fetch_assoc()) { 
+                                      $field1name = "Pesanan baru telah diterima. Segera siapkan barang!";
+      
+                                      echo '<tr>    
+                                              <td>'.$field1name.'</td>  
+                                              <td>  
+                                              <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                              <a> | </a>
+                                              <a href="hapusNotif.php" data-toggle="modal" data-target="#modal">Hapus</a> 
+                                              </td>
+                                          </tr>'; 
+                                  } 
+                                  $result->free(); 
+                              }  
+                          ?> 
+                        </tbody> 
+                    </table>
+                  </div>
                 </div>
-                </ul>
-                
                 <u class="nav nav-tabs nav-tabs-bordered"></u>
-                <div class="py-3">
-                <div class="">
-                  <h5><?php 
-                  if(isset($_POST)){
-                    echo "Pesanan baru telah diterima!";
-                  } 
-                  ?>
-                  <h6>Kamu mendapatkan pesanan baru dari
-                    <?php 
-                    if(isset($POST['transaksi_id'])){
-                      $name = $_GET['transaksi_id'];
-                      //$query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                      $query = "SELECT `transaksi`.`transaksi_id`, `pembeli`.`nama` FROM `transaksi` WHERE `transaksi`.`transaksi_id` = `pembeli`.`id_user`'" . $_GET['transaksi_id'] . "';";
-                      //$no = 0;
-                      $query_run = mysqli_query($conn, $query);
-                    }
-                  ?></h6>
-                  </h5>
-                <u class="nav nav-tabs nav-tabs-bordered"></u>
-                </div>
+              </div>
 
-                <div class="py-3">
-                  <h5><?php 
-                  if(isset($_POST)){
-                    echo "Pesanan telah diterima!";
-                  } 
-                  ?>
-                  <h6>Barang telah diterima oleh pembeli 
-                    <?php 
-                    if(isset($POST['transaksi_id'])){
-                      $name = $_GET['transaksi_id'];
-                      //$query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                      $query = "SELECT `transaksi`.`transaksi_id`, `pembeli`.`nama` FROM `transaksi` WHERE `transaksi`.`transaksi_id` = '" . $_GET['transaksi_id'] . "';";
-                      //$no = 0;
-                      $query_run = mysqli_query($conn, $query);
-                    }
-                  ?></h6>
-                  </h5>
-                <u class="nav nav-tabs nav-tabs-bordered"></u>
-                </div>
+              <div class="card-body pt-3">      
 
-                
-                  <h5><?php 
-                  if(isset($_POST)){
-                    echo "Pesanan telah dibatalkan!";
-                  } 
-                  ?>
-                  <h6>Pesanan telah dibatalkan! 
-                    <?php 
-                    if(isset($POST['transaksi_id'])){
-                      $name = $_GET['transaksi_id'];
-                      //$query = "select t.transaksi_id, b.nama_barang, b.image, t.qty, p.nama, a.alamat, t.pembayaran, t.total, t.status from transaksi t, barang b, pembeli p, alamat a WHERE t.id_barang=b.id_barang and t.id_alamat=a.id_alamat and t.id_user=p.id_user and status = 'Dikirim' ORDER BY `waktu_transaksi` DESC ";
-                      $query = "SELECT `transaksi`.`transaksi_id`, `pembeli`.`nama` FROM `transaksi` WHERE `transaksi`.`transaksi_id` = '" . $_GET['transaksi_id'] . "';";
-                      //$no = 0;
-                      $query_run = mysqli_query($conn, $query);
-                    }
-                  ?></h6>
-                  </h5>
+                <h4>Pesanan Diterima</h4>
+                <!-- DataTales Example -->
+                <div class="mb-4">
+                  <div class="py-3">
+                        <?php 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          
+                        } else{
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
+                          
+                        }
+                        $no = 0; 
+                      ?>
+  
+                    <!-- Table with stripped rows --> 
+                    <table class="table table-borderless"> 
+                      <thead> 
+                        <tr> 
+                          <th scope="col">Notifikasi</th> 
+                        </tr> 
+                      </thead> 
+                      <tbody> 
+                          <?php 
+                              if ($result = $mysqli->query($query)) { 
+                                  while ($row = $result->fetch_assoc()) { 
+                                      $field1name = "Barang telah diterima! Cek informasi lengkapnya.";
+      
+                                      echo '<tr>     
+                                              <td>'.$field1name.'</td>  
+                                              <td>  
+                                              <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                              <a> | </a>
+                                              <a href="hapusNotif.php" data-toggle="modal" data-target="#modal">Hapus</a> 
+                                              </td>
+                                          </tr>'; 
+                                  } 
+                                  $result->free(); 
+                              }  
+                          ?> 
+                        </tbody> 
+                    </table>
+                  </div>
+                </div> 
                 <u class="nav nav-tabs nav-tabs-bordered"></u>
-                </div>
-                </div>
+              </div>
+
+              <div class="card-body pt-3">      
+
+                <h4>Pesanan Dibatalkan</h4>
+                <!-- DataTales Example -->
+                <div class="mb-4">
+                  <div class="py-3">
+                        <?php 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          
+                        } else{
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Dibatalkan' ORDER BY transaksi_id DESC";
+                          
+                        }
+                        $no = 0; 
+                      ?>
+  
+                    <!-- Table with stripped rows --> 
+                    <table class="table table-borderless"> 
+                      <thead> 
+                        <tr> 
+                          <th scope="col">Notifikasi</th> 
+                        </tr> 
+                      </thead> 
+                      <tbody> 
+                          <?php 
+                              if ($result = $mysqli->query($query)) { 
+                                  while ($row = $result->fetch_assoc()) { 
+                                      $field1name = "Pesanan telah dibatalkan oleh pembeli! Cek informasi lengkapnya.";
+      
+                                      echo '<tr>    
+                                              <td>'.$field1name.'</td>  
+                                              <td>  
+                                              <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                              <a> | </a>
+                                              <a href="hapusNotif.php" data-toggle="modal" data-target="#modal">Hapus</a> 
+                                              </td>
+                                          </tr>'; 
+                                  } 
+                                  $result->free(); 
+                              }  
+                          ?> 
+                        </tbody> 
+                    </table>
+                  </div>
+                </div> 
+                <u class="nav nav-tabs nav-tabs-bordered"></u>
               </div>
             </div>
           </div>
