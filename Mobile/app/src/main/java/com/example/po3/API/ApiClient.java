@@ -4,9 +4,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.13/bucket/";
-    public static final String IMAGES_URL = "http://192.168.1.13/bucket/Assets/";
-
+    private static final String BASE_URL = "http://192.168.137.85/bucket/";
+    public static final String IMAGES_URL = "http://192.168.137.85/bucket/Assets/";
 
     private static Retrofit retrofit;
 
