@@ -1,29 +1,33 @@
-<?php
+<!-- <?php
 // Cek apakah form telah disubmit
-if (isset($_POST['submit'])) {
+// if (isset($_POST['submit'])) {
   // Ambil input dari form
-  $phone = $_POST['phone'];
-  $code = $_POST['code'];
-  $password = $_POST['password'];
+  // $phone = $_POST['phone'];
+  // $code = $_POST['code'];
+  // $password = $_POST['password'];
 
   // Cek apakah semua input telah terisi
-  if (empty($phone) || empty($code) || empty($password)) {
+  // if (empty($phone) || empty($code) || empty($password)) {
     // Tampilkan pesan error jika ada input yang kosong
-    echo "Mohon lengkapi semua input.";
-  } else {
+    // echo "Mohon lengkapi semua input.";
+  // } else {
     // Cek apakah kode verifikasi yang dimasukkan sesuai dengan kode verifikasi yang dikirimkan ke nomor telepon
-    if ($code == "123456") { // ganti dengan kode verifikasi yang sebenarnya
+    // if ($code == "123456") { // ganti dengan kode verifikasi yang sebenarnya
       // Update password di database
       // ...
 
       // Beri tahu pengguna bahwa proses reset password telah selesai
-      echo "Password berhasil direset. Silakan login dengan password baru Anda.";
-    } else {
+      // echo "Password berhasil direset. Silakan login dengan password baru Anda.";
+    // } else {
       // Tampilkan pesan error jika kode verifikasi salah
-      echo "Kode verifikasi salah. Mohon masukkan kode verifikasi yang benar.";
-    }
-  }
-}
+      // echo "Kode verifikasi salah. Mohon masukkan kode verifikasi yang benar.";
+//     }
+//   }
+// }
+
+?> -->
+
+<?php
 
 ?>
 

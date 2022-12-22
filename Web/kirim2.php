@@ -69,7 +69,7 @@ if(isset($_SESSION['transaksi_id'])){
         <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
+            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">
               <?php 
               $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
@@ -77,7 +77,7 @@ if(isset($_SESSION['transaksi_id'])){
               $count = mysqli_fetch_row($result)[0];
 
               echo $count;
-              ?>
+              ?>e
             </span>
           </a>
 

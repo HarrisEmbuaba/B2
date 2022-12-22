@@ -80,7 +80,7 @@ require 'koneksi.php';
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Anda punya <?php echo $count;?> Notifikasi belum dibaca!
+              Anda punya <?php echo $count;?> notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->

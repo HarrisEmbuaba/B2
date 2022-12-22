@@ -53,7 +53,7 @@ require "function.php";
     
 
     <div class="d-flex align-items-center">
-      <a href="home.html" class="logo d-flex align-items-center">
+      <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="d-none d-lg-block">Milania Craft</span>
       </a>
@@ -103,11 +103,7 @@ require "function.php";
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-<<<<<<< Updated upstream
-        <a class="nav-link collapsed" href="kirim.php">
-=======
         <a class="nav-link collapsed" href="kirim2.php">
->>>>>>> Stashed changes
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
