@@ -9,7 +9,7 @@ require "koneksi.php";
 
         // Fungsi untuk membuat kode verifikasi, menyimpan kode verifikasi ke database dan mengirimkan kode verifikasi ke Email tujuan.
         $kode =  rand(pow(10, 5 - 1), pow(10, 5) - 1); 
-        $email = $_POST['email'];
+        $email = $_GET['email'];
         $query = mysqli_query($mysqli, "INSERT INTO `password_reset_temp`(`kode_verifikasi`, `status`, `email`) VALUES ('$kode','','$email')");
 
         $judul = "Verification Code for Your New Password.";
@@ -28,13 +28,13 @@ try {
   $mail->isSMTP();                                              // Kirim email menggunakan metode SMTP
   $mail->Host       = 'smtp.gmail.com';                         // Host dari server SMTP
   $mail->SMTPAuth   = true;                                     // Aktifkan autekntifikasi SMTP 
-  $mail->Username   = "variousra@gmail.com";                    // SMTP username (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
-  $mail->Password   = 'rokcxezbgkjicjxh';                       // SMTP kode autentikasi (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
+  $mail->Username   = "e41212346@student.polije.ac.id";                    // SMTP username (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
+  $mail->Password   = 'nuraulia';                       // SMTP kode autentikasi (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
   $mail->SMTPSecure = 'ssl';                                    // Aktifkan enkripsi SSL implisit
   $mail->Port       = 465;                                      // TCP port untuk mengkoneksikan ke SMTP Server
 
   //pengirim
-  $mail->setFrom('variousra@gmail.com', 'Various RA');
+  $mail->setFrom('e41212346@student.polije.ac.id', 'Admin Milania Craft');
   $mail->addAddress($email);     //email penerima
 
   //Content
