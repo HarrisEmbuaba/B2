@@ -157,7 +157,7 @@ require "function.php";
                     <label>Tanggal</label><br>
                     <input type="text" name="tanggal" class="input-tanggal" />
                     <br /><br />
-                </div>
+                </div>s
                 <div id="form-bulan">
                     <label>Bulan</label><br>
                     <select name="bulan">
