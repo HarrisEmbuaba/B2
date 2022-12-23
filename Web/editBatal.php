@@ -1,13 +1,14 @@
 <?php
 
-include ('kirim3.php');
+include ('kirim2.php');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project3";
+require 'koneksi.php';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  header("Location: error-connect.php");
+  exit();
+}
 
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());

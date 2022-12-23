@@ -1,6 +1,12 @@
 <?php
 include ('koneksi.php');
 
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  header("Location: error-connect.php");
+  exit();
+}
+
 if(isset($_SESSION['transaksi_id'])){
   header("Location: kirim2.php");
 }

@@ -1,5 +1,10 @@
 <?php
-    require 'koneksi.php'
+    require 'koneksi.php';
+
+    // if (!$mysqli) {
+    //   die("Connection failed: " . mysqli_connect_error());
+    //   header("Location: error-connect.php");
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +69,7 @@
         <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
+            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">
               <?php 
               $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";

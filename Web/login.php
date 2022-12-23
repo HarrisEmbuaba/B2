@@ -45,6 +45,12 @@ if (isset($_POST['submit']) ){
 require ('koneksi.php');
 include ('login.html');
 
+if ($mysqli -> connect_errno) {
+    echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+    header("Location: error-connect.php");
+    exit();
+  }
+
 session_start();
 error_reporting(0);
 if (isset($_SESSION['nama'])) {
