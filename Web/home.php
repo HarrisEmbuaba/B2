@@ -192,25 +192,11 @@
             <!-- Reports -->
             <div class="col-12">
               <div class="card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Reports <span>| Today</span></h5>
 
                   <!-- Line Chart -->
-                  <div id="reportsChart"></div>
+                  <div id="reportsChart">
 
                   <?php
 
@@ -244,7 +230,7 @@
                   $result12 = mysqli_query($mysqli, $des);
                   $data = mysqli_query($mysqli, $all);
 
-                  $mean = ($data/12);
+                  // $mean = ('$data'/'12');
 
                   ?>
 
@@ -253,9 +239,9 @@
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
                           name: 'Sales',
-                          data: [<?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>,
-                          <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>,
-                          <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>
+                          data: [<?php echo $result1;?>, <?php echo $result2;?>, <?php echo $result3;?>, <?php echo $result4;?>,
+                          <?php echo $result5;?>, <?php echo $result6;?>, <?php echo $result7;?>, <?php echo $result8;?>,
+                          <?php echo $result9;?>, <?php echo $result10;?>, <?php echo $result11;?>, <?php echo $result12;?>
                         ],
                         }, {
                           name: 'Revenue',
@@ -300,10 +286,10 @@
                       }).render();
                     });
                   </script>
+                  </div>
                   <!-- End Line Chart -->
-
+                
                 </div>
-
               </div>
             </div><!-- End Reports -->
 

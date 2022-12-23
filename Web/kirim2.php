@@ -77,7 +77,7 @@ if(isset($_SESSION['transaksi_id'])){
               $count = mysqli_fetch_row($result)[0];
 
               echo $count;
-              ?>e
+              ?>
             </span>
           </a>
 

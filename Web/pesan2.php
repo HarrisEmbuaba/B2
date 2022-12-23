@@ -163,12 +163,10 @@ if(isset($_SESSION['transaksi_id'])){
 
                   <!-- partial:index.partial.html -->
                   <form action="" method="GET">
-                    <div class="row mb-3">
-                      <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                      <div class="col-sm-7">
-                        <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
-                        <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
-                      </div>
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
 
@@ -252,12 +250,10 @@ if(isset($_SESSION['transaksi_id'])){
 
                   <!-- partial:index.partial.html -->
                   <form action="" method="GET">
-                    <div class="row mb-3">
-                      <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                      <div class="col-sm-7">
-                        <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
-                        <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
-                      </div>
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
                   </form>
 
@@ -341,14 +337,12 @@ if(isset($_SESSION['transaksi_id'])){
               <div class="tab-content pt-3">
                 <div class="tab-pane fade dikemas" id="dikemas">
                 <form action="" method="GET">
-                  <div class="row mb-3">
-                    <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
-                    <div class="col-sm-7">
-                      <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                    <div class="input-group mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
+                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                      <button type="submit" class="btn btn-sm-info">Search</button>
                     </div>
-                  </div>
-                </form>
+                  </form>
                         
                         <!-- DataTales Example -->
                         <div class="mb-4">

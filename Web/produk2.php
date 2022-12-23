@@ -356,7 +356,7 @@ if(isset($_GET['hal'])) {
                   <div class="card-body">
                   <form method="POST">
                     <div class="input-group mb-3">
-                      <input type="text" name="tcari" class="form-control" value="<?php echo @$_POST['tcari']; ?>">
+                      <input type="text" name="tcari" class="form-control" value="<?php echo $_POST['tcari']; ?>">
                       <button type="reset" class="btn btn-light" name="breset">X</button>
                       <button type="submit" name="bcari" class="btn btn-warning pl-4 pr-4">Cari</button>
                     </div>
@@ -431,8 +431,6 @@ if(isset($_GET['hal'])) {
                   </div>
                 </div>
               </div>
-
-<!-- End Bordered Tabs -->
             </div>
           </div>
         </div>
