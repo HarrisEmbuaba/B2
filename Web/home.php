@@ -63,34 +63,25 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">99+</span>
+        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
+            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
+            <span class="badge bg-primary badge-number">
+              <?php 
+              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
+              $result = mysqli_query($mysqli, $query);
+              $count = mysqli_fetch_row($result)[0];
+
+              echo $count;
+              ?>
+            </span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
+              Anda punya <?php echo $count;?> notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="chat.php" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-success badge-number">99+</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Anda punya 99+ pesan baru belum dibaca!
-              <a href="chat.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat</span></a>
-            </li>
-          </ul><!-- End Messages Dropdown Items -->
-        </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -109,7 +100,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Profile Page Nav -->
@@ -201,223 +192,121 @@
             <!-- Reports -->
             <div class="col-12">
               <div class="card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
                 <div class="card-body">
+                  <h5 class="card-title">Reports <span>/Today</span></h5>
+
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
 
+                  <?php
+
+                  require 'koneksi.php';
+                  
+                  $jan = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '01'";
+                  $feb = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '02'";
+                  $mar = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '03'";
+                  $apr = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '04'";
+                  $may = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '05'";
+                  $jun = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '06'";
+                  $jul = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '07'";
+                  $aug = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '08'";
+                  $sep = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '09'";
+                  $oct = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '10'";
+                  $nov = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '11'";
+                  $des = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '12'";
+                  $all = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima'";
+
+                  $result1 = mysqli_query($mysqli, $jan);
+                  $result2 = mysqli_query($mysqli, $feb);
+                  $result3 = mysqli_query($mysqli, $mar);
+                  $result4 = mysqli_query($mysqli, $apr);
+                  $result5 = mysqli_query($mysqli, $may);
+                  $result6 = mysqli_query($mysqli, $jun);
+                  $result7 = mysqli_query($mysqli, $jul);
+                  $result8 = mysqli_query($mysqli, $aug);
+                  $result9 = mysqli_query($mysqli, $sep);
+                  $result10 = mysqli_query($mysqli, $oct);
+                  $result11 = mysqli_query($mysqli, $nov);
+                  $result12 = mysqli_query($mysqli, $des);
+                  $data = mysqli_query($mysqli, $all);
+
+                  $mean = ($data/12);
+
+                  ?>
+
                   <script>
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Sales',
+                          data: [<?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>,
+                          <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>,
+                          <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>, <?php echo $result1;?>
+                        ],
+                        }, {
+                          name: 'Revenue',
+                          data: [11, 32, 45, 32, 34, 52, 41, 140000]
+                        }, ],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
 
-function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
-  number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number,
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-    s = '',
-    toFixedFix = function(n, prec) {
-      var k = Math.pow(10, prec);
-      return '' + Math.round(n * k) / k;
-    };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-  if (s[0].length > 3) {
-    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || '').length < prec) {
-    s[1] = s[1] || '';
-    s[1] += new Array(prec - s[1].length + 1).join('0');
-  }
-  return s.join(dec);
-}
-
-// Area Chart Example
-var ctx = document.getElementById("chart1");
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-
-  <?php
-  
-  $data1 = $jan =date('Y-m-d', strtotime("-1 month", strtotime(date("Y-m-d"))));
-  $data2 = $feb =date('Y-m-d', strtotime("-2 month", strtotime(date("Y-m-d"))));
-  $data3 = $mar =date('Y-m-d', strtotime("-3 month", strtotime(date("Y-m-d"))));
-  $data4 = $apr =date('Y-m-d', strtotime("-4 month", strtotime(date("Y-m-d"))));
-  $data5 = $may =date('Y-m-d', strtotime("-5 month", strtotime(date("Y-m-d"))));
-  $data6 = $jun =date('Y-m-d', strtotime("-6 month", strtotime(date("Y-m-d"))));
-  $data7 = $jul =date('Y-m-d', strtotime("-7 month", strtotime(date("Y-m-d"))));
-  $data8 = $aug =date('Y-m-d', strtotime("-8 month", strtotime(date("Y-m-d"))));
-  $data9 = $sep =date('Y-m-d', strtotime("-9 month", strtotime(date("Y-m-d"))));
-  $data10 = $oct =date('Y-m-d', strtotime("-10 month", strtotime(date("Y-m-d"))));
-  $data11 = $nov =date('Y-m-d', strtotime("-11 month", strtotime(date("Y-m-d"))));
-  $data12 = $des =date('Y-m-d', strtotime("-12 month", strtotime(date("Y-m-d"))));
-
-  ?>
-  data: {
-    labels: ["<?php echo $data12; ?>", "<?php echo $data11; ?>", "<?php echo $data10; ?>", "<?php echo $data9; ?>", "<?php echo $data8; ?>", "<?php echo $data7; ?>", <?php echo $data6; ?>", "<?php echo $data5; ?>", "<?php echo $data4; ?>", "<?php echo $data3; ?>", "<?php echo $data2; ?>", "<?php echo $data1; ?>""],
-    datasets: [{
-      label: "Penghasilan",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [<?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data6 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 6 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data12']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data5 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 5 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data11']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data4 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 4 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data10']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data3 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 3 day;");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data9']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data2 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 2 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data8']; ?>
-      <?php 
-      }
-      ?> , <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data1 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 1 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data7']; ?>
-      <?php 
-      }
-      ?>,<?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data6 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 6 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data6']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data5 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 5 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data5']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data4 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 4 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data4']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data3 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 3 day;");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data3']; ?>
-      <?php 
-      }
-      ?>, <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data2 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 2 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data2']; ?>
-      <?php 
-      }
-      ?> , <?php
-      $totaltransaksi  = mysqli_query($koneksi, "select COALESCE(SUM(subtotal),0) as data1 from transaksi where tanggal_transaksi = CURRENT_DATE() - interval 1 day");
-      while ($row = mysqli_fetch_array($totaltransaksi)) {?>
-      <?php echo $row['data1']; ?>
-      <?php 
-      }
-      ?>],
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    layout: {
-      padding: {
-        left: 10,
-        right: 25,
-        top: 25,
-        bottom: 0
-      }
-    },
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'date'
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false
-        },
-        ticks: {
-          maxTicksLimit: 7
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          maxTicksLimit: 5,
-          padding: 10,
-          // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
-            return 'Rp.' + number_format(value);
-          }
-        },
-        gridLines: {
-          color: "rgb(234, 236, 244)",
-          zeroLineColor: "rgb(234, 236, 244)",
-          drawBorder: false,
-          borderDash: [2],
-          zeroLineBorderDash: [2]
-        }
-      }],
-    },
-    legend: {
-      display: false
-    },
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      titleMarginBottom: 10,
-      titleFontColor: '#6e707e',
-      titleFontSize: 14,
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      intersect: false,
-      mode: 'index',
-      caretPadding: 10,
-      callbacks: {
-        label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': Rp.' + number_format(tooltipItem.yLabel);
-        }
-      }
-    }
-  }
-});
-</script>
                 </div>
 
               </div>
             </div><!-- End Reports -->
+
           </div>
         </div><!-- End Left side columns -->
       </div>

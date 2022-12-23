@@ -2,7 +2,7 @@
 include ('koneksi.php');
 
 if(isset($_SESSION['transaksi_id'])){
-  header("Location: kirim.php");
+  header("Location: kirim3.php");
 }
 
 ?>

@@ -68,27 +68,26 @@ if(isset($_SESSION['transaksi_id'])){
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
             <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">99+</span>
+            <span class="badge bg-primary badge-number">
+              <?php 
+              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
+              $result = mysqli_query($mysqli, $query);
+              $count = mysqli_fetch_row($result)[0];
+
+              echo $count;
+              ?>
+            </span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Anda punya 99+ Notifikasi belum dibaca!
+              Anda punya <?php echo $count;?> notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
             </li>
           </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-success badge-number">99+</span>
-          </a><!-- End Messages Icon -->
-
-        </li><!-- End Messages Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -107,7 +106,7 @@ if(isset($_SESSION['transaksi_id'])){
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim3.php">
+        <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Kirim Page Nav -->
@@ -164,10 +163,12 @@ if(isset($_SESSION['transaksi_id'])){
 
                   <!-- partial:index.partial.html -->
                   <form action="" method="GET">
-                    <div class="input-group mb-3">
-                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
-                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                    <div class="row mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
+                        <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                      </div>
                     </div>
                   </form>
 
@@ -251,10 +252,12 @@ if(isset($_SESSION['transaksi_id'])){
 
                   <!-- partial:index.partial.html -->
                   <form action="" method="GET">
-                    <div class="input-group mb-3">
-                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
-                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
-                      <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                    <div class="row mb-3">
+                      <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
+                        <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
+                      </div>
                     </div>
                   </form>
 
@@ -338,12 +341,14 @@ if(isset($_SESSION['transaksi_id'])){
               <div class="tab-content pt-3">
                 <div class="tab-pane fade dikemas" id="dikemas">
                 <form action="" method="GET">
-                    <div class="input-group mb-3">
-                      <label for="search" class="col-sm-2 col-form-label">Cari Pesanan</label>
-                      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" class="">
+                  <div class="row mb-3">
+                    <label for="search" class="col-sm-2 col-form-label">Cari Barang</label>
+                    <div class="col-sm-7">
+                      <input class="form-control" type="search" id="formSearch" name="search" values="<?php if(isset($_GET['search'])){echo $_GET['search']; }?>" required>
                       <button type="submit" class="btn btn-sm-info" href="update.php?">Search</button>
                     </div>
-                  </form>
+                  </div>
+                </form>
                         
                         <!-- DataTales Example -->
                         <div class="mb-4">
