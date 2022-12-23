@@ -13,7 +13,14 @@ require "koneksi.php";
         $query = mysqli_query($mysqli, "INSERT INTO `password_reset_temp`(`kode_verifikasi`, `status`, `email`) VALUES ('$kode','','$email')");
 
         $judul = "Verification Code for Your New Password.";
-        $pesan = "Verification Code: $kode";
+        $pesan = "Your account received an action to change the password. Enter the following code
+                  to change your account password.
+                  <br>
+                  <br>
+                  Verification Code: $kode
+                  <br>
+                  <br>
+                  Note: Ignore this message if you don't want to change the password.";
 
 $mail = new PHPMailer(true);
 try {
