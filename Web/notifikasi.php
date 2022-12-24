@@ -120,7 +120,7 @@ require 'koneksi.php';
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
-
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <li class="nav-item">
         <a class="nav-link collapsed" href="logout.php">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
@@ -143,6 +143,8 @@ require 'koneksi.php';
               <div class="card-body pt-3">
                 <h1>Notifikasi</h1>                
                 <u class="nav nav-tabs nav-tabs-bordered"></u>
+                <div class="mb-4">
+                  <div class="py-3">
 
                 <h4>Pesanan Baru</h4>
                 <!-- DataTales Example -->
@@ -150,10 +152,10 @@ require 'koneksi.php';
                   <div class="py-3">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Belum bayar' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, pembeli.id_user, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli WHERE status = 'Belum Bayar' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Belum bayar' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, pembeli.id_user, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli WHERE status = 'Belum Bayar' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -168,17 +170,17 @@ require 'koneksi.php';
                       </thead> 
                       <tbody> 
                           <?php 
+                          $user = "SELECT `id_UserBeli` FROM `transaksi` WHERE transaksi_id = ''";
+                          $id = "SELECT `transaksi_id` FROM `transaksi` WHERE transaksi_id = ''";
                               if ($result = $mysqli->query($query)) { 
                                   while ($row = $result->fetch_assoc()) { 
-                                      $field1name = "Pesanan baru telah diterima. Segera siapkan barang!";
+                                    $field1name = "Pesanan baru dengan ID !<br>Kamu dapat satu pesanan baru dari pelanggan yaitu ";
       
-                                      echo '<tr>    
-                                              <td>'.$field1name.'</td>  
-                                              <td>  
-                                              <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
-                                              <a> | </a>
-                                              <a href="hapusNotif.php" data-toggle="modal" data-target="#modal">Hapus</a> 
-                                              </td>
+                                    echo '<tr>    
+                                          <td>'.$field1name.'</td>  
+                                          <td>
+                                          <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                          </td>
                                           </tr>'; 
                                   } 
                                   $result->free(); 
@@ -199,10 +201,10 @@ require 'koneksi.php';
                   <div class="py-3">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'diterima' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -219,7 +221,7 @@ require 'koneksi.php';
                           <?php 
                               if ($result = $mysqli->query($query)) { 
                                   while ($row = $result->fetch_assoc()) { 
-                                      $field1name = "Barang telah diterima! Cek informasi lengkapnya.";
+                                      $field1name = "Pesanan dengan ID  telah diterima! Cek informasi lengkapnya.";
       
                                       echo '<tr>     
                                               <td>'.$field1name.'</td>  
@@ -248,10 +250,10 @@ require 'koneksi.php';
                   <div class="py-3">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_userPembeli = transaksi_detail.id_UserDetail JOIN alamat ON transaksi_detail.id_AlamatDetail = alamat.id_alamat WHERE status = 'Dibatalkan' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'dibatalkan' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -268,7 +270,7 @@ require 'koneksi.php';
                           <?php 
                               if ($result = $mysqli->query($query)) { 
                                   while ($row = $result->fetch_assoc()) { 
-                                      $field1name = "Pesanan telah dibatalkan oleh pembeli! Cek informasi lengkapnya.";
+                                      $field1name = "Pesanan dengan ID  telah dibatalkan! Cek informasi lengkapnya.";
       
                                       echo '<tr>    
                                               <td>'.$field1name.'</td>  
@@ -287,6 +289,8 @@ require 'koneksi.php';
                   </div>
                 </div> 
                 <u class="nav nav-tabs nav-tabs-bordered"></u>
+              </div>
+              </div>
               </div>
             </div>
           </div>

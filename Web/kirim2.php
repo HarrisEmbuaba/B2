@@ -128,7 +128,7 @@ if(isset($_SESSION['transaksi_id'])){
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
-
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <li class="nav-item">
         <a class="nav-link collapsed" href="logout.php">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
@@ -147,6 +147,10 @@ if(isset($_SESSION['transaksi_id'])){
 
           <div class="card">
             <div class="card-body pt-3">
+            <h1>Pengiriman</h1>                
+                <u class="nav nav-tabs nav-tabs-bordered"></u>
+                <div class="mb-4">
+                  <div class="py-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
 
@@ -189,10 +193,10 @@ if(isset($_SESSION['transaksi_id'])){
                       <div class="table-responsive">
                       <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND transaksi.status = 'Belum dikirim' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Perlu kirim' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY `waktu_transaksi` ASC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Belum dikirim' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Perlu kirim' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -276,10 +280,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Dikirim' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Dikirim' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Dikirim' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' AND status = 'Dikirim' ORDER BY `waktu_transaksi` ASC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Dikirim' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Dikirim' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -363,10 +367,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY `waktu_transaksi` ASC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Diterima' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
                         }
                         $no = 0; 
                         ?> 
@@ -447,10 +451,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY `waktu_transaksi` ASC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, barang.nama_barang, barang.image, transaksi_detail.jumlah, pembeli.nama, alamat.alamat_lengkap, transaksi.grand_total, transaksi.status FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN pembeli ON transaksi_detail.id_UserDetail = pembeli.id_userPembeli JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN alamat ON alamat.id_alamat = transaksi_detail.id_AlamatDetail WHERE transaksi.status = 'Dibatalkan' ORDER BY `waktu_transaksi` ASC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, transaksi.grand_total, alamat.alamat_lengkap, transaksi.status, transaksi_detail.id_TransaksiDetail, barang.nama_barang, barang.image, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli JOIN alamat ON transaksi.alamat = alamat.id_alamat WHERE status = 'Dibatalkan' ORDER BY transaksi_id DESC";
                         }
                         $no = 0; 
                         ?> 

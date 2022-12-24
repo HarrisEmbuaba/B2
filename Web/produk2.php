@@ -259,7 +259,7 @@ if(isset($_GET['hal'])) {
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
-
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <li class="nav-item">
         <a class="nav-link collapsed" href="logout.html">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
@@ -278,6 +278,10 @@ if(isset($_GET['hal'])) {
 
           <div class="card">
             <div class="card-body pt-3">
+              <h1>Produk</h1>                
+                <u class="nav nav-tabs nav-tabs-bordered"></u>
+                <div class="mb-4">
+                  <div class="py-3">
               <!-- Bordered Tabs -->
               
                        

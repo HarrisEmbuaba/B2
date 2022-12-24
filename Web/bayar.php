@@ -126,7 +126,7 @@ if ($mysqli -> connect_errno) {
           <img src="assets/img/bayar1.png" width="35px" height="35px"></i>
         </a>
       </li><!-- End Bayar Page Nav -->
-
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <li class="nav-item">
         <a class="nav-link collapsed" href="logout.html">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
@@ -140,10 +140,13 @@ if ($mysqli -> connect_errno) {
 
   <section class="section dashboard">
       <div class="row">
-
         
           <div class="card2">
-            <div class="card-body">
+            <div class="card-body pt-3">
+            <h1>Pendapatan</h1>                
+                <u class="nav nav-tabs nav-tabs-bordered"></u>
+                <div class="mb-4">
+                  <div class="py-3">
               <h5 class="card-title">LAPORAN TRANSAKSI</h5>
               <div class="card-body">
               <form method="get" action="">

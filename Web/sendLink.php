@@ -10,7 +10,7 @@ require "koneksi.php";
         // Fungsi untuk membuat kode verifikasi, menyimpan kode verifikasi ke database dan mengirimkan kode verifikasi ke Email tujuan.
         $kode =  rand(pow(10, 5 - 1), pow(10, 5) - 1); 
         $email = $_GET['email'];
-        $query = mysqli_query($mysqli, "INSERT INTO `password_reset_temp`(`kode_verifikasi`, `status`, `email`) VALUES ('$kode','','$email')");
+        $query = mysqli_query($mysqli, "SELECT `email` FROM `pemilik` WHERE email = '$email'");
 
         $judul = "Verification Code for Your New Password.";
         $pesan = "Your account received an action to change the password. Enter the following code
