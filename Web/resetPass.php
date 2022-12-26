@@ -18,7 +18,7 @@ if (isset($_GET["kode_verifikasi"]) && isset($_GET["email"]) && isset($_GET["act
 
   if ($row==""){
 
-    $error .= '<h2>Invalid Code</h2>
+    $error = '<h2>Invalid Code</h2>
     <p>Code is invalid/expired. Either you did not insert the code from OTP, or you have already used the code in which case it is deactivated.</p>
     <p><a href="sendLink.php"> Click here</a> to reset password.</p>';
 

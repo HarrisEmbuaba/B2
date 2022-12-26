@@ -27,3 +27,4 @@ if (!empty($email) && !empty($otp)) {
     // Tampilkan pesan error jika alamat email atau kode OTP kosong
     echo "Harap masukkan alamat email dan kode OTP dengan benar";
 }
+?>
