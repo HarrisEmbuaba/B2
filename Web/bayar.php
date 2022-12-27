@@ -1,12 +1,6 @@
 <?php
 require "function.php";
-require 'koneksi.php';
 
-if ($mysqli -> connect_errno) {
-  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-  header("Location: error-connect.php");
-  exit();
-}
 
 ?>
 
@@ -44,6 +38,14 @@ if ($mysqli -> connect_errno) {
   <link rel="stylesheet" href="plugin/jquery-ui/jquery-ui.min.css" /> <!-- Load file css jquery-ui -->
     <script src="js/jquery.min.js"></script> <!-- Load file jquery -->
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -57,12 +59,10 @@ if ($mysqli -> connect_errno) {
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    
-
     <div class="d-flex align-items-center">
-      <a href="home.php" class="logo d-flex align-items-center">
+      <a href="home.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
-        <span class="d-none d-lg-block">Milania Craft</span>
+        <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
     </div><!-- End Logo -->
 
@@ -72,25 +72,30 @@ if ($mysqli -> connect_errno) {
         <li class="nav-item d-block d-lg-none">
         </li>
 
-        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">
-              <?php 
-              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
-              $result = mysqli_query($mysqli, $query);
-              $count = mysqli_fetch_row($result)[0];
+        <li class="nav-item dropdown">
 
-              echo $count;
-              ?>
-            </span>
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
+            <span class="badge bg-primary badge-number">99+</span>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya <?php echo $count;?> notifikasi belum dibaca!
-              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-            </li>
-          </ul><!-- End Notification Dropdown Items -->
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
+            <span class="badge bg-success badge-number">99+</span>
+          </a><!-- End Messages Icon -->
+
+        </li><!-- Profile Nav -->
+        <li class="nav-item">
+          <a class="nav-link nav-icon" href="users-profile.html">
+            <img src="assets/img/user.png" width="35px" height="35px"></i>
+          </a>
+      </li><!-- End Profile Nav -->
+
+        </li><!-- End Messages Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -98,59 +103,80 @@ if ($mysqli -> connect_errno) {
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
+  
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+    <br />
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan2.php">
+        <a class="nav-link collapsed" href="pesan.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
-        </a>
+        </a><br />
         
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim2.php">
+        <a class="nav-link collapsed" href="kirim.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
-        </a>
+        </a><br />
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk2.php">
+        <a class="nav-link collapsed" href="produk.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
-        </a>
+        </a><br />
       </li><!-- End Produk Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar1.png" width="35px" height="35px"></i>
-        </a>
+        </a><br/><br /><br /><br /><br /><br /><br /><br />
       </li><!-- End Bayar Page Nav -->
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
       <li class="nav-item">
-        <a class="nav-link collapsed" href="logout.html">
+        <a class="nav-link collapsed" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
         </a>
-      </li><!-- End Logout Page Nav -->
-    </ul>
 
-  </aside><!-- End Sidebar-->
+      </ul>
+      </aside><!-- End Sidebar-->
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Logout?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">Pilih "Keluar" jika Anda siap untuk mengakhiri sesi Anda saat ini.</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              
+                <form action="logout.php" method="POST">
+
+                <button type="submit" name="logout_btn" class="btn btn-primary" herf="login.html">Keluar</button>
+
+                </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EndLogout Modal -->
 
   <main id="main" class="main">
 
   <section class="section dashboard">
       <div class="row">
-        
-          <div class="card2">
-            <div class="card-body pt-3">
-            <h1>Pendapatan</h1>                
-                <u class="nav nav-tabs nav-tabs-bordered"></u>
-                <div class="mb-4">
-                  <div class="py-3">
-              <h5 class="card-title">LAPORAN TRANSAKSI</h5>
-              <div class="card-body">
+
+        <!-- Page Heading -->
+        <h1 class="h4 mb-2 text-gray-800">Laporan Transaksi</h1>
+            <div class="card-body">
               <form method="get" action="">
-                <label>Filter Berdasarkan</label><br>
+                <label>Filter Berdasarkan</label>
                 <select name="filter" id="filter">
                     <option value="">Pilih</option>
                     <option value="1">Per Tanggal</option>
@@ -159,12 +185,12 @@ if ($mysqli -> connect_errno) {
                 </select>
                 <br /><br />
                 <div id="form-tanggal">
-                    <label>Tanggal</label><br>
+                    <label>Tanggal</label>
                     <input type="text" name="tanggal" class="input-tanggal" />
                     <br /><br />
-                </div>s
+                </div>
                 <div id="form-bulan">
-                    <label>Bulan</label><br>
+                    <label>Bulan</label>
                     <select name="bulan">
                         <option value="">Pilih</option>
                         <option value="1">Januari</option>
@@ -183,9 +209,10 @@ if ($mysqli -> connect_errno) {
                     <br /><br />
                 </div>
                 <div id="form-tahun">
-                    <label>Tahun</label><br>
+                    <label>Tahun</label>
                     <select name="tahun">
                         <option value="">Pilih</option>
+                        <option value="">2021</option>
                         <?php
                         $query = "SELECT YEAR(waktu_transaksi) AS tahun FROM transaksi GROUP BY YEAR(waktu_transaksi)"; // Tampilkan tahun sesuai di tabel transaksi
                         $sql = mysqli_query($mysqli, $query); // Eksekusi/Jalankan query dari variabel $query
@@ -196,13 +223,20 @@ if ($mysqli -> connect_errno) {
                     </select>
                     <br /><br />
                 </div>
-                <div class="col-lg-3">
+                <div class="cd-grid gap-2 d-md-block">
                   <input name="btnTampil" class="btn btn-success" type="submit" value="Tampilkan" />
-                  <input href="bayar.php" name="btnTampil" class="btn btn-success" type="submit"value="Riset Filter" />
+                  <input href="bayar.php" name="btnTampil" class="btn btn-success" type="submit"value="Refresh" />
                 </div>
                 
             </form>
             <hr />
+
+            
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+              
 
             <?php
             if(isset($_GET['filter']) && ! empty($_GET['filter'])){ // Cek apakah user telah memilih filter dan klik tombol tampilkan
@@ -210,41 +244,50 @@ if ($mysqli -> connect_errno) {
                 if($filter == '1'){ // Jika filter nya 1 (per tanggal)
                     $tgl = date('d-m-y', strtotime($_GET['tanggal']));
                     
-                    echo '<b>Data Transaksi Tanggal '.$tgl.'</b><br /><br />';
-                    echo '<a href="print.php?filter=1&tanggal='.$_GET['tanggal'].'">Cetak PDF</a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE DATE(transaksi.waktu_transaksi)='".$_GET['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+                    echo '<b>Data Transaksi Tanggal '.$tgl.'';
+                    echo '<a href="print.php?filter=1&tanggal='.$_GET['tanggal'].'"<div class="position-absolute top-0 end-0"><button type="button" class="btn btn-primary">Cetak PDF</button></a><br/>';
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE DATE(transaksi.waktu_transaksi)='".$_GET['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
                 
                   }else if($filter == '2'){ // Jika filter nya 2 (per bulan)
                     $nama_bulan = array('', 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
                     
-                    echo '<b>Data Transaksi Bulan '.$nama_bulan[$_GET['bulan']].' '.$_GET['tahun'].'</b><br /><br />';
-                    echo '<a href="print.php?filter=2&bulan='.$_GET['bulan'].'&tahun='.$_GET['tahun'].'">Cetak PDF</a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE MONTH(transaksi.waktu_transaksi)='".$_GET['bulan']."' AND YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
+                    echo '<b>Data Transaksi Bulan '.$nama_bulan[$_GET['bulan']].' '.$_GET['tahun'].'';
+                    echo '<a href="print.php?filter=2&bulan='.$_GET['bulan'].'&tahun='.$_GET['tahun'].'"<div class="position-absolute top-0 end-0"><button type="button" class="btn btn-primary">Cetak PDF</button></a><br/>';
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                    ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE MONTH(transaksi.waktu_transaksi)='".$_GET['bulan']."' AND YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
                 
                   }else{ // Jika filter nya 3 (per tahun)
                     
-                    echo '<b>Data Transaksi Tahun '.$_GET['tahun'].'</b><br /><br />';
-                    echo '<a href="print.php?filter=3&tahun='.$_GET['tahun'].'">Cetak PDF</a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
+                    echo '<b>Data Transaksi Tahun '.$_GET['tahun'].'</b>';
+                    echo '<a href="print.php?filter=3&tahun='.$_GET['tahun'].'"<div class="position-absolute top-0 end-0"><button type="button" class="btn btn-primary">Cetak PDF</button></a><br/>';
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                    ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
                 }
             }else{ // Jika user tidak mengklik tombol tampilkan
-                echo '<b>Semua Data Transaksi</b><br /><br />';
-                echo '<a href="print.php">Cetak PDF</a><br /><br />';
-                $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi.waktu_transaksi ASC"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
+                echo '<b>Semua Data Transaksi</b>';
+                echo '<a href="print.php"<div class="position-absolute top-0 end-0"><button type="button" class="btn btn-primary">Cetak PDF</button></a><br/>';
+                $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang ORDER BY transaksi.waktu_transaksi ASC"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
             }
             ?>
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Transaksi ID</th>
-                <th>Waktu Transaksi</th>
-                <th>Nama Pembeli</th>
-                <th>Nama Barang</th>
-                <th>Pembayaran</th>
-                <th>Total</th>
-              </tr>
-            </thead>
+            </div>
+          
+
+          
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="example" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Transaksi ID</th>
+                      <th>Waktu Transaksi</th>
+                      <th>Nama Pembeli</th>
+                      <th>Nama Barang</th>
+                      <th>Jumlah Barang</th>
+                      <th>Total Harga</th>
+                    </tr>
+                  </thead>
             <?php
             $no = 1;
             $sql = mysqli_query($mysqli, $query); // Eksekusi/Jalankan query dari variabel $query
@@ -254,12 +297,12 @@ if ($mysqli -> connect_errno) {
                     $tgl = date('d-m-Y', strtotime($data['waktu_transaksi'])); // Ubah format tanggal jadi dd-mm-yyyy
                     echo "<tr>";
                     echo "<td>".$no++."</td>";
-                    echo "<td>".$data['transaksi_id']."</td>";
+                    echo "<td>".$data['id_TransaksiDetail']."</td>";
                     echo "<td>".$data['waktu_transaksi']."</td>";
                     echo "<td>".$data['nama']."</td>";
                     echo "<td>".$data['nama_barang']."</td>";
-                    echo "<td>".$data['pembayaran']."</td>";
-                    echo "<td>".$data['total']."</td>";
+                    echo "<td>".$data['jumlah']."</td>";
+                    echo "<td>".$data['grand_total']."</td>";
                     echo "</tr>";
                 }
             }else{ // Jika data tidak ada
@@ -319,6 +362,12 @@ if ($mysqli -> connect_errno) {
 
   <!-- Template Main JS File -->
   <script src="assets/js/mainhome.js"></script>
+
+  <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
   
 
 </body>

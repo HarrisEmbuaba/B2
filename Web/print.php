@@ -31,28 +31,31 @@
                     
                     echo '<b>Data Transaksi Tanggal '.$tgl.'</b><br />';
                     echo '<a href="print.php?filter=1&tanggal='.$_GET['tanggal'].'"></a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE DATE(transaksi.waktu_transaksi)='".$_GET['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE DATE(transaksi.waktu_transaksi)='".$_GET['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
                 
                   }else if($filter == '2'){ // Jika filter nya 2 (per bulan)
                     $nama_bulan = array('', 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
                     
                     echo '<b>Data Transaksi Bulan '.$nama_bulan[$_GET['bulan']].' '.$_GET['tahun'].'</b><br />';
                     echo '<a href="print.php?filter=2&bulan='.$_GET['bulan'].'&tahun='.$_GET['tahun'].'"></a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE MONTH(transaksi.waktu_transaksi)='".$_GET['bulan']."' AND YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                    ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE MONTH(transaksi.waktu_transaksi)='".$_GET['bulan']."' AND YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
                 
                   }else{ // Jika filter nya 3 (per tahun)
                     
                     echo '<b>Data Transaksi Tahun '.$_GET['tahun'].'</b><br />';
                     echo '<a href="print.php?filter=3&tahun='.$_GET['tahun'].'"></a><br /><br />';
-                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
+                    $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                    ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang WHERE YEAR(transaksi.waktu_transaksi)='".$_GET['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
                 }
             }else{ // Jika user tidak mengklik tombol tampilkan
                 echo '<b>Semua Data Transaksi</b><br />';
                 echo '<a href="print.php"></a><br />';
-                $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi.pembayaran, transaksi.total  FROM transaksi JOIN pembeli ON transaksi.id_user = pembeli.id_user JOIN barang ON transaksi.id_barang = barang.id_barang ORDER BY transaksi.waktu_transaksi ASC"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
+                $query = "SELECT transaksi_detail.id_TransaksiDetail, transaksi.waktu_transaksi, pembeli.nama, barang.nama_barang, transaksi_detail.jumlah, transaksi.grand_total FROM transaksi_detail JOIN transaksi 
+                ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id JOIN pembeli ON transaksi.id_UserBeli = pembeli.id_user JOIN barang ON transaksi_detail.id_BarangDetail = barang.id_barang ORDER BY transaksi.waktu_transaksi ASC"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
             }
             ?>
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <table class="table table-striped table-bordered" style="width:100%">
             <thead>
               <tr>
                 <th>No</th>
@@ -60,8 +63,8 @@
                 <th>Waktu Transaksi</th>
                 <th>Nama Pembeli</th>
                 <th>Nama Barang</th>
-                <th>Pembayaran</th>
-                <th>Total</th>
+                <th>Jumlah Barang</th>
+                <th>Total Harga</th>
               </tr>
             </thead>
             <?php
@@ -73,12 +76,12 @@
                     $tgl = date('d-m-Y', strtotime($data['waktu_transaksi'])); // Ubah format tanggal jadi dd-mm-yyyy
                     echo "<tr>";
                     echo "<td>".$no++."</td>";
-                    echo "<td>".$data['transaksi_id']."</td>";
+                    echo "<td>".$data['id_TransaksiDetail']."</td>";
                     echo "<td>".$data['waktu_transaksi']."</td>";
                     echo "<td>".$data['nama']."</td>";
                     echo "<td>".$data['nama_barang']."</td>";
-                    echo "<td>".$data['pembayaran']."</td>";
-                    echo "<td>".$data['total']."</td>";
+                    echo "<td>".$data['jumlah']."</td>";
+                    echo "<td>".$data['grand_total']."</td>";
                     echo "</tr>";
                 }
             }else{ // Jika data tidak ada
