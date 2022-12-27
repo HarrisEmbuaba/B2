@@ -178,8 +178,33 @@ require 'koneksi.php';
       
                                     echo '<tr>    
                                           <td>'.$field1name.'</td>  
-                                          <td>
-                                          <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                          <td><!-- Button trigger modal -->
+                                          <div class="mb-4">
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notifikasi">
+                                            Lihat pesan
+                                          </button>
+                                          </div>
+                                          
+                                          <!-- Modal Tambah-->
+                                          <div class="modal" tabindex="-1" id="#notifikasi">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <div class="modal-content">
+                                              <form action="notifikasi.php" method="POST" enctype="multipart/form-data">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title">Tambah Barang</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                  <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
+                                                </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- End Modal Tambah-->
                                           </td>
                                           </tr>'; 
                                   } 
@@ -226,7 +251,7 @@ require 'koneksi.php';
                                       echo '<tr>     
                                               <td>'.$field1name.'</td>  
                                               <td>  
-                                              <a href="notifikasi3.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
+                                              <a href="detailNotif.php" data-toggle="modal" data-target="#modal">Lihat Pesan</a>
                                               <a> | </a>
                                               <a href="hapusNotif.php" data-toggle="modal" data-target="#modal">Hapus</a> 
                                               </td>

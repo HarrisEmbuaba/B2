@@ -29,7 +29,7 @@ try {
   $mail->Host       = 'smtp.gmail.com';                         // Host dari server SMTP
   $mail->SMTPAuth   = true;                                     // Aktifkan autekntifikasi SMTP 
   $mail->Username   = "zardhina@gmail.com";                    // SMTP username (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
-  $mail->Password   = 'nuraulia';                       // SMTP kode autentikasi (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
+  $mail->Password   = 'otvzgzkyppypvcry';                       // SMTP kode autentikasi (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
   $mail->SMTPSecure = 'ssl';                                    // Aktifkan enkripsi SSL implisit
   $mail->Port       = 465;                                      // TCP port untuk mengkoneksikan ke SMTP Server
 
