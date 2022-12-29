@@ -38,7 +38,7 @@ require "function.php";
   <link rel="stylesheet" href="plugin/jquery-ui/jquery-ui.min.css" /> <!-- Load file css jquery-ui -->
     <script src="js/jquery.min.js"></script> <!-- Load file jquery -->
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -66,39 +66,39 @@ require "function.php";
       </a>
     </div><!-- End Logo -->
 
+    <!-- Notification Dropdown Items -->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
         <li class="nav-item d-block d-lg-none">
         </li>
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
             <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">99+</span>
-          </a>
+            <span class="badge bg-primary badge-number">
+              <?php 
+              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
+              $result = mysqli_query($mysqli, $query);
+              $count = mysqli_fetch_row($result)[0];
 
-        </li><!-- End Notification Nav -->
+              echo $count;
+              ?>
+            </span>
+        </a>
 
-        <li class="nav-item dropdown">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Anda punya <?php echo $count;?> notifikasi belum dibaca!
+              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
+          </li>
+        </ul>
+    <!-- End Notification Dropdown Items -->
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-success badge-number">99+</span>
-          </a><!-- End Messages Icon -->
-
-        </li><!-- Profile Nav -->
-        <li class="nav-item">
-          <a class="nav-link nav-icon" href="users-profile.html">
-            <img src="assets/img/user.png" width="35px" height="35px"></i>
-          </a>
-      </li><!-- End Profile Nav -->
-
-        </li><!-- End Messages Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
+    <!-- Messages Icon -->
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
+          <span class="badge bg-success badge-number">99+</span>
+        </a>
+    <!-- End Messages Icon -->
 
   </header><!-- End Header -->
 
@@ -110,20 +110,20 @@ require "function.php";
     <br />
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pesan.php">
+        <a class="nav-link collapsed" href="pesan2.php">
           <img src="assets/img/pesan.png" width="40px" height="40px"></i>
         </a><br />
         
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kirim.php">
+        <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a><br />
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
         </a><br />
       </li><!-- End Produk Page Nav -->
@@ -155,11 +155,8 @@ require "function.php";
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
               
                 <form action="logout.php" method="POST">
-
-                <button type="submit" name="logout_btn" class="btn btn-primary" herf="login.html">Keluar</button>
-
+                  <button type="submit" name="logout_btn" class="btn btn-primary" herf="login.html">Keluar</button>
                 </form>
-
             </div>
           </div>
         </div>

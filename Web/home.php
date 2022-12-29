@@ -1,10 +1,5 @@
 <?php
-    require 'koneksi.php';
-
-    // if (!$mysqli) {
-    //   die("Connection failed: " . mysqli_connect_error());
-    //   header("Location: error-connect.php");
-    // }
+    require 'koneksi.php'
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +64,7 @@
         <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
+            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">
               <?php 
               $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
@@ -140,25 +135,24 @@
         <div>
           <div class="row">
 
-            <!-- Pendapatan Penjualan Card -->
-            <div class="col-xxl-25 col-md-6">
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h5 class="card-title">Pendapatan Penjualan | Bulan: 
-                    <!-- <?php 
-                    //$bulan = "SELECT waktu_transaksi FROM transaksi WHERE month(waktu_transaksi) = MONTH(CURRENT_DATE());";
-                    ?> -->
-                    <span></h5>
+                  <h3 class="card-title">Produk Terjual <span>| Bulan ini</span></h3>
 
                   <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <img src="assets/img/check-out.png" width="70px" height="70px"></i>
+                    </div>
                     <div class="ps-3">
-                      <h5><?php
+                    <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi ORDER BY month(waktu_transaksi)");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
-                      <div class="ps-3">
-                          <h6><?php echo "Rp." . number_format($data['SUM(grand_total)']) ;?></h6>
+                    
+                          <h3><?php echo number_format($data['qty']) ;?></h3>
                       <?php
                       }
                       ?></h5>
@@ -167,23 +161,25 @@
                 </div>
 
               </div>
-            </div><!-- End Pendapatan Penjualan Card -->
+            </div><!-- End Sales Card -->
 
-            <!-- Produk Terjual Card -->
-            <div class="col-xxl-25 col-md-6">
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Produk Terjual <span></h5>
+                  <h5 class="card-title">Pendapatan<span> | Bulan ini</span></h5>
 
                   <div class="d-flex align-items-center">
-                    <div class="ps-3">
-                      <h5><?php
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <img src="assets/img/money.png" width="70px" height="70px"></i>
+                    </div>
+                    <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi ORDER BY month(waktu_transaksi)");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                       <div class="ps-3">
-                          <h6><?php echo number_format($data['qty']) ;?></h6>
+                          <h3><?php echo "Rp." . number_format($data['SUM(grand_total)']) ;?></h3>
                       <?php
                       }
                       ?></h5>
@@ -194,111 +190,42 @@
               </div>
             </div><!-- End Revenue Card -->
 
-            <!-- Reports -->
+            <!-- Top Selling -->
             <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Reports <span>| Today</span></h5>
+              <div class="card top-selling overflow-auto">
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Produk Terlaris</h5>
 
-                  <!-- Line Chart -->
-                  <div id="reportsChart">
+                  <table class="table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Gambar</th>
+                        <th>Nama Produk</th>
+                        <th>Sold</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      include 'koneksi.php';
+                      $sql = mysqli_query($mysqli, "SELECT barang.stok, barang.nama_barang, transaksi_detail.jumlah  FROM barang JOIN transaksi_detail ON barang.id_barang = transaksi_detail.id_BarangDetail WHERE max(transaksi_detail.jumlah)");
+                      while ($data = mysqli_fetch_array($sql)) {
+                        ?>
+                        <tr>
+                        <td style="text-align: center;"><img src="gambarproduk/<?php echo $data['image']; ?>"></td>
+                        <td> <?php echo $data['nama_barang']; ?> </td>
+                        <td> <?php echo $data['jumlah']; ?> </td>
+                      </tr>
+                      <?php
+                      }
+                      ?>
+                    </tbody>
+                  </table>
 
-                  <?php
-
-                  require 'koneksi.php';
-                  
-                  $jan = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '01'";
-                  $feb = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '02'";
-                  $mar = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '03'";
-                  $apr = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '04'";
-                  $may = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '05'";
-                  $jun = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '06'";
-                  $jul = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '07'";
-                  $aug = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '08'";
-                  $sep = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '09'";
-                  $oct = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '10'";
-                  $nov = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '11'";
-                  $des = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima' AND MONTH(waktu_transaksi) = '12'";
-                  $all = "SELECT SUM(grand_total) FROM transaksi WHERE status = 'Diterima'";
-
-                  $result1 = mysqli_query($mysqli, $jan);
-                  $result2 = mysqli_query($mysqli, $feb);
-                  $result3 = mysqli_query($mysqli, $mar);
-                  $result4 = mysqli_query($mysqli, $apr);
-                  $result5 = mysqli_query($mysqli, $may);
-                  $result6 = mysqli_query($mysqli, $jun);
-                  $result7 = mysqli_query($mysqli, $jul);
-                  $result8 = mysqli_query($mysqli, $aug);
-                  $result9 = mysqli_query($mysqli, $sep);
-                  $result10 = mysqli_query($mysqli, $oct);
-                  $result11 = mysqli_query($mysqli, $nov);
-                  $result12 = mysqli_query($mysqli, $des);
-                  $data = mysqli_query($mysqli, $all);
-
-                  // $mean = ('$data'/'12');
-
-                  ?>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [<?php echo $result1;?>, <?php echo $result2;?>, <?php echo $result3;?>, <?php echo $result4;?>,
-                          <?php echo $result5;?>, <?php echo $result6;?>, <?php echo $result7;?>, <?php echo $result8;?>,
-                          <?php echo $result9;?>, <?php echo $result10;?>, <?php echo $result11;?>, <?php echo $result12;?>
-                        ],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41, 140000]
-                        }, ],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  </div>
-                  <!-- End Line Chart -->
-                
                 </div>
-              </div>
-            </div><!-- End Reports -->
 
-          </div>
+              </div>
+            </div><!-- End Top Selling -->
+
         </div><!-- End Left side columns -->
       </div>
     </section>
