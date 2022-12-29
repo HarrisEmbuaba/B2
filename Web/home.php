@@ -46,25 +46,20 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    
-
     <div class="d-flex align-items-center">
       <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
-        <span class="d-none d-lg-block">Milania Craft</span>
+        <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
     </div><!-- End Logo -->
 
+    <!-- Notification Dropdown Items -->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
         <li class="nav-item d-block d-lg-none">
         </li>
-
-        <li class="nav-item dropdown">
-
         <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif1.png"alt="" width="30px" height="30px"></i>
+            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
             <span class="badge bg-primary badge-number">
               <?php 
               $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
@@ -74,17 +69,23 @@
               echo $count;
               ?>
             </span>
-          </a>
+        </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               Anda punya <?php echo $count;?> notifikasi belum dibaca!
               <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-            </li>
-          </ul><!-- End Notification Dropdown Items -->
+          </li>
+        </ul>
+    <!-- End Notification Dropdown Items -->
 
-      </ul>
-    </nav><!-- End Icons Navigation -->
+    <!-- Messages Icon -->
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
+          <span class="badge bg-success badge-number">99+</span>
+        </a>
+    <!-- End Messages Icon -->
 
   </header><!-- End Header -->
 
@@ -92,39 +93,61 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+    <br />
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan2.php">
-          <img src="assets/img/pesan.png" width="35px" height="35px"></i>
-        </a>
+          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
+        </a><br />
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="kirim2.php">
           <img src="assets/img/kirim.png" width="35px" height="35px"></i>
-        </a>
+        </a><br />
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="produk2.php">
           <img src="assets/img/produk.png" width="35px" height="35px"></i>
-        </a>
+        </a><br />
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="bayar.php">
           <img src="assets/img/bayar.png" width="35px" height="35px"></i>
-        </a>
+        </a><br/><br /><br /><br /><br /><br /><br /><br />
       </li><!-- End Bayar Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="logout.php">
+        <a class="nav-link collapsed" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <img src="assets/img/logout.png" width="35px" height="35px"></i>
         </a>
-      </li><!-- End Logout Page Nav -->
-    </ul>
 
-  </aside><!-- End Sidebar-->
+      </ul>
+      </aside><!-- End Sidebar-->
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Logout?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">Pilih "Keluar" jika Anda siap untuk mengakhiri sesi Anda saat ini.</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              
+                <form action="logout.php" method="POST">
+                  <button type="submit" name="logout_btn" class="btn btn-primary" herf="login.html">Keluar</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EndLogout Modal -->
 
   <main id="main" class="main">
 

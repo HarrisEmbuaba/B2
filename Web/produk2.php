@@ -193,7 +193,7 @@ if(isset($_GET['hal'])) {
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center">
-      <a href="home.html" class="logo d-flex align-items-center">
+      <a href="home.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
