@@ -1,38 +1,34 @@
 <?php
-require("koneksi.php");
-require("inputCodeOTP.html");
+require ('koneksi.php');
+include ('inputCodeOTP.html');
 
-if ($_POST){
+session_start();
 
-    $email = $_POST['email'];
-    $kodeotp = $_POST['kodeotp'];
+$email = $_SESSION['email'];
+$otp = $_POST['kodeotp'];
 
-    $query1 = "SELECT kode_otp FROM pemilik WHERE email = '$email'";
-       
-    $eksekusi = mysqli_query($koneksi, $query1);
-    $cek = mysqli_affected_rows($koneksi);
+// Validasi input
+if (!empty($email) && !empty($otp)) {
 
-    if($cek > 0){
-        $response["kode"] = 1;
-        $response["pesan"]= "Data Tersedia";
-        $response["data"] = array();
+    // Cari kode OTP yang terkait dengan alamat email yang dimasukkan pengguna
+    $query = "SELECT kode_otp FROM pemilik WHERE email = '$email'";
+    $result = mysqli_query($mysqli, $query);
+    $check = mysqli_affected_rows($mysqli);
     
-        while($ambil = mysqli_fetch_object($eksekusi)){
-            $kode = $ambil->kodeotp;
-            array_push($response["data"], $kode);
+    if($check > 0){
+        while($ambil = mysqli_fetch_object($result)){
+            $kode = $ambil->kode_otp;
+            if ($otp == $kode){
+                echo "<script>alert('Email sent successfully to $email!');window.location='resetPass.php';</script>";
+            } else {
+                echo "<script>alert('Gagal Verifikasi! Kode OTP Salah')</script>";
+            }
         }
     }
     else{
-        $response["kode"] = 0;
-        $response["pesan"] = "Data Tidak Tersedia";
+        echo "<script>alert('Masukkan Kode OTP')</script>";
     }
 
-    if ($kodeotp == $kode){
-        echo "<script>alert('Berhasil Verifikasi');window.location='login.html';</script>";
-      } else {
-        echo "<script>alert('Gagal verifiikasi, kode verifikasi salah')</script>";
-      }
+mysqli_close($mysqli);
 }
-echo json_encode($response);
-mysqli_close($koneksi);
 ?>

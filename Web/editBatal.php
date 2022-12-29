@@ -15,7 +15,7 @@ if (!$mysqli) {
   header("Location: error-connect.php");
 }
 
-$sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = $fielad2name";
+$sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = '$fielad2name'";
 
 if (mysqli_query($mysqli, $sql)){
   echo "<script>alert('Status berhasil terupdate!');window.location='kirim3.php';</script>";

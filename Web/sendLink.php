@@ -22,13 +22,16 @@ require "koneksi.php";
                   <br>
                   Note: Ignore this message if you don't want to change the password.";
 
+session_start();
+$_SESSION['email'] = $email;
+
 $mail = new PHPMailer(true);
 try {
   //Server settings
   $mail->isSMTP();                                              // Kirim email menggunakan metode SMTP
   $mail->Host       = 'smtp.gmail.com';                         // Host dari server SMTP
   $mail->SMTPAuth   = true;                                     // Aktifkan autekntifikasi SMTP 
-  $mail->Username   = "zardhina@gmail.com";                    // SMTP username (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
+  $mail->Username   = "zardhina@gmail.com";                     // SMTP username (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
   $mail->Password   = 'otvzgzkyppypvcry';                       // SMTP kode autentikasi (diaktifkan di pengaturan Gmail > keamanan > Login ke Google)
   $mail->SMTPSecure = 'ssl';                                    // Aktifkan enkripsi SSL implisit
   $mail->Port       = 465;                                      // TCP port untuk mengkoneksikan ke SMTP Server
