@@ -198,7 +198,7 @@
                     </div>
                     <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi ORDER BY month(waktu_transaksi)");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                       <div class="ps-3">

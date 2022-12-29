@@ -168,7 +168,7 @@ if(isset($_SESSION['transaksi_id'])){
 
           <div class="card">
             <div class="card-body pt-3">
-            <h1>Pengiriman</h1>                
+            <h3>Pengiriman</h3>                
                 <u class="nav nav-tabs nav-tabs-bordered"></u>
                 <div class="mb-4">
                   <div class="py-3">
