@@ -93,11 +93,10 @@ require "function.php";
     <!-- End Notification Dropdown Items -->
 
     <!-- Messages Icon -->
-      <li class="nav-item dropdown">
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
-          <span class="badge bg-success badge-number">99+</span>
-        </a>
+    <a class="nav-link nav-icon" href="https://web.whatsapp.com/">
+            <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
+            <span class="badge bg-success badge-number"></span>
+          </a>
     <!-- End Messages Icon -->
 
   </header><!-- End Header -->
