@@ -12,15 +12,14 @@ require 'koneksi.php';
 
 if (!$mysqli) {
   die("Connection failed: " . mysqli_connect_error());
-  header("Location: error-connect.php");
 }
 
 $sql = "UPDATE transaksi SET status='Dibatalkan' WHERE transaksi_id = '$fielad2name'";
 
 if (mysqli_query($mysqli, $sql)){
-  echo "<script>alert('Status berhasil terupdate!');window.location='kirim3.php';</script>";
+  echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
 } else {
-  echo "<script>alert('Status gagal terupdate!');window.location='kirim3.php';</script>";
+  echo "<script>alert('Status gagal terupdate!');window.location='kirim2.php';</script>";
 }
 
 mysqli_close($mysqli);

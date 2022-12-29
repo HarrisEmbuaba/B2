@@ -135,13 +135,12 @@ include ('koneksi.php');
             <div class="card-body pt-3">
               <?php
 
-              $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.id_UserBeli, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail WHERE transaksi_id = '$field2name'";
-              
-              
               $id = $_POST['transaksi_id'];
               $idUser = $_POST['id_UserBeli'];
               $waktu = $_POST['waktu_transaksi'];
               $qty = $_POST['jumlah'];
+
+              $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.id_UserBeli, transaksi_detail.jumlah FROM transaksi JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail WHERE transaksi_id = '$field2name'";
               
               if (!$mysqli) {
                 die("Connection failed: " . mysqli_connect_error());
