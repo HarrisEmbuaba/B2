@@ -184,7 +184,7 @@ if(isset($_SESSION['transaksi_id'])){
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dikirimr">Dikirim</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dikirim">Dikirim</button>
                 </li>
 
                 <li class="nav-item">
