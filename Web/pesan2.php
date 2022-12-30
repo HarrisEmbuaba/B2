@@ -186,11 +186,7 @@ if(isset($_SESSION['transaksi_id'])){
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#belum-bayar">Belum Bayar</button>
                 </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sudah-dibayar">Sudah Dibayar</button>
-                </li>
-
+                
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
                 </li>
@@ -222,51 +218,65 @@ if(isset($_SESSION['transaksi_id'])){
  
                   <!-- Table with stripped rows --> 
                   <table class="table table-bordered" id="example1" width="100%" cellspacing="0"> 
-                    <thead> 
-                      <tr> 
-                          <th scope="col">No</th> 
-                          <th scope="col">ID Transaksi</th> 
-                          <th scope="col">ID Pembeli</th> 
-                          <th scope="col">Nama Pembeli</th> 
-                          <th scope="col">Kuantitas</th> 
-                          <th scope="col">Total</th> 
-                          <th scope="col">Alamat</th> 
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th> 
-                      </tr> 
-                    </thead> 
-                    <tbody> 
-                        <?php 
-                            if ($result = $mysqli->query($query)) { 
-                                while ($row = $result->fetch_assoc()) { 
-                                    $no++;
-                                    $field2name = $row["transaksi_id"]; 
-                                    $field3name = $row["id_UserBeli"]; 
-                                    $field4name = $row["nama"]; 
-                                    $field5name = $row["jumlah"];  
-                                    $field6name = $row["grand_total"];  
-                                    $field7name = $row["alamat"]; 
-                                    $field8name = $row["status"]; 
-    
-                                    echo '<tr>   
-                                            <th>' .$no.'</th>  
-                                            <td>'.$field2name.'</td>  
-                                            <td>'.$field3name.'</td>  
-                                            <td>'.$field4name.'</td>  
-                                            <td>'.$field5name.'</td>  
-                                            <td>'.$field6name.'</td> 
-                                            <td>'.$field7name.'</td> 
-                                            <td>'.$field8name.'</td> 
-                                            <td>  
-                                            <a href="editBayar.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
-                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
-                                            </td> 
-                                        </tr>'; 
+                  <thead>
+                                  <tr>
+                                    <th scope="col">No</th> 
+                                    <th scope="col">ID Transaksi</th> 
+                                    <th scope="col">ID Pembeli</th> 
+                                    <th scope="col">Nama Pembeli</th> 
+                                    <th scope="col">Kuantitas</th> 
+                                    <th scope="col">Total</th> 
+                                    <th scope="col">Alamat</th> 
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th> 
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <?php 
+                                //untuk meinclude kan koneksi
+                                include('koneksi.php');
+                                
+                                $no = 1;
+
+                                if(isset($_POST['bcari'])) {
+                                //menampung variabel kata_cari dari form pencarian
+                                $cari = $_POST['tcari'];
+
+                                //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
+                                //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE (nama_barang like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Belum bayar' ORDER BY transaksi_id DESC";
+                                } else {
+                                //jika tidak ada pencarian, default yang dijalankan query ini
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Belum bayar' ORDER BY transaksi_id DESC"; 
                                 } 
-                                $result->free(); 
-                            }  
-                        ?> 
-                      </tbody> 
+
+                                
+                                $result = mysqli_query($mysqli, $query);
+
+                                if(!$result) {
+                                    die("Query Error : ".mysqli_errno($mysqli)." - ".mysqli_error($mysqli));
+                                }
+                                //kalau ini melakukan foreach atau perulangan
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?> 
+                                
+                                  <tr>
+                                    <th><?php echo $no; ?></th> 
+                                    <td><?php echo $row['transaksi_id']; ?></td> 
+                                    <td><?php echo $row['id_UserBeli']; ?></td> 
+                                    <td><?php echo $row['nama']; ?></td>
+                                    <td><?php echo $row['jumlah']; ?></td> 
+                                    <td>Rp.<?php echo $row['grand_total']; ?></td> 
+                                    <td><?php echo $row['alamat']; ?></td> 
+                                    <td><?php echo $row['status']; ?></td> 
+                                    <td>
+                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
+                                    
+                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
+                                    </td>
+                                  </tr>
+                                  <?php }?>
+                            </tbody>
                   </table>
                     </div>
                   </div>
@@ -275,88 +285,8 @@ if(isset($_SESSION['transaksi_id'])){
 
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade sudah-bayar" id="sudah-dibayar">
-
-                  <!-- partial:index.partial.html -->
-
-
-                    <!-- DataTales Example -->
-                    <div class="mb-4">
-                    <div class="py-3">
-                        <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                        <?php 
-                        if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Sudah bayar' AND `transaksi`.`nama` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
-                          
-                        } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Sudah bayar' ORDER BY transaksi_id DESC";
-                          
-                        }
-                        $no = 0; 
-                        ?> 
-  
-                    <!-- Table with stripped rows --> 
-                    <table class="table table-bordered" id="example2" width="100%" cellspacing="0"> 
-                      <thead> 
-                        <tr> 
-                          <th scope="col">No</th> 
-                          <th scope="col">ID Transaksi</th> 
-                          <th scope="col">ID Pembeli</th> 
-                          <th scope="col">Nama Pembeli</th> 
-                          <th scope="col">Kuantitas</th> 
-                          <th scope="col">Total</th> 
-                          <th scope="col">Alamat</th> 
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th> 
-                        </tr> 
-                      </thead> 
-                      <tbody> 
-                          <?php 
-                              if ($result = $mysqli->query($query)) { 
-                                  while ($row = $result->fetch_assoc()) { 
-                                      $no++;
-                                      $field2name = $row["transaksi_id"]; 
-                                      $field3name = $row["id_UserBeli"]; 
-                                      $field4name = $row["nama"]; 
-                                      $field5name = $row["jumlah"];  
-                                      $field6name = $row["grand_total"];  
-                                      $field7name = $row["alamat"]; 
-                                      $field8name = $row["status"];  
-      
-                                      echo '<tr>   
-                                              <th>' .$no.'</th>  
-                                              <td>'.$field2name.'</td>  
-                                              <td>'.$field3name.'</td>  
-                                              <td>'.$field4name.'</td>  
-                                              <td>'.$field5name.'</td>  
-                                              <td>'.$field6name.'</td> 
-                                              <td>'.$field7name.'</td> 
-                                              <td>'.$field8name.'</td> 
-                                              <td> 
-                                              <a href="editKemas.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
-                                              <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
-                                              </td> 
-                                          </tr>'; 
-                                  } 
-                                  $result->free(); 
-                              }  
-                          ?> 
-                        </tbody> 
-                    </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div><!-- End Bordered Tabs -->
-              </div>
-
-              <div class="tab-content pt-3">
                 <div class="tab-pane fade dikemas" id="dikemas">
-                        
+
                         <!-- DataTales Example -->
                         <div class="mb-4">
                           <div class="py-3">
@@ -377,51 +307,65 @@ if(isset($_SESSION['transaksi_id'])){
   
                     <!-- Table with stripped rows --> 
                     <table class="table table-bordered" id="example3" width="100%" cellspacing="0"> 
-                      <thead> 
-                        <tr> 
-                          <th scope="col">No</th> 
-                          <th scope="col">ID Transaksi</th> 
-                          <th scope="col">ID Pembeli</th> 
-                          <th scope="col">Nama Pembeli</th> 
-                          <th scope="col">Kuantitas</th> 
-                          <th scope="col">Total</th> 
-                          <th scope="col">Alamat</th> 
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th>
-                        </tr> 
-                      </thead> 
-                      <tbody> 
-                          <?php 
-                              if ($result = $mysqli->query($query)) { 
-                                  while ($row = $result->fetch_assoc()) { 
-                                      $no++;
-                                      $field2name = $row["transaksi_id"]; 
-                                      $field3name = $row["id_UserBeli"]; 
-                                      $field4name = $row["nama"]; 
-                                      $field5name = $row["jumlah"];  
-                                      $field6name = $row["grand_total"];  
-                                      $field7name = $row["alamat"]; 
-                                      $field8name = $row["status"]; 
-      
-                                      echo '<tr>   
-                                              <th>' .$no.'</th>  
-                                              <td>'.$field2name.'</td>  
-                                              <td>'.$field3name.'</td>  
-                                              <td>'.$field4name.'</td>  
-                                              <td>'.$field5name.'</td>  
-                                              <td>'.$field6name.'</td> 
-                                              <td>'.$field7name.'</td> 
-                                              <td>'.$field8name.'</td> 
-                                              <td> 
-                                              <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
-                                              <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
-                                              </td> 
-                                          </tr>'; 
-                                  } 
-                                  $result->free(); 
-                              }  
-                          ?> 
-                        </tbody> 
+                    <thead>
+                                  <tr>
+                                    <th scope="col">No</th> 
+                                    <th scope="col">ID Transaksi</th> 
+                                    <th scope="col">ID Pembeli</th> 
+                                    <th scope="col">Nama Pembeli</th> 
+                                    <th scope="col">Kuantitas</th> 
+                                    <th scope="col">Total</th> 
+                                    <th scope="col">Alamat</th> 
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th> 
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <?php 
+                                //untuk meinclude kan koneksi
+                                include('koneksi.php');
+                                
+                                $no = 1;
+
+                                if(isset($_POST['bcari'])) {
+                                //menampung variabel kata_cari dari form pencarian
+                                $cari = $_POST['tcari'];
+
+                                //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
+                                //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE (nama_barang like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Dikemas' ORDER BY transaksi_id DESC";
+                                } else {
+                                //jika tidak ada pencarian, default yang dijalankan query ini
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikemas' ORDER BY transaksi_id DESC"; 
+                                } 
+
+                                
+                                $result = mysqli_query($mysqli, $query);
+
+                                if(!$result) {
+                                    die("Query Error : ".mysqli_errno($mysqli)." - ".mysqli_error($mysqli));
+                                }
+                                //kalau ini melakukan foreach atau perulangan
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?> 
+                                
+                                  <tr>
+                                    <th><?php echo $no; ?></th> 
+                                    <td><?php echo $row['transaksi_id']; ?></td> 
+                                    <td><?php echo $row['id_UserBeli']; ?></td> 
+                                    <td><?php echo $row['nama']; ?></td>
+                                    <td><?php echo $row['jumlah']; ?></td> 
+                                    <td>Rp.<?php echo $row['grand_total']; ?></td> 
+                                    <td><?php echo $row['alamat']; ?></td> 
+                                    <td><?php echo $row['status']; ?></td> 
+                                    <td>
+                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
+                                    
+                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
+                                    </td>
+                                  </tr>
+                                  <?php }?>
+                            </tbody>
                     </table>
                       </div>
                     </div>

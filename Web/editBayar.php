@@ -16,8 +16,7 @@ if (!$mysqli) {
   } else {
       echo "<script>alert('Status gagal terupdate!')</script>";
   }
-}  // }
-
+}
 
 mysqli_close($mysqli);
 

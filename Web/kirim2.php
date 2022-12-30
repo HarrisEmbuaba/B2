@@ -208,10 +208,10 @@ if(isset($_SESSION['transaksi_id'])){
                       <div class="table-responsive">
                       <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikirim' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikirim' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikirim' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikirim' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -222,7 +222,10 @@ if(isset($_SESSION['transaksi_id'])){
                     <thead> 
                       <tr> 
                           <th scope="col">No</th> 
-                          <th scope="col">ID Transaksi</th> 
+                          <th scope="col">ID Transaksi</th>
+                          <th scope="col">Waktu Transaksi</th> 
+                          <th scope="col">Waktu Pembayaran</th> 
+                          <th scope="col">Waktu Pengiriman</th> 
                           <th scope="col">ID Pembeli</th> 
                           <th scope="col">Nama Pembeli</th> 
                           <th scope="col">Kuantitas</th> 
@@ -238,12 +241,15 @@ if(isset($_SESSION['transaksi_id'])){
                                 while ($row = $result->fetch_assoc()) { 
                                     $no++;
                                     $field2name = $row["transaksi_id"]; 
-                                    $field3name = $row["id_UserBeli"]; 
-                                    $field4name = $row["nama"]; 
-                                    $field5name = $row["jumlah"];  
-                                    $field6name = $row["grand_total"];  
-                                    $field7name = $row["alamat"]; 
-                                    $field8name = $row["status"]; 
+                                    $field3name = $row["waktu_transaksi"];  
+                                    $field4name = $row["waktu_embayaran"];  
+                                    $field5name = $row["waktu_pengiriman"]; 
+                                    $field6name = $row["id_UserBeli"]; 
+                                    $field7name = $row["nama"]; 
+                                    $field8name = $row["jumlah"];  
+                                    $field9name = $row["grand_total"];  
+                                    $field10name = $row["alamat"]; 
+                                    $field11name = $row["status"]; 
     
                                     echo '<tr>   
                                             <th>' .$no.'</th>  
@@ -254,8 +260,10 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field6name.'</td> 
                                             <td>'.$field7name.'</td> 
                                             <td>'.$field8name.'</td> 
+                                            <td>'.$field9name.'</td> 
+                                            <td>'.$field10name.'</td> 
                                             <td>  
-                                            <a href="editBayar.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
                                             <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                             </td> 
                                         </tr>'; 
@@ -286,10 +294,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -300,7 +308,11 @@ if(isset($_SESSION['transaksi_id'])){
                       <thead> 
                         <tr> 
                           <th scope="col">No</th> 
-                          <th scope="col">ID Transaksi</th> 
+                          <th scope="col">ID Transaksi</th>
+                          <th scope="col">Waktu Transaksi</th> 
+                          <th scope="col">Waktu Pembayaran</th> 
+                          <th scope="col">Waktu Pengiriman</th> 
+                          <th scope="col">Waktu Pesanan Selesai</th>  
                           <th scope="col">ID Pembeli</th> 
                           <th scope="col">Nama Pembeli</th> 
                           <th scope="col">Kuantitas</th> 
@@ -316,12 +328,16 @@ if(isset($_SESSION['transaksi_id'])){
                                   while ($row = $result->fetch_assoc()) { 
                                       $no++;
                                       $field2name = $row["transaksi_id"]; 
-                                      $field3name = $row["id_UserBeli"]; 
-                                      $field4name = $row["nama"]; 
-                                      $field5name = $row["jumlah"];  
-                                      $field6name = $row["grand_total"];  
-                                      $field7name = $row["alamat"]; 
-                                      $field8name = $row["status"];  
+                                      $field3name = $row["waktu_transaksi"];
+                                      $field4name = $row["waktu_pembayaran"]; 
+                                      $field5name = $row["waktu_pengiriman"];   
+                                      $field6name = $row["waktu_pesanan_selesai"]; 
+                                      $field7name = $row["id_UserBeli"]; 
+                                      $field8name = $row["nama"]; 
+                                      $field9name = $row["jumlah"];  
+                                      $field10name = $row["grand_total"];  
+                                      $field11name = $row["alamat"]; 
+                                      $field12name = $row["status"];  
       
                                       echo '<tr>   
                                               <th>' .$no.'</th>  
@@ -332,9 +348,10 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field6name.'</td> 
                                               <td>'.$field7name.'</td> 
                                               <td>'.$field8name.'</td> 
+                                              <td>'.$field9name.'</td> 
+                                              <td>'.$field10name.'</td> 
                                               <td> 
-                                              <a href="editKemas.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
-                                              <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
+                                              <a>Pesanan diterima</a>
                                               </td> 
                                           </tr>'; 
                                   } 
@@ -363,10 +380,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.waktu_dibatalkan, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dibatalkan' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dibatalkan' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.waktu_dibatalkan, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dibatalkan' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -378,6 +395,8 @@ if(isset($_SESSION['transaksi_id'])){
                         <tr> 
                           <th scope="col">No</th> 
                           <th scope="col">ID Transaksi</th> 
+                          <th scope="col">Waktu Transaksi</th> 
+                          <th scope="col">Waktu Pembatalan</th> 
                           <th scope="col">ID Pembeli</th> 
                           <th scope="col">Nama Pembeli</th> 
                           <th scope="col">Kuantitas</th> 
@@ -392,13 +411,15 @@ if(isset($_SESSION['transaksi_id'])){
                               if ($result = $mysqli->query($query)) { 
                                   while ($row = $result->fetch_assoc()) { 
                                       $no++;
-                                      $field2name = $row["transaksi_id"]; 
-                                      $field3name = $row["id_UserBeli"]; 
-                                      $field4name = $row["nama"]; 
-                                      $field5name = $row["jumlah"];  
-                                      $field6name = $row["grand_total"];  
-                                      $field7name = $row["alamat"]; 
-                                      $field8name = $row["status"]; 
+                                      $field2name = $row["transaksi_id"];  
+                                      $field3name = $row["waktu_transaksi"];  
+                                      $field4name = $row["waktu_dibatalkan"]; 
+                                      $field5name = $row["id_UserBeli"]; 
+                                      $field6name = $row["nama"]; 
+                                      $field7name = $row["jumlah"];  
+                                      $field8name = $row["grand_total"];  
+                                      $field9name = $row["alamat"]; 
+                                      $field10name = $row["status"]; 
       
                                       echo '<tr>   
                                               <th>' .$no.'</th>  
@@ -409,9 +430,10 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field6name.'</td> 
                                               <td>'.$field7name.'</td> 
                                               <td>'.$field8name.'</td> 
+                                              <td>'.$field9name.'</td> 
+                                              <td>'.$field10name.'</td> 
                                               <td> 
-                                              <a href="editPerluKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a>
-                                              <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
+                                              <a>Dibatalkan</a>
                                               </td> 
                                           </tr>'; 
                                   } 

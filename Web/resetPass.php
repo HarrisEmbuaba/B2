@@ -83,25 +83,6 @@ if(isset($_POST["email"]) && isset($_POST["action"]) && ($_POST["action"]=="upda
       echo "<div class='error'>".$error."</div><br />";
     
       }      
-    } // isset email key validate end
-    
-    
-    if(isset($_POST["email"]) && isset($_POST["action"]) && ($_POST["action"]=="update")){
-      $error="";
-      $pass1 = mysqli_real_escape_string($koneksi,$_POST["pass1"]);
-      $pass2 = mysqli_real_escape_string($koneksi,$_POST["pass2"]);
-      $curDate = date("Y-m-d H:i:s");
-      
-      if ($pass1!=$pass2){
-        echo "<script>alert('Password tidak sama!');</script>";
-    
-    
-      }else if($error!=""){ 
-        echo "<div class='error'>".$error."</div><br />";
-      } else {
-        mysqli_query($mysqli, "UPDATE pembeli SET password_pbl ='$pass1' WHERE email = '$email'");
-        echo "<script>alert('Password Berhasil Diubah!');window.location='login.php';</script>";
-      }    
     }
   }
     
@@ -142,8 +123,6 @@ if(isset($_POST["email"]) && isset($_POST["action"]) && ($_POST["action"]=="upda
 
               <input type="hidden" name="email" value="<?php echo $email;?>" />
               <input type="submit" name="submit" value="Ubah Password" class="sign-btn" />
-              <p class="text">
-                <a href="#">Get help</a> signing in</p>
             </div>
           </form>
         </main>
