@@ -170,46 +170,19 @@ require 'koneksi.php';
                       </thead> 
                       <tbody> 
                           <?php 
-                          $user = "SELECT `id_UserBeli` FROM `transaksi` WHERE transaksi_id = ''";
-                          $id = "SELECT `transaksi_id` FROM `transaksi` WHERE transaksi_id = ''";
-                              if ($result = $mysqli->query($query)) { 
-                                  while ($row = $result->fetch_assoc()) { 
-                                    $field1name = "Pesanan baru dengan ID !<br>Kamu dapat satu pesanan baru dari pelanggan yaitu ";
-      
-                                    echo '<tr>    
-                                          <td>'.$field1name.'</td>  
-                                          <td><!-- Button trigger modal -->
-                                          <div class="mb-4">
-                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notifikasi">
-                                            Lihat pesan
-                                          </button>
-                                          </div>
-                                          
-                                          <!-- Modal Tambah-->
-                                          <div class="modal" tabindex="-1" id="#notifikasi">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                              <div class="modal-content">
-                                              <form action="notifikasi.php" method="POST" enctype="multipart/form-data">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title">Tambah Barang</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                  <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
-                                                </div>
-                                                </form>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- End Modal Tambah-->
-                                          </td>
-                                          </tr>'; 
-                                  } 
-                                  $result->free(); 
-                              }  
+                          $id       = $_GET['transaksi_id'];
+                          //cek dulu jika merubah gambar produk jalankan coding ini
+                          $sql = "SELECT transaksi_id FROM transaksi WHERE transaksi_id ='$id' ";
+                              $result = mysqli_query($mysqli, $sql);
+                          
+                              //periksa query, apakah ada kesalahan
+                              if(!$result) {
+                                die ("Gagal memuat notifikasi! Error code: ".mysqli_errno($mysqli).
+                                 " - ".mysqli_error($mysqli));
+                              } else {
+                              //echo "<script>alert('Status berhasil terupdate!');window.location='pesan3.php';</script>";
+                              echo "Pesanan dengan ID ".$id." telah diterima. Segera kemas!";
+                              }     
                           ?> 
                         </tbody> 
                     </table>
