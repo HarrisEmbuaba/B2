@@ -115,13 +115,13 @@ if(isset($_SESSION['transaksi_id'])){
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pesan2.php">
-          <img src="assets/img/pesan.png" width="40px" height="40px"></i>
+          <img src="assets/img/pesan1.png" width="40px" height="40px"></i>
         </a><br />
       </li><!-- End Pesan Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="kirim2.php">
-          <img src="assets/img/kirim1.png" width="35px" height="35px"></i>
+          <img src="assets/img/kirim.png" width="35px" height="35px"></i>
         </a><br />
       </li><!-- End Kirim Page Nav -->
 
