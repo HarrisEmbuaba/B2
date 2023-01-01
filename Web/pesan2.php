@@ -76,26 +76,6 @@ if(isset($_SESSION['transaksi_id'])){
       <ul class="d-flex align-items-center">
         <li class="nav-item d-block d-lg-none">
         </li>
-        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">
-              <?php 
-              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
-              $result = mysqli_query($mysqli, $query);
-              $count = mysqli_fetch_row($result)[0];
-
-              echo $count;
-              ?>
-            </span>
-        </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya <?php echo $count;?> notifikasi belum dibaca!
-              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-          </li>
-        </ul>
-    <!-- End Notification Dropdown Items -->
 
     <!-- Messages Icon -->
     <a class="nav-link nav-icon" href="https://web.whatsapp.com/">
@@ -359,7 +339,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     <td><?php echo $row['alamat']; ?></td> 
                                     <td><?php echo $row['status']; ?></td> 
                                     <td>
-                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
+                                        <a href="editKirim.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
                                     
                                         <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
                                     </td>

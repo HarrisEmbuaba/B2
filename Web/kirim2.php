@@ -76,26 +76,6 @@ if(isset($_SESSION['transaksi_id'])){
       <ul class="d-flex align-items-center">
         <li class="nav-item d-block d-lg-none">
         </li>
-        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">
-              <?php 
-              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
-              $result = mysqli_query($mysqli, $query);
-              $count = mysqli_fetch_row($result)[0];
-
-              echo $count;
-              ?>
-            </span>
-        </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya <?php echo $count;?> notifikasi belum dibaca!
-              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-          </li>
-        </ul>
-    <!-- End Notification Dropdown Items -->
 
     <!-- Messages Icon -->
     <a class="nav-link nav-icon" href="https://web.whatsapp.com/">
@@ -242,7 +222,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     $no++;
                                     $field2name = $row["transaksi_id"]; 
                                     $field3name = $row["waktu_transaksi"];  
-                                    $field4name = $row["waktu_embayaran"];  
+                                    $field4name = $row["waktu_pembayaran"];  
                                     $field5name = $row["waktu_pengiriman"]; 
                                     $field6name = $row["id_UserBeli"]; 
                                     $field7name = $row["nama"]; 
@@ -262,9 +242,10 @@ if(isset($_SESSION['transaksi_id'])){
                                             <td>'.$field8name.'</td> 
                                             <td>'.$field9name.'</td> 
                                             <td>'.$field10name.'</td> 
+                                            <td>'.$field11name.'</td> 
                                             <td>  
-                                            <a href="editKirim.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
-                                            <a href="editBatal.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Batalkan</a> 
+                                            <a href="editTerima.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
+                                            <a href="editBatal.php" class="btn btn-danger" data-toggle="modal" data-target="#modal">Batalkan</a> 
                                             </td> 
                                         </tr>'; 
                                 } 
@@ -294,10 +275,10 @@ if(isset($_SESSION['transaksi_id'])){
                         <div class="table-responsive">
                         <?php 
                         if(isset($_GET['search'])){
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Selesai' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
                           
                         } else{
-                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Diterima' ORDER BY transaksi_id DESC";
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_pesanan_selesai, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Selesai' ORDER BY transaksi_id DESC";
                           
                         }
                         $no = 0; 
@@ -350,6 +331,8 @@ if(isset($_SESSION['transaksi_id'])){
                                               <td>'.$field8name.'</td> 
                                               <td>'.$field9name.'</td> 
                                               <td>'.$field10name.'</td> 
+                                              <td>'.$field11name.'</td> 
+                                              <td>'.$field12name.'</td> 
                                               <td> 
                                               <a>Pesanan diterima</a>
                                               </td> 

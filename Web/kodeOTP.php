@@ -19,7 +19,7 @@ if (!empty($email) && !empty($otp)) {
         while($ambil = mysqli_fetch_object($result)){
             $kode = $ambil->kode_otp;
             if ($otp == $kode){
-                echo "<script>alert('Email sent successfully to $email!');window.location='resetPass.php';</script>";
+                echo "<script>alert('Kode terverifikasi!');window.location='resetPass.php';</script>";
             } else {
                 echo "<script>alert('Gagal Verifikasi! Kode OTP Salah')</script>";
             }

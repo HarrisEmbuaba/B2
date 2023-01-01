@@ -26,7 +26,7 @@ if (empty($email)) {
     session_destroy();
     }
   } else {
-    echo "Password gagal diupdate!";
+    // echo "Password gagal diupdate!";
   }
   // mysqli_close($mysqli);
 }

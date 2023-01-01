@@ -13,7 +13,7 @@ $sql = "UPDATE transaksi SET status = 'Dikemas' WHERE transaksi_id ='$id' ";
       die ("Gagal mengubah status. Error code: ".mysqli_errno($mysqli).
        " - ".mysqli_error($mysqli));
     } else {
-    echo "<script>alert('Status berhasil terupdate!');window.location='pesan3.php';</script>";
+    echo "<script>alert('Status berhasil terupdate!');window.location='pesan2.php';</script>";
     }     
 
 ?>

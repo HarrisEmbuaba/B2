@@ -1,27 +1,19 @@
 <?php
+// memanggil file koneksi.php untuk melakukan koneksi database
+include ('koneksi.php');
 
-include ('kirim3.php');
+// membuat variabel untuk menampung data dari form
+$id       = $_GET['id'];
+//cek dulu jika merubah gambar produk jalankan coding ini
+$sql = "UPDATE transaksi SET status = 'Dikirim' WHERE transaksi_id ='$id' ";
+    $result = mysqli_query($mysqli, $sql);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project3";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "UPDATE transaksi SET status='Dikirim' WHERE transaksi_id = $field2name";
-
-if (mysqli_query($conn, $sql)){
-  echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
-} else {
-  echo "<script>alert('Status gagal terupdate!');window.location='kirim2.php';</script>";
-}
-
-
-mysqli_close($conn);
+    //periksa query, apakah ada kesalahan
+    if(!$result) {
+      die ("Gagal mengubah status. Error code: ".mysqli_errno($mysqli).
+       " - ".mysqli_error($mysqli));
+    } else {
+    echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
+    }     
 
 ?>
