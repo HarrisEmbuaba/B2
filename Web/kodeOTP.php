@@ -32,3 +32,4 @@ if (!empty($email) && !empty($otp)) {
 mysqli_close($mysqli);
 }
 ?>
+

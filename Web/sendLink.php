@@ -1,9 +1,7 @@
 <?php
-// Library untuk menggunakan PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
-//ini sesuaikan foldernya ke file 2 ini
 require 'vendor/autoload.php';
 require "koneksi.php";
 
@@ -62,3 +60,4 @@ try {
   ini_set('display_errors', 1);
 }
 ?>
+
