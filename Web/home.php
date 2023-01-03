@@ -150,7 +150,8 @@
                     <div class="ps-3">
                     <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail");
+                      $tgl    =date("Y-m-d");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail JOIN transaksi ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id WHERE transaksi.waktu_pembayaran='$tgl'");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                     
@@ -177,7 +178,8 @@
                     </div>
                     <h5><?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi");
+                      $tgl    =date("Y-m-d");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi WHERE waktu_pembayaran='$tgl'");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                       <div class="ps-3">
@@ -202,6 +204,7 @@
                     <thead class="table-light">
                       <tr>
                         <th>Gambar</th>
+                        <th>Jenis Barang</th>
                         <th>Nama Produk</th>
                         <th>Sold</th>
                       </tr>
@@ -209,11 +212,12 @@
                     <tbody>
                       <?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT barang.stok, barang.nama_barang, transaksi_detail.jumlah  FROM barang JOIN transaksi_detail ON barang.id_barang = transaksi_detail.id_BarangDetail WHERE max(transaksi_detail.jumlah)");
+                      $sql = mysqli_query($mysqli, "SELECT barang.image, barang.barang_jenis, barang.nama_barang,  transaksi_detail.jumlah  FROM barang JOIN transaksi_detail ON barang.id_barang = transaksi_detail.id_BarangDetail ORDER BY transaksi_detail.jumlah DESC LIMIT 3");
                       while ($data = mysqli_fetch_array($sql)) {
                         ?>
                         <tr>
                         <td style="text-align: center;"><img src="gambarproduk/<?php echo $data['image']; ?>"></td>
+                        <td> <?php echo $data['barang_jenis']; ?> </td>
                         <td> <?php echo $data['nama_barang']; ?> </td>
                         <td> <?php echo $data['jumlah']; ?> </td>
                       </tr>
