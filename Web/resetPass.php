@@ -94,35 +94,39 @@ if(isset($_POST["email"]) && isset($_POST["action"]) && ($_POST["action"]=="upda
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Reset Password</title>
+        <title>Enter New Password</title>
         <link rel="stylesheet" href="assets/css/stylelog.css">
     </head>
 
     <body>
         <main>
-          <form method="POST" action="" name="update">
-            <div class="heading text-center">
-              <h2>Reset Password</h2>
-            </div>
-            
-            <div class="actual-form">
-              <input type="hidden" name="action" value="update" />
-              <br /><br />
-              <div class="input-wrap">
-                <label>Enter Your New Password Here</label>
-                <input type="Password" name="pass1" minlength="8" maxlength="20" class="input-field" autocomplete="off" required />
+          <div class="container">
+            <div class="center">
+            <form method="POST" action="" name="update">
+              <div class="center">
+                <img src="assets/img/reset.png" width="100" height="100" alt="">
               </div>
               
-              <div class="input-wrap">
-                <label>Confirm Your New Password Here</label>
-                <input type="Password" name="pass2" minlength="8" maxlength="20" class="input-field" autocomplete="off" required />
-              </div>
-              <br /><br />
+              <div class="actual-form">
+                <input type="hidden" name="action" value="update" />
+                <br /><br />
+                <div class="input-wrap">
+                  <p>Enter Your New Password Here</p>
+                  <input type="Password" name="pass1" minlength="8" maxlength="20" class="input-field" autocomplete="off" placeholder="New Password" required />
+                </div>
+                
+                <div class="input-wrap">
+                  <p>Confirm Your New Password Here</p>
+                  <input type="Password" name="pass2" minlength="8" maxlength="20" class="input-field" autocomplete="off" placeholder="Confirm Password" required />
+                </div>
+                <br /><br />
 
-              <input type="hidden" name="email" value="<?php echo $email;?>" />
-              <input type="submit" name="submit" value="Ubah Password" class="sign-btn" />
+                <input type="hidden" name="email" value="<?php echo $email;?>" />
+                <input type="submit" name="submit" value="Ubah Password" class="sign-btn" />
+              </div>
+            </form>
             </div>
-          </form>
+          </div>
         </main>
         <!-- Javascript file -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
