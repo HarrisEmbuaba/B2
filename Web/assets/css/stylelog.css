@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 200vh;
     background: #DD8B55;
 }
 
@@ -26,7 +26,7 @@ h1 {
     margin: auto;
     margin-right: 75px;
     margin-bottom: 65px;
-    text-align: center;
+    text-align: right;
     font-weight: bolder;
     color: #FFFFFF;
 }
@@ -104,50 +104,6 @@ button {
 
 button:hover {
     background: RGBA(214, 86, 64, 1);
-}
-
-form p {
-    font-size: 14px;
-    color: #666666;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-form input[type="text"] {
-    width: 100%;
-    height: 40px;
-    margin-bottom: 10px;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    padding: 0 10px;
-    font-size: 14px;
-    color: #666666;
-}
-
-form input[type="password"] {
-    width: 100%;
-    height: 40px;
-    margin-bottom: 10px;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    padding: 0 10px;
-    font-size: 14px;
-    color: #666666;
-}
-
-form input[type="submit"] {
-    width: 100%;
-    height: 40px;
-    background-color: #e49c00;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #ffffff;
-    cursor: pointer;
-    }
-    
-    form input[type="submit"]:hover {
-    background-color: #fd2d2d;
 }
 
 @media (max-width: 880px) {

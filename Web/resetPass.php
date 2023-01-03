@@ -100,29 +100,33 @@ if(isset($_POST["email"]) && isset($_POST["action"]) && ($_POST["action"]=="upda
 
     <body>
         <main>
-          <form method="POST" action="" name="update">
-            <div class="heading text-center">
-              <h2>Reset Password</h2>
-            </div>
-            
-            <div class="actual-form">
-              <input type="hidden" name="action" value="update" />
-              <br /><br />
-              <div class="input-wrap">
-                <label>Enter Your New Password Here</label>
-                <input type="Password" name="pass1" minlength="8" maxlength="20" class="input-field" autocomplete="off" required />
+          <div class="container">
+            <div class="center">
+            <form method="POST" action="" name="update">
+              <div class="center">
+                <h2>Reset Password</h2>
               </div>
               
-              <div class="input-wrap">
-                <label>Confirm Your New Password Here</label>
-                <input type="Password" name="pass2" minlength="8" maxlength="20" class="input-field" autocomplete="off" required />
-              </div>
-              <br /><br />
+              <div class="actual-form">
+                <input type="hidden" name="action" value="update" />
+                <br /><br />
+                <div class="input-wrap">
+                  <label>Enter Your New Password Here</label>
+                  <input type="Password" name="pass1" minlength="8" maxlength="20" class="input-field" autocomplete="off" placeholder="New Password" required />
+                </div>
+                
+                <div class="input-wrap">
+                  <label>Confirm Your New Password Here</label>
+                  <input type="Password" name="pass2" minlength="8" maxlength="20" class="input-field" autocomplete="off" placeholder="Confirm Password" required />
+                </div>
+                <br /><br />
 
-              <input type="hidden" name="email" value="<?php echo $email;?>" />
-              <input type="submit" name="submit" value="Ubah Password" class="sign-btn" />
+                <input type="hidden" name="email" value="<?php echo $email;?>" />
+                <input type="submit" name="submit" value="Ubah Password" class="sign-btn" />
+              </div>
+            </form>
             </div>
-          </form>
+          </div>
         </main>
         <!-- Javascript file -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
