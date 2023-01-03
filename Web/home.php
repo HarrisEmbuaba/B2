@@ -141,7 +141,7 @@
           <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h3 class="card-title">Produk Terjual <span>| Bulan ini</span></h3>
+                  <h3 class="card-title">Produk Terjual <span>| Hari ini</span></h3>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -170,7 +170,7 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Pendapatan<span> | Bulan ini</span></h5>
+                  <h5 class="card-title">Pendapatan<span> | Hari ini</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
