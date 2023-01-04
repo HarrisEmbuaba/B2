@@ -225,42 +225,63 @@ if(isset($_SESSION['transaksi_id'])){
                       </tr> 
                     </thead> 
                     <tbody> 
-                        <?php 
-                            if ($result = $mysqli->query($query)) { 
-                                while ($row = $result->fetch_assoc()) { 
-                                    $no++;
-                                    $field2name = $row["transaksi_id"]; 
-                                    $field3name = $row["waktu_transaksi"];  
-                                    $field4name = $row["waktu_pembayaran"];  
-                                    $field5name = $row["waktu_pengiriman"]; 
-                                    $field6name = $row["id_UserBeli"]; 
-                                    $field7name = $row["nama"]; 
-                                    $field8name = $row["jumlah"];  
-                                    $field9name = $row["grand_total"];  
-                                    $field10name = $row["alamat"]; 
-                                    $field11name = $row["status"]; 
-    
-                                    echo '<tr>   
-                                            <th>' .$no.'</th>  
-                                            <td>'.$field2name.'</td>  
-                                            <td>'.$field3name.'</td>  
-                                            <td>'.$field4name.'</td>  
-                                            <td>'.$field5name.'</td>  
-                                            <td>'.$field6name.'</td> 
-                                            <td>'.$field7name.'</td> 
-                                            <td>'.$field8name.'</td> 
-                                            <td>'.$field9name.'</td> 
-                                            <td>'.$field10name.'</td> 
-                                            <td>'.$field11name.'</td> 
-                                            <td>  
-                                            <a href="editTerima.php" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</a> 
-                                            <a href="editBatal.php" class="btn btn-danger" data-toggle="modal" data-target="#modal">Batalkan</a> 
-                                            </td> 
-                                        </tr>'; 
+                    <?php 
+                                //untuk meinclude kan koneksi
+                                include('koneksi.php');
+                                
+                                $no = 1;
+
+                                if(isset($_POST['bcari'])) {
+                                //menampung variabel kata_cari dari form pencarian
+                                $cari = $_POST['tcari'];
+
+                                //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
+                                //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_transaksi, 
+                                    transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat 
+                                    FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli 
+                                    ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE 
+                                    (nama_barang like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Dikirim' 
+                                    ORDER BY transaksi_id DESC";
+                                } else {
+                                //jika tidak ada pencarian, default yang dijalankan query ini
+                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_pembayaran, transaksi.waktu_pengiriman, transaksi.waktu_transaksi, 
+                                    transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat 
+                                    FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli 
+                                    ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikirim' 
+                                    ORDER BY transaksi_id DESC"; 
                                 } 
-                                $result->free(); 
-                            }  
-                        ?> 
+
+                                
+                                $result = mysqli_query($mysqli, $query);
+
+                                if(!$result) {
+                                    die("Query Error : ".mysqli_errno($mysqli)." - ".mysqli_error($mysqli));
+                                }
+                                //kalau ini melakukan foreach atau perulangan
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?> 
+                                
+                                  <tr>
+                                    <th><?php echo $no; ?></th> 
+                                    <td><?php echo $row['transaksi_id']; ?></td> 
+                                    <td><?php echo $row['waktu_transaksi']; ?></td> 
+                                    <td><?php echo $row['waktu_pembayaran']; ?></td> 
+                                    <td><?php echo $row['waktu_pembayaran']; ?></td> 
+                                    <td><?php echo $row['id_UserBeli']; ?></td> 
+                                    <td><?php echo $row['nama']; ?></td>
+                                    <td><?php echo $row['jumlah']; ?></td> 
+                                    <td>Rp.<?php echo $row['grand_total']; ?></td> 
+                                    <td><?php echo $row['alamat']; ?></td> 
+                                    <td><?php echo $row['status']; ?></td> 
+                                    <td>
+                                        <a href="editTerima.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Diterima</a>
+                                    
+                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" 
+                                        onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
+                                    </td>
+                                  </tr>
+                                  <?php }?>
                       </tbody> 
                   </table>
                     </div>

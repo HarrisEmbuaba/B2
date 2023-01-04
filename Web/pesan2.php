@@ -269,7 +269,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     <td><?php echo $row['alamat']; ?></td> 
                                     <td><?php echo $row['status']; ?></td> 
                                     <td>
-                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
+                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Dikemas</a>
                                     
                                         <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" 
                                         onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>

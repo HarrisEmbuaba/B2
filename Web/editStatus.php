@@ -5,7 +5,7 @@ include ('koneksi.php');
 // membuat variabel untuk menampung data dari form
 $id       = $_GET['id'];
 //cek dulu jika merubah gambar produk jalankan coding ini
-$sql = "UPDATE transaksi SET status = 'Dikemas' WHERE transaksi_id ='$id' ";
+$sql = "UPDATE transaksi SET status = 'Diterima' WHERE transaksi_id ='$id' ";
     $result = mysqli_query($mysqli, $sql);
 
     //periksa query, apakah ada kesalahan

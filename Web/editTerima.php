@@ -2,12 +2,10 @@
 // memanggil file koneksi.php untuk melakukan koneksi database
 include ('koneksi.php');
 
-require 'kirim2.php';
-
 // membuat variabel untuk menampung data dari form
-//$id       = $_GET['transaksi_id'];
+$id       = $_GET['id'];
 //cek dulu jika merubah gambar produk jalankan coding ini
-$sql = "UPDATE transaksi SET status = 'Selesai' WHERE transaksi_id ='$field2name' ";
+$sql = "UPDATE transaksi SET status = 'Selesai' WHERE transaksi_id ='$id' ";
     $result = mysqli_query($mysqli, $sql);
 
     //periksa query, apakah ada kesalahan
@@ -16,6 +14,6 @@ $sql = "UPDATE transaksi SET status = 'Selesai' WHERE transaksi_id ='$field2name
        " - ".mysqli_error($mysqli));
     } else {
     echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
-    }
-?>
+    }     
 
+?>
