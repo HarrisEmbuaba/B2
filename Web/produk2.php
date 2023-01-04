@@ -57,6 +57,7 @@ include ('koneksi.php');
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <!-- Notification Dropdown Items -->
@@ -168,10 +169,10 @@ include ('koneksi.php');
                   <!-- No Labels Form -->
                   <div class="card-body">
                   <form class="row g-2">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
-  + Barang
-</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
+                      + Barang
+                    </button>
 
                   </form>
                   </div>
@@ -220,7 +221,7 @@ include ('koneksi.php');
                                 }
                                 //kalau ini melakukan foreach atau perulangan
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                ?> 
+                              ?> 
                                   <tr>
                                     <th><?php echo $no; ?></th> 
                                     <td><?php echo $row['nama_barang']; ?></td> 
@@ -229,75 +230,78 @@ include ('koneksi.php');
                                     <td>Rp.<?php echo $row['harga']; ?></td> 
                                     <td><?php echo $row['stok']; ?></td> 
                                     <td>
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editBarang<?php echo $row['id_barang']; ?>">Ubah</button> &nbsp;&nbsp;
-<!-- Modal Edit-->
-<div class="modal" tabindex="-1" id="editBarang<?php echo $row['id_barang']; ?>">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <form action="editProduk.php" method="POST" enctype="multipart/form-data">
-      <div class="modal-header">
-        <h5 class="modal-title">Ubah Barang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+                                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editBarang
+                                      <?php echo $row['id_barang']; ?>">Ubah</button> &nbsp;&nbsp;
+                                        <!-- Modal Edit-->
+                                        <div class="modal" tabindex="-1" id="editBarang<?php echo $row['id_barang']; ?>">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            <form action="editProduk.php" method="POST" enctype="multipart/form-data">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title">Ubah Barang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
 
-      <?php
-      $id = $row['id_barang'];
-      $edit_query = mysqli_query($mysqli, "SELECT * FROM barang WHERE id_barang = $id");
-      if(mysqli_num_rows($edit_query) > 0){
-        while($fetch_edit = mysqli_fetch_assoc($edit_query)){
-      ?>
+                                              <?php
+                                              $id = $row['id_barang'];
+                                              $edit_query = mysqli_query($mysqli, "SELECT * FROM barang WHERE id_barang = $id");
+                                              if(mysqli_num_rows($edit_query) > 0){
+                                                while($fetch_edit = mysqli_fetch_assoc($edit_query)){
+                                              ?>
 
-          <div>
-          <input type="hidden" class="form-control" name="id" value="<?php echo $row['id_barang']; ?>" required>
+                                                  <div>
+                                                  <input type="hidden" class="form-control" name="id" value="<?php echo $row['id_barang']; ?>" required>
 
-            <label>Nama Barang : </label>
-            <input type="text" class="form-control" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Kategori : </label>
-            <select class="form-control"  name="barang_jenis" required>
-              <option value="<?= @$row['barang_jenis']; ?>"><?= @$row['barang_jenis']; ?></option>
-              <option value="Bucket">Bucket</option>
-              <option value="Seserahan">Seserahan</option>
-              <option value="Hampers">Hampers</option>
-            </select>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Harga : </label>
-            <input type="text" class="form-control" name="harga" value="<?php echo $row['harga']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Stok : </label>
-            <input type="text" class="form-control" name="stok" value="<?php echo $row['stok']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Gambar :</label><br>
-            <img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
-            <input type="file" class="form-control" name="image" value="<?php echo $row['image']; ?>" accept="image/png, image/jpg, image/jpeg">
-            <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Deskripsi :</label>
-            <textarea class="form-control" name="deskripsi" required><?php echo $row['deskripsi']; ?></textarea>
-          </div><br>  
-          <?php
-            // };
-         };
-         ?>
+                                                    <label>Nama Barang : </label>
+                                                    <input type="text" class="form-control" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Kategori : </label>
+                                                    <select class="form-control"  name="barang_jenis" required>
+                                                      <option value="<?= @$row['barang_jenis']; ?>"><?= @$row['barang_jenis']; ?></option>
+                                                      <option value="Bucket">Bucket</option>
+                                                      <option value="Seserahan">Seserahan</option>
+                                                      <option value="Hampers">Hampers</option>
+                                                    </select>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Harga : </label>
+                                                    <input type="text" class="form-control" name="harga" value="<?php echo $row['harga']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Stok : </label>
+                                                    <input type="text" class="form-control" name="stok" value="<?php echo $row['stok']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Gambar :</label><br>
+                                                    <img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                                    <input type="file" class="form-control" name="image" value="<?php echo $row['image']; ?>" accept="image/png, image/jpg, image/jpeg">
+                                                    <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Deskripsi :</label>
+                                                    <textarea class="form-control" name="deskripsi" required><?php echo $row['deskripsi']; ?></textarea>
+                                                  </div><br>  
+                                                  <?php
+                                                    // };
+                                                };
+                                                ?>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-warning"><a href="editProduk.php?id=<?php echo $row['id_barang'] ?>"></a> Simpan Perubahan</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- End Modal Edit-->
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-warning"><a href="editProduk.php?id=<?php echo $row['id_barang'] ?>">
+                                              </a> Simpan Perubahan</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal Edit-->
 
-                                        <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                        <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" class="btn btn-danger" 
+                                        onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                     </td>
                                   </tr>
                                   <?php
@@ -313,59 +317,59 @@ include ('koneksi.php');
                 </div>
               </div>
 
-<!-- Modal Tambah-->
-<div class="modal" tabindex="-1" id="tambahBarang">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <form action="tambahProduk.php" method="POST" enctype="multipart/form-data">
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah Barang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+                <!-- Modal Tambah-->
+                <div class="modal" tabindex="-1" id="tambahBarang">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <form action="tambahProduk.php" method="POST" enctype="multipart/form-data">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tambah Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
 
-          <div>
-            <label>Nama Barang : </label>
-            <input type="text" class="form-control" name="nama_barang" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Kategori : </label>
-            <select class="form-control" name="barang_jenis" required>
-              <option value=""></option>
-              <option value="Bucket">Bucket</option>
-              <option value="Seserahan">Seserahan</option>
-              <option value="Hampers">Hampers</option>
-            </select>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Harga : </label>
-            <input type="text" class="form-control" name="harga" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Stok : </label>
-            <input type="text" class="form-control" name="stok" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Gambar :</label>
-            <input type="file" class="form-control" name="image" accept="image/png, image/jpg, image/jpeg" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Deskripsi :</label>
-            <textarea class="form-control" name="deskripsi" required></textarea>
-          </div><br> 
-        <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>  &nbsp; &nbsp;
-        <br> 
+                          <div>
+                            <label>Nama Barang : </label>
+                            <input type="text" class="form-control" name="nama_barang" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Kategori : </label>
+                            <select class="form-control" name="barang_jenis" required>
+                              <option value=""></option>
+                              <option value="Bucket">Bucket</option>
+                              <option value="Seserahan">Seserahan</option>
+                              <option value="Hampers">Hampers</option>
+                            </select>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Harga : </label>
+                            <input type="text" class="form-control" name="harga" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Stok : </label>
+                            <input type="text" class="form-control" name="stok" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Gambar :</label>
+                            <input type="file" class="form-control" name="image" accept="image/png, image/jpg, image/jpeg" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Deskripsi :</label>
+                            <textarea class="form-control" name="deskripsi" required></textarea>
+                          </div><br> 
+                        <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>  &nbsp; &nbsp;
+                        <br> 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- End Modal Tambah-->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal Tambah-->
 
 
 
@@ -376,12 +380,12 @@ include ('koneksi.php');
                       <!-- No Labels Form -->
                   <div class="card-body">
                   <form class="row g-2">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
-  + Barang
-</button>
-                      </form>
-                      </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
+                      + Barang
+                    </button>
+                  </form>
+                  </div>
                   
                   <!-- DataTales Example -->
                 <div class="mb-4">
@@ -437,73 +441,74 @@ include ('koneksi.php');
                                   <td>Rp.<?php echo $row['harga']; ?></td> 
                                   <td><?php echo $row['stok']; ?></td> 
                                   <td>
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editBarang<?php echo $row['id_barang']; ?>">Ubah</button> &nbsp;&nbsp;
-<!-- Modal Edit-->
-<div class="modal" tabindex="-1" id="editBarang<?php echo $row['id_barang']; ?>">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <form action="editProduk.php" method="POST" enctype="multipart/form-data">
-      <div class="modal-header">
-        <h5 class="modal-title">Ubah Barang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editBarang<?php echo $row['id_barang']; ?>">
+                                    Ubah</button> &nbsp;&nbsp;
+                                        <!-- Modal Edit-->
+                                        <div class="modal" tabindex="-1" id="editBarang<?php echo $row['id_barang']; ?>">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            <form action="editProduk.php" method="POST" enctype="multipart/form-data">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title">Ubah Barang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
 
-      <?php
-      $id = $row['id_barang'];
-      $edit_query = mysqli_query($mysqli, "SELECT * FROM barang WHERE id_barang = $id");
-      if(mysqli_num_rows($edit_query) > 0){
-        while($fetch_edit = mysqli_fetch_assoc($edit_query)){
-      ?>
+                                              <?php
+                                              $id = $row['id_barang'];
+                                              $edit_query = mysqli_query($mysqli, "SELECT * FROM barang WHERE id_barang = $id");
+                                              if(mysqli_num_rows($edit_query) > 0){
+                                                while($fetch_edit = mysqli_fetch_assoc($edit_query)){
+                                              ?>
 
-          <div>
-          <input type="hidden" class="form-control" name="id" value="<?php echo $row['id_barang']; ?>" required>
+                                                  <div>
+                                                  <input type="hidden" class="form-control" name="id" value="<?php echo $row['id_barang']; ?>" required>
 
-            <label>Nama Barang : </label>
-            <input type="text" class="form-control" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Kategori : </label>
-            <select class="form-control"  name="barang_jenis" required>
-              <option value="<?= @$row['barang_jenis']; ?>"><?= @$row['barang_jenis']; ?></option>
-              <option value="Bucket">Bucket</option>
-              <option value="Seserahan">Seserahan</option>
-              <option value="Hampers">Hampers</option>
-            </select>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Harga : </label>
-            <input type="text" class="form-control" name="harga" value="<?php echo $row['harga']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Stok : </label>
-            <input type="text" class="form-control" name="stok" value="<?php echo $row['stok']; ?>" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Gambar :</label><br>
-            <img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
-            <input type="file" class="form-control" name="image" value="<?php echo $row['image']; ?>" accept="image/png, image/jpg, image/jpeg">
-            <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Deskripsi :</label>
-            <textarea class="form-control" name="deskripsi" required><?php echo $row['deskripsi']; ?></textarea>
-          </div><br>  
-          <?php
-            // };
-         };
-         ?>
+                                                    <label>Nama Barang : </label>
+                                                    <input type="text" class="form-control" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Kategori : </label>
+                                                    <select class="form-control"  name="barang_jenis" required>
+                                                      <option value="<?= @$row['barang_jenis']; ?>"><?= @$row['barang_jenis']; ?></option>
+                                                      <option value="Bucket">Bucket</option>
+                                                      <option value="Seserahan">Seserahan</option>
+                                                      <option value="Hampers">Hampers</option>
+                                                    </select>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Harga : </label>
+                                                    <input type="text" class="form-control" name="harga" value="<?php echo $row['harga']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Stok : </label>
+                                                    <input type="text" class="form-control" name="stok" value="<?php echo $row['stok']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Gambar :</label><br>
+                                                    <img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                                    <input type="file" class="form-control" name="image" value="<?php echo $row['image']; ?>" accept="image/png, image/jpg, image/jpeg">
+                                                    <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Deskripsi :</label>
+                                                    <textarea class="form-control" name="deskripsi" required><?php echo $row['deskripsi']; ?></textarea>
+                                                  </div><br>  
+                                                  <?php
+                                                    // };
+                                                };
+                                                ?>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-warning"><a href="editProduk.php?id=<?php echo $row['id_barang'] ?>"></a> Simpan Perubahan</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- End Modal Edit-->
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-warning"><a href="editProduk.php?id=<?php echo $row['id_barang'] ?>"></a> Simpan Perubahan</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal Edit-->
 
                                         <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                     </td>
@@ -521,59 +526,59 @@ include ('koneksi.php');
                 </div>
               </div>
 
-<!-- Modal Tambah-->
-<div class="modal" tabindex="-1" id="tambahBarang">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <form action="tambahProduk.php" method="POST" enctype="multipart/form-data">
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah Barang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+                <!-- Modal Tambah-->
+                <div class="modal" tabindex="-1" id="tambahBarang">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <form action="tambahProduk.php" method="POST" enctype="multipart/form-data">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tambah Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
 
-          <div>
-            <label>Nama Barang : </label>
-            <input type="text" class="form-control" name="nama_barang" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Kategori : </label>
-            <select class="form-control" name="barang_jenis" required>
-              <option value=""></option>
-              <option value="Bucket">Bucket</option>
-              <option value="Seserahan">Seserahan</option>
-              <option value="Hampers">Hampers</option>
-            </select>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Harga : </label>
-            <input type="text" class="form-control" name="harga" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Stok : </label>
-            <input type="text" class="form-control" name="stok" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Gambar :</label>
-            <input type="file" class="form-control" name="image" accept="image/png, image/jpg, image/jpeg" required>
-          </div>&nbsp;&nbsp;
-          <div>
-            <label>Deskripsi :</label>
-            <textarea class="form-control" name="deskripsi" required></textarea>
-          </div><br> 
-        <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>  &nbsp; &nbsp;
-        <br> 
+                          <div>
+                            <label>Nama Barang : </label>
+                            <input type="text" class="form-control" name="nama_barang" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Kategori : </label>
+                            <select class="form-control" name="barang_jenis" required>
+                              <option value=""></option>
+                              <option value="Bucket">Bucket</option>
+                              <option value="Seserahan">Seserahan</option>
+                              <option value="Hampers">Hampers</option>
+                            </select>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Harga : </label>
+                            <input type="text" class="form-control" name="harga" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Stok : </label>
+                            <input type="text" class="form-control" name="stok" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Gambar :</label>
+                            <input type="file" class="form-control" name="image" accept="image/png, image/jpg, image/jpeg" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Deskripsi :</label>
+                            <textarea class="form-control" name="deskripsi" required></textarea>
+                          </div><br> 
+                        <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>  &nbsp; &nbsp;
+                        <br> 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- End Modal Tambah-->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal Tambah-->
 
               </div><!-- End Bordered Tabs -->
             </div>

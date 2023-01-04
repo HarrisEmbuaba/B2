@@ -64,6 +64,7 @@ require "function.php";
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <!-- Notification Dropdown Items -->

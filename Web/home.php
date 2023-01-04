@@ -51,7 +51,7 @@
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
-<i class="bi bi-list toggle-sidebar-btn"></i>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <!-- Notification Dropdown Items -->
@@ -142,17 +142,19 @@
           <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h3 class="card-title">Produk Terjual <span>| Hari ini</span></h3>
+                  <h3 class="card-title">Produk Terjual <span>| Bulan ini</span></h3>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <img src="assets/img/check-out.png" width="70px" height="70px"></i>
                     </div>
                     <div class="ps-3">
-                    <h5><?php
+                    <h5>
+                      <?php
                       include 'koneksi.php';
                       $tgl    =date("Y-m-d");
-                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail JOIN transaksi ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id WHERE transaksi.waktu_pembayaran='$tgl'");
+                      $sql = mysqli_query($mysqli, "SELECT SUM(jumlah) as qty FROM transaksi_detail JOIN transaksi 
+                      ON transaksi_detail.id_TransaksiDetail = transaksi.transaksi_id WHERE transaksi.waktu_pembayaran='$tgl'");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
                     
@@ -171,7 +173,7 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Pendapatan<span> | Hari ini</span></h5>
+                  <h5 class="card-title">Pendapatan<span> | Bulan ini</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -179,7 +181,7 @@
                     </div>
                     <h5><?php
                       include 'koneksi.php';
-                      $tgl    =date("Y-m-d");
+                      $tgl    = date("Y-m-d");
                       $sql = mysqli_query($mysqli, "SELECT SUM(grand_total) FROM transaksi WHERE waktu_pembayaran='$tgl'");
                       while($data = mysqli_fetch_array($sql)) {
                       ?>
@@ -213,7 +215,9 @@
                     <tbody>
                       <?php
                       include 'koneksi.php';
-                      $sql = mysqli_query($mysqli, "SELECT barang.image, barang.barang_jenis, barang.nama_barang,  transaksi_detail.jumlah  FROM barang JOIN transaksi_detail ON barang.id_barang = transaksi_detail.id_BarangDetail ORDER BY transaksi_detail.jumlah DESC LIMIT 3");
+                      $sql = mysqli_query($mysqli, "SELECT barang.image, barang.barang_jenis, barang.nama_barang,  
+                      transaksi_detail.jumlah  FROM barang JOIN transaksi_detail ON barang.id_barang = transaksi_detail.id_BarangDetail 
+                      ORDER BY transaksi_detail.jumlah DESC LIMIT 3");
                       while ($data = mysqli_fetch_array($sql)) {
                         ?>
                         <tr>
