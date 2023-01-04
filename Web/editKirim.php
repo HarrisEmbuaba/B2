@@ -15,5 +15,5 @@ $sql = "UPDATE transaksi SET status = 'Dikirim' WHERE transaksi_id ='$id' ";
     } else {
     echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
     }     
-
 ?>
+

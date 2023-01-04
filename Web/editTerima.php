@@ -16,6 +16,6 @@ $sql = "UPDATE transaksi SET status = 'Selesai' WHERE transaksi_id ='$field2name
        " - ".mysqli_error($mysqli));
     } else {
     echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
-    }     
-
+    }
 ?>
+

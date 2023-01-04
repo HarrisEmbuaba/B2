@@ -8,8 +8,8 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: right;
-    min-height: 200vh;
+    align-items: center;
+    min-height: 100vh;
     background: #DD8B55;
 }
 
@@ -26,7 +26,7 @@ h1 {
     margin: auto;
     margin-right: 75px;
     margin-bottom: 65px;
-    text-align: right;
+    text-align: center;
     font-weight: bolder;
     color: #FFFFFF;
 }
