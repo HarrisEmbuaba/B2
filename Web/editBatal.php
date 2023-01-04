@@ -3,7 +3,7 @@
 include ('koneksi.php');
 
 // membuat variabel untuk menampung data dari form
-// $id       = $_GET['id'];
+$id       = $_GET['id'];
 //cek dulu jika merubah gambar produk jalankan coding ini
 $sql = "UPDATE transaksi SET status = 'Dibatalkan' WHERE transaksi_id ='$id' ";
     $result = mysqli_query($mysqli, $sql);
@@ -15,5 +15,5 @@ $sql = "UPDATE transaksi SET status = 'Dibatalkan' WHERE transaksi_id ='$id' ";
     } else {
     echo "<script>alert('Status berhasil terupdate!');window.location='kirim2.php';</script>";
     }     
-?>
 
+?>

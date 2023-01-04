@@ -267,7 +267,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     <td><?php echo $row['transaksi_id']; ?></td> 
                                     <td><?php echo $row['waktu_transaksi']; ?></td> 
                                     <td><?php echo $row['waktu_pembayaran']; ?></td> 
-                                    <td><?php echo $row['waktu_pembayaran']; ?></td> 
+                                    <td><?php echo $row['waktu_pengiriman']; ?></td> 
                                     <td><?php echo $row['id_UserBeli']; ?></td> 
                                     <td><?php echo $row['nama']; ?></td>
                                     <td><?php echo $row['jumlah']; ?></td> 
@@ -277,7 +277,7 @@ if(isset($_SESSION['transaksi_id'])){
                                     <td>
                                         <a href="editTerima.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Diterima</a>
                                     
-                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" 
+                                        <a href="editBatal.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" 
                                         onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
                                     </td>
                                   </tr>
