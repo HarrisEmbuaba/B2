@@ -57,6 +57,7 @@ include ('koneksi.php');
         <img src="assets/img/logo.png" width="45px" height="45px">
         <span class="h2 position-absolute top-2 end-50">Milania Craft</span>
       </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <!-- Notification Dropdown Items -->
@@ -64,27 +65,7 @@ include ('koneksi.php');
       <ul class="d-flex align-items-center">
         <li class="nav-item d-block d-lg-none">
         </li>
-        <a class="nav-link nav-icon" href="notifikasi.php" data-bs-toggle="dropdown">
-            <img src="assets/img/notif.png"alt="" width="30px" height="30px"></i>
-            <span class="badge bg-primary badge-number">
-              <?php 
-              $query = "SELECT COUNT(*) FROM transaksi WHERE status = 'Belum bayar' OR status = 'Diterima' OR status = 'Dibatalkan'";
-              $result = mysqli_query($mysqli, $query);
-              $count = mysqli_fetch_row($result)[0];
-
-              echo $count;
-              ?>
-            </span>
-        </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Anda punya <?php echo $count;?> notifikasi belum dibaca!
-              <a href="notifikasi.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Lihat senua</span></a>
-          </li>
-        </ul>
-    <!-- End Notification Dropdown Items -->
-
+        
     <!-- Messages Icon -->
     <a class="nav-link nav-icon" href="https://web.whatsapp.com/">
             <img src="assets/img/chat.png"alt="" width="30px" height="30px"></i>
@@ -113,7 +94,7 @@ include ('koneksi.php');
       </li><!-- End Kirim Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk2.php">
+        <a class="nav-link collapsed" href="produk2.[h[">
           <img src="assets/img/produk1.png" width="35px" height="35px"></i>
         </a><br />
       </li><!-- End Produk Page Nav -->
@@ -172,34 +153,45 @@ include ('koneksi.php');
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#belum-bayar">Belum Bayar</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tersedia">Tersedia</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dikemas">Dikemas</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#habis">Habis</button>
                 </li>
 
               </ul>          
 
               <div class="tab-content pt-1">
-                <div class="tab-pane fade show active belum-bayar" id="belum-bayar">
+                <div class="tab-pane fade show active tersedia" id="tersedia">
 
+                  <!-- partial:index.partial.html -->
+                  <!-- No Labels Form -->
+                  <div class="card-body">
+                  <form class="row g-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
+                      + Barang
+                    </button>
+
+                  </form>
+                  </div>
+
+                  
                   <!-- DataTales Example -->
                 <div class="mb-4">
                   <div class="card-body">
                       <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                          <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                    <th scope="col">No</th> 
-                                    <th scope="col">ID Transaksi</th> 
-                                    <th scope="col">ID Pembeli</th> 
-                                    <th scope="col">Nama Pembeli</th> 
-                                    <th scope="col">Kuantitas</th> 
-                                    <th scope="col">Total</th> 
-                                    <th scope="col">Alamat</th> 
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th> 
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Gambar</th>
+                                    <th>Deskripsi</th>
+                                    <th>Harga</th>
+                                    <th>Stok</th>
+                                    <th>Aksi</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -215,10 +207,10 @@ include ('koneksi.php');
 
                                 //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
                                 //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
-                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE (nama_barang like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Belum bayar' ORDER BY transaksi_id DESC";
+                                    $query = "SELECT * FROM barang WHERE (nama_barang like '%".$cari."%' OR harga like '%".$cari."%') AND stok > 0 ORDER BY id_barang DESC";
                                 } else {
                                 //jika tidak ada pencarian, default yang dijalankan query ini
-                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Belum bayar' ORDER BY transaksi_id DESC"; 
+                                    $query = "SELECT * FROM barang WHERE stok > 0 ORDER BY id_barang DESC"; 
                                 } 
 
                                 
@@ -229,24 +221,95 @@ include ('koneksi.php');
                                 }
                                 //kalau ini melakukan foreach atau perulangan
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                ?> 
-                                
+                              ?> 
                                   <tr>
                                     <th><?php echo $no; ?></th> 
-                                    <td><?php echo $row['transaksi_id']; ?></td> 
-                                    <td><?php echo $row['id_UserBeli']; ?></td> 
-                                    <td><?php echo $row['nama']; ?></td>
-                                    <td><?php echo $row['jumlah']; ?></td> 
-                                    <td>Rp.<?php echo $row['grand_total']; ?></td> 
-                                    <td><?php echo $row['alamat']; ?></td> 
-                                    <td><?php echo $row['status']; ?></td> 
+                                    <td><?php echo $row['nama_barang']; ?></td> 
+                                    <td style="text-align: center;"><img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;"></td> 
+                                    <td><textarea name="deskripsi" id="" cols="50" rows="7" class="border border-0"><?php echo $row['deskripsi']; ?></textarea></td> 
+                                    <td>Rp.<?php echo $row['harga']; ?></td> 
+                                    <td><?php echo $row['stok']; ?></td> 
                                     <td>
-                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
-                                    
-                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
+                                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editBarang
+                                      <?php echo $row['id_barang']; ?>">Ubah</button> &nbsp;&nbsp;
+                                        <!-- Modal Edit-->
+                                        <div class="modal" tabindex="-1" id="editBarang<?php echo $row['id_barang']; ?>">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            <form action="editProduk.php" method="POST" enctype="multipart/form-data">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title">Ubah Barang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+
+                                              <?php
+                                              $id = $row['id_barang'];
+                                              $edit_query = mysqli_query($mysqli, "SELECT * FROM barang WHERE id_barang = $id");
+                                              if(mysqli_num_rows($edit_query) > 0){
+                                                while($fetch_edit = mysqli_fetch_assoc($edit_query)){
+                                              ?>
+
+                                                  <div>
+                                                  <input type="hidden" class="form-control" name="id" value="<?php echo $row['id_barang']; ?>" required>
+
+                                                    <label>Nama Barang : </label>
+                                                    <input type="text" class="form-control" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Kategori : </label>
+                                                    <select class="form-control"  name="barang_jenis" required>
+                                                      <option value="<?= @$row['barang_jenis']; ?>"><?= @$row['barang_jenis']; ?></option>
+                                                      <option value="Bucket">Bucket</option>
+                                                      <option value="Seserahan">Seserahan</option>
+                                                      <option value="Hampers">Hampers</option>
+                                                    </select>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Harga : </label>
+                                                    <input type="text" class="form-control" name="harga" value="<?php echo $row['harga']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Stok : </label>
+                                                    <input type="text" class="form-control" name="stok" value="<?php echo $row['stok']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Gambar :</label><br>
+                                                    <img src="gambarproduk/<?php echo $row['image']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                                    <input type="file" class="form-control" name="image" value="<?php echo $row['image']; ?>" accept="image/png, image/jpg, image/jpeg">
+                                                    <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Deskripsi :</label>
+                                                    <textarea class="form-control" name="deskripsi" required><?php echo $row['deskripsi']; ?></textarea>
+                                                  </div><br>  
+                                                  <?php
+                                                    // };
+                                                };
+                                                ?>
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-warning"><a href="editProduk.php?id=<?php echo $row['id_barang'] ?>">
+                                              </a> Simpan Perubahan</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal Edit-->
+
+                                        <a href="hapusProduk.php?id=<?php echo $row["id_barang"]; ?>" class="btn btn-danger" 
+                                        onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                     </td>
                                   </tr>
-                                  <?php }?>
+                                  <?php
+                                    $no++;
+                                    }
+                                }
+                                $result->free();
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -254,17 +317,94 @@ include ('koneksi.php');
                 </div>
               </div>
 
-                <div class="tab-content pt-2">
-                  <div class="tab-pane fade dikemas" id="dikemas" >
+                <!-- Modal Tambah-->
+                <div class="modal" tabindex="-1" id="tambahBarang">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <form action="tambahProduk.php" method="POST" enctype="multipart/form-data">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tambah Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                          <div>
+                            <label>Nama Barang : </label>
+                            <input type="text" class="form-control" name="nama_barang" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Kategori : </label>
+                            <select class="form-control" name="barang_jenis" required>
+                              <option value=""></option>
+                              <option value="Bucket">Bucket</option>
+                              <option value="Seserahan">Seserahan</option>
+                              <option value="Hampers">Hampers</option>
+                            </select>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Harga : </label>
+                            <input type="text" class="form-control" name="harga" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Stok : </label>
+                            <input type="text" class="form-control" name="stok" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Gambar :</label>
+                            <input type="file" class="form-control" name="image" accept="image/png, image/jpg, image/jpeg" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Deskripsi :</label>
+                            <textarea class="form-control" name="deskripsi" required></textarea>
+                          </div><br> 
+                        <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>  &nbsp; &nbsp;
+                        <br> 
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="tambah" class="btn btn-warning">Simpan</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal Tambah-->
+
+
+
+                <div class="tab-content pt-1">
+                  <div class="tab-pane fade habis" id="habis" >
+
+                    <!-- partial:index.partial.html -->
+                      <!-- No Labels Form -->
+                  <div class="card-body">
+                  <?php 
+                        if(isset($_GET['search'])){
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, 
+                          transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = 
+                          transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = 
+                          transaksi.alamat WHERE status = 'Dikemas' AND `transaksi`.`transaksi_id` = '" . $_GET['search'] ."' ORDER BY transaksi_id DESC";
+                          
+                        } else{
+                          $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, 
+                          transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = 
+                          transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = 
+                          transaksi.alamat WHERE status = 'Dikemas' ORDER BY transaksi_id DESC";
+                          
+                        }
+                        $no = 0; 
+                        ?>
+                  </div>
+                  
                   <!-- DataTales Example -->
-                <!-- DataTales Example -->
                 <div class="mb-4">
                   <div class="card-body">
                       <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                      <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                    <th scope="col">No</th> 
+                                  <th scope="col">No</th> 
                                     <th scope="col">ID Transaksi</th> 
                                     <th scope="col">ID Pembeli</th> 
                                     <th scope="col">Nama Pembeli</th> 
@@ -272,11 +412,11 @@ include ('koneksi.php');
                                     <th scope="col">Total</th> 
                                     <th scope="col">Alamat</th> 
                                     <th scope="col">Status</th>
-                                    <th scope="col">Action</th> 
+                                    <th scope="col">Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                              <?php 
+                                <?php 
                                 //untuk meinclude kan koneksi
                                 include('koneksi.php');
                                 
@@ -288,10 +428,17 @@ include ('koneksi.php');
 
                                 //jika hanya ingin mencari berdasarkan kode_produk, silahkan hapus dari awal OR
                                 //jika ingin mencari 1 ketentuan saja query nya ini : SELECT * FROM produk WHERE kode_produk like '%".$kata_cari."%' 
-                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE (nama_barang like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Dikemas' ORDER BY transaksi_id DESC";
+                                $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, 
+                                transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = 
+                                transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = 
+                                transaksi.alamat WHERE (nama like '%".$cari."%' OR transaksi_id like '%".$cari."%') AND status = 'Dikemas' 
+                                ORDER BY transaksi_id DESC";
                                 } else {
-                                //jika tidak ada pencarian, default yang dijalankan query ini
-                                    $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = transaksi.alamat WHERE status = 'Dikemas' ORDER BY transaksi_id DESC"; 
+                            //jika tidak ada pencarian, default yang dijalankan query ini
+                                $query = "SELECT transaksi.transaksi_id, transaksi.waktu_transaksi, transaksi.grand_total, transaksi.status, transaksi.id_UserBeli, 
+                                transaksi_detail.jumlah, pembeli.nama, transaksi.alamat FROM transaksi LEFT JOIN transaksi_detail ON transaksi.transaksi_id = 
+                                transaksi_detail.id_TransaksiDetail LEFT JOIN pembeli ON pembeli.id_user = transaksi.id_UserBeli LEFT JOIN alamat ON alamat.id_alamat = 
+                                transaksi.alamat WHERE status = 'Dikemas' ORDER BY transaksi_id DESC"; 
                                 } 
 
                                 
@@ -303,29 +450,121 @@ include ('koneksi.php');
                                 //kalau ini melakukan foreach atau perulangan
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?> 
-                                
-                                  <tr>
-                                    <th><?php echo $no; ?></th> 
-                                    <td><?php echo $row['transaksi_id']; ?></td> 
+
+
+                                <tr>  
+                                <td><?php echo $row['transaksi_id']; ?></td> 
                                     <td><?php echo $row['id_UserBeli']; ?></td> 
                                     <td><?php echo $row['nama']; ?></td>
                                     <td><?php echo $row['jumlah']; ?></td> 
                                     <td>Rp.<?php echo $row['grand_total']; ?></td> 
                                     <td><?php echo $row['alamat']; ?></td> 
-                                    <td><?php echo $row['status']; ?></td> 
-                                    <td>
-                                        <a href="editStatus.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-info">Edit</a>
-                                    
-                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda ingin membatalkan transaksi ini?')">Batalkan</a>
+                                    <td><?php echo $row['status']; ?></td>
+                                  <td>
+                                  <button type="button" class="btn btn-info" data-bs-toggle="modal" 
+                    data-bs-target="#editStatus">Update Status</button>
+                                        <!-- Modal Edit-->
+                                        <div class="modal" tabindex="-1" id="editStatus<?php echo $row['transaksi_id']; ?>">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            <form action="editKirim.php" method="POST" enctype="multipart/form-data">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title">Update Informasi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+
+                                              <?php
+                                              $id = $row['transaksi_id'];
+                                              $edit_query = mysqli_query($mysqli, "SELECT * FROM transaksi WHERE transaksi_id = $id");
+                                              if(mysqli_num_rows($edit_query) > 0){
+                                                while($fetch_edit = mysqli_fetch_assoc($edit_query)){
+                                              ?>
+
+                                                  <div>
+                                                  <input type="hidden" class="form-control" name="id" value="<?php echo $row['transaksi_id']; ?>" required>
+
+                                                    <label>Status: </label>
+                                                    <input type="text" class="form-control" name="status" value="<?php echo $row['status']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  
+                                                  <div>
+                                                    <label>Jasa Kurir: </label>
+                                                    <input type="text" class="form-control" name="jasa_kurir" value="<?php echo $row['jasa_kurir']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                  <div>
+                                                    <label>Nomor Resi: </label>
+                                                    <input type="text" class="form-control" name="no_resi" value="<?php echo $row['no_resi']; ?>" required>
+                                                  </div>&nbsp;&nbsp;
+                                                   
+                                                  <?php
+                                                    // };
+                                                };
+                                                ?>
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-info"><a href="editKirim.php?id=<?php echo $row['transaksi_id'] ?>"></a> Simpan Perubahan</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal Edit-->
+
+                                        <a href="editBatalPesan.php?id=<?php echo $row["transaksi_id"]; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
                                     </td>
                                   </tr>
-                                  <?php }?>
+                                    <?php
+                                    $no++;
+                                    }
+                                }
+                                $result->free();
+                                ?>
                             </tbody>
                         </table>
                     </div>
                   </div>
                 </div>
               </div>
+
+                <!-- Modal Tambah-->
+                <div class="modal" tabindex="-1" id="editStatus">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <form action="editKirim.php" method="POST" enctype="multipart/form-data">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Update Informasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                          <div>
+                            <label>Status: </label>
+                            <input type="text" class="form-control" name="status" required>
+                          </div>&nbsp;&nbsp;
+                          
+                          <div>
+                            <label>Jasa Kurir: </label>
+                            <input type="text" class="form-control" name="jasa_kurir" required>
+                          </div>&nbsp;&nbsp;
+                          <div>
+                            <label>Nomor Resi: </label>
+                            <input type="text" class="form-control" name="no_resi" required>
+                          </div>&nbsp;&nbsp;
+                          
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="edit" class="btn btn-info">Simpan</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal Tambah-->
+
               </div><!-- End Bordered Tabs -->
             </div>
           </div>

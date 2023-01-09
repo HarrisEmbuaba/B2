@@ -381,9 +381,8 @@ include ('koneksi.php');
                   <div class="card-body">
                   <form class="row g-2">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" data-bs-target="#tambahBarang">
-                      + Barang
-                    </button>
+                    <button type="button" class="btn btn-primary center-block" data-bs-toggle="modal" 
+                    data-bs-target="#tambahBarang">+ Barang</button>
                   </form>
                   </div>
                   
