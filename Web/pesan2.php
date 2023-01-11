@@ -394,10 +394,6 @@ if(isset($_SESSION['transaksi_id'])){
 
                                                   <div>
                                                   <input type="hidden" class="form-control" name="id" value="<?php echo $row['transaksi_id']; ?>" required>
-
-                                                    <label>Status: </label>
-                                                    <input type="text" class="form-control" name="status" value="<?php echo $row['status']; ?>" required>
-                                                  </div>&nbsp;&nbsp;
                                                   
                                                   <div>
                                                     <label>Jasa Kurir: </label>
@@ -451,11 +447,6 @@ if(isset($_SESSION['transaksi_id'])){
                       </div>
                       <div class="modal-body">
 
-                          <div>
-                            <label>Status: </label>
-                            <input type="text" class="form-control" name="status" required>
-                          </div>&nbsp;&nbsp;
-                          
                           <div>
                             <label>Jasa Kurir: </label>
                             <input type="text" class="form-control" name="jasa_kurir" required>
